@@ -26,7 +26,7 @@
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">청년농장</a>
+			<a class="navbar-brand" href="./">청년농장</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> 
 			</button>
@@ -34,7 +34,7 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a href="/" class="nav-link">Home</a>
+						<a href="./" class="nav-link">Home</a>
 					</li>
 					<li class="nav-item">
 						<a href="notice" class="nav-link">공지 & FAQ</a>
@@ -58,8 +58,14 @@
 					<li class="nav-item">
 						<a href="community" class="nav-link">커뮤니티</a>
 					</li>
+					<li class="nav-item">
+						<a href="myPage" class="nav-link">마이페이지</a>
+					</li>
+					<li class="nav-item">
+						<a href="admin" class="nav-link">관리자</a>
+					</li>
 					<li class="nav-item cta cta-colored">
-						<a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
+						<a href="login" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
 					</li>
 				</ul>
 			</div>

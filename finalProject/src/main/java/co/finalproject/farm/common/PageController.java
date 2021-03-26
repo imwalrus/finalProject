@@ -11,6 +11,11 @@ public class PageController {
 		return "login";
 	}
 
+	@GetMapping("/admin")
+	public String adminMove() {
+		return "admin";
+	}
+	
 	@GetMapping("/myPage")
 	public String myPageMove() {
 		return "myPage";
