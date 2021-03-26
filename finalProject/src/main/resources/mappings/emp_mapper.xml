@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.temp.service.impl.EmpMapper">
+	<select id="getEmpList" resultType="map">
+		SELECT FIRST_NAME "firstName",
+			   LAST_NAME  "lastName",
+			   SALARY 	  "salary",
+			   EMAIL 	  "e-mail"
+		  FROM EMPLOYEES
+	</select>
+	<!-- 일별 판매합계 -->
+	<select id="getChartData" resultType="map">
+		SELECT TO_CHAR(SALE_DATE, 'YY-MM-DD') SALE_DATE, SUM(SALE_PRICE) SALES
+		FROM SALE_TBL_10
+		GROUP BY TO_CHAR(SALE_DATE, 'YY-MM-DD')
+	</select>
+</mapper>
