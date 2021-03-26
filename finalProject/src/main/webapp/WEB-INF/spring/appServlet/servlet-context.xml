@@ -37,7 +37,7 @@
 	</beans:bean>
 	
 	<!-- @Componentm @Controller, @Service, @Repository -->
-	<context:component-scan base-package="com.company" />
+	<context:component-scan base-package="co.finalproject.farm" />
 	
 	<!-- @Aspect @PointCut @Before -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
@@ -62,7 +62,7 @@
 	
 	<!-- TransactionManager AOP 설정 -->
  	<aop:config>
-		<aop:pointcut id="trPointcut" expression="execution(* com.company..*Impl.*(..))" />
+		<aop:pointcut id="trPointcut" expression="execution(* co.finalproject.farm..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="trPointcut" advice-ref="txAdvice" />
 	</aop:config> 
 	

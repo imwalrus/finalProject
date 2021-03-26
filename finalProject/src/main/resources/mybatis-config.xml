@@ -4,6 +4,6 @@
 
 <configuration>
 	<typeAliases>
-		<package name="com.company"/>
+		<package name="co.finalproject.farm"/>
 	</typeAliases>
 </configuration>
