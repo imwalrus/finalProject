@@ -17,6 +17,24 @@
 	<link rel="stylesheet" type="text/css" href="resources/login/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="resources/login/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/login/css/main.css">
+	
+	<script src="resources/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="resources/login/vendor/animsition/js/animsition.min.js"></script>
+	<script src="resources/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="resources/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resources/login/vendor/select2/select2.min.js"></script>
+	<script src="resources/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="resources/login/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="resources/login/vendor/countdowntime/countdowntime.js"></script>
+	<script src="resources/login/js/main.js"></script>
+	
+<!-- <script type="text/javascript">
+	$(document).ready(function(){
+		$("[name=signupButton]").on("click", function(){
+			location.href="redirect:signUpForm";
+		})
+	})
+</script> -->
 </head>
 <body>
 	
@@ -61,31 +79,17 @@
 							</a>
 						</div>
 					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">회원가입</button>
-					</div>
-					<div class="container-login100-form-btn">
+					<div class="container-login100-form-btn1">
 						<button class="login100-form-btn">로그인</button>
 					</div>
-
 				</form>
+<!-- 				<div class="container-login100-form-btn1" style="display:inline-flex">
+					<button class="login100-form-btn" name="signupForm">회원가입</button>
+				</div> -->
 			</div>
 		</div>
 	</div>
 	
-
-	<div id="dropDownSelect1"></div>
-	
-	<script src="resources/login/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="resources/login/vendor/animsition/js/animsition.min.js"></script>
-	<script src="resources/login/vendor/bootstrap/js/popper.js"></script>
-	<script src="resources/login/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/login/vendor/select2/select2.min.js"></script>
-	<script src="resources/login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="resources/login/vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="resources/login/vendor/countdowntime/countdowntime.js"></script>
-	<script src="resources/login/js/main.js"></script>
 
 </body>
 </html>
