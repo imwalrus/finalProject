@@ -8,11 +8,13 @@ import co.finalproject.farm.app.user.service.UserVO;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
 	@Autowired UserMapper userDAO;
 		
 	@Override
 	public int idCheck(UserVO vo) {
 		int result = userDAO.idCheck(vo);
+		System.out.println("idcheck result " + result);
 		return result;
 		
 	}

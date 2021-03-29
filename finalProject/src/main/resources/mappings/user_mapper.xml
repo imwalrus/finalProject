@@ -5,7 +5,7 @@
 <mapper namespace="co.finalproject.farm.app.user.service.impl.UserMapper">
 
 	<!-- ID 중복체크 -->
-	<select id="getIdCheck" resultType="int" parameterType="UserVO">
+	<select id="idCheck" resultType="int" parameterType="UserVO">
 		SELECT COUNT(*) FROM USERS WHERE USER_ID=#{user_id}
 	</select>
 	

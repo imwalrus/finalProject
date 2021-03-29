@@ -109,23 +109,63 @@
 
 </style>
 <script>
-	$(function(){
-		//ID 중복체크
-		var idCk=0;
-		$('#idCheck').on('click',function(){
-			var id = $('[name=user_id]').val();
-			$.ajax({
-				url:"idCheck?user_id=",
-				type:"get",
-				data:id,
-				success:function(count){
-					console.log(count);
+//id 중복체크
+$(document).ready(function(){
+	var idCk=0;
+	var pwCk=0;
+	$('#idCheck').on('click',function(){
+		var id = $('[name=user_id]').val();
+		console.log(id);
+		$.ajax({
+			url:"idCheck",
+			data:{"user_id":id},
+			dataType: "json",
+			success: function(data){
+				if(data==0){
+					$('[name=user_id]').css("background-color", "#B0F6AC");
+					$('[name=user_password]').focus();
+					idCk=1;	
+				} else{
+					alert("이미 존재하는 아이디 입니다. 다른 아이디를 입력해주세요.")
+					$('[name=signUpBtn]').prop("disabled",false);
+					$('[name=user_id]').focus();
+					$('[name=user_id]').val('');
+					idCk=0;
 				}
-			})
+				
+			}
 		})
 		
-		//비밀번호 확인
 	})
+		//비밀번호 확인
+	$.function(){
+
+			var pw = $('[name=user_password]').val();
+			var pwCheck = $('[name=confirm_password]').val();
+			console.log("입력한 비밀번호" + pw);
+			console.log("비밀번호 확인" + pwCheck);
+			if(pw.length==0 || pwCheck.length==0 ){
+
+				pwCk=0;
+			} else if(pw != pwCheck){
+
+				pwCk=0;
+			} else if (pw == pwCheck){
+
+				pwCk=1;
+			}
+
+	}
+
+	
+
+
+
+	
+})
+	
+
+
 </script>
 </head>
 <body>
@@ -137,7 +177,7 @@
         <div class="form-group">
 			<label class="control-label col-xs-4 divcountrol" >아이디 *</label>
 			<div class="col-xs-8 inputControl">
-                <input type="text" class="form-control" name="user_id" >
+                <input type="text" class="form-control" name="user_id" id="user_id">
             </div>
             <div>
                	<button type="button" class="btn btn-primary" id="idCheck">ID 중복체크</button>
@@ -151,7 +191,7 @@
             </div>        	
         </div>
 		<div class="form-group">
-			<label class="control-label col-xs-4 divcountrol">확인</label>
+			<label class="control-label col-xs-4 divcountrol">확 인 *</label>
 			<div class="col-xs-8">
                 <input type="password" class="form-control" name="confirm_password" >
             </div>        	
@@ -202,7 +242,7 @@
 	
 		<div class="form-group">
 			<div class="col-xs-8 col-xs-offset-4">
-				<button type="submit" class="btn btn-primary btn-lg" >회원가입</button>
+				<button type="submit" class="btn btn-primary btn-lg" name="signUpBtn" >회원가입</button>
 			</div>  
 		</div>			      
     </form>
