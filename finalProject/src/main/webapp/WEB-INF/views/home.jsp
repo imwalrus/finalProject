@@ -37,7 +37,7 @@
 						<a href="./" class="nav-link">Home</a>
 					</li>
 					<li class="nav-item">
-						<a href="notice" class="nav-link">공지 & FAQ</a>
+						<a href="getNotices" class="nav-link">공지 & FAQ</a>
 					</li>
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>

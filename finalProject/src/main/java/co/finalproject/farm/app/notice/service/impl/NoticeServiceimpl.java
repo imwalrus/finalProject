@@ -3,10 +3,12 @@ package co.finalproject.farm.app.notice.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import co.finalproject.farm.app.notice.service.NoticeService;
 import co.finalproject.farm.app.notice.service.NoticeVO;
 
+@Service	
 public class NoticeServiceimpl implements NoticeService	{
 	
 	@Autowired NoticeMapper dao;

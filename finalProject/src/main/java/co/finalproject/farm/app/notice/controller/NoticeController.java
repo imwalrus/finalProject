@@ -25,7 +25,7 @@ public class NoticeController {
     @RequestMapping("/getNotices")
     public String  getNotices(Model model) {
     	model.addAttribute("list", noticeService.getNotices(null) );
-    	return "";
+    	return "view/notice";
     }
     
     //단건 조회
@@ -38,7 +38,7 @@ public class NoticeController {
 	//등록폼
     @GetMapping("/insertNotices")
     public String insertNotices(Model model) {
-    	return "";
+    	return "notice/insertNotice";
     	
     }
 	

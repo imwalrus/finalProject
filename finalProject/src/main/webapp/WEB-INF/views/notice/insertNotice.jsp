@@ -37,7 +37,7 @@
 						<a href="./" class="nav-link">Home</a>
 					</li>
 					<li class="nav-item">
-						<a href="getNotices" class="nav-link">공지 & FAQ</a>
+						<a href="notice" class="nav-link">공지 & FAQ</a>
 					</li>
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>
@@ -84,8 +84,51 @@
       </div>
     </div>
     
-		<section class="ftco-section testimony-section">
-        </section>
+   <section class="ftco-section contact-section">
+     <div align="center" style="margin-left:400px; margin-right:400px;">
+		<div>
+			<h3>게시글 작성</h3>
+		</div>
+		<div>
+			<form id="frm" name="frm" action="#" method="post">
+				<table border="1" class="table-hover">
+					<tr>
+						<th width="70">글번호</th>
+						<td align="center" width="50">
+						<input type="text" id="boardNo" name="boardNo">
+						</td>
+						<th width="70">작성자</th>
+						<td align="center" width="150">
+						<input type="text" id="writer" name="writer">
+						</td>
+						<th width="80">작성일자</th>
+						<td align="center" width="150">
+						<input type="date" id="creationDate" name="creationDate">
+						</td>
+					</tr>
+					<tr>
+						<th width="70">제 목</th>
+						<td colspan="5">
+						<input type="text" id="title" name="title" size="95">
+						</td>
+					</tr>
+					<tr>
+						<th width="70">내용</th>
+						<td colspan="5"><textarea id="content" name="content" rows="7" cols="95"></textarea></td>
+					</tr>
+				</table><br/>
+				
+				<div>
+			<button type="submit">저장하기</button> &nbsp;&nbsp;
+			<button type="reset">취소</button> &nbsp;&nbsp;
+		</div>
+		
+			</form>
+		</div>
+		<br />
+		
+	</div>
+    </section>
 
 
     <footer class="ftco-footer ftco-section">
