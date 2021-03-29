@@ -85,40 +85,32 @@
     </div>
     
    <section class="ftco-section contact-section">
-     <div align="center" style="margin-left:400px; margin-right:400px;">
+      <div align="center" style="margin-left:400px; margin-right:400px;">
 		<div>
-			<h3>게시글 작성</h3>
-		</div>
+			<h1>게시글 작성하기</h1>
+		</div><br/>
 		<div>
-			<form id="frm" name="frm" action="#" method="post">
-				<table border="1" class="table-hover">
-					<tr>
-						<th width="70">글번호</th>
-						<td align="center" width="50">
-						<input type="text" id="boardNo" name="boardNo">
-						</td>
-						<th width="70">작성자</th>
-						<td align="center" width="150">
-						<input type="text" id="writer" name="writer">
-						</td>
-						<th width="80">작성일자</th>
-						<td align="center" width="150">
-						<input type="date" id="creationDate" name="creationDate">
-						</td>
-					</tr>
-					<tr>
-						<th width="70">제 목</th>
-						<td colspan="5">
-						<input type="text" id="title" name="title" size="95">
-						</td>
-					</tr>
-					<tr>
-						<th width="70">내용</th>
-						<td colspan="5"><textarea id="content" name="content" rows="7" cols="95"></textarea></td>
-					</tr>
-				</table><br/>
+			<form id="frm" name="frm" action="insertNotices" method="post">
+				<table border="1">
+				<tr>
+				<td align="center" width="70">제 목</td>
+					<td colspan="3"><input type="text" id="notice_title" name="notice_title" size=70></td>
+					<td align="center" width="70">분류</td>
+					<td align="center" width="80">
+					<select name="notice_category" id="notice_category">
+					<option value="관련기사">관련기사</option>
+					<option value="관련공문">관련공문</option>
+					<option value="농사물가격">농사물가격</option>
+					<option value="축제,박람회">축제,박람회</option>
+					</select></td>
+				</tr>			
+				<tr>
+					<td align="center" width="70">내용</td>
+					<td colspan="5"><textarea rows="7" cols="100" id="notice_content" name="notice_content"></textarea></td>
+				</tr>
+			</table><br/>
 				
-				<div>
+			<div>
 			<button type="submit">저장하기</button> &nbsp;&nbsp;
 			<button type="reset">취소</button> &nbsp;&nbsp;
 		</div>

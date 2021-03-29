@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.finalproject.farm.app.notice.service.impl.NoticeMapper">
-   <!-- 전체보기 -->
-   <select id="getNotices" resultType="NoticeVO">
+<mapper
+	namespace="co.finalproject.farm.app.notice.service.impl.NoticeMapper">
+	<!-- 전체보기 -->
+	<select id="getNotices" resultType="NoticeVO">
 		SELECT NOTICE_NO
 		,NOTICE_TITLE
 		,NOTICE_CATEGORY
@@ -11,10 +12,10 @@
 		,NOTICE_CONTENT
 		,NOTICE_HIT
 		FROM NOTICE
-		ORDER BY NOTICE_NO 
+		ORDER BY NOTICE_NO
 	</select>
-	
-    <!-- 상세보기 -->
+
+	<!-- 상세보기 -->
 	<select id="getSearchNotices" resultType="NoticeVO">
 		SELECT NOTICE_NO
 		,NOTICE_TITLE
@@ -25,31 +26,35 @@
 		FROM NOTICE
 		WHERE NOTICE_NO = #{notice_no}
 	</select>
-	
-    <!-- 등록하기 -->
+
+	<!-- 등록하기 -->
 	<insert id="insertNotices" parameterType="NoticeVO">
 		INSERT INTO NOTICE
-        VALUES ( ( select nvl(max(notice_no),0)+1 from NOTICE ),
-             #{NOTICE_TITLE},
-             #{NOTICE_CATEGORY},
-             #{NOTICE_DATE},
-             #{NOTICE_CONTENT},
-             ( select nvl(max(notice_hit),0)+1 from NOTICE )
-             )
+		(NOTICE_NO,
+	    NOTICE_TITLE,
+	    NOTICE_CATEGORY,
+	    NOTICE_CONTENT)
+		VALUES ( ( select nvl(max(notice_no),0)+1 from NOTICE),
+		#{notice_title},
+		#{notice_category},
+		#{notice_content}
+		)
 	</insert>
-    
-    <!-- 글 수정처리 -->
-    <update id="updateNotices">
-        UPDATE NOTICE SET
-            NOTICE_TITLE = #{notice_title},
-            NOTICE_CATEGORY = #{notice_category},
-            NOTICE_CONTENT = #{notice_content}
-        WHERE NOTICE_NO = #{notice_no}
-    </update>
-    
-    <!-- 글 삭제 -->
+
+	<!-- 글 수정처리 -->
+	<update id="updateNotices" parameterType="NoticeVO">
+		UPDATE NOTICE
+		<set>
+<if test="notice_title !=null"> NOTICE_TITLE=#{notice_title},</if>
+<if test="notice_category !=null"> NOTICE_CATEGORY=#{notice_category},</if>
+<if test="notice_content !=null"> NOTICE_CONTENT=#{notice_content}</if>
+		</set>
+		WHERE NOTICE_NO = #{notice_no}
+	</update>
+
+	<!-- 글 삭제 -->
 	<delete id="deleteNotices" parameterType="NoticeVO">
 		DELETE FROM NOTICE
-        WHERE NOTICE_NO = #{notice_no}
+		WHERE NOTICE_NO = #{notice_no}
 	</delete>
 </mapper>

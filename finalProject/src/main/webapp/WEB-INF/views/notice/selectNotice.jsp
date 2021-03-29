@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -84,49 +86,47 @@
       </div>
     </div>
     
-   <section class="ftco-section contact-section">
+  <section class="ftco-section contact-section">
      <div align="center" style="margin-left:400px; margin-right:400px;">
 		<div>
-			<h3>게시글 작성</h3>
-		</div>
+			<h1>게시글 상세보기</h1>
+		</div><br/>
+		<form id="frm" name="frm" action="updateNotices" method="post">
+		<input type="hidden" name="notice_no" value="${NoticeVO.notice_no}">
 		<div>
-			<form id="frm" name="frm" action="#" method="post">
-				<table border="1" class="table-hover">
-					<tr>
-						<th width="70">글번호</th>
-						<td align="center" width="50">
-						<input type="text" id="boardNo" name="boardNo">
-						</td>
-						<th width="70">작성자</th>
-						<td align="center" width="150">
-						<input type="text" id="writer" name="writer">
-						</td>
-						<th width="80">작성일자</th>
-						<td align="center" width="150">
-						<input type="date" id="creationDate" name="creationDate">
-						</td>
-					</tr>
-					<tr>
-						<th width="70">제 목</th>
-						<td colspan="5">
-						<input type="text" id="title" name="title" size="95">
-						</td>
-					</tr>
-					<tr>
-						<th width="70">내용</th>
-						<td colspan="5"><textarea id="content" name="content" rows="7" cols="95"></textarea></td>
-					</tr>
-				</table><br/>
-				
-				<div>
-			<button type="submit">수정하기</button> &nbsp;&nbsp;
-			<button type="reset">삭제하기</button> &nbsp;&nbsp;
+			<table border="1">
+				<tr>
+					<td align="center" width="70">글번호</td>
+					<td align="center" width="50">${NoticeVO.notice_no}</td>
+					<td align="center" width="70">분류</td>
+					<td align="center" width="80">
+					<select name="notice_category" id="notice_category">
+					<option value="관련기사">관련기사</option>
+					<option value="관련공문">관련공문</option>
+					<option value="농사물가격">농사물가격</option>
+					<option value="축제,박람회">축제,박람회</option>
+					</select></td>
+					<td align="center" width="80">작성일자</td>
+					<td align="center" width="150">${NoticeVO.notice_date}</td>
+				</tr>
+				<tr>
+					<td align="center" width="70">제 목</td>
+					<td colspan="5" ><input type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>
+				</tr>
+				<tr>
+					<td align="center" width="70">내용</td>
+					<td colspan="5"><textarea rows="7" cols="100" id="notice_content" name="notice_content">${NoticeVO.notice_content}</textarea></td>
+				</tr>
+			</table>
+		</div><br />
+		<div>
+		<button type="button" onclick="location.href='getNotices'">목록보기</button>
+		&nbsp;&nbsp;&nbsp;
+		<button type="button" onclick="location.href='deleteNotices?notice_no=${NoticeVO.notice_no}'">글 삭제</button>
+		&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="글 수정">
 		</div>
-		
-			</form>
-		</div>
-		<br />
-		
+		</form>
 	</div>
     </section>
 

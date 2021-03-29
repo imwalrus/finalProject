@@ -30,16 +30,15 @@ public class NoticeController {
     
     //단건 조회
     @RequestMapping("/getSearchNotices")
-    public String  getSearchNotices(Model model) {
-    	model.addAttribute("list", noticeService.getSearchNotices(null) );
-    	return "";
+    public String  getSearchNotices(Model model, NoticeVO vo) {
+    	model.addAttribute("NoticeVO", noticeService.getSearchNotices(vo) );
+    	return "notice/selectNotice";
     }
     
 	//등록폼
-    @GetMapping("/insertNotices")
+    @RequestMapping("/insertNotices")
     public String insertNotices(Model model) {
-    	return "notice/insertNotice";
-    	
+    	return "notice/insertNotice";	
     }
 	
 	//등록처리
@@ -47,30 +46,23 @@ public class NoticeController {
     public String insertNoticesProc(NoticeVO vo) {
     	logger.debug(vo.toString());
     	noticeService.insertNotices(vo);
-    	return "";
+    	return "redirect:getNotices";
     }
     	
-	//수정폼
-    @GetMapping("/updateNotices")
-    public String updateNotices(NoticeVO vo, Model model) {
-    	model.addAttribute("NoticeVO", noticeService.getSearchNotices(vo));
-    	return "notice/updateNotice";
-    }
-	
 	//수정처리
     @PostMapping("/updateNotices")
     public String updateNoticesProc(NoticeVO vo) {
     	logger.debug(vo.toString());
     	noticeService.updateNotices(vo);
-    	return "";
+    	return "redirect:getSearchNotices?notice_no="+vo.getNotice_no();
     }
     
     //삭제처리
-    @PostMapping("/deleteNotices")
+    @GetMapping("/deleteNotices")
     public String deleteNoticesProc(NoticeVO vo) {
     	logger.debug(vo.toString());
     	noticeService.deleteNotices(vo);
-		return "";	
+		return "redirect:getNotices";	
     }
 	
 }

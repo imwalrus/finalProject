@@ -18,5 +18,5 @@ public interface NoticeService {
 	
 	//전체조회
     public List<NoticeVO> getNotices(NoticeVO vo);
-
+    
 }

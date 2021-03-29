@@ -84,13 +84,38 @@
         </div>
       </div>
     </div>
+   
     
 		<section class="ftco-section testimony-section">
+		<div align="center" style="margin-left:400px; margin-right:400px;">
+		<div>
+			<h1>공지사항</h1>
+		</div><br/>
 		<div align="center">
+		<table border="1">
+				<tr>
+					<td align="center" width="100">글번호</td>
+					<td align="center" width="300">제 목</td>
+					<td align="center" width="150">분류</td>
+					<td align="center" width="200">작성일자</td>
+					<td align="center" width="150">조회수</td>
+				</tr>
 		<c:forEach items="${list}" var="ntc">
-        ${ntc.notice_no } ${ntc.notice_title } ${ntc.notice_category } ${ntc.notice_content } ${ntc.notice_hit }<br>
+		<tr onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}'">
+         <td align="center">${ntc.notice_no}</td>
+         <td>&nbsp; ${ntc.notice_title}</td>
+         <td align="center">${ntc.notice_category}</td>
+         <td align="center">${ntc.notice_date}</td>
+         <td align="center">${ntc.notice_hit}</td>
+        </tr>
         </c:forEach>
+        </table>
         </div>
+        </div><br/>
+        
+    <div align="center">
+	<button type="button" onclick="location.href='insertNotices'">글쓰기</button>
+	</div>
         </section>
 
 
