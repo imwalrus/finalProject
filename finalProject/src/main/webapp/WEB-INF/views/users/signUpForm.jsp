@@ -113,6 +113,7 @@
 $(document).ready(function(){
 	var idCk=0;
 	var pwCk=0;
+	var emailCk=0;
 	$('#idCheck').on('click',function(){
 		var id = $('[name=user_id]').val();
 		console.log(id);
@@ -132,38 +133,49 @@ $(document).ready(function(){
 					$('[name=user_id]').val('');
 					idCk=0;
 				}
-				
 			}
-		})
-		
-	})
-		//비밀번호 확인
-	$.function(){
-
-			var pw = $('[name=user_password]').val();
-			var pwCheck = $('[name=confirm_password]').val();
-			console.log("입력한 비밀번호" + pw);
-			console.log("비밀번호 확인" + pwCheck);
-			if(pw.length==0 || pwCheck.length==0 ){
-
-				pwCk=0;
-			} else if(pw != pwCheck){
-
-				pwCk=0;
-			} else if (pw == pwCheck){
-
+		});
+	});
+	//비밀번호 확인
+$(function(){
+		$('[name=user_password]').keyup(function(){
+			$('#pwCkNotice').html('');
+		});
+		$('[name=confirm_password]').keyup(function(){
+			if($('[name=user_password]').val() != $('[name=confirm_password]').val()){
+				$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
+				$('#pwCkNotice').attr('color', '#f82a2aa3');
+			} else if($('[name=user_password]').val() == $('[name=confirm_password]').val()){
 				pwCk=1;
+				$('#pwCkNotice').html('비밀번호 일치함<br>');
+				$('#pwCkNotice').attr('color', '#199894b3');
 			}
+		});
+	});
+});
 
-	}
-
-	
-
-
-
-	
-})
-	
+	//이메일 인증번호 전송
+	$('#emailCheck').on('click',function(){
+		var email = $('[name=user_email]').val();
+		if(email==""){
+			$('#emailCkNotice').html('이메일을 입력해주세요.');
+			$('#pwCkNotice').attr('color', '#f82a2aa3');
+		}else{
+			$.ajax({
+				url:"emailCheck",
+				type:"post",
+				data:{"user_email":email},
+				dataType:"json",
+				success:function(response){
+					console.log(response);
+					$('#emailCkNotice').html('인증완료');
+					$('#pwCkNotice').attr('color', '#199894b3');
+					emailCk=1;
+				}
+			});
+		}
+		
+	});
 
 
 </script>
@@ -194,6 +206,7 @@ $(document).ready(function(){
 			<label class="control-label col-xs-4 divcountrol">확 인 *</label>
 			<div class="col-xs-8">
                 <input type="password" class="form-control" name="confirm_password" >
+                <font id="pwCkNotice" size=2></font>
             </div>        	
         </div>
         <div class="form-group">
@@ -206,12 +219,21 @@ $(document).ready(function(){
 			<label class="control-label col-xs-4 divcountrol">이메일 *</label>
 			<div class="col-xs-8">
                 <input type="email" class="form-control" name="user_email" >
-                <br>
-               <div id="btnControl">
-               		<button class="btn btn-primary" id="emailCheck">이메일 인증</button>        	
-               </div>
+                <font id="emailCkNotice" size=2></font>
         	</div>
         </div>
+        
+        <div class="form-group">
+			<label class="control-label col-xs-4 divcountrol" >인증번호 *</label>
+			<div class="col-xs-8 inputControl">
+                <input type="text" class="form-control" name="emailCheckNum" id="emailCheckNum" placeholder="인증번호 입력">
+            </div>
+            <div>
+               	<button type="button" class="btn btn-primary" id="emailCheck">이메일 인증</button>
+            </div>
+            <div class="check_font" id="id_check"></div>   		        	
+        </div>
+        
         <div class="form-group">
 			<label class="control-label col-xs-4 divcountrol">연락처 *</label>
 			<div class="col-xs-8">
