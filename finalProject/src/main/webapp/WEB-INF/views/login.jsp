@@ -28,13 +28,13 @@
 	<script src="resources/login/vendor/countdowntime/countdowntime.js"></script>
 	<script src="resources/login/js/main.js"></script>
 	
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
-		$("[name=signupButton]").on("click", function(){
-			location.href="redirect:signUpForm";
+		$("#signUpButton").on("click", function(){
+			location.href="signUpForm";
 		})
 	})
-</script> -->
+</script>
 </head>
 <body>
 	
@@ -67,25 +67,24 @@
 					
 					<div class="flex-sb-m w-full p-b-48">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								아이디 저장하기
-							</label>
+							<a href="#" class="txt3">
+	
+							</a>
 						</div>
-
 						<div>
 							<a href="#" class="txt3">
 								아이디/비밀번호 찾기
-							</a>
+							</a>							
 						</div>
 					</div>
-					<div class="container-login100-form-btn1">
-						<button class="login100-form-btn">로그인</button>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn1">로그인</button>
 					</div>
 				</form>
-<!-- 				<div class="container-login100-form-btn1" style="display:inline-flex">
-					<button class="login100-form-btn" name="signupForm">회원가입</button>
-				</div> -->
+				<br> 
+				<div class="container-login100-form-btn" style="display:inline-flex">
+					<button class="login100-form-btn1" id="signUpButton">회원가입</button>
+				</div>
 			</div>
 		</div>
 	</div>

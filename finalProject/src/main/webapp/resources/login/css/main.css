@@ -424,10 +424,10 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  min-width: 150px;
+  min-width: 390px;
   height: 55px;
-  background-color: rgb(119, 119, 119);
-  border-radius: 27px;
+  background-color: #78c2ad;
+  border-radius: 25px;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -438,7 +438,9 @@ iframe {
 .login100-form-btn:hover {
   background-color: #78c2ad;
 }
-
+.login100-form-btn1:hover {
+  background-color: rgb(119, 119, 119);
+}
 
 /*------------------------------------------------------------------
 [ Alert validate ]*/

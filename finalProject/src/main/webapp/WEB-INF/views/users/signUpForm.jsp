@@ -63,11 +63,11 @@
         font-weight: bold;
 		background: #5cd3b4;
 		border: none;
-		margin-top: 20px;
+		/* margin-top: 20px; */
 		min-width: 140px;
     }
 	.signup-form .btn:hover, .signup-form .btn:focus {
-		background: #41cba9;
+		background: rgb(119, 119, 119);
         outline: none !important;
 	}
     .signup-form a {
@@ -84,7 +84,49 @@
 	.signup-form form a:hover {
 		text-decoration: underline;
 	}
+	#idCheck,#searchAddr {
+		font-size:13px;
+		width:90px !important;
+		height:41px;
+	}
+	.divcountrol{
+		width:120px !important;
+	}
+	.inputControl{
+		width:170px !important;
+	}
+	.inputControl2{
+		width:120px !important;
+	}
+	#emailCheck{
+		font-size:13px;
+		width:90px !important;
+		height:41px;
+	}
+	#btnControl{
+		float:right;
+	}
+
 </style>
+<script>
+	$(function(){
+		//ID 중복체크
+		var idCk=0;
+		$('#idCheck').on('click',function(){
+			var id = $('[name=user_id]').val();
+			$.ajax({
+				url:"idCheck?user_id=",
+				type:"get",
+				data:id,
+				success:function(count){
+					console.log(count);
+				}
+			})
+		})
+		
+		//비밀번호 확인
+	})
+</script>
 </head>
 <body>
 <div class="signup-form">
@@ -93,51 +135,74 @@
 			<h2>회원가입</h2>
 		</div>	
         <div class="form-group">
-			<label class="control-label col-xs-4">아이디</label>
+			<label class="control-label col-xs-4 divcountrol" >아이디 *</label>
+			<div class="col-xs-8 inputControl">
+                <input type="text" class="form-control" name="user_id" >
+            </div>
+            <div>
+               	<button type="button" class="btn btn-primary" id="idCheck">ID 중복체크</button>
+            </div>
+            <div class="check_font" id="id_check"></div>   		        	
+        </div>
+		<div class="form-group">
+			<label class="control-label col-xs-4 divcountrol">비밀번호 *</label>
 			<div class="col-xs-8">
-                <input type="text" class="form-control" name="user_id" required="required">
+                <input type="password" class="form-control" name="user_password" >
             </div>        	
         </div>
 		<div class="form-group">
-			<label class="control-label col-xs-4">비밀번호</label>
+			<label class="control-label col-xs-4 divcountrol">확인</label>
 			<div class="col-xs-8">
-                <input type="password" class="form-control" name="user_password" required="required">
-            </div>        	
-        </div>
-		<div class="form-group">
-			<label class="control-label col-xs-4">비밀번호 확인</label>
-			<div class="col-xs-8">
-                <input type="password" class="form-control" name="confirm_password" required="required">
+                <input type="password" class="form-control" name="confirm_password" >
             </div>        	
         </div>
         <div class="form-group">
-			<label class="control-label col-xs-4">이름</label>
+			<label class="control-label col-xs-4 divcountrol">이 름 *</label>
 			<div class="col-xs-8">
-                <input type="text" class="form-control" name="user_name" required="required">
+                <input type="text" class="form-control" name="user_name" >
             </div>        	
         </div>
         <div class="form-group">
-			<label class="control-label col-xs-4">이메일</label>
+			<label class="control-label col-xs-4 divcountrol">이메일 *</label>
 			<div class="col-xs-8">
-                <input type="email" class="form-control" name="user_email" required="required">
+                <input type="email" class="form-control" name="user_email" >
+                <br>
+               <div id="btnControl">
+               		<button class="btn btn-primary" id="emailCheck">이메일 인증</button>        	
+               </div>
         	</div>
         </div>
         <div class="form-group">
-			<label class="control-label col-xs-4">연락처</label>
+			<label class="control-label col-xs-4 divcountrol">연락처 *</label>
 			<div class="col-xs-8">
-        	 <input type="text" class="form-control" name="user_phone" required="required">
+        	 <input type="text" class="form-control" name="user_phone" >
         	</div>
         </div>
         <div class="form-group">
-			<label class="control-label col-xs-4">생년월일</label>
+			<label class="control-label col-xs-4 divcountrol">생년월일 *</label>
 			<div class="col-xs-8">
-                <input type="date" class="form-control" name="user_birth" required="required">
+                <input type="date" class="form-control" name="user_birth" >
             </div>        	
-        </div>        	
+        </div>
+        <div class="form-group">
+			<label class="control-label col-xs-4 divcountrol">주 소 *</label>
+			<div class="col-xs-8 inputControl">
+                <input type="text" class="form-control" name="user_zip" placeholder="우편번호">
+            </div>
+            <div>
+               	<button class="btn btn-primary" id="searchAddr">주소 검색</button>
+            </div> 
+            <br> 
+			<label class="control-label col-xs-4 divcountrol"></label>
+            <div class="col-xs-8">
+                <input type="text" class="form-control" name="user_adr">
+                <input type="text" class="form-control" name="user_detailadr" placeholder="상세 주소">
+            </div>
+        </div>         	
 	
 		<div class="form-group">
 			<div class="col-xs-8 col-xs-offset-4">
-				<button type="submit" class="btn btn-primary btn-lg">회원가입</button>
+				<button type="submit" class="btn btn-primary btn-lg" >회원가입</button>
 			</div>  
 		</div>			      
     </form>
