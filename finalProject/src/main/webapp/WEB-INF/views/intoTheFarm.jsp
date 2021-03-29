@@ -58,9 +58,11 @@
             $('#datetimepicker1').datetimepicker('maxDate', e.date);
         });
     });
-</script>	
+</script>
 </head>
 <body class="goto-here">
+	
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="./">청년농장</a>
@@ -80,7 +82,7 @@
 						<a href="education" class="nav-link">귀농교육</a>
 					</li>
 					<li class="nav-item">
-						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
+						<a href="getFarmList" class="nav-link">농촌속으로</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
@@ -109,12 +111,10 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
-	
 	<!--농촌속으로 리스트  -->
-	<form action="" id="frm" name="frm" method="post">
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
-	        <div class="selectbox"> 
+	        <!-- <div class="selectbox"> 
 				<label for="city_select">지역</label> 
 					<select id="ex_select"> <option selected>지역 선택</option> 
 											<option>대구</option> 
@@ -158,8 +158,8 @@
 						</div>
 					</div>
 			</div>
-			<button type="button" onclick="">검색</button>
-			</form>
+			<button type="button" onclick="">검색</button> -->
+			
 
 				<div class="row d-flex justify-content-center py-5">
 			
@@ -170,38 +170,24 @@
 		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
 		                    <div class="block-23 mb-3">
 		                        <ul>
+					                <c:forEach items="${list}" var="listt">
 					                <li><span ></span><span class="text">지역</span></li>
+					                <li>
+					                	${listt.into_city}
+					                </li>
 					                <li><span ></span><span class="text">농작물</span></li>
+					                <li>
+					               	   ${listt.into_product}
+					                </li>
 					                <li><span ></span><span class="text">기간</span></li>
+					                <li>
+					                   ${listt.into_date}
+					                </li>
 					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
-					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
-					            </ul>
-		                    </div>    
-		                    </div>
-		        </div>
-		        <div class="col-md-4">
-		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
-		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
-		                    <div class="block-23 mb-3">
-		                        <ul>
-					                <li><span ></span><span class="text">지역</span></li>
-					                <li><span ></span><span class="text">농작물</span></li>
-					                <li><span ></span><span class="text">기간</span></li>
-					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
-					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
-					            </ul>
-		                    </div>    
-		                    </div>
-		        </div>
-		        <div class="col-md-4">
-		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
-		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
-		                    <div class="block-23 mb-3">
-		                        <ul>
-					                <li><span ></span><span class="text">지역</span></li>
-					                <li><span ></span><span class="text">농작물</span></li>
-					                <li><span ></span><span class="text">기간</span></li>
-					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
+					                <li>
+					                	${listt.into_entry}
+					                </li>
+					                </c:forEach>
 					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
 					            </ul>
 		                    </div>    
@@ -212,7 +198,6 @@
 		     </div>
 		   </div>
 	</section>
-        
    
     <section class="ftco-section bg-light">
 			<div class="container">
