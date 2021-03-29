@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,12 +16,49 @@
 <link rel="stylesheet" href="resources/main/css/magnific-popup.css">
 <link rel="stylesheet" href="resources/main/css/aos.css">
 <link rel="stylesheet" href="resources/main/css/ionicons.min.css">
-<link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css">
+<!-- <link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css"> -->
 <link rel="stylesheet" href="resources/main/css/flaticon.css">
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="resources/gotoFarm/js/jquery-ui-1.10.4.custom.min.js"></script>
+<link rel="stylesheet" href="resources/gotoFarm/css/datepicker/jquery-ui-1.10.4.custom.css"></link>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
+
+<script>
+	$(document).ready(function() {
+		var selectTarget = $('.selectbox select');
+		selectTarget.change(function() {
+			var select_name = $(this).children('option:selected').text();
+			$(this).siblings('label').text(select_name);
+		});
+	});
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+        	 format: 'L'
+        });
+        $('#datetimepicker2').datetimepicker({
+        	 format: 'L',
+             useCurrent: false
+        });
+        $("#datetimepicker1").on("change.datetimepicker", function (e) {
+            var select_date = $('#datetimepicker2').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker2").on("change.datetimepicker", function (e) {
+            $('#datetimepicker1').datetimepicker('maxDate', e.date);
+        });
+    });
+</script>	
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -72,192 +109,111 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
-
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About us</span></p>
-            <h1 class="mb-0 bread">About us</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/about.jpg);">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="icon-play"></span>
-						</a>
-					</div>
-					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section-bold mb-4 mt-md-5">
-	          	<div class="ml-md-0">
-		            <h2 class="mb-4">Welcome to Vegefoods an eCommerce website</h2>
-	            </div>
-	          </div>
-	          <div class="pb-md-5">
-	          	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-							<p>But nothing the copy said could convince her and so it didnât take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p><a href="#" class="btn btn-primary">Shop now</a></p>
+	
+	<!--농촌속으로 리스트  -->
+	<form action="" id="frm" name="frm" method="post">
+	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+      <div class="container py-4">
+	        <div class="selectbox"> 
+				<label for="city_select">지역</label> 
+					<select id="ex_select"> <option selected>지역 선택</option> 
+											<option>대구</option> 
+											<option>서울</option> 
+					</select> 
+			</div>
+			<div class="selectbox"> 
+				<label for="product_select">농작물 종류</label> 
+					<select id="ex_select"> <option selected>농작물 선택</option> 
+											<option>포도</option> 
+											<option>사과</option> 
+					</select>
+			</div>		
+				<div class='col-md-3 col-xs-4'>
+					<label for="product_select">기간</label> 
+					<div class="form-group">
+						<div class="input-group date" id="datetimepicker1"
+							data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input"
+								data-target="#datetimepicker1" value="01/01/2021">
+							<div class="input-group-append" data-target="#datetimepicker1"
+								data-toggle="datetimepicker">
+								<div class="input-group-text">
+									<i class="fa fa-calendar"></i>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				
+					<div class="form-group">
+						<div class="input-group date" id="datetimepicker2"
+							data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input"
+								data-target="#datetimepicker2" value="01/01/2021">
+							<div class="input-group-append" data-target="#datetimepicker2"
+								data-toggle="datetimepicker">
+								<div class="input-group-text">
+									<i class="fa fa-calendar"></i>
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
-		</section>
+			<button type="button" onclick="">검색</button>
+			</form>
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-		
-		<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_3.jpg);">
-    	<div class="container">
-    		<div class="row justify-content-center py-5">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="10000">0</strong>
-		                <span>Happy Customers</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Branches</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span>Partner</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Awards</span>
-		              </div>
-		            </div>
-		          </div>
+				<div class="row d-flex justify-content-center py-5">
+			
+			<div class="container-fluid mt-5 mb-5">
+		    <div class="row">
+		        <div class="col-md-4">
+		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
+		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
+		                    <div class="block-23 mb-3">
+		                        <ul>
+					                <li><span ></span><span class="text">지역</span></li>
+					                <li><span ></span><span class="text">농작물</span></li>
+					                <li><span ></span><span class="text">기간</span></li>
+					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
+					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
+					            </ul>
+		                    </div>    
+		                    </div>
 		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
-		
-		<section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-          	<span class="subheading">Testimony</span>
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+		        <div class="col-md-4">
+		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
+		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
+		                    <div class="block-23 mb-3">
+		                        <ul>
+					                <li><span ></span><span class="text">지역</span></li>
+					                <li><span ></span><span class="text">농작물</span></li>
+					                <li><span ></span><span class="text">기간</span></li>
+					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
+					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
+					            </ul>
+		                    </div>    
+		                    </div>
+		        </div>
+		        <div class="col-md-4">
+		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
+		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
+		                    <div class="block-23 mb-3">
+		                        <ul>
+					                <li><span ></span><span class="text">지역</span></li>
+					                <li><span ></span><span class="text">농작물</span></li>
+					                <li><span ></span><span class="text">기간</span></li>
+					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
+					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
+					            </ul>
+		                    </div>    
+		                    </div>
+		        </div>
+		     </div>
+		     </div>
+		     </div>
+		   </div>
+	</section>
+        
+   
     <section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row no-gutters ftco-services">
@@ -390,7 +346,7 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
 		</svg>
 	</div>
-
+	
 	<script src="resources/main/js/jquery.min.js"></script>
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/main/js/popper.min.js"></script>
