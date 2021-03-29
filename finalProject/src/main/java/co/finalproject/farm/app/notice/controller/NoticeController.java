@@ -54,7 +54,7 @@ public class NoticeController {
     @GetMapping("/updateNotices")
     public String updateNotices(NoticeVO vo, Model model) {
     	model.addAttribute("NoticeVO", noticeService.getSearchNotices(vo));
-    	return "";
+    	return "notice/updateNotice";
     }
 	
 	//수정처리
