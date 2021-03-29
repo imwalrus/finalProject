@@ -37,7 +37,7 @@
 						<a href="./" class="nav-link">Home</a>
 					</li>
 					<li class="nav-item">
-						<a href="getNotices" class="nav-link">공지 & FAQ</a>
+						<a href=getNotices class="nav-link">공지 & FAQ</a>
 					</li>
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>
@@ -46,7 +46,7 @@
 						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="shop"></a>
 							<a class="dropdown-item" href="wishlist.html">Wishlist</a>
@@ -72,67 +72,73 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
-	
-   <section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url(resources/main/images/bg_1.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="#" class="btn btn-primary">View Details</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="slider-item" style="background-image: url(resources/main/images/bg_2.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="#" class="btn btn-primary">View Details</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About us</span></p>
+            <h1 class="mb-0 bread">About us</h1>
           </div>
         </div>
       </div>
+    </div>
+    
+   <section class="ftco-section contact-section">
+     <div align="center" style="margin-left:400px; margin-right:400px;">
+		<div>
+			<h3>게시글 작성</h3>
+		</div>
+		<div>
+			<form id="frm" name="frm" action="#" method="post">
+				<table border="1" class="table-hover">
+					<tr>
+						<th width="70">글번호</th>
+						<td align="center" width="50">
+						<input type="text" id="boardNo" name="boardNo">
+						</td>
+						<th width="70">작성자</th>
+						<td align="center" width="150">
+						<input type="text" id="writer" name="writer">
+						</td>
+						<th width="80">작성일자</th>
+						<td align="center" width="150">
+						<input type="date" id="creationDate" name="creationDate">
+						</td>
+					</tr>
+					<tr>
+						<th width="70">제 목</th>
+						<td colspan="5">
+						<input type="text" id="title" name="title" size="95">
+						</td>
+					</tr>
+					<tr>
+						<th width="70">내용</th>
+						<td colspan="5"><textarea id="content" name="content" rows="7" cols="95"></textarea></td>
+					</tr>
+				</table><br/>
+				
+				<div>
+			<button type="submit">수정하기</button> &nbsp;&nbsp;
+			<button type="reset">삭제하기</button> &nbsp;&nbsp;
+		</div>
+		
+			</form>
+		</div>
+		<br />
+		
+	</div>
     </section>
+
+
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
       		<div class="mouse">
-				<a href="#" class="mouse-icon">
-					<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-				</a>
-			</div>
+						<a href="#" class="mouse-icon">
+							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+						</a>
+					</div>
       	</div>
         <div class="row mb-5">
           <div class="col-md">
@@ -189,15 +195,16 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			</p>
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
           </div>
         </div>
       </div>
     </footer>
+    
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">

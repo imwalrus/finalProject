@@ -25,7 +25,7 @@ public class NoticeController {
     @RequestMapping("/getNotices")
     public String  getNotices(Model model) {
     	model.addAttribute("list", noticeService.getNotices(null) );
-    	return "view/notice";
+    	return "notice";
     }
     
     //단건 조회
