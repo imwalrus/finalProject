@@ -16,7 +16,7 @@
 
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script>
-<title>체험등록</title>
+<title>체험등록/</title>
 
 <script>
 $(document).ready(function() {
