@@ -48,11 +48,10 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop"></a>
-							<a class="dropdown-item" href="wishlist.html">Wishlist</a>
-							<a class="dropdown-item" href="product-single.html">Single Product</a>
-							<a class="dropdown-item" href="cart.html">Cart</a>
-							<a class="dropdown-item" href="checkout.html">Checkout</a>
+							<a class="dropdown-item" href="#"></a>
+							<a class="dropdown-item" href="shop">판매 리스트</a>
+							<a class="dropdown-item" href="shopManage">판매 관리</a>
+							<a class="dropdown-item" href="shopIntroduce">판매 소개</a>
 						</div>
 					</li>
 					<li class="nav-item">

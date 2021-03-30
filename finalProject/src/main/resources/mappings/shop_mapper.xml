@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.shop.service.impl.ShopMapper">
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		<where>
+			<if test="pro_name != null and pro_name != '' and pro_content != null and pro_content != ''">
+				AND UPPER(PRO_NAME) LIKE '%' || UPPER(#{pro_name}) || '%'
+				OR UPPER(PRO_CONTENT) LIKE '%' || UPPER(#{pro_content}) || '%'
+			</if>
+			<if test="pro_category != null and pro_category != ''">
+				OR PRO_CATEGORY = #{pro_category}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+				OR PRO_PRICE &lt;= #{pro_price}
+			</if>
+		</where>
+	</select>
+	<select id="getListShop" parameterType="ShopVO" resultType="ShopVO">
+		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT PRO_NO
+			 , PRO_NAME
+			 , TO_CHAR(PRO_PRICE, '999,999,999') PRO_PRICE
+			 , PRO_DCOMPANY
+			 , TO_CHAR(PRO_DCOST, '999,999,999') PRO_DCOST
+			 , PRO_QUANTITY
+			 , PRO_CONDITION
+			 , PRO_CONTENT
+			 , USER_ID
+			 , PRO_FILENAME
+			 , PRO_CATEGORY
+		FROM PRODUCT
+		<where>
+			<if test="pro_name != null and pro_name != '' and pro_content != null and pro_content != ''">
+				AND UPPER(PRO_NAME) LIKE '%' || UPPER(#{pro_name}) || '%'
+				OR UPPER(PRO_CONTENT) LIKE '%' || UPPER(#{pro_content}) || '%'
+			</if>
+			<if test="pro_category != null and pro_category != ''">
+				OR PRO_CATEGORY = #{pro_category}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+				OR PRO_PRICE &lt;= #{pro_price}
+			</if>
+		</where>
+		ORDER BY
+		<choose>
+			<when test="orderCond == 'popular'">PRO_QUANTITY</when>
+			<when test="orderCond == 'cheap'">PRO_PRICE </when>
+			<when test="orderCond == 'expensive'">PRO_PRICE DESC</when>
+			<otherwise>PRO_NO</otherwise>
+		</choose>
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<select id="allCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM PRODUCT
+	</select>
+	<select id="cateCount" resultType="ShopVO">
+		SELECT PRO_CATEGORY, COUNT(*) PRO_COUNT
+		  FROM PRODUCT
+		 GROUP BY PRO_CATEGORY
+         ORDER BY PRO_COUNT DESC
+	</select>
+	<select id="getProduct" parameterType="ShopVO" resultType="ShopVO">
+		SELECT PRO_NO
+			 , PRO_NAME
+			 , TO_CHAR(PRO_PRICE, '999,999,999') PRO_PRICE
+			 , PRO_DCOMPANY
+			 , TO_CHAR(PRO_DCOST, '999,999,999') PRO_DCOST
+			 , PRO_QUANTITY
+			 , PRO_CONDITION
+			 , PRO_CONTENT
+			 , USER_ID
+			 , PRO_FILENAME
+			 , PRO_CATEGORY
+		FROM PRODUCT
+	   WHERE PRO_NO = #{pro_no}
+	</select>
+</mapper>
