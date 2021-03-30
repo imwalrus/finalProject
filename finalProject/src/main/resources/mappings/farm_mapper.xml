@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmMapper">
+
+<!-- 전체조회 -->
+	<select id="getFarmList" resultType="FarmVO">
+			SELECT *
+			FROM FARM
+	</select>
+	
+<!-- 단건조회 -->
+
+	<select id="getFarm" resultType="FarmVO"
+						parameterType="FarmVO">
+						
+				SELECT *
+				FROM FARM
+				WHERE farm_no=#{farm_no}						
+	</select>
+</mapper>

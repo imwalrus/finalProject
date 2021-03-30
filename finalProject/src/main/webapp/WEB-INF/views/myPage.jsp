@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -49,73 +51,50 @@
 				</div>
 				
 				<ul class="nav pcoded-inner-navbar ">
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Navigation</label>
-					</li>
 					<li class="nav-item">
-					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					    <a href="getFDiaryList" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
 					</li>
+					
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내 정보관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="layout-vertical.html" target="_blank">Vertical</a></li>
-					        <li><a href="layout-horizontal.html" target="_blank">Horizontal</a></li>
+					        <li><a href="#">회원정보 수정</a></li>
+					        <li><a href="#">회원탈퇴</a></li>
+					        <li><a href="getFarmList">나의 농지</a></li>
+                            <!-- 유저 권한-->
+					        <li><a href="#">농업인 권한 신청</a></li>
+                            <!-- 농업인권한 -->
+                            <li><a href="#">문의 답변 관리</a></li>
 					    </ul>
 					</li>
-					<li class="nav-item pcoded-menu-caption">
-					    <label>UI Element</label>
-					</li>
-					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Basic</span></a>
+                    <!-- 농업인만 권한 -->
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">Alert</a></li>
-					        <li><a href="bc_button.html">Button</a></li>
-					        <li><a href="bc_badges.html">Badges</a></li>
-					        <li><a href="bc_breadcrumb-pagination.html">Breadcrumb & paggination</a></li>
-					        <li><a href="bc_card.html">Cards</a></li>
-					        <li><a href="bc_collapse.html">Collapse</a></li>
-					        <li><a href="bc_carousel.html">Carousel</a></li>
-					        <li><a href="bc_grid.html">Grid system</a></li>
-					        <li><a href="bc_progress.html">Progress</a></li>
-					        <li><a href="bc_modal.html">Modal</a></li>
-					        <li><a href="bc_spinner.html">Spinner</a></li>
-					        <li><a href="bc_tabs.html">Tabs & pills</a></li>
-					        <li><a href="bc_typography.html">Typography</a></li>
-					        <li><a href="bc_tooltip-popover.html">Tooltip & popovers</a></li>
-					        <li><a href="bc_toasts.html">Toasts</a></li>
-					        <li><a href="bc_extra.html">Other</a></li>
+					        <li><a href="#">판매내역</a></li>  
 					    </ul>
 					</li>
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Forms &amp; table</label>
-					</li>
-					<li class="nav-item">
-					    <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Forms</span></a>
-					</li>
-					<li class="nav-item">
-					    <a href="tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Bootstrap table</span></a>
-					</li>
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Chart & Maps</label>
-					</li>
-					<li class="nav-item">
-					    <a href="chart-apex.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Chart</span></a>
-					</li>
-					<li class="nav-item">
-					    <a href="map-google.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a>
-					</li>
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Pages</label>
-					</li>
-					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="auth-signup.html" target="_blank">Sign up</a></li>
-					        <li><a href="auth-signin.html" target="_blank">Sign in</a></li>
+					        <li><a href="#">장바구니</a></li>
+					        <li><a href="#">구매내역</a></li>
+					        <li><a href="#">구매 관련 문의</a></li>
+					        
 					    </ul>
 					</li>
-					<li class="nav-item"><a href="sample-page.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
-
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
+					    <ul class="pcoded-submenu">
+                            <!-- 유저 전용 -->
+					        <li><a href="#">나의 신청 내역</a></li>
+                            <!-- 농업인 전용 -->
+                            <li><a href="#">신청 내역 관리</a></li>
+					        <li><a href="#">체험 관련 문의</a></li>
+					        
+	
+					    </ul>
+					</li>
 				</ul>
 				
 				<div class="card text-center">
@@ -281,7 +260,10 @@
                             <div class="card-body pb-0">
                                 <h2 class="m-0">350</h2>
                                 <span class="text-c-blue">Support Requests</span>
-                                <p class="mb-3 mt-3">Total number of support requests that come in.</p>
+                                <p class="mb-3 mt-3">
+                                <a href="getCropList">나의농지</a>
+                                
+                                </p>
                             </div>
                             <div id="support-chart"></div>
                             <div class="card-footer bg-primary text-white">
@@ -949,17 +931,17 @@
     <!-- Warning Section Ends -->
 
     <!-- Required Js -->
-    <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
+    <script src="resources/admin/js/vendor-all.min.js"></script>
+    <script src="resources/admin/js/plugins/bootstrap.min.js"></script>
+    <script src="resources/admin/js/ripple.js"></script>
+    <script src="resources/admin/js/pcoded.min.js"></script>
 
 <!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
+<script src="resources/admin/js/plugins/apexcharts.min.js"></script>
 
 
 <!-- custom-chart js -->
-<script src="assets/js/pages/dashboard-main.js"></script>
+<script src="resources/admin/js/pages/dashboard-main.js"></script>
 </body>
 
 </html>
