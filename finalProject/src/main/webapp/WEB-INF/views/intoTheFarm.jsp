@@ -32,7 +32,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-
+<!--grid 리스트 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 	$(document).ready(function() {
 		var selectTarget = $('.selectbox select');
@@ -81,8 +85,13 @@
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>
 					</li>
-					<li class="nav-item">
-						<a href="getFarmList" class="nav-link">농촌속으로</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="getFarmList">체험신청</a>
+							<a class="dropdown-item" href="">체험등록</a>
+							<a class="dropdown-item" href="wishlist.html">농촌속으로 문의</a>
+						</div>	
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
@@ -161,42 +170,63 @@
 			<button type="button" onclick="">검색</button> -->
 			
 
-				<div class="row d-flex justify-content-center py-5">
+			 <!-- Product grid -->
+			<%-- <div class="w3-row w3-grayscale">
+				<div class="w3-col l3 s6">
+					<c:forEach items="${list}" var="listt">
+						<div class="w3-container">
+							<ul>
+								<li><span></span><span><img
+										src="https://i.imgur.com/CBU1h2t.png" width="240"></span></li>
+								<li><span></span><span class="text">지역</span></li>
+								<li>${listt.into_city}</li>
+								<li><span></span><span class="text">농작물</span></li>
+								<li>${listt.into_product}</li>
+								<li><span></span><span class="text">기간</span></li>
+								<li>${listt.into_date}</li>
+								<li><span></span><span class="text">모집 인원 수&남은 인원 수</span></li>
+								<li>${listt.into_entry}</li>
+								<li><a href="#"><span></span><span class="text">상세보기</span></a></li>
+							</ul>
+						</div>
+					</c:forEach>
+				</div>
+			</div> 
+			<%--end of product grid  --%>
 			
-			<div class="container-fluid mt-5 mb-5">
-		    <div class="row">
-		        <div class="col-md-4">
-		            <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up"> 
-		                    <div class="icon"> <img src="https://i.imgur.com/CBU1h2t.png" width="240"> </div>
-		                    <div class="block-23 mb-3">
-		                        <ul>
-					                <c:forEach items="${list}" var="listt">
-					                <li><span ></span><span class="text">지역</span></li>
-					                <li>
-					                	${listt.into_city}
-					                </li>
-					                <li><span ></span><span class="text">농작물</span></li>
-					                <li>
-					               	   ${listt.into_product}
-					                </li>
-					                <li><span ></span><span class="text">기간</span></li>
-					                <li>
-					                   ${listt.into_date}
-					                </li>
-					                <li><span ></span><span class="text">모집 인원 수&남은 인원 수</span></li>
-					                <li>
-					                	${listt.into_entry}
-					                </li>
-					                </c:forEach>
-					                <li><a href="#"><span ></span><span class="text">상세보기</span></a></li>
-					            </ul>
-		                    </div>    
-		                    </div>
-		        </div>
-		     </div>
-		     </div>
-		     </div>
-		   </div>
+
+
+
+			<div class="row d-flex justify-content-center py-5">
+					<div class="container-fluid mt-5 mb-5">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="col max-mb-30 aos-init aos-animate"
+									data-aos="fade-up">
+									<c:forEach items="${list}" var="listt">
+										<div class="block-23 mb-3">
+											<ul>
+												<li><span></span><span><img
+														src="https://i.imgur.com/CBU1h2t.png" width="240"></span></li>
+												<li><span></span><span class="text">지역</span></li>
+												<li>${listt.into_city}</li>
+												<li><span></span><span class="text">농작물</span></li>
+												<li>${listt.into_product}</li>
+												<li><span></span><span class="text">기간</span></li>
+												<li>${listt.into_date}</li>
+												<li><span></span><span class="text">모집 인원 수&남은
+														인원 수</span></li>
+												<li>${listt.into_entry}</li>
+												<li><a href="#"><span></span><span class="text">상세보기</span></a></li>
+											</ul>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
 	</section>
    
     <section class="ftco-section bg-light">

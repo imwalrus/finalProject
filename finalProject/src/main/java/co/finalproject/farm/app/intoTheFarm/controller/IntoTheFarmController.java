@@ -31,7 +31,7 @@ public class IntoTheFarmController {
 	//등록
 	@GetMapping("/insertFarm") //등록 페이지
 	public String insertFarm(IntoTheFarmVO vo,Model model) {
-		return "insertFarm";
+		return "insertIntoFarm";
 	}
 	
 	@PostMapping("/insertFarm") //등록
