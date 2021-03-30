@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper">
+	<!--전체조회 -->
+	
+	<select id="getFarmList" resultType="IntoTheFarmVO">
+	SELECT INTO_NO,
+		   INTO_TITLE,
+		   INTO_PHONE,
+		   INTO_PRODUCT,
+		   INTO_DATE,
+		   INTO_ENTRY,
+		   INTO_FILENAME,
+		   INTO_INFO,
+		   USER_ID,
+		   INTO_CITY
+	FROM INTOFARM
+	</select>
+	
+	<!--단건조회 -->
+	<select id="getSearchFarm" resultType="IntoTheFarmVO">
+	SELECT INTO_NO,
+		   INTO_TITLE,
+		   INTO_PHONE,
+		   INTO_PRODUCT,
+		   INTO_DATE,
+		   INTO_ENTRY,
+		   INTO_FILENAME,
+		   INTO_INFO,
+		   USER_ID,
+		   INTO_CITY
+	FROM INTOFARM
+	WHERE INTO_NO=${into_no}
+	</select>
+	
+	<!--등록 -->
+	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+	INSERT INTO INTOFARM <!--확인! -->
+				(INTO_TITLE,
+		  		 INTO_PHONE,
+		  		 INTO_PRODUCT,
+				 INTO_DATE,
+				 INTO_ENTRY,
+				 INTO_FILENAME,
+				 INTO_INFO,
+			     USER_ID,
+			     INTO_CITY
+			    )
+	VALUES ((SELECT NVL(MAX(SEQ),1)+1 FROM INTOFARM),
+			#{into_title},
+	 		#{into_phone},
+		   	#{into_product},
+	   	    #{into_date}, 
+		   	#{into_entry},
+		    #{into_filename},
+		   	#{into_info},
+		   	#{user_id},
+		   	#{into_city}
+		   	)
+	</insert>
+	
+	<!--수정 -->
+	<update id="updateFarm" parameterType="IntoTheFarmVO">
+	UPDATE INTOFARM SET INTO_TITLE=#{into_title},
+						INTO_PHONE=#{into_phone},
+						INTO_PRODUCT=#{into_product},
+						INTO_DATE=#{into_date},
+						INTO_ENTRY=#{into_entry},
+						INTO_FILENAME=#{into_filename},
+						INTO_INFO=#{into_info},
+					    USER_ID=#{user_id},
+					    INTO_CITY=#{into_city}
+	WHERE INTO_NO=#{into_no}				    
+	</update>
+	
+	<!--삭제 -->
+	<delete id="deleteFarm" parameterType="IntoTheFarmVO">
+	DELETE FROM INTOFARM 
+	WHERE INTO_NO=#{into_no}
+	</delete>
+	
+</mapper>
