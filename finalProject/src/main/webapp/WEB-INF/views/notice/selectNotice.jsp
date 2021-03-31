@@ -101,10 +101,18 @@
 					<td align="center" width="70">분류</td>
 					<td align="center" width="80">
 					<select name="notice_category" id="notice_category">
-					<option value="관련기사">관련기사</option>
-					<option value="관련공문">관련공문</option>
-					<option value="농사물가격">농사물가격</option>
-					<option value="축제,박람회">축제,박람회</option>
+					<option value="관련기사"
+                    <c:if test ="${NoticeVO.notice_category eq '관련기사'}">
+	                selected </c:if>>관련기사</option>
+	                <option value="관련공문"
+	                <c:if test ="${NoticeVO.notice_category eq '관련공문'}">
+	                selected </c:if>>관련공문</option>
+                    <option value="농산물가격"
+                    <c:if test ="${NoticeVO.notice_category eq '농산물가격'}">
+	                selected </c:if>>농산물가격</option>
+                    <option value="축제,박람회"
+                    <c:if test ="${NoticeVO.notice_category eq '축제,박람회'}">
+	                selected </c:if>>축제,박람회</option>
 					</select></td>
 					<td align="center" width="80">작성일자</td>
 					<td align="center" width="150">${NoticeVO.notice_date}</td>
@@ -120,9 +128,9 @@
 			</table>
 		</div><br />
 		<div>
-		<button type="button" onclick="location.href='getNotices'">목록보기</button>
+		<button type="button" onclick="location.href='getNotices?page=${noticePagingVO.page}'">목록보기</button>
 		&nbsp;&nbsp;&nbsp;
-		<button type="button" onclick="location.href='deleteNotices?notice_no=${NoticeVO.notice_no}'">글 삭제</button>
+		<button type="button" onclick="location.href='deleteNotices?notice_no=${NoticeVO.notice_no}&page=${noticePagingVO.page}'">글 삭제</button>
 		&nbsp;&nbsp;&nbsp;
 		<input type="submit" value="글 수정">
 		</div>

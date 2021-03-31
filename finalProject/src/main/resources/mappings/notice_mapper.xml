@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="co.finalproject.farm.app.notice.service.impl.NoticeMapper">
+<mapper namespace="co.finalproject.farm.app.notice.service.impl.NoticeMapper">
 	<!-- 전체보기 -->
-	<select id="getNotices" resultType="NoticeVO">
-		SELECT NOTICE_NO
-		,NOTICE_TITLE
-		,NOTICE_CATEGORY
-		,NOTICE_DATE
-		,NOTICE_CONTENT
-		,NOTICE_HIT
-		FROM NOTICE
-		ORDER BY NOTICE_NO
+	<select id="getNotices" parameterType="NoticePagingVO" resultType="NoticeVO">
+		select b.* from (select  rownum rn, a.* from (
+        select * from notice
+        <where>
+         <if test="notice_category != null and notice_category != ''">
+			    NOTICE_CATEGORY=#{notice_category}
+		 </if>
+         <if test="notice_title != null and notice_title != '' and notice_content != null and notice_content != ''">
+				AND UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
+				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%'
+		 </if>
+        </where>
+         order by notice_no desc
+         ) a ) b where rn between #{start} and #{end} 
 	</select>
 
 	<!-- 상세보기 -->
@@ -51,10 +55,30 @@
 		</set>
 		WHERE NOTICE_NO = #{notice_no}
 	</update>
+	
+	<!-- 게시글 조회수 증가처리 -->
+    <update id="updatereviewcnt" parameterType="NoticeVO">
+        UPDATE NOTICE SET NOTICE_HIT = NOTICE_HIT + 1 
+        WHERE notice_no = #{notice_no}
+    </update>
 
 	<!-- 글 삭제 -->
 	<delete id="deleteNotices" parameterType="NoticeVO">
 		DELETE FROM NOTICE
 		WHERE NOTICE_NO = #{notice_no}
 	</delete>
+	
+	  <!-- 레코드 건수 -->
+    <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM NOTICE
+     <where>
+        <if test="notice_category != null and notice_category != ''">
+			    NOTICE_CATEGORY=#{notice_category}
+		</if>
+        <if test="notice_title != null and notice_title != '' and notice_content != null and notice_content != ''">
+				AND UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
+				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%'
+		</if>
+	 </where>
+    </select>
 </mapper>

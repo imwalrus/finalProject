@@ -97,10 +97,10 @@
 					<td colspan="3"><input type="text" id="notice_title" name="notice_title" size=70></td>
 					<td align="center" width="70">분류</td>
 					<td align="center" width="80">
-					<select name="notice_category" id="notice_category">
+					<select name="notice_category">
 					<option value="관련기사">관련기사</option>
 					<option value="관련공문">관련공문</option>
-					<option value="농사물가격">농사물가격</option>
+					<option value="농산물가격">농산물가격</option>
 					<option value="축제,박람회">축제,박람회</option>
 					</select></td>
 				</tr>			

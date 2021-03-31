@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,6 +24,21 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#notice_title").on('keyup', function() {
+		$("#notice_content").val($(this).val())
+	});
+});
+</script>
+
+<script>
+function categoryChange() {
+	notice_category.submit();
+    }
+</script>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -86,10 +102,29 @@
     </div>
    
     
-		<section class="ftco-section testimony-section">
+     <section class="ftco-section testimony-section">
 		<div align="center" style="margin-left:400px; margin-right:400px;">
 		<div>
 			<h1>공지사항</h1>
+		</div><br/>
+		<div style="margin-left:760px">
+		<form action="getNotices" name="notice_category" >
+		<select name="notice_category" onchange="categoryChange()" >
+		<option value="">분류</option>
+        <option value="관련기사"
+        <c:if test ="${noticePagingVO.notice_category eq '관련기사'}">
+	             selected </c:if>>관련기사</option>
+	    <option value="관련공문"
+	    <c:if test ="${noticePagingVO.notice_category eq '관련공문'}">
+	             selected </c:if>>관련공문</option>
+        <option value="농산물가격"
+        <c:if test ="${noticePagingVO.notice_category eq '농산물가격'}">
+	             selected </c:if>>농산물가격</option>
+        <option value="축제,박람회"
+        <c:if test ="${noticePagingVO.notice_category eq '축제,박람회'}">
+	             selected </c:if>>축제,박람회</option>
+        </select>
+        </form>
 		</div><br/>
 		<div align="center">
 		<table border="1">
@@ -101,7 +136,7 @@
 					<td align="center" width="150">조회수</td>
 				</tr>
 		<c:forEach items="${list}" var="ntc">
-		<tr onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}'">
+		<tr onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}&page=${paging.page}'">
          <td align="center">${ntc.notice_no}</td>
          <td>&nbsp; ${ntc.notice_title}</td>
          <td align="center">${ntc.notice_category}</td>
@@ -109,14 +144,34 @@
          <td align="center">${ntc.notice_hit}</td>
         </tr>
         </c:forEach>
-        </table>
+        </table><br/>
+        <div style="margin-left:750px">
+        <button type="button" onclick="location.href='insertNotices'">글쓰기</button>
         </div>
-        </div><br/>
+        </div>
+        </div>
         
-    <div align="center">
-	<button type="button" onclick="location.href='insertNotices'">글쓰기</button>
-	</div>
-        </section>
+        <div class="container box_1170" style="margin-right:276px">
+        <form action="getNotices" name="searchFrm">
+        <input type="hidden" name="page" value="1">
+        <div class="form-group">
+        <input type="text" placeholder="Search..." id="notice_title" name="notice_title">
+        <input type="hidden" id="notice_content" name="notice_content" value="">
+        </div>
+        </form>
+        </div>
+       
+        <div align="center">
+        <my:paging paging="${paging}" jsFunc="goPage" />
+        <script>
+        function goPage(p) {
+    	//location.href="getNotices?page=" +p;
+    	searchFrm.page.value= p;
+    	searchFrm.submit();
+        }
+        </script>
+        </div>
+    </section>
 
 
     <footer class="ftco-footer ftco-section">
