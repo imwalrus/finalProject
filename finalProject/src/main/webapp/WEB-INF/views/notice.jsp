@@ -36,7 +36,7 @@ $(document).ready(function() {
 
 <script>
 function categoryChange() {
-	notice_category.submit();
+	notice_sch.submit();
     }
 </script>
 </head>
@@ -103,28 +103,27 @@ function categoryChange() {
    
     
      <section class="ftco-section testimony-section">
+     <form action="getNotices" name="notice_sch">
 		<div align="center" style="margin-left:400px; margin-right:400px;">
 		<div>
 			<h1>공지사항</h1>
 		</div><br/>
 		<div style="margin-left:760px">
-		<form action="getNotices" name="notice_category" >
-		<select name="notice_category" onchange="categoryChange()" >
+		<select name="notice_category" onchange="categoryChange()">
 		<option value="">분류</option>
         <option value="관련기사"
-        <c:if test ="${noticePagingVO.notice_category eq '관련기사'}">
+        <c:if test ="${noticePagingVO.notice_category == '관련기사'}">
 	             selected </c:if>>관련기사</option>
 	    <option value="관련공문"
-	    <c:if test ="${noticePagingVO.notice_category eq '관련공문'}">
+	    <c:if test ="${noticePagingVO.notice_category == '관련공문'}">
 	             selected </c:if>>관련공문</option>
         <option value="농산물가격"
-        <c:if test ="${noticePagingVO.notice_category eq '농산물가격'}">
+        <c:if test ="${noticePagingVO.notice_category == '농산물가격'}">
 	             selected </c:if>>농산물가격</option>
         <option value="축제,박람회"
-        <c:if test ="${noticePagingVO.notice_category eq '축제,박람회'}">
+        <c:if test ="${noticePagingVO.notice_category == '축제,박람회'}">
 	             selected </c:if>>축제,박람회</option>
         </select>
-        </form>
 		</div><br/>
 		<div align="center">
 		<table border="1">
@@ -152,13 +151,11 @@ function categoryChange() {
         </div>
         
         <div class="container box_1170" style="margin-right:276px">
-        <form action="getNotices" name="searchFrm">
         <input type="hidden" name="page" value="1">
         <div class="form-group">
-        <input type="text" placeholder="Search..." id="notice_title" name="notice_title">
-        <input type="hidden" id="notice_content" name="notice_content" value="">
+        <input type="text" placeholder="Search..." id="notice_title" name="notice_title" value="${noticePagingVO.notice_title}" onclick="this.select()">
+        <input type="hidden" id="notice_content" name="notice_content" value="${noticePagingVO.notice_content}">
         </div>
-        </form>
         </div>
        
         <div align="center">
@@ -166,11 +163,12 @@ function categoryChange() {
         <script>
         function goPage(p) {
     	//location.href="getNotices?page=" +p;
-    	searchFrm.page.value= p;
-    	searchFrm.submit();
+    	notice_sch.page.value= p;
+    	notice_sch.submit();
         }
         </script>
         </div>
+        </form>
     </section>
 
 

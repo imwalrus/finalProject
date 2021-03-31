@@ -42,7 +42,7 @@ public class NoticeController {
     	return "notice";
     }
     
-    //단건 조회
+    //단건 조회 ( + 조회수 증가 )
     @RequestMapping("/getSearchNotices")
     public ModelAndView getSearchNotices(HttpSession session, Model model, NoticeVO vo, NoticePagingVO pagingvo) {
     	noticeService.updatereviewcnt(vo, session);
@@ -73,7 +73,7 @@ public class NoticeController {
     public String updateNoticesProc(NoticeVO vo, NoticePagingVO pagingvo) {
     	logger.debug(vo.toString());
     	noticeService.updateNotices(vo);
-    	return "redirect:getSearchNotices?notice_no="+vo.getNotice_no();
+    	return "redirect:getSearchNotices?notice_no="+vo.getNotice_no()+"&page="+pagingvo.getPage();
     }
     
     //삭제처리

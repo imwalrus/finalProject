@@ -11,8 +11,8 @@
 			    NOTICE_CATEGORY=#{notice_category}
 		 </if>
          <if test="notice_title != null and notice_title != '' and notice_content != null and notice_content != ''">
-				AND UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
-				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%'
+			    AND ( UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
+				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%' )
 		 </if>
         </where>
          order by notice_no desc
@@ -76,8 +76,8 @@
 			    NOTICE_CATEGORY=#{notice_category}
 		</if>
         <if test="notice_title != null and notice_title != '' and notice_content != null and notice_content != ''">
-				AND UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
-				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%'
+				AND ( UPPER(NOTICE_TITLE) LIKE '%' || UPPER(#{notice_title}) || '%'
+				OR UPPER(NOTICE_CONTENT) LIKE '%' || UPPER(#{notice_content}) || '%' )
 		</if>
 	 </where>
     </select>

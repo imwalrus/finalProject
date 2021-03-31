@@ -93,6 +93,7 @@
 		</div><br/>
 		<form id="frm" name="frm" action="updateNotices" method="post">
 		<input type="hidden" name="notice_no" value="${NoticeVO.notice_no}">
+		<input type="hidden" name="page" value="${noticePagingVO.page}">
 		<div>
 			<table border="1">
 				<tr>
