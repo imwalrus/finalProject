@@ -17,7 +17,7 @@
 	padding: 18px;
 	width: 100%;
 	border: none;
-	text-align: left;
+	text-align: center;
 	outline: none;
 	font-size: 15px;
 	transition: 0.4s;
@@ -153,12 +153,9 @@
 	<div class="pcoded-main-container">
 		<div class="pcoded-content">
 			<!-- [ breadcrumb ] start -->
-
-
 			<!-- Latest Customers start -->
 			<div class="row">
-				<div class="col-lg-9 col-md-12">
-				
+				<div class="col-lg-9 col-md-12">				
 					<!-- 왼쪽 -->
 				<div class="card table-card review-card">
 					<div class="card-header borderless ">

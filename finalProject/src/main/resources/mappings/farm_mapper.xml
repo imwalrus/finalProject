@@ -19,4 +19,43 @@
 				FROM FARM
 				WHERE farm_no=#{farm_no}						
 	</select>
+<!-- 등록 -->
+	<insert id="insertFarm" parameterType="FarmVO">	
+		INSERT INTO farm
+            (
+            FARM_NO
+            ,FARM_NAME
+            ,FARM_ADR
+            ,FARM_AREA
+            ,FARM_CONTENT
+            ,USER_ID
+            )
+    VALUES(
+            ( select nvl(max(farm_no),0)+1 from farm )
+            ,#{farm_name }
+            ,#{farm_adr }
+            ,#{farm_area }
+            ,#{farm_content }
+            ,#{user_id }
+            )	
+	</insert>
+	
+<!-- 수정 -->
+	<update id="updateFarm" parameterType="FarmVO">
+			UPDATE farm 
+					SET 
+						FARM_NAME = #{farm_name}
+						,FARM_ADR = #{farm_adr }
+						,FARM_AREA = #{farm_area }
+						,FARM_CONTENT=#{farm_content }
+					WHERE FARM_no=#{farm_no}
+			
+	</update>
+
+
+<!-- 삭제 -->
+	<delete id="deleteFarm" >
+		DELETE FROM FARM
+		WHERE farm_no = #{farm_no}
+	</delete>
 </mapper>
