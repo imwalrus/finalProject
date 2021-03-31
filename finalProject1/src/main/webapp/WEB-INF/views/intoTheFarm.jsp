@@ -86,10 +86,10 @@
 						<a href="education" class="nav-link">귀농교육</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
+						<a class="nav-link dropdown-toggle" href="intoTheFarm" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농촌속으로</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
-							<a class="dropdown-item" href="">체험등록</a>
+							<a class="dropdown-item" href="insertIntoFarm">체험등록</a>
 							<a class="dropdown-item" href="wishlist.html">농촌속으로 문의</a>
 						</div>	
 					</li>
@@ -206,8 +206,6 @@
 									<c:forEach items="${list}" var="listt">
 										<div class="block-23 mb-3">
 											<ul>
-												<li><span></span><span><img
-														src="https://i.imgur.com/CBU1h2t.png" width="240"></span></li>
 												<li><span></span><span class="text">지역</span></li>
 												<li>${listt.into_city}</li>
 												<li><span></span><span class="text">농작물</span></li>

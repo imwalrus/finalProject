@@ -18,5 +18,4 @@ public class IntoTheFarmVO {
 	private String user_id;
 	private String into_city;
 	private String into_filename;
-	private MultipartFile[] uploadFile;
 }
