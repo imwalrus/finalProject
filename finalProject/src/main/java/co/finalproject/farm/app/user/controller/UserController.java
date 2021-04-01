@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import co.finalproject.farm.app.user.service.UserVO;
 public class UserController {
 	
 	@Autowired UserService userService;
+	@Autowired BCryptPasswordEncoder pwdEncoder;
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/signUpForm")
@@ -58,18 +60,22 @@ public class UserController {
 	
 	//회원가입 완료 후 home으로 이동
 	@PostMapping("/signUp")
-	public String insertUser(UserVO vo) {
+	public String insertUser(UserVO vo){
+		//비밀번호 암호화해서 다시 vo에 저장
+		vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));
 		userService.insertUser(vo);
 		return "redirect:login";
 	}
 	
+	
 	//로그인 아이디 패스워드 체크 후 로그인 -> 홈으로 이동
 	@PostMapping("/login")
 	public String login(UserVO vo , HttpServletRequest request, RedirectAttributes redirectAttr) {
-		UserVO resultVO = userService.loginCheck(vo);
-		HttpSession session = request.getSession();
+		//입력한 비밀번호와 db에 저장된 비밀번호 확인
 		
-		if(resultVO != null) {
+		UserVO resultVO = userService.loginCheck(vo);
+		HttpSession session = request.getSession();		
+		if(resultVO != null && pwdEncoder.matches(vo.getUser_pwd(), resultVO.getUser_pwd())) {
 			session.setAttribute("user", resultVO);
 		} else {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
@@ -96,12 +102,32 @@ public class UserController {
 		return result;
 	}
 	
+	//회원 권한 변경(user-> farmer)
+	@GetMapping("/updateUserToFarmer")
+	@ResponseBody
+	public int updateUserToFarmer(UserVO vo) {
+		int result = userService.updateUserToFarmer(vo);
+		return result;
+	}
+	
+	//회원정보 수정
+	@PostMapping("/updateUser")
+	public String updateUser(UserVO vo){
+		//비밀번호 암호화해서 다시 vo에 저장
+		if(vo.getUser_pwd() != null) {
+			vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));			
+		}
+		userService.insertUser(vo);
+		return "redirect:/";
+	}
+	
+	
 	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:home";
+		return "redirect:/";
 	}
 	
 }

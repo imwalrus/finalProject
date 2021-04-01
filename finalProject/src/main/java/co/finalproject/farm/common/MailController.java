@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ public class MailController {
 
 	@Autowired private JavaMailSender mailSender;
 	@Autowired UserService userService;
+	@Autowired BCryptPasswordEncoder pwdEncoder;
 	
 	//회원가입시 이메일 인증코드 메일 발송
 	@RequestMapping("/sendEmailJoinCode")
@@ -100,14 +102,13 @@ public class MailController {
 	        String setFrom = "yellowsys92@gmail.com";
 	        String toMail = user_email;
 	        String title = "청년농장 임시 비밀번호 발급 안내입니다.";
-	        String content = "<h2>안녕하세요</h2><br><br>" 
-	        				+ "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"
-	        				+ "<p>임시로 발급 드린 비밀번호는 <h2 style='color : blue'>'" + pwTempCode +"'</h2>이며 로그인 후 마이페이지에서 비밀번호를 변경해주시면 됩니다.</p><br>"
-	        				+ "<h3><a href='http://192.168.0.68/temp/'>MS :p 홈페이지 접속 ^0^</a></h3><br><br>"
+	        String content = "안녕하세요" 
+	        				+ "비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다."
+	        				+ "임시로 발급 드린 비밀번호는   " + pwTempCode +"  이며 로그인 후 마이페이지에서 비밀번호를 변경해주시면 됩니다."
 	        				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 
 	        UserVO vo = new UserVO();
-	        vo.setUser_pwd(pwTempCode);
+	        vo.setUser_pwd(pwdEncoder.encode(pwTempCode));
 	        vo.setUser_id(user_id);
 	        int result = userService.updateUser(vo);
 	        System.out.println("============= 비밀번호 변경 완료시 1 ============" + result);

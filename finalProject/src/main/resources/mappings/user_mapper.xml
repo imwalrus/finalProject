@@ -45,7 +45,7 @@
 				USER_DETAILADR,
 				USER_AUTH
 		FROM USERS
-		WHERE USER_ID=#{user_id} AND USER_PWD = #{user_pwd}
+		WHERE USER_ID=#{user_id}
 	</select>
 	
 	<!-- 회원 단건조회(아이디로 조회) -->
@@ -62,7 +62,6 @@
 				USER_AUTH
 		FROM USERS
 		WHERE USER_ID = #{user_id}
-		ORDER BY USER_ID
 	</select>
 	
 	<!-- 회원 전체조회 -->
@@ -123,6 +122,13 @@
 		</set>
 
 		WHERE USER_ID = #{user_id} 
+	</update>
+	
+	<!-- 회원 농업인 권한 수정 -->
+	<update id="updateUserToFarmer" parameterType="UserVO">
+		UPDATE USERS
+			SET USER_AUTH= 'farmer'
+			WHERE USER_ID = #{user_id}
 	</update>
 	
 	<!-- 회원탈퇴 또는 관리자페이지 내에서 회원 삭제 -->

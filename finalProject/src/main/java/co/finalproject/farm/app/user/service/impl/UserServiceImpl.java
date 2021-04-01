@@ -65,10 +65,18 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
+	//회원 권한 변경(user-> farmer)
+	public int updateUserToFarmer(UserVO vo) {
+		int result = userDAO.updateUserToFarmer(vo);
+		return result;
+	}
+	
 	//회원탈퇴 또는 관리자 페이지 내에서 수정
 	public int deleteUser(UserVO vo) {
 		int result = userDAO.deleteUser(vo);
 		return result;
 	}
+	
+
 
 }

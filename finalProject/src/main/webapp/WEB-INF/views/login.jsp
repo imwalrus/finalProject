@@ -70,7 +70,7 @@
 					<div class="flex-sb-m w-full p-b-48">
 						<div class="contact100-form-checkbox">
 					<c:if test="${msg ne null }">
-							<font id="loginNotice" size=3 style="color:#f82a2aa3;">${msg}</font>
+							<font id="loginNotice" size=2 style="color:#f82a2aa3;">${msg}</font>
 					</c:if>	
 						</div>
 						<div>

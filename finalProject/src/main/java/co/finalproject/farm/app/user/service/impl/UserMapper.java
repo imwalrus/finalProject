@@ -17,6 +17,7 @@ public interface UserMapper {
 	
 	public int insertUser(UserVO vo); 			//회원가입
 	public int updateUser(UserVO vo); 			//회원 정보수정 
+	public int updateUserToFarmer(UserVO vo);	//회원 권한 변경(user-> farmer)
 	public int deleteUser(UserVO vo);			//회원탈퇴 또는 관리자 페이지 내에서 회원 삭제
 
 }

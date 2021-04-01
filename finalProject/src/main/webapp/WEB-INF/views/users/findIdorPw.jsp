@@ -95,6 +95,10 @@
 	top: 18px;
 	font-size: 7px;
 	position: absolute;
+
+}
+.signupDiv{
+	margin-top: 50px;
 }
 </style>
 <script>
@@ -128,11 +132,11 @@ $(document).ready(function(){
 			success:function(response){
 				console.log(response.user_id);
 				if(response == 0){
-					$('modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
 					$('.modal').show();
+					$('.modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
 				} else{
-					$('modal-body').find('p').html("회원님의 아이디는 "+response.user_id+" 입니다.");
 					$('.modal').show();
+					$('.modal-body').find('p').html("회원님의 아이디는 <h3>"+response.user_id+"</h3> 입니다.");
 				}
 			}
 		})
@@ -176,12 +180,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div align="center">
+<div class="signupDiv" align="center">
 
 	<!-- id찾기 form -->
 	<div class="signup-form">
 	    <form name="idFindFrm" method="post">
-			<h2>아이디 찾기</h2>
+			<h3>아이디 찾기</h3>
 			<hr>
 	        <div class="form-group">
 				<div class="input-group">
@@ -224,7 +228,7 @@ $(document).ready(function(){
     <!-- 비밀번호 찾기 form -->
     <div class="signup-form">
     <form name="pwFindFrm" method="post">
-		<h2>비밀번호 찾기</h2>
+		<h3>비밀번호 찾기</h3>
 		<hr>
         <div class="form-group">
 			<div class="input-group">
