@@ -34,14 +34,11 @@
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script>
-		/*모달*/
-		function fngetSearchInfo(str) { //into_no 가지고 보냄
-			$('#moaModal .modal-content').load("getSearchFarm?into_no=" + str);
-			$('#moaModal').modal();
-
-		}
-</script>
+<style type="text/css">
+	ul {
+		list-style-type: none;
+	}
+</style>
 </head>
 <body class="goto-here">
 	
@@ -99,6 +96,9 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
+	<!-- 검색창 (지역, 농작물종류,기간)  -->
+	
+	
 	<!--농촌속으로 리스트  -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	 <div class="container">
@@ -108,13 +108,13 @@
 					<div class="card">
 						<div class="card-header">${listt.into_title}</div>
 						<div class="card-body">
-							
-								<span></span><span class="text">지역 : ${listt.into_city}</span><br>
-								<span></span><span class="text">농작물 : ${listt.into_product}</span><br>
-								<span></span><span class="text">기간 : ${listt.into_date}</span><br>
-								<span></span><span class="text">모집 인원 수&남은 인원 수 : ${listt.into_entry}</span><br><br>
-							
-								<a onclick="fngetSearchInfo('${into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#moaModal">
+							<ul>
+								<li><span></span><span class="text">지역 : ${listt.into_city}</span></li>
+								<li><span></span><span class="text">농작물 : ${listt.into_product}</span></li>
+								<li><span></span><span class="text">기간 : ${listt.into_date}</span></li>
+								<li><span></span><span class="text">모집 인원 수&남은 인원 수 : ${listt.into_entry}</span></li>
+							</ul>
+								<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#moaModal">
 								<span></span><span class="text">상세보기</span></a>
 						</div>
 					</div>
@@ -122,7 +122,6 @@
 			</c:forEach>
 		</div>
 	</div>
-		
 	</section>
 
 	
@@ -296,15 +295,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div role="document">
-				<div class="modal-content"></div>
-			</div>
-		</div>
 	</div>
 	
-	
-</body>
-</html>
 </body>
 </html>

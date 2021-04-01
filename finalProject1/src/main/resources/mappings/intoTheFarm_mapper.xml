@@ -12,7 +12,6 @@
 		   INTO_DATE,
 		   INTO_ENTRY,
 		   INTO_INFO,
-		   INTO_FILENAME,
 		   USER_ID,
 		   INTO_CITY
 	FROM INTOFARM
@@ -27,37 +26,44 @@
 		   INTO_DATE,
 		   INTO_ENTRY,
 		   INTO_INFO,
-		   INTO_FILENAME,
 		   USER_ID,
 		   INTO_CITY
 	FROM INTOFARM
-	WHERE INTO_NO=${into_no}
+	WHERE INTO_NO=#{into_no}
 	</select>
 	
 	<!--등록 -->
 	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+	
+	<selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+		SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
+	</selectKey>
 	INSERT INTO INTOFARM <!--확인! -->
-				(INTO_NO,
-				 INTO_TITLE,
-		  		 INTO_PHONE,
-		  		 INTO_PRODUCT,
-				 INTO_DATE,
-				 INTO_ENTRY,
-				 INTO_INFO,
-				 INTO_FILENAME,
-			     USER_ID,
-			     INTO_CITY
+				( INTO_NO
+				 ,INTO_TITLE
+		  		 ,INTO_PHONE
+		  		 ,INTO_PRODUCT
+				 ,INTO_DATE
+				 ,INTO_ENTRY
+				 ,INTO_INFO
+				 <if test="uploadFileName != null and uploadFileName != ''">
+				 ,INTO_FILENAME
+				 </if>
+			     ,USER_ID
+			     ,INTO_CITY
 			    )
-	VALUES ((SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM),
-			#{into_title},
-	 		#{into_phone},
-		   	#{into_product},
-	   	    #{into_date}, 
-		   	#{into_entry},
-		   	#{into_info},
-		   	#{into_filename},
-		   	#{user_id},
-		   	#{into_city}
+	VALUES ( #{into_no}
+			,#{into_title}
+	 		,#{into_phone}
+		   	,#{into_product}
+	   	    ,#{into_date}
+		   	,#{into_entry}
+		   	,#{into_info}
+		   	<if test="uploadFileName != null and uploadFileName != ''">
+		   	,#{into_filename}
+		   	</if>
+		   	,#{user_id}
+		   	,#{into_city}
 		   	)
 	</insert>
 	

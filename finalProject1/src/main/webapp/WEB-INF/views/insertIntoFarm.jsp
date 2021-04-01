@@ -178,7 +178,7 @@
       <!--체험일정 calendar 넣기  -->
       <input type="date" name="into_date" style="width: 40%; margin-top: 1%;" placeholder="체험일정"/><br>
       <input type="text" name="into_entry" style="width: 40%; margin-top: 1%;" placeholder="참여 가능 인원 수 "/><br>
-      <input type="file" name="into_filename" id="into_filename" accept="image/png, image/jpeg, image/jpg"><br>
+      <input multiple="multiple" type="file" name="uploadFile" id="uploadFile" accept="image/png, image/jpeg, image/jpg"><br>
       <br><br> 
       <textarea id="summernote" name="into_info"></textarea>
       
