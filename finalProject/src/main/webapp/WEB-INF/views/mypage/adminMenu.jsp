@@ -37,9 +37,8 @@
 				
 				<div class="">
 					<div class="main-menu-header">
-						<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
 						<div class="user-details">
-							<div id="more-details">UX Designer <i class="fa fa-caret-down"></i></div>
+							<div id="more-details">내정보 보기? <i class="fa fa-caret-down"></i></div>
 						</div>
 					</div>
 					<div class="collapse" id="nav-user-link">
@@ -52,13 +51,16 @@
 				</div>
 				
 				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item">
+					    <a href="getFDiaryList" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
+					</li>
 					<li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="bc_alert.html">회원정보수정</a></li>
-					        <li><a href="bc_button.html">회원탈퇴</a></li>
+					        <li><a href="memberOut">회원탈퇴</a></li>
 					        <li><a href="getFarmList">나의농지</a></li>
-                            <li><a href="bc_badges.html">농업인 권한 신청</a></li>
+                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
 					        <li><a href="bc_breadcrumb-pagination.html">문의 답변 관리</a></li>
 					    </ul>
 					</li>
