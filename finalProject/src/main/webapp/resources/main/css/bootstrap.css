@@ -5963,13 +5963,24 @@ a.close.disabled {
   height: 100%;
   overflow: hidden;
   outline: 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
 }
 
 .modal-dialog {
   position: relative;
   width: auto;
   margin: 0.5rem;
-  pointer-events: none;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .modal.fade .modal-dialog {

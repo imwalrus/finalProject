@@ -27,20 +27,6 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-	// 검색시 pro_name + pro_content 값 같이 넘겨주기
-	$(document).ready(function() {
-		$("#pro_name").on('keyup', function() {
-			$("#pro_content").val($(this).val())
-		});
-	});
-
-	// 가격대 슬라이더
-	function ShowSliderValue(sVal) {
-		var obValueView = document.getElementById("slider_value_view");
-		obValueView.innerHTML = sVal
-	}
-</script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 	<div class="container">
@@ -58,7 +44,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item" href="#"></a>
 						<a class="dropdown-item" href="shop">판매 리스트</a>
-						<a class="dropdown-item" href="shopManage">판매 관리</a>
+						<a class="dropdown-item" href="prodManage">판매 관리</a>
 						<a class="dropdown-item" href="shopIntroduce">판매 소개</a>
 					</div></li>
 				<li class="nav-item"><a href="community" class="nav-link">커뮤니티</a></li>
@@ -72,256 +58,95 @@
 	</div>
 </nav>
 <!-- 내비바 END -->
-<div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
-	<div class="container">
-		<div class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-0 bread">농산물 판매</h1>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- 판매 페이지 START  -->
-
-
-
-
-
+<!-- 상품 페이지 START  -->
 <section class="ftco-section">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 mb-5 ftco-animate">
-				<a href="images/product-1.jpg" class="image-popup">
-					<img src="images/product-1.jpg" class="img-fluid" alt="Colorlib Template">
+				<!-- 이미지 -->
+				<a href="resources/main/images/${prod.pro_filename}" class="image-popup">
+					<img src="resources/main/images/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
 				</a>
 			</div>
 			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-				<h3>Bell Pepper</h3>
+				<!-- 상품 이름 -->
+				<h3>${prod.pro_name}</h3>
+				<p class="text-left mr-4">
+					<a class="mr-2" style="color: #000;">
+						판매자 <span style="color: #bbb;">${prod.user_name}</span>
+					</a>
+					<!-- ★문의하기 url 넣기★ -->
+					<a href="#" class="mr-2">문의하기</a>
 				<div class="rating d-flex">
 					<p class="text-left mr-4">
-						<a href="#" class="mr-2">5.0</a>
-						<a href="#">
-							<span class="ion-ios-star-outline"></span>
-						</a>
-						<a href="#">
-							<span class="ion-ios-star-outline"></span>
-						</a>
-						<a href="#">
-							<span class="ion-ios-star-outline"></span>
-						</a>
-						<a href="#">
-							<span class="ion-ios-star-outline"></span>
-						</a>
-						<a href="#">
-							<span class="ion-ios-star-outline"></span>
-						</a>
-					</p>
-					<p class="text-left mr-4">
-						<a href="#" class="mr-2" style="color: #000;">
-							100 <span style="color: #bbb;">Rating</span>
+						<a class="mr-2" style="color: #000;">
+							카테고리 <span style="color: #bbb;">${prod.pro_category}</span>
 						</a>
 					</p>
 					<p class="text-left">
-						<a href="#" class="mr-2" style="color: #000;">
-							500 <span style="color: #bbb;">Sold</span>
+						<a class="mr-2" style="color: #000;">
+							재고 <span style="color: #bbb;">${prod.pro_quantity}개</span>
 						</a>
 					</p>
 				</div>
+				<!-- 가격 -->
 				<p class="price">
-					<span>$120.00</span>
+					<c:set var="price" value="${prod.pro_price}"/>
+					<span>￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/></span>
 				</p>
-				<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until.</p>
+				<p>
+					<span style="color: #000;">배송사 :</span> ${prod.pro_dcompany}
+				</p>
+				<p>
+					<c:set var="dcost" value="${prod.pro_dcost}"/>
+					<span style="color: #000;">배송비 :</span> ￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${dcost}"/>
+				</p>
+				<!-- 내용 -->
+				<p>${prod.pro_content}</p>
 				<div class="row mt-4">
-					<div class="col-md-6">
-						<div class="form-group d-flex">
-							<div class="select-wrap">
-								<div class="icon">
-									<span class="ion-ios-arrow-down"></span>
-								</div>
-								<select name="" id="" class="form-control">
-									<option value="">Small</option>
-									<option value="">Medium</option>
-									<option value="">Large</option>
-									<option value="">Extra Large</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="w-100"></div>
 					<div class="input-group col-md-6 d-flex mb-3">
-						<span class="input-group-btn mr-2">
+						<span class="input-group-btn ml-2">
 							<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
 								<i class="ion-ios-remove"></i>
 							</button>
 						</span>
 						<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-						<span class="input-group-btn ml-2">
+						<span class="input-group-btn mr-2">
 							<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
 								<i class="ion-ios-add"></i>
 							</button>
 						</span>
 					</div>
-					<div class="w-100"></div>
-					<div class="col-md-12">
-						<p style="color: #000;">600 kg available</p>
-					</div>
 				</div>
 				<p>
-					<a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a>
+					<!-- ★장바구니, 구매 url 추가하기★ -->
+					<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
+					<a href="cart.html" class="btn btn-primary py-3 px-5">바로구매</a>
 				</p>
 			</div>
 		</div>
 	</div>
-</section>
-
-<section class="ftco-section">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<span class="subheading">Products</span>
-				<h2 class="mb-4">Related Products</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+	<!-- 모달 START -->
+	<div id="modalAlert" class="modal fade">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!-- ★장바구니 action 추가★ -->
+				<form action="shop">
+					<div class="modal-body">
+						<p>해당 상품이 장바구니에 담겼습니다.</p>
+						<p>장바구니로 이동하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-lg-3 ftco-animate">
-				<div class="product">
-					<a href="#" class="img-prod">
-						<img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template"> <span class="status">30%</span>
-						<div class="overlay"></div>
-					</a>
-					<div class="text py-3 pb-4 px-3 text-center">
-						<h3>
-							<a href="#">Bell Pepper</a>
-						</h3>
-						<div class="d-flex">
-							<div class="pricing">
-								<p class="price">
-									<span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span>
-								</p>
-							</div>
-						</div>
-						<div class="bottom-area d-flex px-3">
-							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-									<span><i class="ion-ios-menu"></i></span>
-								</a>
-								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-									<span><i class="ion-ios-cart"></i></span>
-								</a>
-								<a href="#" class="heart d-flex justify-content-center align-items-center ">
-									<span><i class="ion-ios-heart"></i></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-3 ftco-animate">
-				<div class="product">
-					<a href="#" class="img-prod">
-						<img class="img-fluid" src="images/product-2.jpg" alt="Colorlib Template">
-						<div class="overlay"></div>
-					</a>
-					<div class="text py-3 pb-4 px-3 text-center">
-						<h3>
-							<a href="#">Strawberry</a>
-						</h3>
-						<div class="d-flex">
-							<div class="pricing">
-								<p class="price">
-									<span>$120.00</span>
-								</p>
-							</div>
-						</div>
-						<div class="bottom-area d-flex px-3">
-							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-									<span><i class="ion-ios-menu"></i></span>
-								</a>
-								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-									<span><i class="ion-ios-cart"></i></span>
-								</a>
-								<a href="#" class="heart d-flex justify-content-center align-items-center ">
-									<span><i class="ion-ios-heart"></i></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-3 ftco-animate">
-				<div class="product">
-					<a href="#" class="img-prod">
-						<img class="img-fluid" src="images/product-3.jpg" alt="Colorlib Template">
-						<div class="overlay"></div>
-					</a>
-					<div class="text py-3 pb-4 px-3 text-center">
-						<h3>
-							<a href="#">Green Beans</a>
-						</h3>
-						<div class="d-flex">
-							<div class="pricing">
-								<p class="price">
-									<span>$120.00</span>
-								</p>
-							</div>
-						</div>
-						<div class="bottom-area d-flex px-3">
-							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-									<span><i class="ion-ios-menu"></i></span>
-								</a>
-								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-									<span><i class="ion-ios-cart"></i></span>
-								</a>
-								<a href="#" class="heart d-flex justify-content-center align-items-center ">
-									<span><i class="ion-ios-heart"></i></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-3 ftco-animate">
-				<div class="product">
-					<a href="#" class="img-prod">
-						<img class="img-fluid" src="images/product-4.jpg" alt="Colorlib Template">
-						<div class="overlay"></div>
-					</a>
-					<div class="text py-3 pb-4 px-3 text-center">
-						<h3>
-							<a href="#">Purple Cabbage</a>
-						</h3>
-						<div class="d-flex">
-							<div class="pricing">
-								<p class="price">
-									<span>$120.00</span>
-								</p>
-							</div>
-						</div>
-						<div class="bottom-area d-flex px-3">
-							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-									<span><i class="ion-ios-menu"></i></span>
-								</a>
-								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-									<span><i class="ion-ios-cart"></i></span>
-								</a>
-								<a href="#" class="heart d-flex justify-content-center align-items-center ">
-									<span><i class="ion-ios-heart"></i></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<!-- 모달 END -->
 </section>
-
+<!-- 상품 페이지 END -->
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	<div class="container py-4">
 		<div class="row d-flex justify-content-center py-5">

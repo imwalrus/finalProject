@@ -49,7 +49,7 @@
 			<when test="orderCond == 'popular'">PRO_QUANTITY</when>
 			<when test="orderCond == 'cheap'">PRO_PRICE </when>
 			<when test="orderCond == 'expensive'">PRO_PRICE DESC</when>
-			<otherwise>PRO_NO</otherwise>
+			<otherwise>PRO_NO DESC</otherwise>
 		</choose>
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
@@ -64,18 +64,87 @@
          ORDER BY PRO_COUNT DESC
 	</select>
 	<select id="getProduct" parameterType="ShopVO" resultType="ShopVO">
-		SELECT PRO_NO
-			 , PRO_NAME
-			 , TO_CHAR(PRO_PRICE, '999,999,999') PRO_PRICE
-			 , PRO_DCOMPANY
-			 , TO_CHAR(PRO_DCOST, '999,999,999') PRO_DCOST
-			 , PRO_QUANTITY
-			 , PRO_CONDITION
-			 , PRO_CONTENT
-			 , USER_ID
-			 , PRO_FILENAME
-			 , PRO_CATEGORY
-		FROM PRODUCT
-	   WHERE PRO_NO = #{pro_no}
+		SELECT P.PRO_NO
+			 , P.PRO_NAME
+			 , P.PRO_PRICE
+			 , P.PRO_DCOMPANY
+			 , P.PRO_DCOST
+			 , P.PRO_QUANTITY
+			 , P.PRO_CONDITION
+			 , P.PRO_CONTENT
+			 , P.USER_ID
+			 , P.PRO_FILENAME
+			 , P.PRO_CATEGORY
+			 , U.USER_NAME
+		FROM PRODUCT P, USERS U
+	   WHERE P.USER_ID = U.USER_ID
+	   	 AND P.PRO_NO = #{pro_no}
 	</select>
+	<insert id="insertProduct" statementType="CALLABLE" parameterType="ShopVO">	
+		<selectKey keyProperty="pro_no" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(PRO_NO), 0) + 1 FROM PRODUCT
+		</selectKey>
+		INSERT INTO PRODUCT (PRO_NO
+                     	   , PRO_NAME
+                           , PRO_PRICE
+                           , PRO_DCOMPANY
+                           , PRO_DCOST
+                           , PRO_QUANTITY
+                           , PRO_CONDITION
+                           , PRO_CONTENT
+                           , USER_ID
+                           , PRO_FILENAME
+                           , PRO_CATEGORY)
+                      VALUES(#{pro_no}
+                           , #{pro_name}
+                           , #{pro_price}
+                           , #{pro_dcompany}
+                           , #{pro_dcost}
+                           , #{pro_quantity}
+                           , #{pro_condition}
+                           , #{pro_content}
+                           , #{user_id}
+                           , #{pro_filename}
+                           , #{pro_category})
+	</insert>
+	<update id="updateProduct" parameterType="ShopVO">
+		UPDATE PRODUCT 
+   		<set>
+			<if test="pro_name != null and pro_name != ''">
+			   PRO_NAME = #{pro_name}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+			 , PRO_PRICE = #{pro_price}
+			</if>
+			<if test="pro_dcompany != null and pro_dcompany != ''">
+			 , PRO_DCOMPANY = #{pro_dcompany}
+			</if>
+			<if test="pro_dcost != null and pro_dcost != ''">
+			 , PRO_DCOST = #{pro_dcost}
+			</if>
+			<if test="pro_quantity != null and pro_quantity != ''">
+			 , PRO_QUANTITY = #{pro_quantity}
+			</if>
+			<if test="pro_condition != null and pro_condition != ''">
+			 , PRO_CONDITION = #{pro_condition}
+			</if>
+			<if test="pro_content != null and pro_content != ''">
+			 , PRO_CONTENT = #{pro_content}
+			</if>
+			<if test="user_id != null and user_id != ''">
+			 , USER_ID = #{user_id}
+			</if>
+			<if test="pro_filename != null and pro_filename != ''">
+			 , PRO_FILENAME = #{pro_filename}
+			</if>
+			<if test="pro_category != null and pro_category !=''">
+			 , PRO_CATEGORY = #{pro_category}
+			</if>
+   		</set>
+		 WHERE PRO_NO = #{pro_no}
+	</update>
+	<delete id="deleteProduct" parameterType="ShopVO">
+		 DELETE FROM PRODUCT
+		  WHERE PRO_NO = #{pro_no}
+	</delete>
 </mapper>

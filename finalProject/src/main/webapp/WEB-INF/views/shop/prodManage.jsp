@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="resources/main/css/animate.css">
 <link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
@@ -26,20 +27,39 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+<link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	// 검색시 pro_name + pro_content 값 같이 넘겨주기
-	$(document).ready(function() {
-		$("#pro_name").on('keyup', function() {
-			$("#pro_content").val($(this).val())
-		});
+	// 툴팁 활성화
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 
-	// 가격대 슬라이더
-	function ShowSliderValue(sVal) {
-		var obValueView = document.getElementById("slider_value_view");
-		obValueView.innerHTML = sVal
+	// modal-단건 보기 불러오기
+	function modalView(str){
+	   $('#modal .modal-content').load("modalView?pro_no=" + str);
+	   $('#modal').modal();
 	}
+	
+	// modal-등록 폼 불러오기
+	function modalInsert(){
+	   $('#modal .modal-content').load("modalInsert");
+	   $('#modal').modal();
+	}
+	
+	// modal-수정 폼 불러오기
+	function modalUpdate(str){
+	   $('#modal .modal-content').load("modalUpdate?pro_no=" + str);
+	   $('#modal').modal();
+	}
+	
+	//번호 값 삭제 모달로 넘기기
+	function delFunc(e){
+		var tds = $(e.target).closest("tr").children()
+		console.log(tds.eq(0).html());
+		$('#pro_no').val(tds.eq(0).html());
+	}
+
 </script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -72,150 +92,91 @@
 	</div>
 </nav>
 <!-- 내비바 END -->
-<!-- 판매 페이지 START  -->
+<!-- 관리 페이지 START  -->
 <section class="ftco-section">
-	<div class="shop-box-inner">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
-					<div class="right-product-box">
-						<!-- 정렬 -->
-						<div class="product-item-filter col text-right">
-							<ul class="nav nav-pills flex-column text-right">
-								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">정렬</a>
-									<div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 42px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-										<a class="dropdown-item" href="shop?orderCond=popular">인기 많은순</a>
-										<a class="dropdown-item" href="shop?orderCond=cheap">가격 낮은순</a>
-										<a class="dropdown-item" href="shop?orderCond=expensive">가격 높은순</a>
-									</div></li>
-							</ul>
-						</div>
-						<!-- 정렬 END -->
-						<!-- 판매품목 -->
-						<div class="product-categorie-box">
-							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-									<div class="row">
-										<c:forEach items="${list}" var="shop">
-											<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-												<div class="product">
-													<input type="hidden" name="pro_no" value="${shop.pro_no }">
-													<a href="product?pro_no=${shop.pro_no}" class="img-prod">
-														<!-- 이미지 -->
-														<img class="img-fluid" src="resources/main/images/${shop.pro_filename}" alt="Colorlib Template">
-													</a>
-													<div class="text py-3 pb-4 px-3 text-center">
-														<h3>
-															<!-- 이름 -->
-															<a href="product?pro_no=${shop.pro_no}">${shop.pro_name }</a>
-														</h3>
-														<div class="d-flex">
-															<div class="pricing">
-																<!-- 가격 -->
-																<p class="price">
-																	<span class="price-sale">￦ ${shop.pro_price }</span>
-																</p>
-															</div>
-														</div>
-														<div class="bottom-area d-flex px-3">
-															<div class="m-auto d-flex">
-																<!-- 상세 페이지 이동 -->
-																<a href="product?pro_no=${shop.pro_no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-																	<span><i class="ion-ios-menu"></i></span>
-																</a>
-																<!-- 장바구니 이동 -->
-																<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-																	<span><i class="ion-ios-cart"></i></span>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</c:forEach>
-									</div>
-									<!-- 페이징 -->
-									<div class="row mt-5">
-										<div class="col text-center">
-											<div class="block-27">
-												<form action="shop" name="searchFrm">
-													<input type="hidden" name="page" value="1">
-													<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
-													<input type="hidden" name="pro_name" value="${shopVO.pro_name}">
-													<input type="hidden" name="pro_content" value="${shopVO.pro_content}">
-													<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
-													<input type="hidden" name="pro_price" value="${shopVO.pro_price}">
-													<my:paging paging="${paging}" jsFunc="goPage" />
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 판매품목 END -->
-				<!-- 사이드바 -->
-				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
-					<div class="product-categori">
-						<!-- 검색창 -->
-						<div class="search-product">
-							<form action="shop" class="search-form">
-								<input type="hidden" name="page" value="1">
-								<div class="form-group">
-									<span class="icon ion-ios-search"></span>
-									<input type="text" class="form-control" placeholder="Search..." id="pro_name" name="pro_name">
-									<input type="hidden" class="form-control" id="pro_content" name="pro_content" value="">
-								</div>
-							</form>
-						</div>
-						<br>
-						<div class="filter-sidebar-left">
-							<div class="title-left">
-								<!-- 카테고리 -->
-								<h3>카테고리</h3>
-							</div>
-							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-								<div class="list-group-collapse sub-men">
-									<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
-										<div class="list-group">
-											<a href="shop" class="list-group-item list-group-item-action">
-												전체 <small class="text-muted">(${cnt})</small>
-											</a>
-											<c:forEach items="${cate}" var="cate">
-												<a href="shop?pro_category=${cate.pro_category}" class="list-group-item list-group-item-action">
-													${cate.pro_category} <small class="text-muted">(${cate.pro_count})</small>
-												</a>
-											</c:forEach>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<br> <br>
-						<div class="filter-price-left">
-							<div class="title-left">
-								<h3>가격대</h3>
-							</div>
-							<div class="price-box-slider">
-								<form action="shop">
-									<div id="slider-range"></div>
-									<div class="Container">
-										<font size=2 id="slider_value_view">10000</font>
-										<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='0' max='20000' step="1000" value='10000'>
-									</div>
-									<button type="submit" class="btn btn-primary">검색</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-auto mr-auto">
+				<h2>
+					<b>판매 관리</b>
+				</h2>
 			</div>
+			<div class="col-auto">
+				<a href="javascript:;" class="btn btn-success" onclick="modalInsert()">
+					<span>상품 등록</span>
+				</a>
+				<a href="shop" class="btn btn-primary">
+					<span>판매 리스트</span>
+				</a>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr class="table-primary">
+						<th scope="col">No.</th>
+						<th scope="col">이름</th>
+						<th scope="col">가격</th>
+						<th scope="col">수량</th>
+						<th scope="col">상태</th>
+						<th scope="col">이미지</th>
+						<th scope="col" align="center">카테고리</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${manage}" var="manage">
+						<tr>
+							<th scope="row">${manage.pro_no}</th>
+							<td>${manage.pro_name}</td>
+							<td>${manage.pro_price}원</td>
+							<td>${manage.pro_quantity}</td>
+							<td>${manage.pro_condition}</td>
+							<td>${manage.pro_filename}</td>
+							<td>${manage.pro_category}</td>
+							<td>
+							<a href="javascript:;" class="view" onclick="modalView('${manage.pro_no}')">
+							<i class="material-icons" data-toggle="tooltip" title="보기">&#xe8f4;</i></a>
+							<a href="javascript:;" class="edit" onclick="modalUpdate('${manage.pro_no}')">
+							<i class="material-icons btn-outline-warning" data-toggle="tooltip" title="수정">&#xE254;</i></a>
+							<a href="#delProdModal" class="delete" data-toggle="modal" onclick="delFunc(event)">
+							<i class="material-icons btn-outline-danger" data-toggle="tooltip" title="삭제">&#xE872;</i></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<form action="prodManage" name="searchFrm">
+			<input type="hidden" name="page" value="1">
+			<my:paging paging="${paging}" jsFunc="goPage" />
+		</form>
+	</div>
+<!-- 단건 보기 · 등록 · 수정 Modal -->
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+<!-- 상품 삭제 Modal -->
+<div id="delProdModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="deleteProduct" method="post">
+				<input type="hidden" id="pro_no" name="pro_no">
+				<div class="modal-body">				
+					<p>정말로 삭제하시겠습니까?</p>
+					<p class="text-warning"><small>이 작업은 되돌릴 수 없습니다.</small></p>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" class="btn btn-danger" value="삭제">
+					<input type="button" class="btn btn-info" data-dismiss="modal" value="닫기">
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
 </section>
-<!-- 판매 페이지 END -->
+<!-- 관리 페이지 END -->
 <!-- 푸터 START -->
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	<div class="container py-4">

@@ -1,5 +1,7 @@
 package co.finalproject.farm.app.shop.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +27,8 @@ public class ShopVO {
 	private String pro_content;
 	private String user_id;
 	private String pro_filename;
+	private MultipartFile uploadFile;
 	private String pro_category;
 	private String orderCond;
+	private String user_name;
 }
