@@ -77,7 +77,7 @@ public class NoticeController {
     }
     
     //삭제처리
-    @GetMapping("/deleteNotices")
+    @RequestMapping("/deleteNotices") //원래 get으로 처리하는 게 정석인데 삭제 버튼이 post 폼 안에 묶여있어서 request로 바꿈.
     public String deleteNoticesProc(NoticeVO vo, NoticePagingVO pagingvo) {
     	logger.debug(vo.toString());
     	noticeService.deleteNotices(vo);

@@ -24,6 +24,21 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+
+<script type="text/javascript">
+	function deleteAlert() {
+		var yn = confirm("정말 삭제할까요?");
+		if (yn) {
+			frm.action = "deleteNotices?notice_no=${NoticeVO.notice_no}&page=${noticePagingVO.page}"
+			frm.submit();
+		}
+	}
+</script>
+<style type="text/css">
+#notice_title {  width:836px;
+                 padding:5px;
+                 height:32px !important; }
+</style>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -88,14 +103,15 @@
     
   <section class="ftco-section contact-section">
      <div align="center" style="margin-left:400px; margin-right:400px;">
-		<div>
+		<div style="margin-left:100px;">
 			<h1>게시글 상세보기</h1>
 		</div><br/>
 		<form id="frm" name="frm" action="updateNotices" method="post">
 		<input type="hidden" name="notice_no" value="${NoticeVO.notice_no}">
 		<input type="hidden" name="page" value="${noticePagingVO.page}">
 		<div>
-			<table border="1">
+			<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
+				<thead>
 				<tr>
 					<td align="center" width="70">글번호</td>
 					<td align="center" width="50">${NoticeVO.notice_no}</td>
@@ -119,21 +135,22 @@
 					<td align="center" width="150">${NoticeVO.notice_date}</td>
 				</tr>
 				<tr>
-					<td align="center" width="70">제 목</td>
-					<td colspan="5" ><input type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>
+					<td align="center" width="80">제 목</td>
+					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>
 				</tr>
 				<tr>
 					<td align="center" width="70">내용</td>
-					<td colspan="5"><textarea rows="7" cols="100" id="notice_content" name="notice_content">${NoticeVO.notice_content}</textarea></td>
+					<td colspan="5"><textarea class="form-control" rows="7" cols="100" id="notice_content" name="notice_content">${NoticeVO.notice_content}</textarea></td>
 				</tr>
+				</thead>
 			</table>
-		</div><br />
-		<div>
-		<button type="button" onclick="location.href='getNotices?page=${noticePagingVO.page}'">목록보기</button>
+		</div><br /><br/>
+		<div style="margin-left:100px;">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='getNotices?page=${noticePagingVO.page}'">목록보기</button>
 		&nbsp;&nbsp;&nbsp;
-		<button type="button" onclick="location.href='deleteNotices?notice_no=${NoticeVO.notice_no}&page=${noticePagingVO.page}'">글 삭제</button>
+		<button type="button" class="btn btn-outline-primary" onclick="deleteAlert()">글 삭제</button>
 		&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="글 수정">
+		<input type="submit"  class="btn btn-outline-primary" value="글 수정">
 		</div>
 		</form>
 	</div>
@@ -142,13 +159,6 @@
 
     <footer class="ftco-footer ftco-section">
       <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">

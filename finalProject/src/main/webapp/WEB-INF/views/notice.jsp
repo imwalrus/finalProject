@@ -39,6 +39,16 @@ function categoryChange() {
 	notice_sch.submit();
     }
 </script>
+
+<style type="text/css">
+#notice_title {  width:170px; 
+                 height:40px !important; }
+#notice_category {  width:120px; 
+                    text-align: center;
+                    margin:0px;
+                    padding: 5px;
+                    height:35px !important; }
+</style>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -53,8 +63,12 @@ function categoryChange() {
 					<li class="nav-item active">
 						<a href="./" class="nav-link">Home</a>
 					</li>
-					<li class="nav-item">
-						<a href="getNotices" class="nav-link">공지 & FAQ</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">공지 & FAQ</a>
+					    <div class="dropdown-menu" aria-labelledby="dropdown">
+					    <a class="dropdown-item" href="getNotices">공지사항</a>
+					    <a class="dropdown-item" href="#">FAQ</a>
+					    </div>
 					</li>
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>
@@ -108,8 +122,8 @@ function categoryChange() {
 		<div>
 			<h1>공지사항</h1>
 		</div><br/>
-		<div style="margin-left:760px">
-		<select name="notice_category" onchange="categoryChange()">
+		<div class="form-group" style="margin-left:980px">
+		<select class="form-control" id="notice_category" name="notice_category" onchange="categoryChange()">
 		<option value="">분류</option>
         <option value="관련기사"
         <c:if test ="${noticePagingVO.notice_category == '관련기사'}">
@@ -124,9 +138,10 @@ function categoryChange() {
         <c:if test ="${noticePagingVO.notice_category == '축제,박람회'}">
 	             selected </c:if>>축제,박람회</option>
         </select>
-		</div><br/>
+		</div>
 		<div align="center">
-		<table border="1">
+		<table class="table table-hover">
+		 <thead>
 				<tr>
 					<td align="center" width="100">글번호</td>
 					<td align="center" width="300">제 목</td>
@@ -143,17 +158,18 @@ function categoryChange() {
          <td align="center">${ntc.notice_hit}</td>
         </tr>
         </c:forEach>
+        </thead>
         </table><br/>
-        <div style="margin-left:750px">
-        <button type="button" onclick="location.href='insertNotices'">글쓰기</button>
+        <div style="margin-left:1029px">
+        <button type="button" class="btn btn-success" onclick="location.href='insertNotices'">글쓰기</button>
         </div>
         </div>
         </div>
         
-        <div class="container box_1170" style="margin-right:276px">
+        <div class="container box_1170" style="margin-right:380px">
         <input type="hidden" name="page" value="1">
-        <div class="form-group">
-        <input type="text" placeholder="Search..." id="notice_title" name="notice_title" value="${noticePagingVO.notice_title}" onclick="this.select()">
+        <div class="form-group" >
+        <input class="form-control" type="text" placeholder="Search..." id="notice_title" name="notice_title" value="${noticePagingVO.notice_title}" onclick="this.select()">
         <input type="hidden" id="notice_content" name="notice_content" value="${noticePagingVO.notice_content}">
         </div>
         </div>
@@ -170,17 +186,8 @@ function categoryChange() {
         </div>
         </form>
     </section>
-
-
     <footer class="ftco-footer ftco-section">
-      <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
+      <div class="container">  	
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">

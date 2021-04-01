@@ -22,6 +22,10 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+<style type="text/css">
+#notice_title {  padding:5px;
+                 height:32px !important; }
+</style>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -85,19 +89,20 @@
     </div>
     
    <section class="ftco-section contact-section">
-      <div align="center" style="margin-left:400px; margin-right:400px;">
-		<div>
+       <div align="center" style="margin-left:400px; margin-right:400px;">
+		<div style="margin-left:100px;">
 			<h1>게시글 작성하기</h1>
 		</div><br/>
 		<div>
 			<form id="frm" name="frm" action="insertNotices" method="post">
-				<table border="1">
+				<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
+                <thead>
 				<tr>
-				<td align="center" width="70">제 목</td>
-					<td colspan="3"><input type="text" id="notice_title" name="notice_title" size=70></td>
-					<td align="center" width="70">분류</td>
-					<td align="center" width="80">
-					<select name="notice_category">
+				    <td align="center" width="15%">제목</td>
+					<td align="left" width="55%"><input class="form-control" type="text" id="notice_title" name="notice_title" size=70></td>
+					<td align="center" width="15%">분류</td>
+					<td align="center" width="15%">
+					<select name="notice_category" id="notice_category">
 					<option value="관련기사">관련기사</option>
 					<option value="관련공문">관련공문</option>
 					<option value="농산물가격">농산물가격</option>
@@ -106,18 +111,18 @@
 				</tr>			
 				<tr>
 					<td align="center" width="70">내용</td>
-					<td colspan="5"><textarea rows="7" cols="100" id="notice_content" name="notice_content"></textarea></td>
+					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="notice_content" name="notice_content"></textarea></td>
 				</tr>
+				<thead>
 			</table><br/>
 				
-			<div>
-			<button type="submit">저장하기</button> &nbsp;&nbsp;
-			<button type="reset">취소</button> &nbsp;&nbsp;
+			<div style="margin-left:100px;">
+			<button class="btn btn-outline-primary" type="submit">저장하기</button> &nbsp;&nbsp;
+			<button class="btn btn-outline-primary" type="reset">취소</button> &nbsp;&nbsp;
 		</div>
 		
-			</form>
-		</div>
-		<br />
+	</form>
+		</div><br />
 		
 	</div>
     </section>
@@ -125,13 +130,6 @@
 
     <footer class="ftco-footer ftco-section">
       <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -194,7 +192,7 @@
 						</p>
           </div>
         </div>
-      </div>
+       </div>
     </footer>
     
 	<!-- loader -->
