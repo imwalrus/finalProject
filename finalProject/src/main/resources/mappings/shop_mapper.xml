@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.finalproject.farm.app.shop.service.impl.ShopMapper">
+	<!-- 페이징 -->
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PRODUCT
@@ -18,6 +19,7 @@
 			</if>
 		</where>
 	</select>
+	<!-- 전체 리스트 -->
 	<select id="getListShop" parameterType="ShopVO" resultType="ShopVO">
 		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
 		SELECT PRO_NO
@@ -53,10 +55,12 @@
 		</choose>
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	<!-- 전체 수량 -->
 	<select id="allCount" resultType="int">
 		SELECT COUNT(*)
 		  FROM PRODUCT
 	</select>
+	<!-- 카테고리 수량 -->
 	<select id="cateCount" resultType="ShopVO">
 		SELECT PRO_CATEGORY, COUNT(*) PRO_COUNT
 		  FROM PRODUCT
@@ -80,9 +84,10 @@
 	   WHERE P.USER_ID = U.USER_ID
 	   	 AND P.PRO_NO = #{pro_no}
 	</select>
+	<!-- 상품 등록 -->
 	<insert id="insertProduct" statementType="CALLABLE" parameterType="ShopVO">	
 		<selectKey keyProperty="pro_no" resultType="String" order="BEFORE">
-			SELECT NVL(MAX(PRO_NO), 0) + 1 FROM PRODUCT
+			  SELECT NVL(MAX(PRO_NO), 0) + 1 FROM PRODUCT
 		</selectKey>
 		INSERT INTO PRODUCT (PRO_NO
                      	   , PRO_NAME
@@ -107,6 +112,7 @@
                            , #{pro_filename}
                            , #{pro_category})
 	</insert>
+	<!-- 상품 수정 -->
 	<update id="updateProduct" parameterType="ShopVO">
 		UPDATE PRODUCT 
    		<set>
@@ -143,8 +149,56 @@
    		</set>
 		 WHERE PRO_NO = #{pro_no}
 	</update>
+	<!-- 상품 삭제 -->
 	<delete id="deleteProduct" parameterType="ShopVO">
 		 DELETE FROM PRODUCT
 		  WHERE PRO_NO = #{pro_no}
 	</delete>
+	<!-- 장바구니 불러오기 -->
+	<select id="getCart" parameterType="CartVO" resultType="CartVO">
+		SELECT C.CART_NO
+			 , C.USER_ID
+			 , C.PRO_NO
+			 , P.PRO_NAME
+			 , P.PRO_DCOST
+			 , P.PRO_CONTENT
+			 , P.PRO_FILENAME
+			 , C.CART_COUNT, (P.PRO_PRICE * C.CART_COUNT) CART_PRICE
+			 , P.USER_ID SELLER
+	  	  FROM CART C, PRODUCT P, USERS U
+		WHERE C.USER_ID = U.USER_ID AND C.PRO_NO = P.PRO_NO
+	 ORDER BY C.CART_NO
+	</select>
+	<!-- 장바구니 등록 -->
+	<insert id="insertCart" statementType="CALLABLE" parameterType="CartVO">
+	<selectKey keyProperty="cart_no" resultType="String" order="BEFORE">
+		  SELECT NVL(MAX(CART_NO), 0) + 1 FROM CART
+	</selectKey>
+        INSERT INTO CART(CART_NO
+        			   , PRO_NO
+        			   , CART_COUNT
+        			   , USER_ID)
+                 VALUES (#{cart_no}
+                 	   , #{pro_no}
+                 	   , #{cart_count}
+                 	   , #{user_id})
+	</insert>
+	<!-- 장바구니 수량 변경 -->
+	<update id="updateCart" parameterType="CartVO">
+		UPDATE CART
+		  SET  CART_COUNT = #{cart_count}
+		 WHERE PRO_NO = #{pro_no}
+	</update>
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart" parameterType="CartVO">
+		DELETE FROM CART
+		 WHERE CART_NO = #{cart_no}
+	</delete>
+	<!-- 동일한 상품이있는지 체크 -->
+	<select id="cartCheck" parameterType="CartVO" resultType="int">
+		SELECT COUNT(*)
+		  FROM CART
+		 WHERE USER_ID = #{user_id}
+	       AND PRO_NO = #{pro_no}
+	</select>
 </mapper>

@@ -316,7 +316,7 @@
 <script src="resources/main/js/main.js"></script>
 <script>
 	function goPage(p) {
-		//	location.href="getSearchEmp?page="+p;
+		//	location.href="prodManage?page="+p;
 		searchFrm.page.value = p;
 		searchFrm.submit();
 	}

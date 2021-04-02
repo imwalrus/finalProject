@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="resources/main/css/animate.css">
 <link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
@@ -28,18 +29,17 @@
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	// 검색시 pro_name + pro_content 값 같이 넘겨주기
+	// form - hidden 수량에 수량값 넘겨주기
 	$(document).ready(function() {
-		$("#pro_name").on('keyup', function() {
-			$("#pro_content").val($(this).val())
+		$("#count").on({
+			keyup : function() {
+				$("#hcount").val($(this).val())
+			},
+			click : function() {
+				$("#hcount").val($(this).val())
+			}
 		});
 	});
-
-	// 가격대 슬라이더
-	function ShowSliderValue(sVal) {
-		var obValueView = document.getElementById("slider_value_view");
-		obValueView.innerHTML = sVal
-	}
 </script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -72,150 +72,98 @@
 	</div>
 </nav>
 <!-- 내비바 END -->
-<!-- 판매 페이지 START  -->
-<section class="ftco-section">
-	<div class="shop-box-inner">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
-					<div class="right-product-box">
-						<!-- 정렬 -->
-						<div class="product-item-filter">
-							<ul class="nav nav-pills">
-								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">정렬</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="shop?orderCond=popular">인기 많은순</a>
-										<a class="dropdown-item" href="shop?orderCond=cheap">가격 낮은순</a>
-										<a class="dropdown-item" href="shop?orderCond=expensive">가격 높은순</a>
-									</div></li>
-							</ul>
-						</div>
-						<!-- 정렬 END -->
-						<!-- 판매품목 -->
-						<div class="product-categorie-box">
-							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+<!-- 장바구니 START  -->
+<section class="pt-5 pb-5">
+	<div class="container">
+		<div class="row w-100">
+			<div class="col-lg-12 col-md-12 col-12">
+				<h3 class="display-5 mb-2 text-center">장바구니</h3>
+				<p class="mb-5 text-center">
+				<table id="shoppingCart" class="table table-condensed table-responsive">
+					<thead>
+						<tr>
+							<th style="width: 55%">상품정보</th>
+							<th style="width: 12%">판매가</th>
+							<th style="width: 10%">수량</th>
+							<th style="width: 12%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 총액 계산 -> c:set 태그 설정(총액 변수명 price) -->
+						<c:set var="price" value="0" />
+						<!-- c:forEach START -->
+						<c:forEach items="${cart}" var="cart" varStatus="status">
+							<tr>
+								<form action="updateCart" method="post">
+								<td data-th="Product">
+									<input type="hidden" name="pro_no" value="${cart.pro_no}">
 									<div class="row">
-										<c:forEach items="${list}" var="shop">
-											<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-												<div class="product">
-													<input type="hidden" name="pro_no" value="${shop.pro_no }">
-													<a href="product?pro_no=${shop.pro_no}" class="img-prod">
-														<!-- 이미지 -->
-														<img class="img-fluid" src="resources/main/images/${shop.pro_filename}" alt="Colorlib Template">
-													</a>
-													<div class="text py-3 pb-4 px-3 text-center">
-														<h3>
-															<!-- 이름 -->
-															<a href="product?pro_no=${shop.pro_no}">${shop.pro_name }</a>
-														</h3>
-														<div class="d-flex">
-															<div class="pricing">
-																<!-- 가격 -->
-																<p class="price">
-																	<span class="price-sale">￦ ${shop.pro_price }</span>
-																</p>
-															</div>
-														</div>
-														<div class="bottom-area d-flex px-3">
-															<div class="m-auto d-flex">
-																<!-- 상세 페이지 이동 -->
-																<a href="product?pro_no=${shop.pro_no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-																	<span><i class="ion-ios-menu"></i></span>
-																</a>
-																<!-- 장바구니 이동 -->
-																<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-																	<span><i class="ion-ios-cart"></i></span>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</c:forEach>
-									</div>
-									<!-- 페이징 -->
-									<div class="row mt-5">
-										<div class="col text-center">
-											<div class="block-27">
-												<form action="shop" name="searchFrm">
-													<input type="hidden" name="page" value="1">
-													<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
-													<input type="hidden" name="pro_name" value="${shopVO.pro_name}">
-													<input type="hidden" name="pro_content" value="${shopVO.pro_content}">
-													<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
-													<input type="hidden" name="pro_price" value="${shopVO.pro_price}">
-													<my:paging paging="${paging}" jsFunc="goPage" />
-												</form>
-											</div>
+										<div class="col-md-3 text-left">
+											<!-- 이미지 -->
+											<img src="resources/main/images/${cart.pro_filename}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+										</div>
+										<div class="col-md-9 text-left mt-sm-2">
+											<!-- 상품명 · 상품 내용 -->
+											<h4>${cart.pro_name}</h4>
+											<p class="font-weight-light">${cart.pro_content}</p>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 판매품목 END -->
-				<!-- 사이드바 -->
-				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
-					<div class="product-categori">
-						<!-- 검색창 -->
-						<div class="search-product">
-							<form action="shop" class="search-form">
-								<input type="hidden" name="page" value="1">
-								<div class="form-group">
-									<span class="icon ion-ios-search"></span>
-									<input type="text" class="form-control" placeholder="Search..." id="pro_name" name="pro_name">
-									<input type="hidden" class="form-control" id="pro_content" name="pro_content" value="">
-								</div>
-							</form>
-						</div>
-						<br>
-						<div class="filter-sidebar-left">
-							<div class="title-left">
-								<!-- 카테고리 -->
-								<h3>카테고리</h3>
-							</div>
-							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-								<div class="list-group-collapse sub-men">
-									<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
-										<div class="list-group">
-											<a href="shop" class="list-group-item list-group-item-action">
-												전체 <small class="text-muted">(${cnt})</small>
-											</a>
-											<c:forEach items="${cate}" var="cate">
-												<a href="shop?pro_category=${cate.pro_category}" class="list-group-item list-group-item-action">
-													${cate.pro_category} <small class="text-muted">(${cate.pro_count})</small>
-												</a>
-											</c:forEach>
-										</div>
+								</td>
+								<!-- 판매가(jstl - 3자리마다 ',') -->
+								<c:set var="com" value="${cart.cart_price}" />
+								<td data-th="Price">
+									￦
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
+								</td>
+								<td data-th="Quantity">
+									<!-- 수량 -->
+									<input type="text" class="form-control-sm" name="cart_count" value="${cart.cart_count}">
+								</td>
+								<td class="actions" data-th="">
+									<div class="text-right">
+										<!-- 수량 수정 · 삭제 버튼 -->
+										<button class="btn btn-white border-secondary bg-white btn-md mb-2">
+											<i class="material-icons refresh">&#xe5d5;</i>
+										</button>
+										<a type="button" href="deleteCart?cart_no=${cart.cart_no}" class="btn btn-white border-secondary bg-white btn-md mb-2">
+											<i class="material-icons close_fullscreen">&#xe14c;</i>
+										</a>
 									</div>
-								</div>
-							</div>
-						</div>
-						<br> <br>
-						<div class="filter-price-left">
-							<div class="title-left">
-								<h3>가격대</h3>
-							</div>
-							<div class="price-box-slider">
-								<form action="shop">
-									<div id="slider-range"></div>
-									<div class="Container">
-										<font size=2 id="slider_value_view">10000</font>
-										<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='0' max='20000' step="1000" value='10000'>
-									</div>
-									<button type="submit" class="btn btn-primary">검색</button>
+								</td>
 								</form>
-							</div>
-						</div>
-					</div>
+							</tr>
+							<!-- 총액 계산 -> c:set 태그 종료 -->
+							<c:set var="price" value="${price + cart.cart_price}" />
+						</c:forEach>
+						<!-- c:forEach END -->
+					</tbody>
+				</table>
+				<div class="float-right text-right">
+					<h4>총 결제금액</h4>
+					<!-- jstl - 총액 계산 · 3자리마다 ','  -->
+					<c:set var="com" value="${price}" />
+					<h1>
+						￦
+						<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
+					</h1>
 				</div>
+			</div>
+		</div>
+		<div class="row mt-4 d-flex align-items-center">
+			<div class="col-sm-6 order-md-2 text-right">
+				<!-- 주문 버튼 -->
+				<a href="#" class="btn btn-success mb-4 btn-lg pl-5 pr-5">주문하기</a>
+			</div>
+			<div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+				<a href="shop">
+					<!-- '<- 쇼핑 계속하기' -->
+					<i class="material-icons arrow_back">&#xe5c4;<strong> 쇼핑 계속하기</strong></i>
+				</a>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- 판매 페이지 END -->
+<!-- 장바구니 END -->
 <!-- 푸터 START -->
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	<div class="container py-4">
@@ -311,7 +259,6 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
-
 				<p>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
@@ -353,12 +300,5 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="resources/main/js/google-map.js"></script>
 <script src="resources/main/js/main.js"></script>
-<script>
-	function goPage(p) {
-		//	location.href="shop?page="+p;
-		searchFrm.page.value = p;
-		searchFrm.submit();
-	}
-</script>
 </body>
 </html>

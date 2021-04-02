@@ -2,6 +2,7 @@ package co.finalproject.farm.app.shop.service.impl;
 
 import java.util.List;
 
+import co.finalproject.farm.app.shop.service.CartVO;
 import co.finalproject.farm.app.shop.service.ShopVO;
 
 public interface ShopMapper {
@@ -28,5 +29,20 @@ public interface ShopMapper {
 
 	// 상품 삭제
 	public int deleteProduct(ShopVO vo);
+	
+	// 장바구니 페이지
+	public List<CartVO> getCart(CartVO vo);
+	
+	// 장바구니 등록
+	public void insertCart(CartVO vo);
+	
+	// 장바구니 수량 변경
+	public int updateCart(CartVO vo);
+	
+	// 장바구니 삭제
+	public int deleteCart(CartVO vo);
+	
+	// 동일한 상품 체크
+	public int cartCheck(CartVO vo);
 
 }

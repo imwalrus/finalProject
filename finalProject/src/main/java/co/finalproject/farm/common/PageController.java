@@ -13,7 +13,7 @@ public class PageController {
 
 	@GetMapping("/admin")
 	public String adminMove() {
-		return "admin";
+		return "admin/admin";
 	}
 	
 	@GetMapping("/myPage")

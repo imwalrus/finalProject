@@ -27,6 +27,13 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(function() {
+		$("#addCart").submit(function(event) {
+			$('#modalAlert').modal();
+		});
+	});
+</script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 	<div class="container">
@@ -60,84 +67,88 @@
 <!-- 내비바 END -->
 <!-- 상품 페이지 START  -->
 <section class="ftco-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 mb-5 ftco-animate">
-				<!-- 이미지 -->
-				<a href="resources/main/images/${prod.pro_filename}" class="image-popup">
-					<img src="resources/main/images/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
-				</a>
-			</div>
-			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-				<!-- 상품 이름 -->
-				<h3>${prod.pro_name}</h3>
-				<p class="text-left mr-4">
-					<a class="mr-2" style="color: #000;">
-						판매자 <span style="color: #bbb;">${prod.user_name}</span>
+	<form action="insertCart" id="addCart" name="addCart" method="post">
+		<input type="hidden" name="pro_no" value="${prod.pro_no}">
+		<!-- ★user_id 세션값 넘겨주기★ -->
+		<input type="hidden" name="user_id" value="kcs">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 mb-5 ftco-animate">
+					<!-- 이미지 -->
+					<a href="resources/main/images/${prod.pro_filename}" class="image-popup">
+						<img src="resources/main/images/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
 					</a>
-					<!-- ★문의하기 url 넣기★ -->
-					<a href="#" class="mr-2">문의하기</a>
-				<div class="rating d-flex">
+				</div>
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+					<!-- 상품 이름 -->
+					<h3>${prod.pro_name}</h3>
 					<p class="text-left mr-4">
 						<a class="mr-2" style="color: #000;">
-							카테고리 <span style="color: #bbb;">${prod.pro_category}</span>
+							판매자 <span style="color: #bbb;">${prod.user_name}</span>
 						</a>
-					</p>
-					<p class="text-left">
-						<a class="mr-2" style="color: #000;">
-							재고 <span style="color: #bbb;">${prod.pro_quantity}개</span>
-						</a>
-					</p>
-				</div>
-				<!-- 가격 -->
-				<p class="price">
-					<c:set var="price" value="${prod.pro_price}"/>
-					<span>￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/></span>
-				</p>
-				<p>
-					<span style="color: #000;">배송사 :</span> ${prod.pro_dcompany}
-				</p>
-				<p>
-					<c:set var="dcost" value="${prod.pro_dcost}"/>
-					<span style="color: #000;">배송비 :</span> ￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${dcost}"/>
-				</p>
-				<!-- 내용 -->
-				<p>${prod.pro_content}</p>
-				<div class="row mt-4">
-					<div class="input-group col-md-6 d-flex mb-3">
-						<span class="input-group-btn ml-2">
-							<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-								<i class="ion-ios-remove"></i>
-							</button>
-						</span>
-						<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-						<span class="input-group-btn mr-2">
-							<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-								<i class="ion-ios-add"></i>
-							</button>
-						</span>
+						<!-- ★문의하기 url 넣기★ -->
+						<a href="#" class="mr-2">문의하기</a>
+					<div class="rating d-flex">
+						<p class="text-left mr-4">
+							<a class="mr-2" style="color: #000;">
+								카테고리 <span style="color: #bbb;">${prod.pro_category}</span>
+							</a>
+						</p>
+						<p class="text-left">
+							<a class="mr-2" style="color: #000;">
+								재고 <span style="color: #bbb;">${prod.pro_quantity}개</span>
+							</a>
+						</p>
 					</div>
+					<!-- 가격 -->
+					<p class="price">
+						<c:set var="price" value="${prod.pro_price}" />
+						<span>￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" /></span>
+					</p>
+					<p>
+						<span style="color: #000;">배송사 :</span> ${prod.pro_dcompany}
+					</p>
+					<p>
+						<c:set var="dcost" value="${prod.pro_dcost}" />
+						<span style="color: #000;">배송비 :</span> ￦
+						<fmt:formatNumber type="number" maxFractionDigits="3" value="${dcost}" />
+					</p>
+					<!-- 내용 -->
+					<p>${prod.pro_content}</p>
+					<div class="row mt-4">
+						<div class="input-group col-md-6 d-flex mb-3">
+							<span class="input-group-btn ml-2">
+								<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+									<i class="ion-ios-remove"></i>
+								</button>
+							</span>
+							<input type="text" name="cart_count" class="form-control input-number" value="1" min="1" max="100">
+							<span class="input-group-btn mr-2">
+								<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+									<i class="ion-ios-add"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+					<p>
+						<!-- 구매 url 추가하기★ -->
+						<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
+						<a href="cart.html" class="btn btn-primary py-3 px-5">바로구매</a>
+					</p>
 				</div>
-				<p>
-					<!-- ★장바구니, 구매 url 추가하기★ -->
-					<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
-					<a href="cart.html" class="btn btn-primary py-3 px-5">바로구매</a>
-				</p>
 			</div>
 		</div>
-	</div>
+	</form>
 	<!-- 모달 START -->
 	<div id="modalAlert" class="modal fade">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<!-- ★장바구니 action 추가★ -->
 				<form action="shop">
 					<div class="modal-body">
-						<p>해당 상품이 장바구니에 담겼습니다.</p>
-						<p>장바구니로 이동하시겠습니까?</p>
+						<p>해당 상품을 장바구니에 담으시겠습니까?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">확인</button>
+						<a href="javascript:addCart.submit();" type="button" class="btn btn-primary">확인</a>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					</div>
 				</form>
@@ -252,6 +263,8 @@
 					<a href="https://colorlib.com" target="_blank">Colorlib</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
+
+
 			</div>
 		</div>
 	</div>
@@ -285,39 +298,23 @@
 <script src="resources/main/js/main.js"></script>
 <script>
 	$(document).ready(function() {
-
 		var quantitiy = 0;
 		$('.quantity-right-plus').click(function(e) {
-
-			// Stop acting like a button
+			// 버튼 동작 Stop
 			e.preventDefault();
-			// Get the field name
-			var quantity = parseInt($('#quantity').val());
-
-			// If is not undefined
-
-			$('#quantity').val(quantity + 1);
-
-			// Increment
-
+			// input-number의 값
+			var quantity = parseInt($('.input-number').val());
+			$('.input-number').val(quantity + 1);
 		});
 
 		$('.quantity-left-minus').click(function(e) {
-			// Stop acting like a button
 			e.preventDefault();
-			// Get the field name
-			var quantity = parseInt($('#quantity').val());
-
-			// If is not undefined
-
-			// Increment
+			var quantity = parseInt($('.input-number').val());
 			if (quantity > 0) {
-				$('#quantity').val(quantity - 1);
+				$('.input-number').val(quantity - 1);
 			}
 		});
-
 	});
 </script>
-
 </body>
 </html>

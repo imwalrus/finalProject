@@ -29,11 +29,11 @@
 					</td>
 					<td></td>
 					<td class="h6">
-						<input list="pro_category" class="form-control-sm" name="pro_category" autocomplete="off">
+						<input list="pro_category" class="form-control-sm" name="pro_category" autocomplete="off" value="${modal.pro_category}">
 							<datalist class="form-control-sm" id="pro_category">
-								<option value="작물">	
-								<option value="채소">
-								<option value="과일">
+								<option value="작물">작물</option>
+								<option value="채소">채소</option>
+								<option value="과일">과일</option>
 							</datalist>
 					</td>
 				</tr>
@@ -98,7 +98,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<p><textarea class="form-control" name="pro_content">${modal.pro_content}</textarea></p>
+		<p><textarea class="form-control" name="pro_content" cols="20" rows="10">${modal.pro_content}</textarea></p>
 	</div>
 </div>
 <div class="modal-footer">
