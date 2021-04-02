@@ -244,6 +244,12 @@
 			<version>${org.apache.tiles-version}</version>
 		</dependency>
 		
+		<!-- web socket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		
 	</dependencies>
 	<build>

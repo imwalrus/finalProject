@@ -13,29 +13,11 @@
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
-    <!-- Favicon icon -->
+    
     <link rel="icon" href="resources/admin/images/favicon.ico" type="image/x-icon">
-    <!-- vendor css -->
     <link rel="stylesheet" href="resources/admin/css/style.css">
 
-	<!-- 상단 메뉴바 css -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="resources/main/css/animate.css">
-	<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="resources/main/css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="resources/main/css/magnific-popup.css">
-	<link rel="stylesheet" href="resources/main/css/aos.css">
-	<link rel="stylesheet" href="resources/main/css/ionicons.min.css">
-	<link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css">
-	<link rel="stylesheet" href="resources/main/css/flaticon.css">
-	<link rel="stylesheet" href="resources/main/css/icomoon.css">
-	<link rel="stylesheet" href="resources/main/css/style.css">
-	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
-	
+
 </head>
 <body class="">
 	<tiles:insertAttribute name="header" />
