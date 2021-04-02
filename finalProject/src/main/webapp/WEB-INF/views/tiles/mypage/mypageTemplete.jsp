@@ -1,26 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-    <title>청년농장</title>
-    <!-- Meta -->
+    <title>마이페이지_메뉴</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
-    <!-- Favicon icon -->
-    <link rel="icon" href="resources/admin/images/favicon.ico" type="image/x-icon">
 
+    
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- vendor css -->
     <link rel="stylesheet" href="resources/admin/css/style.css">
-    
-    <!-- 메인에서 보이는 header footer css -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+		<!-- 상단 메뉴바 css -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
@@ -36,65 +37,10 @@
 	<link rel="stylesheet" href="resources/main/css/icomoon.css">
 	<link rel="stylesheet" href="resources/main/css/style.css">
 	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
-
 </head>
-<body class="goto-here">
-	<!-- 내비게이션 바 시작 -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="./">청년농장</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> 
-			</button>
+<body class="">
+<tiles:insertAttribute name="header"/>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a href="./" class="nav-link">Home</a>
-					</li>
-					<li class="nav-item">
-						<a href="notice" class="nav-link">공지 & FAQ</a>
-					</li>
-					<li class="nav-item">
-						<a href="education" class="nav-link">귀농교육</a>
-					</li>
-					<li class="nav-item">
-						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop"></a>
-							<a class="dropdown-item" href="wishlist.html">Wishlist</a>
-							<a class="dropdown-item" href="product-single.html">Single Product</a>
-							<a class="dropdown-item" href="cart.html">Cart</a>
-							<a class="dropdown-item" href="checkout.html">Checkout</a>
-						</div>
-					</li>
-					<li class="nav-item">
-						<a href="community" class="nav-link">커뮤니티</a>
-					</li>
-					<li class="nav-item">
-						<a href="myPage" class="nav-link">마이페이지</a>
-					</li>
-					<li class="nav-item">
-						<a href="admin" class="nav-link">관리자</a>
-					</li>
-					<li class="nav-item cta cta-colored">
-						<a href="login" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- 내비게이션 바 END -->
-	<!-- [ Pre-loader ] start -->
-	<div class="loader-bg">
-		<div class="loader-track">
-			<div class="loader-fill"></div>
-		</div>
-	</div>
-	<!-- [ Pre-loader ] End -->
 	<!-- [ navigation menu ] start -->
 	<nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
@@ -153,21 +99,11 @@
 					</li>
 					
 				</ul>
-				
-				<div class="card text-center">
-					<div class="card-block">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<i class="feather icon-sunset f-40"></i>
-						<h6 class="mt-3">Download Pro</h6>
-						<p>Getting more features with pro version</p>
-						<a href="https://1.envato.market/qG0m5" target="_blank" class="btn btn-primary btn-sm text-white m-0">Upgrade Now</a>
-					</div>
-				</div>
-				
 			</div>
 		</div>
 	</nav>
 	<!-- [ navigation menu ] end -->
+	
 	<!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
@@ -285,45 +221,16 @@
 	</header>
 	<!-- [ Header ] end -->
 	
-	
-	
-	
- 	<tiles:insertAttribute name="content"/>
-
-
-
+	<tiles:insertAttribute  name="content"/>
 
 
 	<!-- admin 설정페이지 js start -->
     <!-- Required Js -->
-    <script src="resources/admin/js/vendor-all.min.js"></script>
+ 	<script src="resources/admin/js/vendor-all.min.js"></script>
     <script src="resources/admin/js/plugins/bootstrap.min.js"></script>
     <script src="resources/admin/js/ripple.js"></script>
-    <script src="resources/admin/js/pcoded.min.js"></script>
-	<!-- Apex Chart -->
-	<script src="resources/admin/js/plugins/apexcharts.min.js"></script>
-	<!-- custom-chart js -->
-	<script src="resources/admin/js/pages/dashboard-main.js"></script>
-	<!-- admin 설정페이지 js end-->
-	
-	<!-- 상단메뉴바 js start -->
-	<script src="resources/main/js/jquery.min.js"></script>
-	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="resources/main/js/popper.min.js"></script>
-	<script src="resources/main/js/bootstrap.min.js"></script>
-	<script src="resources/main/js/jquery.easing.1.3.js"></script>
-	<script src="resources/main/js/jquery.waypoints.min.js"></script>
-	<script src="resources/main/js/jquery.stellar.min.js"></script>
-	<script src="resources/main/js/owl.carousel.min.js"></script>
-	<script src="resources/main/js/jquery.magnific-popup.min.js"></script>
-	<script src="resources/main/js/aos.js"></script>
-	<script src="resources/main/js/jquery.animateNumber.min.js"></script>
-	<script src="resources/main/js/bootstrap-datepicker.js"></script>
-	<script src="resources/main/js/scrollax.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="resources/main/js/google-map.js"></script>
-	<script src="resources/main/js/main.js"></script>
-	<!-- 상단메뉴바 js end -->
-</body>
+    <script src="resources/admin/js/pcoded.min.js"></script> 
 
+
+</body>
 </html>

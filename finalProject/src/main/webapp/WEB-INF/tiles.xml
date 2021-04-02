@@ -26,14 +26,17 @@
 	
 	<!-- admin tiles -->
 	<definition name="adminTiles/*/*" template="/WEB-INF/views/tiles/admin/adminTemplete.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/mypage/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 	<definition name="adminTiles/*" template="/WEB-INF/views/tiles/admin/adminTemplete.jsp">
-			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/mypage/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 	
 	<!-- mypage tiles -->
 	<definition name="mypageTiles/*/*" template="/WEB-INF/views/tiles/mypage/mypageTemplete.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/mypage/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 	<definition name="mypageTiles/*" template="/WEB-INF/views/tiles/mypage/mypageTemplete.jsp">

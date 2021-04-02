@@ -13,12 +13,12 @@ public class PageController {
 
 	@GetMapping("/admin")
 	public String adminMove() {
-		return "adminTiles/admin";
+		return "adminTiles/admin/admin";
 	}
 	
 	@GetMapping("/myPage")
 	public String myPageMove() {
-		return "mypageTiles/myPage";
+		return "mypageTiles/mypage/myPage";
 	}
 
 	@GetMapping("/notice")
