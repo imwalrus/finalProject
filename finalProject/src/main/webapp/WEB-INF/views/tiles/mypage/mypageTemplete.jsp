@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,7 @@
 						<a href="admin" class="nav-link">관리자</a>
 					</li>
 					<li class="nav-item cta cta-colored">
-						<a href="login.main" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
+						<a href="login" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
 					</li>
 				</ul>
 			</div>
@@ -284,7 +285,14 @@
 	</header>
 	<!-- [ Header ] end -->
 	
- <tiles:insertAttribute name="content"/>
+	
+	
+	
+ 	<tiles:insertAttribute name="content"/>
+
+
+
+
 
 	<!-- admin 설정페이지 js start -->
     <!-- Required Js -->

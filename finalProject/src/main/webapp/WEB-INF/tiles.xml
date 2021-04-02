@@ -6,28 +6,59 @@
 <tiles-definitions>
 
 
+	<!-- 타일즈는 순서대로 코드를 설정 내용을 읽는다. 전체를 읽는 코드는 가장 아래에 있어야 먼저 읽지 않음 -->
 
 	<!-- 메인 tiles 설정 -->
-	<definition name="mainTemplete" template="/WEB-INF/views/tiles/mainTemplete.jsp">
-<!-- 		<put-attribute name="left" value="/WEB-INF/tiles/adminTemplete.jsp" /> -->
+	<definition name="mainTemplete" template="/WEB-INF/views/tiles/main/mainTemplete.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/main/header.jsp" />
 		<put-attribute name="content" value=""/>
-<!-- 		<put-attribute name="footer" value="/WEB-INF/tiles/tiles/footer.jsp"/> -->
 	</definition>
 	
-	<!-- 상속 -->	
-	<definition name="*" extends="mainTemplete">
-		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
-	</definition>
-	<definition name="*/*" extends="mainTemplete">
+	<!-- footer 필요없는 화면 설정 -->	
+	<definition name="nofooter/*/*" template="/WEB-INF/views/tiles/main/nofooter.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/main/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-<!-- 	<definition name="admin/*" extends="mainTemplete">
-		
-		<put-attribute name="content" value="/WEB-INF/views/admin/{1}.jsp" />
+	<definition name="nofooter/*" template="/WEB-INF/views/tiles/main/nofooter.jsp">
+			<put-attribute name="header" value="/WEB-INF/views/tiles/main/header.jsp" />
+			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
-	<definition name="mypage/*" extends="mainTemplete"> 
-		<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp" />
-	</definition> -->
+	
+	<!-- admin tiles -->
+	<definition name="adminTiles/*/*" template="/WEB-INF/views/tiles/admin/adminTemplete.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="adminTiles/*" template="/WEB-INF/views/tiles/admin/adminTemplete.jsp">
+			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	<!-- mypage tiles -->
+	<definition name="mypageTiles/*/*" template="/WEB-INF/views/tiles/mypage/mypageTemplete.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="mypageTiles/*" template="/WEB-INF/views/tiles/mypage/mypageTemplete.jsp">
+			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	
+	<!-- tiles 안쓰는 화면 설정 ex) 주소팝업...-->
+	<definition name="notiles/*/*" template="/WEB-INF/views/tiles/notiles.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="notiles/*" template="/WEB-INF/views/tiles/notiles.jsp">
+			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	
+	
+	<definition name="*/*" extends="mainTemplete">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+ 		<put-attribute name="footer" value="/WEB-INF/views/tiles/main/footer.jsp"/> 
+	</definition>
 
+	<definition name="*" extends="mainTemplete">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+ 		<put-attribute name="footer" value="/WEB-INF/views/tiles/main/footer.jsp"/> 
+	</definition>
 
 </tiles-definitions>

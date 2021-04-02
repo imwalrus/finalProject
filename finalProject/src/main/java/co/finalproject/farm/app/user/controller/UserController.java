@@ -27,7 +27,7 @@ public class UserController {
 	//회원가입 페이지로 이동
 	@GetMapping("/signUpForm")
 	public String getSignUpForm() {
-		return "users/signUpForm";
+		return "nofooter/users/signUpForm";
 	}
 	
 	//아이디, 비밀번호 찾기페이지로 이동
@@ -55,7 +55,7 @@ public class UserController {
 	//주소 팝업
 	@RequestMapping("/jusoPopup")
 	public String jusoPopup() {
-		return "popup/jusoPopup";
+		return "notiles/popup/jusoPopup";
 	}
 	
 	//회원가입 완료 후 home으로 이동
@@ -64,7 +64,7 @@ public class UserController {
 		//비밀번호 암호화해서 다시 vo에 저장
 		vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));
 		userService.insertUser(vo);
-		return "redirect:login";
+		return "nofooter/login";
 	}
 	
 	
@@ -118,7 +118,7 @@ public class UserController {
 			vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));			
 		}
 		userService.insertUser(vo);
-		return "redirect:/";
+		return "mypageTiles/myPage";
 	}
 	
 	
