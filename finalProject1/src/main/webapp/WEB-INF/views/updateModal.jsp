@@ -4,16 +4,16 @@
 <table class="table table-hover">
 	<thead class="text-center">
 		<tr class="content">
-			<th class="text-left">체험 이름 : ${getlist.into_title} </th>
+			<th class="text-left">체험 이름 : ${upFarm.into_title} </th>
 		</tr>
 		<tr class="content">
-			<th class="text-left">모집 인원 수 : ${getlist.into_entry}</th>
+			<th class="text-left">모집 인원 수 : ${upFarm.into_entry}</th>
 		</tr>
 		<tr class="content">
-			<th class="text-left">체험 내용  ${getlist.into_info}</th>
+			<th class="text-left">체험 내용  ${upFarm.into_info}</th>
 		</tr>
 		<tr class="content">
-			<th class="text-left">문의 전화번호 :  ${getlist.into_phone}</th>
+			<th class="text-left">문의 전화번호 :  ${upFarm.into_phone}</th>
 		</tr>
 	</thead>
 	

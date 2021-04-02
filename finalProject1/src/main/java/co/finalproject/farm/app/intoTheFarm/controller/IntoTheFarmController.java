@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,12 @@ import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
 public class IntoTheFarmController {
 	@Autowired IntoTheFarmMapper intoTheFarmMapper;
 	
+	Logger logger = LoggerFactory.getLogger(IntoTheFarmController.class);
 	
 	//전체조회
 	@RequestMapping("/getFarmList")
 	public String getFarmList(IntoTheFarmVO vo, Model model) {
 		model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
-		System.out.println("list");
 		return "intoTheFarm";
 	}
 	
@@ -62,11 +64,27 @@ public class IntoTheFarmController {
 		
 		}
 	
+	//수정
+	
+	@GetMapping("/updateFarm") //수정 페이지
+	public String updateFarm(IntoTheFarmVO vo, Model model) {
+		model.addAttribute("upFarm", intoTheFarmMapper.getSearchFarm(vo));
+		return "updateModal";
+	}
+	
+	@PostMapping("/updateFarm") //수정
+	public String updateFarmProc(IntoTheFarmVO vo) {
+		logger.debug(vo.toString());
+		intoTheFarmMapper.updateFarm(vo);
+		return "redirect:/getFarmList?into_no="+vo.getInto_no();
+		
+	}
+	
 	//삭제
 	@RequestMapping("/deleteFarm")
 	public String deleteFarm(IntoTheFarmVO vo) {
-		intoTheFarmMapper.updateFarm(vo);
-		return "";
+		intoTheFarmMapper.deleteFarm(vo);
+		return "redirect:/getFarmList";
 	}
 }
 //file 테이블 만들어서 스케쥴 걸어서.. y/n으로 
