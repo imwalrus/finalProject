@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,6 +24,35 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#faq_title").on('keyup', function() {
+		$("#faq_content").val($(this).val())
+	});
+});
+</script>
+
+<script>
+function categoryChange() {
+	faq_sch.submit();
+    }
+</script>
+
+<style type="text/css">
+#faq_title    {     width:170px; 
+                    height:40px !important; }
+#faq_category {     width:120px; 
+                    text-align: center;
+                    margin:0px;
+                    padding: 5px;
+                    height:35px !important; }
+#title > h1 {
+       font-size: 35px;
+       color: #00cc99;
+            } 
+</style>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -55,7 +86,7 @@
 						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="shop"></a>
 							<a class="dropdown-item" href="wishlist.html">Wishlist</a>
@@ -81,68 +112,92 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
-	
-   <section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url(resources/main/images/bg_1.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="#" class="btn btn-primary">View Details</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="slider-item" style="background-image: url(resources/main/images/bg_2.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="#" class="btn btn-primary">View Details</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About us</span></p>
+            <h1 class="mb-0 bread">About us</h1>
           </div>
         </div>
       </div>
+    </div>
+   
+    
+     <section class="ftco-section testimony-section">
+     <form action="getFaq" name="faq_sch">
+		<div align="center" style="margin-left:400px; margin-right:400px;">
+		<div id="title">
+			<h1>FAQ</h1>
+		</div><br/>
+		<div class="form-group" style="margin-left:980px">
+		<select class="form-control" id="faq_category" name="faq_category" onchange="categoryChange()">
+		<option value="">분류</option>
+        <option value="농업지식"
+        <c:if test ="${faqPagingVO.faq_category == '농업지식'}">
+	             selected </c:if>>농업지식</option>
+	    <option value="교육/기타"
+	    <c:if test ="${faqPagingVO.faq_category == '교육/기타'}">
+	             selected </c:if>>교육/기타</option>
+        <option value="정책/금융"
+        <c:if test ="${faqPagingVO.faq_category == '정책/금융'}">
+	             selected </c:if>>정책/금융</option>
+        <option value="주택"
+        <c:if test ="${faqPagingVO.faq_category == '주택'}">
+	             selected </c:if>>주택</option>
+	    <option value="농지"
+        <c:if test ="${faqPagingVO.faq_category == '농지'}">
+	             selected </c:if>>농지</option>          
+        </select>
+		</div>
+		<div align="center">
+		<table class="table table-hover">
+		 <thead>
+				<tr>
+					<td align="center" width="100">글번호</td>
+					<td align="center" width="300">제 목</td>
+					<td align="center" width="150">분류</td>
+					<td align="center" width="200">작성일자</td>
+				</tr>
+		<c:forEach items="${list}" var="faq">
+		<tr onclick="location.href='getSearchFaq?faq_no=${faq.faq_no}&page=${paging.page}'">
+         <td align="center">${faq.faq_no}</td>
+         <td>&nbsp; ${faq.faq_title}</td>
+         <td align="center">${faq.faq_category}</td>
+         <td align="center">${faq.faq_date}</td>
+        </tr>
+        </c:forEach>
+        </thead>
+        </table><br/>
+        <div style="margin-left:1029px">
+        <button type="button" class="btn btn-success" onclick="location.href='insertFaq'">글쓰기</button>
+        </div>
+        </div>
+        </div>
+        
+        <div class="container box_1170" style="margin-right:380px">
+        <input type="hidden" name="page" value="1">
+        <div class="form-group" >
+        <input class="form-control" type="text" placeholder="Search..." id="faq_title" name="faq_title" value="${faqPagingVO.faq_title}" onclick="this.select()">
+        <input type="hidden" id="faq_content" name="faq_content" value="${faqPagingVO.faq_content}">
+        </div>
+        </div>
+       
+        <div align="center">
+        <my:paging paging="${paging}" jsFunc="goPage" />
+        <script>
+        function goPage(p) {
+    	//location.href="getNotices?page=" +p;
+    	faq_sch.page.value= p;
+    	faq_sch.submit();
+        }
+        </script>
+        </div>
+        </form>
     </section>
     <footer class="ftco-footer ftco-section">
-      <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-				<a href="#" class="mouse-icon">
-					<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-				</a>
-			</div>
-      	</div>
+      <div class="container">  	
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -198,15 +253,16 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			</p>
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
           </div>
         </div>
       </div>
     </footer>
+    
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">

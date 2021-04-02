@@ -48,6 +48,10 @@ function categoryChange() {
                     margin:0px;
                     padding: 5px;
                     height:35px !important; }
+#title > h1 {
+       font-size: 35px;
+       color: #00cc99;
+       } 
 </style>
 </head>
 <body class="goto-here">
@@ -67,11 +71,16 @@ function categoryChange() {
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">공지 & FAQ</a>
 					    <div class="dropdown-menu" aria-labelledby="dropdown">
 					    <a class="dropdown-item" href="getNotices">공지사항</a>
-					    <a class="dropdown-item" href="#">FAQ</a>
+					    <a class="dropdown-item" href="getFaq">FAQ</a>
 					    </div>
 					</li>
-					<li class="nav-item">
-						<a href="education" class="nav-link">귀농교육</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">귀농교육</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown">
+					    <a class="dropdown-item" href="education">귀농 작성 체크리스트</a>
+					    <a class="dropdown-item" href="#">온라인 교육</a>
+					    <a class="dropdown-item" href="#">오프라인 교육</a>
+					    </div>
 					</li>
 					<li class="nav-item">
 						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
@@ -118,8 +127,8 @@ function categoryChange() {
     
      <section class="ftco-section testimony-section">
      <form action="getNotices" name="notice_sch">
-		<div align="center" style="margin-left:400px; margin-right:400px;">
-		<div>
+		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
+		<div id="title">
 			<h1>공지사항</h1>
 		</div><br/>
 		<div class="form-group" style="margin-left:980px">

@@ -45,5 +45,10 @@ public class PageController {
 	public String communityMove() {
 		return "community";
 	}
+	
+	@GetMapping("/faq")
+	public String faqMove() {
+		return "faq";
+	}
 
 }
