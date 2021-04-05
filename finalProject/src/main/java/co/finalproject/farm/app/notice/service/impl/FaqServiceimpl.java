@@ -1,13 +1,13 @@
-package co.finalproject.farm.app.faq.service.impl;
+package co.finalproject.farm.app.notice.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.finalproject.farm.app.faq.service.FaqPagingVO;
-import co.finalproject.farm.app.faq.service.FaqService;
-import co.finalproject.farm.app.faq.service.FaqVO;
+import co.finalproject.farm.app.notice.service.FaqPagingVO;
+import co.finalproject.farm.app.notice.service.FaqService;
+import co.finalproject.farm.app.notice.service.FaqVO;
 
 @Service	
 public class FaqServiceimpl implements FaqService	{

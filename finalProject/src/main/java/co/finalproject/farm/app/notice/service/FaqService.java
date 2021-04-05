@@ -1,15 +1,12 @@
-package co.finalproject.farm.app.faq.service.impl;
+package co.finalproject.farm.app.notice.service;
 
 import java.util.List;
 
 
-import co.finalproject.farm.app.faq.service.FaqPagingVO;
-import co.finalproject.farm.app.faq.service.FaqVO;
 
 
-public interface FaqMapper {
+public interface FaqService {
 	
-
 	//등록
     public void insertFaq(FaqVO vo);
 
@@ -28,5 +25,4 @@ public interface FaqMapper {
     //건수
   	public int getCount(FaqPagingVO vo);
   	
-	   
 }

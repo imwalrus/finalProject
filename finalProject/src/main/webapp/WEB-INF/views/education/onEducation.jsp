@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,14 +24,22 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
-<style type="text/css">
-#faq_title {  padding:5px;
-              height:32px !important; }
-#title > h1 {
-       font-size: 35px;
-       color: #00cc99;
-            } 
-</style>
+
+<link href="http://api.nongsaro.go.kr/css/api.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://api.nongsaro.go.kr/js/framework.js"></script>	
+<script type="text/javascript" src="http://api.nongsaro.go.kr/js/openapi_nongsaro.js"></script>
+	
+<script type="text/javascript">
+nongsaroOpenApiRequest.apiKey = "202104051O622XQYJUSXVTUNGUZ75Q";//변경할 부분 1
+nongsaroOpenApiRequest.serviceName = "agriTechVideo";
+nongsaroOpenApiRequest.operationName = "insttList";
+nongsaroOpenApiRequest.htmlArea="nongsaroApiLoadingAreaInstt";
+nongsaroOpenApiRequest.operationName1 = "mainCategoryList";
+nongsaroOpenApiRequest.htmlArea1="nongsaroApiLoadingArea";
+nongsaroOpenApiRequest.operationName2 = "subCategoryList";
+nongsaroOpenApiRequest.htmlArea2="nongsaroApiLoadingArea1";
+nongsaroOpenApiRequest.callback = "ajax_local_callback";//변경할 부분 2
+</script>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -100,50 +110,16 @@
         </div>
       </div>
     </div>
+   
     
-   <section class="ftco-section contact-section">
-       <div align="center" style="margin-left:400px; margin-right:400px;">
-		<div id="title" style="margin-left:100px;">
-			<h1>FAQ 작성하기</h1>
-		</div><br/>
-		<div>
-			<form id="frm" name="frm" action="insertFaq" method="post">
-				<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
-                <thead>
-				<tr>
-				    <td align="center" width="15%">제목</td>
-					<td align="left" width="55%"><input class="form-control" type="text" id="faq_title" name="faq_title" size=70></td>
-					<td align="center" width="15%">분류</td>
-					<td align="center" width="15%">
-					<select name="faq_category" id="faq_category">
-					<option value="농업지식">농업지식</option>
-					<option value="교육/기타">교육/기타</option>
-					<option value="정책/금융">정책/금융</option>
-					<option value="주택">주택</option>
-					<option value="농지">농지</option>
-					</select></td>
-				</tr>			
-				<tr>
-					<td align="center" width="70">내용</td>
-					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="faq_content" name="faq_content"></textarea></td>
-				</tr>
-				<thead>
-			</table><br/>
-				
-			<div style="margin-left:100px;">
-			<button class="btn btn-outline-primary" type="submit">저장하기</button> &nbsp;&nbsp;
-			<button class="btn btn-outline-primary" type="reset">취소</button> &nbsp;&nbsp;
-		</div>
-		
-	</form>
-		</div><br />
-		
-	</div>
+     <section class="ftco-section testimony-section">
+     <div id="nongsaroApiLoadingAreaInstt"></div><!-- 기관명 목록 HTML 로딩 영역 -->
+     <div id="nongsaroApiLoadingArea"></div><!-- 메인카테고리 HTML 로딩 영역 -->
+     <div id="nongsaroApiLoadingArea1"></div><!-- 서브카테고리 HTML 로딩 영역 -->
+     <div id="nongsaroApiLoadingArea2"></div><!-- 농업기술동영상 HTML 로딩 영역 -->
     </section>
-
-
     <footer class="ftco-footer ftco-section">
-      <div class="container">
+      <div class="container">  	
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -206,7 +182,7 @@
 						</p>
           </div>
         </div>
-       </div>
+      </div>
     </footer>
     
 	<!-- loader -->

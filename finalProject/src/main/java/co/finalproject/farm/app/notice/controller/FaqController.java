@@ -1,4 +1,4 @@
-package co.finalproject.farm.app.faq.controller;
+package co.finalproject.farm.app.notice.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import co.finalproject.farm.app.faq.service.FaqPagingVO;
-import co.finalproject.farm.app.faq.service.FaqService;
-import co.finalproject.farm.app.faq.service.FaqVO;
+import co.finalproject.farm.app.notice.service.FaqPagingVO;
+import co.finalproject.farm.app.notice.service.FaqService;
+import co.finalproject.farm.app.notice.service.FaqVO;
 import co.finalproject.farm.common.Paging;
 
 

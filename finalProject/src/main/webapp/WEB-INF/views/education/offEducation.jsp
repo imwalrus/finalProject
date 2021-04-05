@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,13 +24,13 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
-<style type="text/css">
-#faq_title {  padding:5px;
-              height:32px !important; }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
 #title > h1 {
        font-size: 35px;
        color: #00cc99;
-            } 
+       } 
 </style>
 </head>
 <body class="goto-here">
@@ -100,50 +102,55 @@
         </div>
       </div>
     </div>
+   
     
-   <section class="ftco-section contact-section">
-       <div align="center" style="margin-left:400px; margin-right:400px;">
-		<div id="title" style="margin-left:100px;">
-			<h1>FAQ 작성하기</h1>
+    <section class="ftco-section testimony-section">
+    <form action="getOffEdu" name="edu_sch">
+    <div align="center" style="margin-left:400px; margin-right:400px;">
+    <div id="title">
+			<h1>오프라인 교육</h1>
 		</div><br/>
-		<div>
-			<form id="frm" name="frm" action="insertFaq" method="post">
-				<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
-                <thead>
-				<tr>
-				    <td align="center" width="15%">제목</td>
-					<td align="left" width="55%"><input class="form-control" type="text" id="faq_title" name="faq_title" size=70></td>
-					<td align="center" width="15%">분류</td>
-					<td align="center" width="15%">
-					<select name="faq_category" id="faq_category">
-					<option value="농업지식">농업지식</option>
-					<option value="교육/기타">교육/기타</option>
-					<option value="정책/금융">정책/금융</option>
-					<option value="주택">주택</option>
-					<option value="농지">농지</option>
-					</select></td>
-				</tr>			
-				<tr>
-					<td align="center" width="70">내용</td>
-					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="faq_content" name="faq_content"></textarea></td>
+    <table class="table table-hover">
+         <thead>
+                <tr>
+					<td align="center" width="150">번호</td>
+					<td align="center" width="150">지역</td>
+					<td align="center" width="500">주제</td>
+					<td align="center" width="400">교육기간</td>
+					<td align="center" width="250">교육시간</td>
+					<td align="center" width="150">신청현황</td>
+					<td align="center" width="150">상세보기</td>
 				</tr>
-				<thead>
-			</table><br/>
-				
-			<div style="margin-left:100px;">
-			<button class="btn btn-outline-primary" type="submit">저장하기</button> &nbsp;&nbsp;
-			<button class="btn btn-outline-primary" type="reset">취소</button> &nbsp;&nbsp;
-		</div>
-		
-	</form>
-		</div><br />
-		
-	</div>
+		<c:forEach items="${list}" var="edu">
+		<tr>
+         <td align="center">${edu.edu_no}</td>
+         <td>&nbsp; ${edu.edu_adr}</td>
+         <td align="center">${edu.edu_title}</td>
+         <td align="center">${edu.edu_date}</td>
+         <td align="center">${edu.edu_time}</td>
+         <td align="center">${edu.edu_check}</td>
+         <td>
+         <input type="button" class="btn btn-primary disabled" style="padding:1px" 
+         onclick="location.href='getOffEdu?edu_no=${edu.edu_no}&page=${paging.page}'" value="상세보기">
+         </td>
+        </tr>
+        </c:forEach>
+        </thead>
+    </table><br>
+        <div align="center">
+        <my:paging paging="${paging}" jsFunc="goPage" />
+        <script>
+        function goPage(p) {
+    	location.href="getOffEdu?page=" +p;
+    	//edu_sch.page.value= p;
+    	//edu_sch.submit();
+        }
+        </script>
+        </div></div>
+    </form>
     </section>
-
-
     <footer class="ftco-footer ftco-section">
-      <div class="container">
+      <div class="container">  	
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -206,7 +213,7 @@
 						</p>
           </div>
         </div>
-       </div>
+      </div>
     </footer>
     
 	<!-- loader -->

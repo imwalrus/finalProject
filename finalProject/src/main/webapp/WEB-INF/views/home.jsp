@@ -47,8 +47,8 @@
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">귀농교육</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown">
 					    <a class="dropdown-item" href="education">귀농 작성 체크리스트</a>
-					    <a class="dropdown-item" href="#">온라인 교육</a>
-					    <a class="dropdown-item" href="#">오프라인 교육</a>
+					    <a class="dropdown-item" href="onEducation">온라인 교육</a>
+					    <a class="dropdown-item" href="getOffEdu">오프라인 교육</a>
 					    </div>
 					</li>
 					<li class="nav-item">

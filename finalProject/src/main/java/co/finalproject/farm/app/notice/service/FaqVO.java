@@ -1,4 +1,4 @@
-package co.finalproject.farm.app.faq.service;
+package co.finalproject.farm.app.notice.service;
 
 import lombok.Data;
 
