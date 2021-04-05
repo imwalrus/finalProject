@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.finalproject.farm.chat.service.impl.ChatMapper">
+<mapper namespace="co.finalproject.farm.app.chat.service.impl.ChatMapper">
 
+<!-- 채팅방 조회 -->
+<select id="getChatRoom" resultType="ChatRoomVO" parameterType="ChatRoomVO">
+	SELECT * FROM CHATROOM
+					WHERE	USER_ID_ONE=#{user_id_one} AND
+							USER_ID_TWO=#{user_id_two}
+</select>
+
+<!-- 채팅방 번호 조회 -->
+<select id="getRoomNo" resultType="ChatRoomVO" parameterType="ChatRoomVO">
+	SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_no}
+</select>
+
+<!-- 채팅방 조회후 일치하는 값이 없으면 채팅방 생성 -->
+<insert id="insertChatRoom" parameterType="ChatRoomVO">
+	INSERT INTO CHATROOM  (CHATROOM_NO,
+							USER_ID_ONE,
+							USER_ID_TWO)
+				VALUES     ((select nvl(max(chatroom_no),0) from chatroom)+1,
+							#{user_id_one},
+							#{user_id_two})
+</insert>
+
+<!-- 메세지 보내기 -->
+<insert id="insertMessage" parameterType="MessageVO">
+	insert into MESSAGE (	MSG_NO,
+							MSG_SENDER,
+							MSG_RECEVIER,
+							MSG_CONTENT,
+							MSG_SENDTIME,
+							CHATROOM_NO,
+							USER_ID_ONE,
+							USER_ID_TWO)
+				VALUES ((SELECT NVL(MAX(MSG_NO),0) FROM MESSAGE)+1,
+						#{msg_sender},
+						#{msg_recevier},
+						#{msg_content},
+						systimestamp,
+						#{chatroom_no},
+						#{user_id_one},
+						#{user_id_two})
+</insert>
+
+<!-- 채팅 팝업 처음 켰을때 리스트 띄우기 -->
+<select id = "getChatRoomList" resultType = "ChatRoomVO"><!-- 대화리스트 불러오기 -->
+	SELECT * FROM CHATROOM WHERE   USER_ID_ONE = #{user_id_one} 
+								OR USER_ID_TWO = #{user_id_two} 
+</select>
+
+<!-- 최근 메세지 -->
+<select id = "getRecentMessage" resultType = "MessageVO"><!-- 최근 메세지 가져오기 -->
+	SELECT * FROM MESSAGE 
+			 WHERE CHATROOM_NO = #{chatroom_no} 
+			 AND ROWNUM <![CDATA[<=]]>1
+			 ORDER BY MESSAGE_ID DESC
+</select>
+
+<update id ="updateReadTime1" parameterType="MessageVO">
+	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
+				   where USER_ID_ONE = #{user_id_one}  AND 
+				   MSG_READTIME = MSG_SENDTIME and 
+				   message_sender = USER_ID_ONE and 
+				   USER_ID_TWO = #{user_id_two}
+</update>
+
+<update id ="updateReadTime2" parameterType="MessageVO">
+	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
+				   where USER_ID_two = #{user_id_two}  AND 
+				   MSG_READTIME = MSG_SENDTIME and 
+				   message_sender = USER_ID_two and 
+				   USER_ID_one = #{user_id_one}
+</update>
 
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,9 +68,16 @@
 					<li class="nav-item">
 						<a href="admin" class="nav-link">관리자</a>
 					</li>
-					<li class="nav-item cta cta-colored">
-						<a href="login" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
-					</li>
+					<c:if test="${ user_id eq null }"><!-- session 내 아이디 값 없을시 -->
+						<li class="nav-item cta cta-colored">
+							<a href="login" class="nav-link"><span class="icon-person_outline"></span>로그인</a>
+						</li>
+					</c:if>
+					<c:if test="${ user_id ne null }"><!-- session 내 아이디 값 존재 할 경우 -->
+						<li class="nav-item cta cta-colored">
+							<a href="logout" class="nav-link"><span class="icon-person_outline"></span>로그아웃</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

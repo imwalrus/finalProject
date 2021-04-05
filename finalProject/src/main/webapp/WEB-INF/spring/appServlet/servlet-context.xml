@@ -83,15 +83,16 @@
 	</aop:config> 
 	
 	<!-- 웹소켓 핸들러 등록 -->
-	<!-- handshake interceptor : HttpSession의 session 값을 가로채오는 것 -->
 	<websocket:handlers>
-		<websocket:mapping handler="ChatHandler" path="/chat" />
+		<websocket:mapping handler="chatHandler" path="/chat" />
+		<!-- WebSocket Handshake : 웹소켓 핸들러 클래스(ChatHandler)가 호출되기전에 HttpSession에 접속하여  -->
+        <!-- '이용자 아이디를 추출하는 기능' 등을 인터셉터가 수행하도록 설정 -->
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
-	
-	<beans:bean id="ChatHandler" class="co.finalproject.farm.chat.ChatHandler"></beans:bean>
+
+	<beans:bean id="chatHandler" class="co.finalproject.farm.common.ChatHandler" />
 	
 	</beans:beans>
