@@ -15,6 +15,7 @@ public class MessageVO {
 	private String  msg_content;
 	private Date msg_sendtime;
 	private Date msg_readtime;
+	private String msg_type;
 	private int chatroom_no;
 	private String user_id_one;
 	private String user_id_two;

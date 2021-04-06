@@ -5,39 +5,23 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>1:1대화</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
-  <link rel="stylesheet" href="resources/chat/style.css">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>	
-  <script  src="resources/chat/script.js" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
-<style>
-	.chat-bubble{
-		width: 400px !important;
-	}
-	.offset-md-9 {
-	   	margin-left: 40% !important;
-	}
-	.chat-bubble--right{
-		text-align:right !important;
-	}
-	.container{
-		height:600px !important; 
-	}
-	.sendBtn{
-		cursor:pointer;
-	}
-</style>
 <script>
 	$(document).ready(function(){
 		connect();
+		
+		//메세지 입력 후 enter키 누르면 메세지 전송
+		 $('#message').keypress(function(event){
+			  var keycode = (event.keyCode ? event.keyCode : event.which);
+				  if(keycode == '13'){
+					  sendMessage();
+			  }
+			event.stopPropagation();
+		});
 	})
 	
 	var sock;
 	
 	function connect(){
-		 /* var wsUri= "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat"; */
 		sock = new SockJS('http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat');
 		sock.onopen = onOpen;
 		sock.onerror=onError;
@@ -49,22 +33,57 @@
 	}
 	
 	//메세지 전송
-	function sendMessage(message){
-		
+	function sendMessage(){
+		var msg = $('#message').val();
+		if(msg != ""){
+			const data = {
+					"msg_type" : "CHAT",
+					"msg_sender" : "${user_id}",
+					"msg_receiver" : "",
+					"msg_content": msg,
+					"chatroom_no" : ""  };
+			
+			//json 타입으로 변환하여 메세지 전달
+			//전송 후 value 값 초기화
+			msg = JSON.stringify(data);
+			sock.send(msg); 
+			$('#message').val("");
+			appendMessage(data);
+		}
+
 	}
 	
 	//메세지 수신
 	function onMessage(evt){
-		
+		var receive = evt.data.split(",");
+ 		const data = {
+				"msg_type" : receive[0],
+				"msg_sender" : receive[1],
+				"msg_receiver" : receive[2],
+				"msg_content": receive[3]
+		};
+ 		appendMessage(data);
 	}
 	
 	function onError(evt){
 		console.log(evt);
 	}
 	
-	
-/* 	
-	
+    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
+    function CheckLR(data) {
+        // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
+        const LR = (data.user_id != ${user_id}) ? "left" : "right";
+         // 메세지 추가
+        appendMessageTag(LR, data.email, data.message, data.name);
+    }
+     
+    // * 3 메세지 태그 append
+    function appendMessageTag(LR_className, email, message, name) {
+        const chatLi = createMessageTag(LR_className, email, message, name);
+        $('div.chatMiddle:not(.format) ul').append(chatLi);
+        // 스크롤바 아래 고정
+        $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
+    }	
 	
 	function getTimeStamp() {
 	  var d = new Date();
@@ -80,6 +99,27 @@
 	  return s;
 	}
 	
+	
+	function appendMessage(msg) {
+		 if(msg == ''){
+			 return false;
+		 }else{
+		 var t = getTimeStamp();
+		
+/* 		 $.ajax({
+			 url:,
+			 type:,
+			 dataType:"json",
+			 data:{
+				 chatroom
+			 }
+		 }) */
+		 
+	
+		 }
+	}
+	
+	 	
 	function leadingZeros(n, digits) {
 	  var zero = '';
 	  n = n.toString();
@@ -91,37 +131,10 @@
 	  return zero + n;
 	}
 	
-	
-	
-	function appendMessage(msg) {
-	
-		 if(msg == ''){
-			 return false;
-		 }else{
-	
-	
-		 var t = getTimeStamp();
-		 $("#chatMessageArea").append("<div class='col-12 row' style = 'height : auto; margin-top : 5px;'><div class='col-2' style = 'float:left; padding-right:0px; padding-left : 0px;'><img id='profileImg' class='img-fluid' src='/displayFile?fileName=${userImage}&directory=profile' style = 'width:50px; height:50px; '><div style='font-size:9px; clear:both;'>${user_name}</div></div><div class = 'col-10' style = 'overflow : y ; margin-top : 7px; float:right;'><div class = 'col-12' style = ' background-color:#ACF3FF; padding : 10px 5px; float:left; border-radius:10px;'><span style = 'font-size : 12px;'>"+msg+"</span></div><div col-12 style = 'font-size:9px; text-align:right; float:right;'><span style ='float:right; font-size:9px; text-align:right;' >"+t+"</span></div></div></div>")		 
-	
-		  var chatAreaHeight = $("#chatArea").height();
-		  var maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
-		  $("#chatArea").scrollTop(maxScroll);
-	
-		 }
-	}
-	$(document).ready(function() {
-	 $('#message').keypress(function(event){
-	  var keycode = (event.keyCode ? event.keyCode : event.which);
-	  if(keycode == '13'){
-	   send();
-	  }
-	  event.stopPropagation();
-	 });
-	
-	
-	
-	 $('#sendBtn').click(function() { send(); }); 
-	});*/
+
+	 $('#sendBtn').click(function() {
+		 send(); 
+	 }); 
 </script>
 </head>
 <body>
@@ -143,14 +156,14 @@
           <input placeholder="Search here" type="text" >
         </div>
       </div>
-	      <div class="friend-drawer friend-drawer--onhover">
+	   <div class="friend-drawer friend-drawer--onhover">
 	        <div class="text">
-	          <h6>Robo Cop</h6>
-	          <p class="text-muted">Hey, you're arrested!</p>
+		          <h6>Robo Cop</h6>
+		          <p class="text-muted">Hey, you're arrested!</p>
 	        </div>
-	        <span class="time text-muted small">13:21</span>
-	      </div>
-	      <hr>
+	       <span class="time text-muted small">13:21</span>
+	     </div>
+	    <hr>
       </div>
     <!-- 대화리스트 받는 화면 끝 -->
     <!-- 대화 보내고 받는 화면 시작 -->
@@ -169,22 +182,29 @@
         </div>
       </div>
       <div class="chat-panel">
-        <div class="row no-gutters">
-          <div class="col-md-3">
-            <div class="chat-bubble chat-bubble--left">
-            	보내는 메세지
-              <span class="time text-muted small">04-05</span>
-            </div>
-          </div>
+      <div class="chatMiddle">
+	      <div class="row no-gutters">
+	          <div class="col-md-3">
+	            <div class="chat-bubble chat-bubble--left">
+	            	보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 
+	            </div>
+	             <div class="showTime" style="display:block">
+	              	<span class="time text-muted small">00:00:00 06.04.2021</span>
+	             </div>
+	          </div>
+	        </div>
+	        <div class="row no-gutters">
+	          <div class="col-md-3 offset-md-9">
+	            <div class="chat-bubble chat-bubble--right" >
+	            	받는 메세지
+	            </div>
+	            <div class="showTime" style="display:block">
+	              <span class="time text-muted small">00:00:00 06.04.2021</span>
+	             </div>
+	          </div>
+	        </div>
         </div>
-        <div class="row no-gutters">
-          <div class="col-md-3 offset-md-9">
-            <div class="chat-bubble chat-bubble--right">
-            	받는 메세지
-              <span class="time text-muted small"></span>
-            </div>
-          </div>
-        </div>
+        
         <div class="row">
           <div class="col-12">
             <div class="chat-box-tray">
@@ -197,6 +217,12 @@
       </div>
     </div>
     <!-- 대화 보내고 받는 화면 끝 -->
+    <form class="hideForm">
+<%--     	<input type="hidden" value="${chatRoomVO. }"> --%>
+    	<input type="hidden" value="">
+    	<input type="hidden" value=""> 
+    	<input type="hidden" value="">
+    </form>
 
 </div>
 </div> <!-- end of container -->

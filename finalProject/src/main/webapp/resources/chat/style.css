@@ -1,5 +1,5 @@
 body {
-  background-color: #3498db;
+  background-color: #78c2ad;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -37,7 +37,7 @@ body {
   transition: 0.3s;
 }
 .settings-tray--right i:hover {
-  color: #74b9ff;
+  color: #78c2ad;
   cursor: pointer;
 }
 
@@ -94,7 +94,7 @@ input:focus {
   color: grey;
 }
 .friend-drawer--onhover:hover {
-  background: #74b9ff;
+  background: #78c2ad;
   cursor: pointer;
 }
 .friend-drawer--onhover:hover p,
@@ -134,7 +134,7 @@ hr {
 }
 .chat-bubble--right:after {
   right: 0;
-  border-left-color: #74b9ff;
+  border-left-color: #78c2ad;
   border-right: 0;
   margin-right: -20px;
 }
@@ -148,7 +148,7 @@ hr {
   }
 }
 .offset-md-9 .chat-bubble {
-  background: #74b9ff;
+  background: #78c2ad;
   color: #fff;
 }
 

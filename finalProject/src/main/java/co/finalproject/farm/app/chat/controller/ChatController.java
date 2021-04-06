@@ -27,13 +27,13 @@ public class ChatController {
 		@RequestMapping("/showChat")
 		public String showChatGet(Model model,HttpSession session) {
 			model.addAttribute("user_id",session.getAttribute("user_id"));
-			return "notiles/chat/showChat";
+			return "chat/chat/showChat";
 		}
 		
 		//커뮤니티에서 1:1대화하기 버튼 클릭시
 		@PostMapping("/showChat")
 		public String showChatPost() {
-			return "notiles/chat/showChat";
+			return "chat/chat/showChat";
 		}
 
 		@RequestMapping("/getMessageList")

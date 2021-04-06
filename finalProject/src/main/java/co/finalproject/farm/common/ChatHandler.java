@@ -41,7 +41,6 @@ public class ChatHandler extends TextWebSocketHandler {
 			log.info("{} 연결됨", user_id);
 			users.put(user_id,session);
 			connectUsers.add(session);
-		
 	}
 	
 	//클라이언트 연결 해제 이후 시행되는 메서드
@@ -61,6 +60,7 @@ public class ChatHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
+		System.out.println("hadleMessage=================>"+ msg);
 	}
 	
 	@Override
