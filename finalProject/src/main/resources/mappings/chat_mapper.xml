@@ -6,13 +6,20 @@
 <!-- 채팅방 조회 -->
 <select id="getChatRoom" resultType="ChatRoomVO" parameterType="ChatRoomVO">
 	SELECT * FROM CHATROOM
-					WHERE	USER_ID_ONE=#{user_id_one} AND
-							USER_ID_TWO=#{user_id_two}
+					WHERE	(USER_ID_ONE=#{user_id_one} AND
+							USER_ID_TWO=#{user_id_two}) or
+							(USER_ID_ONE=#{user_id_two} AND
+							USER_ID_TWO=#{user_id_one})
 </select>
 
 <!-- 채팅방 번호 조회 -->
 <select id="getRoomNo" resultType="ChatRoomVO" parameterType="ChatRoomVO">
 	SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_no}
+</select>
+
+<!-- 해당 채팅방에 속하는 메세지 조회 조회 -->
+<select id="getMessageList" resultType="map" >
+	SELECT * FROM MESSAGE WHERE CHATROOM_NO = #{chatroom_no}
 </select>
 
 <!-- 채팅방 조회후 일치하는 값이 없으면 채팅방 생성 -->
@@ -61,10 +68,9 @@
 
 <update id ="updateReadTime1" parameterType="MessageVO">
 	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
-				   where USER_ID_ONE = #{user_id_one}  AND 
-				   MSG_READTIME = MSG_SENDTIME and 
-				   message_sender = USER_ID_ONE and 
-				   USER_ID_TWO = #{user_id_two}
+				   WHERE CHATROOM_ID=${chatroom_no} and 
+				   		 MSG_RECIEVER = #{msg_reciever} and
+				   		 MSG_READTIME = #{msg_readtime, jdbcType=DATE}
 </update>
 
 <update id ="updateReadTime2" parameterType="MessageVO">

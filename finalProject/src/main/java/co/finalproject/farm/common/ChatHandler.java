@@ -3,7 +3,6 @@ package co.finalproject.farm.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import co.finalproject.farm.app.chat.service.ChatRoomVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import co.finalproject.farm.app.chat.service.ChatService;
-import co.finalproject.farm.app.chat.service.MessageVO;
-import co.finalproject.farm.app.user.service.UserVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatHandler extends TextWebSocketHandler {
 	
 	@Autowired ChatService chatService;
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	private List<WebSocketSession> connectUsers; //로그인한 전체 세션 리스트 담는 곳 
 	private Map<String,WebSocketSession> users = new HashMap<String, WebSocketSession>();//1:1채팅

@@ -64,7 +64,7 @@ public class UserController {
 		//비밀번호 암호화해서 다시 vo에 저장
 		vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));
 		userService.insertUser(vo);
-		return "nofooter/login";
+		return "redirect:login";
 	}
 	
 	

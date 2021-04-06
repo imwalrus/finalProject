@@ -2,6 +2,7 @@ package co.finalproject.farm.app.chat.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class ChatServiceImpl implements ChatService {
 	public int updateReadTime1(MessageVO vo) {
 		int result = chatDAO.updateReadTime1(vo);
 		return result;
+	}
+
+	public List<Map<String,Object>> getMessageList(MessageVO vo) {
+		return chatDAO.getMessageList(vo);
 	}
 
 }
