@@ -31,7 +31,7 @@
 		   USER_ID,
 		   INTO_CITY
 	FROM INTOFARM
-	WHERE INTO_NO=${into_no}
+	WHERE INTO_NO=#{into_no}
 	</select>
 	
 	<!--등록 -->

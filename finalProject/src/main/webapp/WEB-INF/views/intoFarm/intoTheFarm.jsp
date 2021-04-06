@@ -14,20 +14,24 @@
 			//event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 			/* $('#myUpdate').hide(); */
 			$('#myLargeModal .modal-body').load("getSearchFarm?into_no="+str);
-			$('#myLargeModal').modal('show');
-			$('#myUpdate').modal('hide');
+				$('#myLargeModal').modal('show');
+				$('#myUpdate').modal('hide'); 
 			/*만약 myUpdate를 누르면 수정폼이 보이게..*/
 			
-		}
+		}	
 		
-		 function fnUpdate(str1){
-			 	$('#myUpdate .modal-body').load("updateFarm?into_no=1");
-				$('#myLargeModal').modal('hide');
-				$('#myUpdate').modal('show');
-		}
+		function fnUpdate(str1){
+					 	$('#myUpdate .modal-body').load("updateFarm?into_no="+str1);
+						$('#myLargeModal').modal('hide');
+						$('#myUpdate').modal('show');
+				}
+		 
+		 /* function goupdate(str2){
+			 
+		 } */
 		
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 //Bootstrap multiple modal
 	var count = 0; // 모달이 열릴 때 마다 count 해서  z-index값을 높여줌
 	$(document).on(
@@ -43,7 +47,7 @@
 				count = count + 1
 			});
 	
-</script>
+</script> -->
 <style>
 .modal.modal-center {
   text-align: center;
@@ -81,9 +85,11 @@
 	</section>
 
 	<!--모달 상세보기 -->
-
-	<div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
-		<div class="modal-dialog modal-lg" role="document">
+	
+	<div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<!-- <div class="modal-dialog modal-lg" role="document"> -->
+		<!-- <div class="modal-dialog modal-dialog-centered"> -->
+		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">상세보기</h5>
@@ -93,22 +99,21 @@
 					</button>
 				</div>
 				<div class="modal-body"></div> <!--내용 append -->
-				<div class="modal-footer">
-					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+				
 					<!--농업인& 관리자 수정-->
-					<a href="#" onclick="fnUpdate('${upFarm.into_no}')" class="btn btn-primary" data-toggle="modal">수정</a>
 					
 					<%-- <button class="btn btn-primary" id="firstUpdate" onclick="fnUpdate('${upFarm.into_no}')" type="button" data-dismiss="modal">수정</button> --%>
 					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
 				</div>
 			</div>
 		</div>
-	</div>
+	
 	
 	<!--모달 수정화면 -->
-	
-	<div class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
-		<div class="modal-dialog modal-lg" role="document">
+	<form id="updatefrm" method="post" action="updateFarm" >
+	<div class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<!-- <div class="modal-dialog modal-dialog-centered"> -->
+		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
@@ -119,15 +124,16 @@
 				<div class="modal-body"></div> <!--내용 append -->
 				<div class="modal-footer">
 					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+					<a class="btn btn-primary" href="#myLargeModal" data-bs-toggle="modal" role="button">Open #modal</a>
 					<!--농업인& 관리자 수정-->
-					<button class="btn btn-primary" type="button" data-dismiss="modal">저장</button>
+					<button class="btn btn-primary" type="button" data-dismiss="modal" onclick="goupdate('${upFarm.into_no}')">저장</button>
 					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+	<!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#myLargeModal" role="button">Open #modal</a> -->
+	</form>
 	
 </body>
 </html>
