@@ -38,21 +38,21 @@
 	
 	//메세지 전송
 	//message에 담을 값 전역변수 선언하고 보내기
-	var sendMessage={};
+	var sendMsg={};
 	function sendMessage(){
 		var msg = $('#message').val();
 		var time = getTimeStamp();
 		if(msg != ""){
-			sendMessage.msg_type ="CHAT"; 
-			sendMessage.msg_sender="${user_id}";
-			sendMessage.msg_content=msg;
-			sendMessage.chatroom_no = "";
-			sendMessage.msg_receiver="";
-			sendMessage.msg_sendtime= time;
-			console.log("전송할 msg =====>" + sendMessage);
+			sendMsg.msg_type ="CHAT"; 
+			sendMsg.msg_sender="${user_id}";
+			sendMsg.msg_content=msg;
+			sendMsg.chatroom_no = $('#chatroom_no').val();
+			sendMsg.msg_receiver= $('#msg_receiver').val();
+			sendMsg.msg_sendtime= time;
 			//json 타입으로 변환하여 메세지 전달
 			//전송 후 value 값 초기화
-			msg = JSON.stringify(sendMessage);
+			msg = JSON.stringify(sendMsg);
+			console.log("전송할 msg =====>" + msg);
 			sock.send(msg); 
 			$('#message').val("");
 			appendMessage(sendMessage);
@@ -166,19 +166,20 @@
 	            <div class="chat-bubble chat-bubble--left">
 	            	보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 
 	            </div>
-	             <div class="showTime" style="display:block">
-	              	<span class="time text-muted small">00:00:00 06.04.2021</span>
-	             </div>
+	            <div style="float:left">
+	              <span class="time text-muted small">00:00:00 06.04.2021</span>
+	          	</div>
 	          </div>
+
 	        </div>
 	        <div class="row no-gutters">
 	          <div class="col-md-3 offset-md-9">
 	            <div class="chat-bubble chat-bubble--right" >
-	            	받는 메세지
+	            	보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 보내는 메세지 1234564123435 
 	            </div>
-	            <div class="showTime" style="display:block">
+	          </div>
+	          <div style="float:right">
 	              <span class="time text-muted small">00:00:00 06.04.2021</span>
-	             </div>
 	          </div>
 	        </div>
         </div>
@@ -197,7 +198,6 @@
     <!-- 대화 보내고 받는 화면 끝 -->
     <c:if test="${room ne null}" >
 	    <form class="hideForm">
-     		<input type="hidden" id="msg_type" value="">
 	    	<input type="hidden" id="msg_sender" value="">
 	    	<input type="hidden" id="msg_receiver" value=""> 
 	    	<input type="hidden" id="chatroom_no" value="">

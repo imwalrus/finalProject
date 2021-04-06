@@ -13,7 +13,7 @@ public class MessageVO {
 	private String msg_sender;
 	private String  msg_recevier;
 	private String  msg_content;
-	private Date msg_sendtime;
+	private String msg_sendtime;
 	private Date msg_readtime;
 	private String msg_type;
 	private int chatroom_no;

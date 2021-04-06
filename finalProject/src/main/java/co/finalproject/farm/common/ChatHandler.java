@@ -15,7 +15,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.finalproject.farm.app.chat.service.ChatRoomVO;
 import co.finalproject.farm.app.chat.service.ChatService;
+import co.finalproject.farm.app.chat.service.MessageVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -60,7 +62,8 @@ public class ChatHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
-		System.out.println("hadleMessage=================>"+ msg);
+		MessageVO msgVO = objectMapper.readValue(msg, MessageVO.class);
+		System.out.println("hadleMessage=================>"+ msgVO);
 	}
 	
 	@Override
