@@ -28,19 +28,6 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-	// form - hidden 수량에 수량값 넘겨주기
-	$(document).ready(function() {
-		$("#count").on({
-			keyup : function() {
-				$("#hcount").val($(this).val())
-			},
-			click : function() {
-				$("#hcount").val($(this).val())
-			}
-		});
-	});
-</script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 	<div class="container">
@@ -77,76 +64,85 @@
 	<div class="container">
 		<div class="row w-100">
 			<div class="col-lg-12 col-md-12 col-12">
-				<h3 class="display-5 mb-2 text-center">장바구니</h3>
+				<h3 class="display-5 mb-2 text-center">
+					<i class="material-icons shopping_cart">&#xe8cc;</i> 장바구니
+				</h3>
 				<p class="mb-5 text-center">
-				<table id="shoppingCart" class="table table-condensed table-responsive">
-					<thead>
-						<tr>
-							<th style="width: 55%">상품정보</th>
-							<th style="width: 12%">판매가</th>
-							<th style="width: 10%">수량</th>
-							<th style="width: 12%"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- 총액 계산 -> c:set 태그 설정(총액 변수명 price) -->
-						<c:set var="price" value="0" />
-						<!-- c:forEach START -->
-						<c:forEach items="${cart}" var="cart" varStatus="status">
-							<tr>
-								<form action="updateCart" method="post">
-								<td data-th="Product">
-									<input type="hidden" name="pro_no" value="${cart.pro_no}">
-									<div class="row">
-										<div class="col-md-3 text-left">
-											<!-- 이미지 -->
-											<img src="resources/main/images/${cart.pro_filename}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-										</div>
-										<div class="col-md-9 text-left mt-sm-2">
-											<!-- 상품명 · 상품 내용 -->
-											<h4>${cart.pro_name}</h4>
-											<p class="font-weight-light">${cart.pro_content}</p>
-										</div>
-									</div>
-								</td>
-								<!-- 판매가(jstl - 3자리마다 ',') -->
-								<c:set var="com" value="${cart.cart_price}" />
-								<td data-th="Price">
-									￦
-									<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
-								</td>
-								<td data-th="Quantity">
-									<!-- 수량 -->
-									<input type="text" class="form-control-sm" name="cart_count" value="${cart.cart_count}">
-								</td>
-								<td class="actions" data-th="">
-									<div class="text-right">
-										<!-- 수량 수정 · 삭제 버튼 -->
-										<button class="btn btn-white border-secondary bg-white btn-md mb-2">
-											<i class="material-icons refresh">&#xe5d5;</i>
-										</button>
-										<a type="button" href="deleteCart?cart_no=${cart.cart_no}" class="btn btn-white border-secondary bg-white btn-md mb-2">
-											<i class="material-icons close_fullscreen">&#xe14c;</i>
-										</a>
-									</div>
-								</td>
-								</form>
-							</tr>
-							<!-- 총액 계산 -> c:set 태그 종료 -->
-							<c:set var="price" value="${price + cart.cart_price}" />
-						</c:forEach>
-						<!-- c:forEach END -->
-					</tbody>
-				</table>
-				<div class="float-right text-right">
-					<h4>총 결제금액</h4>
-					<!-- jstl - 총액 계산 · 3자리마다 ','  -->
-					<c:set var="com" value="${price}" />
-					<h1>
-						￦
-						<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
-					</h1>
-				</div>
+					<c:if test="${empty cart}">
+						<div class="float-center text-center">
+							<h4>장바구니가 비었습니다.</h4>
+						</div>
+						<div class="float-right text-right">
+							<h4>총 결제금액</h4>
+							<h1>￦ 0</h1>
+						</div>
+					</c:if>
+					<c:if test="${not empty cart}">
+						<table id="shoppingCart" class="table table-condensed table-responsive">
+							<thead>
+								<tr>
+									<th style="width: 55%">상품정보</th>
+									<th style="width: 12%">판매가</th>
+									<th style="width: 10%">수량</th>
+									<th style="width: 12%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- 총액 계산 -> c:set 태그 설정(총액 변수명 price) -->
+								<c:set var="price" value="0" />
+								<!-- c:forEach START -->
+								<c:forEach items="${cart}" var="cart" varStatus="status">
+									<tr>
+										<form action="updateCart" method="post">
+											<td data-th="Product">
+												<input type="hidden" name="pro_no" value="${cart.pro_no}">
+												<div class="row">
+													<div class="col-md-3 text-left">
+														<!-- 이미지 -->
+														<img src="resources/main/images/${cart.pro_filename}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+													</div>
+													<div class="col-md-9 text-left mt-sm-2">
+														<!-- 상품명 · 상품 내용 -->
+														<h4>${cart.pro_name}</h4>
+														<p class="font-weight-light">${cart.pro_content}</p>
+													</div>
+												</div>
+											</td>
+											<!-- 판매가(jstl - 3자리마다 ',') -->
+											<c:set var="com" value="${cart.cart_price}" />
+											<td data-th="Price">
+												￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
+											</td>
+											<td data-th="Quantity">
+												<!-- 수량 -->
+												<input type="text" class="form-control-sm" name="cart_count" value="${cart.cart_count}">
+											</td>
+											<td class="actions" data-th="">
+												<div class="text-right">
+													<!-- 수량 수정 · 삭제 버튼 -->
+													<button class="btn btn-white border-secondary bg-white btn-md mb-2">
+														<i class="material-icons refresh">&#xe5d5;</i>
+													</button>
+													<a type="button" href="deleteCart?cart_no=${cart.cart_no}" class="btn btn-white border-secondary bg-white btn-md mb-2">
+														<i class="material-icons close_fullscreen">&#xe14c;</i>
+													</a>
+												</div>
+											</td>
+										</form>
+									</tr>
+									<!-- 총액 계산 -> c:set 태그 종료 -->
+									<c:set var="price" value="${price + cart.cart_price}" />
+								</c:forEach>
+								<!-- c:forEach END -->
+							</tbody>
+						</table>
+						<div class="float-right text-right">
+							<h4>총 결제금액</h4>
+							<!-- jstl - 총액 계산 · 3자리마다 ','  -->
+							<c:set var="com" value="${price}" />
+							<h1>￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" /></h1>
+						</div>
+					</c:if>
 			</div>
 		</div>
 		<div class="row mt-4 d-flex align-items-center">
