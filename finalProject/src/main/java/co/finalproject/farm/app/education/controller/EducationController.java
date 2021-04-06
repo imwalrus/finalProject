@@ -21,8 +21,6 @@ import co.finalproject.farm.app.education.service.EduPagingVO;
 import co.finalproject.farm.app.education.service.EducationService;
 import co.finalproject.farm.app.education.service.EducationVO;
 import co.finalproject.farm.app.notice.controller.FaqController;
-import co.finalproject.farm.app.notice.service.FaqPagingVO;
-import co.finalproject.farm.app.notice.service.FaqVO;
 import co.finalproject.farm.common.Paging;
 
 @Controller
@@ -80,7 +78,7 @@ public class EducationController {
     @RequestMapping("/getSchOffEdu")
     public String getSchOffEdu (Model model, EducationVO vo, EduPagingVO pagingvo) {
     	model.addAttribute("edu", eduService.getSchOffEdu(vo));
-        return "education/selectEdu";
+        return "education/offEducation";
     }
 
     

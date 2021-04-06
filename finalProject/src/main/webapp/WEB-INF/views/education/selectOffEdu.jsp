@@ -25,19 +25,6 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-//모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
-$('#offEduModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-})
-</script>
-<style>
-#title > h1 {
-       font-size: 35px;
-       color: #00cc99;
-       } 
-</style>
 </head>
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
@@ -110,74 +97,8 @@ $('#offEduModal').on('show.bs.modal', function (event) {
     </div>
    
     
-    <section class="ftco-section testimony-section">
-    <form action="getOffEdu" name="edu_sch">
-    <div align="center" style="margin-left:400px; margin-right:400px;">
-    <div id="title">
-			<h1>오프라인 교육</h1>
-		</div><br/>
-    <table class="table table-hover">
-         <thead>
-                <tr>
-					<td align="center" width="150">번호</td>
-					<td align="center" width="150">지역</td>
-					<td align="center" width="500">주제</td>
-					<td align="center" width="400">교육기간</td>
-					<td align="center" width="250">교육시간</td>
-					<td align="center" width="150">신청현황</td>
-					<td align="center" width="150">상세보기</td>
-				</tr>
-		<c:forEach items="${list}" var="edu">
-		<tr>
-         <td align="center">${edu.edu_no}</td>
-         <td>&nbsp; ${edu.edu_adr}</td>
-         <td align="center">${edu.edu_title}</td>
-         <td align="center">${edu.edu_date}</td>
-         <td align="center">${edu.edu_time}</td>
-         <td align="center">${edu.edu_check}</td>
-         <td>
-         <button 
-         type="button" 
-         class="btn btn-primary disabled" 
-         style="padding: 1px"
-         data-toggle="modal" 
-         data-target="#offEduModal">상세보기</button>
-         </td>
-        </tr>
-        </c:forEach>
-        </thead>
-    </table><br>
-<!-- 모달팝업 -->
-<div class="modal" id="offEduModal" tabindex="-1" role="dialog" aria-labelledby="offEduModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="offEduModalLabel">과정상세정보</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" align="center">
-      
-      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary disabled" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-        <div align="center">
-        <my:paging paging="${paging}" jsFunc="goPage" />
-        <script>
-        function goPage(p) {
-    	location.href="getOffEdu?page=" +p;
-    	//edu_sch.page.value= p;
-    	//edu_sch.submit();
-        }
-        </script>
-        </div></div>
-    </form>
+     <section class="ftco-section testimony-section">
+    
     </section>
     <footer class="ftco-footer ftco-section">
       <div class="container">  	
