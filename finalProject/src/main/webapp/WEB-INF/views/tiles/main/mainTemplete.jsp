@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
+<script src="resources/main/js/jquery.min.js"></script>
 </head>
 <body class="goto-here">
 
