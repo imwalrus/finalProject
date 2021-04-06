@@ -1,10 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>청년농장</title>
+
+ 	<!-- 상단 메뉴바 css -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="resources/main/css/animate.css">
+	<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="resources/main/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="resources/main/css/magnific-popup.css">
+	<link rel="stylesheet" href="resources/main/css/aos.css">
+	<link rel="stylesheet" href="resources/main/css/ionicons.min.css">
+	<link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css">
+	<link rel="stylesheet" href="resources/main/css/flaticon.css">
+	<link rel="stylesheet" href="resources/main/css/icomoon.css">
+ 	<link rel="stylesheet" href="resources/main/css/style.css">
+	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
+	
 </head>
 <body>
 	<!-- 내비게이션 바 시작 -->
@@ -48,31 +68,21 @@
 					<li class="nav-item">
 						<a href="admin" class="nav-link">관리자</a>
 					</li>
-					<li class="nav-item cta cta-colored">
-						<a href="login" class="nav-link"><span class="icon-shopping_cart"></span>로그인</a>
-					</li>
+					<c:if test="${ user_id eq null }"><!-- session 내 아이디 값 없을시 -->
+						<li class="nav-item cta cta-colored">
+							<a href="login" class="nav-link"><span class="icon-person_outline"></span>로그인</a>
+						</li>
+					</c:if>
+					<c:if test="${ user_id ne null }"><!-- session 내 아이디 값 존재 할 경우 -->
+						<li class="nav-item cta cta-colored">
+							<a href="logout" class="nav-link"><span class="icon-person_outline"></span>로그아웃</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
 
-
-	<script src="resources/main/js/jquery.min.js"></script>
-	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="resources/main/js/popper.min.js"></script>
-	<script src="resources/main/js/bootstrap.min.js"></script>
-	<script src="resources/main/js/jquery.easing.1.3.js"></script>
-	<script src="resources/main/js/jquery.waypoints.min.js"></script>
-	<script src="resources/main/js/jquery.stellar.min.js"></script>
-	<script src="resources/main/js/owl.carousel.min.js"></script>
-	<script src="resources/main/js/jquery.magnific-popup.min.js"></script>
-	<script src="resources/main/js/aos.js"></script>
-	<script src="resources/main/js/jquery.animateNumber.min.js"></script>
-	<script src="resources/main/js/bootstrap-datepicker.js"></script>
-	<script src="resources/main/js/scrollax.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="resources/main/js/google-map.js"></script>
-	<script src="resources/main/js/main.js"></script>	
 </body>
 </html>

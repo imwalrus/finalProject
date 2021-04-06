@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib  prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>    
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
+<meta charset="UTF-8">
 <title>청년농장</title>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -24,30 +24,11 @@
 <link rel="stylesheet" href="resources/main/css/icomoon.css">
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
-<script src="resources/main/js/jquery.min.js"></script>
 </head>
-<body class="goto-here">
+<body>
 
-
-
-
-	
-   	<tiles:insertAttribute name="header"/>
-   
-   
   	<tiles:insertAttribute name="content"/>
-  	
-  	
-  	
-  	
-    <tiles:insertAttribute name="footer"/>
-  
-  
-  
-  
-  
-  
-  
+
 	<script src="resources/main/js/jquery.min.js"></script>
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/main/js/popper.min.js"></script>

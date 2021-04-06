@@ -64,7 +64,7 @@ public class UserController {
 		//비밀번호 암호화해서 다시 vo에 저장
 		vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));
 		userService.insertUser(vo);
-		return "nofooter/login";
+		return "redirect:login";
 	}
 	
 	
@@ -76,7 +76,10 @@ public class UserController {
 		UserVO resultVO = userService.loginCheck(vo);
 		HttpSession session = request.getSession();		
 		if(resultVO != null && pwdEncoder.matches(vo.getUser_pwd(), resultVO.getUser_pwd())) {
-			session.setAttribute("user", resultVO);
+			/* session.setAttribute("user", resultVO); */
+			//로그인 체크에 성공하면 세션에 user_id, user_auth 담아두기
+			session.setAttribute("user_id", resultVO.getUser_id());
+			session.setAttribute("user_auth", resultVO.getUser_auth());
 		} else {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
 			return "redirect:login";
