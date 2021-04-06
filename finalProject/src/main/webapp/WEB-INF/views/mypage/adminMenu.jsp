@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,33 +13,23 @@
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
-
-    
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
     <!-- vendor css -->
     <link rel="stylesheet" href="resources/admin/css/style.css">
-		<!-- 상단 메뉴바 css -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="resources/main/css/animate.css">
-	<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="resources/main/css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="resources/main/css/magnific-popup.css">
-	<link rel="stylesheet" href="resources/main/css/aos.css">
-	<link rel="stylesheet" href="resources/main/css/ionicons.min.css">
-	<link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css">
-	<link rel="stylesheet" href="resources/main/css/flaticon.css">
-	<link rel="stylesheet" href="resources/main/css/icomoon.css">
-	<link rel="stylesheet" href="resources/main/css/style.css">
-	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
+    
+    
+
 </head>
 <body class="">
-<tiles:insertAttribute name="header"/>
-
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
 	<!-- [ navigation menu ] start -->
 	<nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
@@ -99,11 +88,21 @@
 					</li>
 					
 				</ul>
+				
+				<div class="card text-center">
+					<div class="card-block">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<i class="feather icon-sunset f-40"></i>
+						<h6 class="mt-3">Download Pro</h6>
+						<p>Getting more features with pro version</p>
+						<a href="https://1.envato.market/qG0m5" target="_blank" class="btn btn-primary btn-sm text-white m-0">Upgrade Now</a>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</nav>
 	<!-- [ navigation menu ] end -->
-	
 	<!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
@@ -221,15 +220,8 @@
 	</header>
 	<!-- [ Header ] end -->
 	
-	<tiles:insertAttribute  name="content"/>
+	
 
-
-	<!-- admin 설정페이지 js start -->
-    <!-- Required Js -->
- 	<script src="resources/admin/js/vendor-all.min.js"></script>
-    <script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-    <script src="resources/admin/js/ripple.js"></script>
-    <script src="resources/admin/js/pcoded.min.js"></script> 
 
 
 </body>

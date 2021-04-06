@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmDiaryMapper">
+
+<!-- 전체조회 -->
+	<select id="getFDiaryList" resultType="FarmDiaryVO">
+			select 	FDIARY_NO
+					,TO_CHAR(FDIARY_DAY,'YYYY-MM-DD') as fday
+					,FDIARY_CROP
+					,FDIARY_WORKER
+					,FDIARY_WEATHER
+					,FDIARY_CONTENT
+					,USER_ID
+					,CROP_NO
+					,FDIARY_FILENAME
+					,TO_CHAR(FDIARY_STIME,'am') as SAMPM
+        			,TO_CHAR(FDIARY_STIME,'hh') as SSI
+        			,TO_CHAR(FDIARY_STIME,'MI') as SBUN
+					,TO_CHAR(FDIARY_ETIME,'am') as EAMPM
+        			,TO_CHAR(FDIARY_ETIME,'hh') as ESI
+        			,TO_CHAR(FDIARY_ETIME,'MI') as EBUN    
+			FROM farmdiary
+	</select>
+	
+</mapper>
