@@ -49,7 +49,7 @@ public class PurchaseInqController {
 	public String getpuchasInq(Model model, puchasInqVO vo) {
 		model.addAttribute("plist", pciMapper.getpuchasInq(vo));
 		System.out.println(vo);
-		return "mypage/getpuchasInq";
+		return "notiles/mypage/getpuchasInq";
 	}
 	
 	//등록폼
@@ -84,7 +84,7 @@ public class PurchaseInqController {
 	@RequestMapping("/updatepuchasInq")
 	public String updatepuchasInq(Model model,puchasInqVO vo) {
 		model.addAttribute("pupdate", pciMapper.getpuchasInq(vo));
-		return "mypage/updatepuchasInq";
+		return "notiles/mypage/updatepuchasInq";
 		
 	}
 	

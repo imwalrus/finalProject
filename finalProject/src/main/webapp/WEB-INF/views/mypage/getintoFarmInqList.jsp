@@ -20,14 +20,15 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-
 <style>
-.table {
-	text-align: center;
+.table{
+min-width:100% !important;
 }
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
 </style>
-
-
 </head>
 <body>
 	<section class="pcoded-main-container">
@@ -57,7 +58,7 @@
 									</div>
 									<div class="card-body table-border-style">
 										<div class="table-responsive">
-											<table class="table">
+											<table class="table table-hover">
 												<tr class="table-success">
 													<th>No</th>
 													<th>Title</th>

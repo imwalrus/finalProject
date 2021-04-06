@@ -22,9 +22,13 @@
 <link rel="stylesheet" href="resources/admin/css/style.css">
 
 <style>
-.table {
-	text-align: center;
+.table{
+min-width:100% !important;
 }
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
 </style>
 
 
