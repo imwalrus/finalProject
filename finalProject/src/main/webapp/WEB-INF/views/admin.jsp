@@ -591,7 +591,7 @@
                                     <a href="#!">
                                         <h6>+ 1652 Followers</h6>
                                     </a>
-                                    <p class="text-muted m-b-0">You’re getting more and more followers, keep it up!</p>
+                                    <p class="text-muted m-b-0">Youâre getting more and more followers, keep it up!</p>
                                 </div>
                             </div>
                             <div class="row p-b-30">
@@ -734,7 +734,7 @@
                                     <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius profile-img cust-img m-b-15">
                                 </div>
                                 <div class="col">
-                                    <h6 class="m-b-15">Allina D’croze <span class="float-right f-13 text-muted"> a week ago</span></h6>
+                                    <h6 class="m-b-15">Allina Dâcroze <span class="float-right f-13 text-muted"> a week ago</span></h6>
                                     <a href="#!"><i class="feather icon-star-on f-18 text-c-yellow"></i></a>
                                     <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
                                     <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
@@ -747,7 +747,7 @@
                                     <a href="#!"><i class="feather icon-heart-on text-c-red m-r-15"></i></a>
                                     <a href="#!"><i class="feather icon-edit text-muted"></i></a>
                                     <blockquote class="blockquote m-t-15 m-b-0">
-                                        <h6>Allina D’croze</h6>
+                                        <h6>Allina Dâcroze</h6>
                                         <p class="m-b-0 text-muted">Lorem Ipsum is simply dummy text of the industry.</p>
                                     </blockquote>
                                 </div>
