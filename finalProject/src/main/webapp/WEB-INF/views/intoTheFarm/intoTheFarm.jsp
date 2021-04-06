@@ -1,3 +1,4 @@
+  
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -32,37 +33,49 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-<!--grid 리스트 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
-		var selectTarget = $('.selectbox select');
-		selectTarget.change(function() {
-			var select_name = $(this).children('option:selected').text();
-			$(this).siblings('label').text(select_name);
-		});
-	});
+		/*모달*/
+		function fngetSearchInfo(str) { //into_no 가지고 보냄
+			//event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+			/* $('#myUpdate').hide(); */
+			$('#myLargeModal .modal-body').load("getSearchFarm?into_no="+str);
+			$('#myLargeModal').modal('show');
+			$('#myUpdate').modal('hide');
+			/*만약 myUpdate를 누르면 수정폼이 보이게..*/
+			
+		}
+		
+		 function fnUpdate(str1){
+			 	$('#myUpdate .modal-body').load("updateFarm?into_no=1");
+				$('#myLargeModal').modal('hide');
+				$('#myUpdate').modal('show');
+		}
+		
 </script>
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-        	 format: 'L'
-        });
-        $('#datetimepicker2').datetimepicker({
-        	 format: 'L',
-             useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            var select_date = $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
-    });
+//Bootstrap multiple modal
+	var count = 0; // 모달이 열릴 때 마다 count 해서  z-index값을 높여줌
+	$(document).on(
+			'show.bs.modal',
+			'.modal',
+			function() {
+				var zIndex = 1040 + (10 * count);
+				$(this).css('z-index', zIndex);
+				setTimeout(function() {
+					$('.modal-backdrop').not('.modal-stack').css('z-index',
+							zIndex - 1).addClass('modal-stack');
+				}, 0);
+				count = count + 1
+			});
+	
 </script>
+<style>
+.modal.modal-center {
+  text-align: center;
+}
+</style>
 </head>
 <body class="goto-here">
 	
@@ -73,7 +86,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> 
 			</button>
-
+			
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
@@ -86,10 +99,10 @@
 						<a href="education" class="nav-link">귀농교육</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
+						<a class="nav-link dropdown-toggle" href="intoTheFarm" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농촌속으로</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
-							<a class="dropdown-item" href="">체험등록</a>
+							<a class="dropdown-item" href="insertIntoFarm">체험등록</a>
 							<a class="dropdown-item" href="wishlist.html">농촌속으로 문의</a>
 						</div>	
 					</li>
@@ -119,115 +132,35 @@
 			</div>
 		</div>
 	</nav>
+	
 	<!-- 내비게이션 바 END -->
 	<!--농촌속으로 리스트  -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-	        <!-- <div class="selectbox"> 
-				<label for="city_select">지역</label> 
-					<select id="ex_select"> <option selected>지역 선택</option> 
-											<option>대구</option> 
-											<option>서울</option> 
-					</select> 
-			</div>
-			<div class="selectbox"> 
-				<label for="product_select">농작물 종류</label> 
-					<select id="ex_select"> <option selected>농작물 선택</option> 
-											<option>포도</option> 
-											<option>사과</option> 
-					</select>
-			</div>		
-				<div class='col-md-3 col-xs-4'>
-					<label for="product_select">기간</label> 
-					<div class="form-group">
-						<div class="input-group date" id="datetimepicker1"
-							data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker1" value="01/01/2021">
-							<div class="input-group-append" data-target="#datetimepicker1"
-								data-toggle="datetimepicker">
-								<div class="input-group-text">
-									<i class="fa fa-calendar"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				
-					<div class="form-group">
-						<div class="input-group date" id="datetimepicker2"
-							data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker2" value="01/01/2021">
-							<div class="input-group-append" data-target="#datetimepicker2"
-								data-toggle="datetimepicker">
-								<div class="input-group-text">
-									<i class="fa fa-calendar"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-			</div>
-			<button type="button" onclick="">검색</button> -->
-			
-
-			 <!-- Product grid -->
-			<%-- <div class="w3-row w3-grayscale">
-				<div class="w3-col l3 s6">
-					<c:forEach items="${list}" var="listt">
-						<div class="w3-container">
-							<ul>
-								<li><span></span><span><img
-										src="https://i.imgur.com/CBU1h2t.png" width="240"></span></li>
-								<li><span></span><span class="text">지역</span></li>
-								<li>${listt.into_city}</li>
-								<li><span></span><span class="text">농작물</span></li>
-								<li>${listt.into_product}</li>
-								<li><span></span><span class="text">기간</span></li>
-								<li>${listt.into_date}</li>
-								<li><span></span><span class="text">모집 인원 수&남은 인원 수</span></li>
-								<li>${listt.into_entry}</li>
-								<li><a href="#"><span></span><span class="text">상세보기</span></a></li>
-							</ul>
-						</div>
-					</c:forEach>
-				</div>
-			</div> 
-			<%--end of product grid  --%>
-			
-
-
-
-			<div class="row d-flex justify-content-center py-5">
-					<div class="container-fluid mt-5 mb-5">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="col max-mb-30 aos-init aos-animate"
-									data-aos="fade-up">
-									<c:forEach items="${list}" var="listt">
-										<div class="block-23 mb-3">
-											<ul>
-												<li><span></span><span><img
-														src="https://i.imgur.com/CBU1h2t.png" width="240"></span></li>
-												<li><span></span><span class="text">지역</span></li>
-												<li>${listt.into_city}</li>
-												<li><span></span><span class="text">농작물</span></li>
-												<li>${listt.into_product}</li>
-												<li><span></span><span class="text">기간</span></li>
-												<li>${listt.into_date}</li>
-												<li><span></span><span class="text">모집 인원 수&남은
-														인원 수</span></li>
-												<li>${listt.into_entry}</li>
-												<li><a href="#"><span></span><span class="text">상세보기</span></a></li>
-											</ul>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
+	
+	 <div class="container">
+		<div class="row">
+			<c:forEach items="${list}" var="listt">
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header">${listt.into_title}</div>
+						<div class="card-body">
+							
+								<span></span><span class="text">지역 : ${listt.into_city}</span><br>
+								<span></span><span class="text">농작물 : ${listt.into_product}</span><br>
+								<span></span><span class="text">기간 : ${listt.into_date}</span><br>
+								<span></span><span class="text">모집 인원 수&남은 인원 수 : ${listt.into_entry}</span><br><br>
+								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
+								<span></span><span class="text">상세보기</span></a>
 						</div>
 					</div>
 				</div>
+			</c:forEach>
 		</div>
+	</div>
+		
 	</section>
+
+	
    
     <section class="ftco-section bg-light">
 			<div class="container">
@@ -378,5 +311,55 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="resources/main/js/google-map.js"></script>
 	<script src="resources/main/js/main.js"></script>
+	
+	<!--모달 상세보기 -->
+
+	<div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">상세보기</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<div class="modal-body"></div> <!--내용 append -->
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+					<!--농업인& 관리자 수정-->
+					<a href="#" onclick="fnUpdate('${upFarm.into_no}')" class="btn btn-primary" data-toggle="modal">수정</a>
+					
+					<%-- <button class="btn btn-primary" id="firstUpdate" onclick="fnUpdate('${upFarm.into_no}')" type="button" data-dismiss="modal">수정</button> --%>
+					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--모달 수정화면 -->
+	
+	<div class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<div class="modal-body"></div> <!--내용 append -->
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+					<!--농업인& 관리자 수정-->
+					<button class="btn btn-primary" type="button" data-dismiss="modal">저장</button>
+					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 </body>
 </html>
