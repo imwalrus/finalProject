@@ -25,6 +25,9 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="resources/main/js/jquery.min.js"></script>
+<script src="resources/main/js/jquery.min.js"></script>
+<script src="resources/main/js/popper.min.js"></script>
+<script src="resources/main/js/bootstrap.min.js"></script>
 </head>
 <body class="goto-here">
 
@@ -48,10 +51,8 @@
   
   
   
-	<script src="resources/main/js/jquery.min.js"></script>
+
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="resources/main/js/popper.min.js"></script>
-	<script src="resources/main/js/bootstrap.min.js"></script>
 	<script src="resources/main/js/jquery.easing.1.3.js"></script>
 	<script src="resources/main/js/jquery.waypoints.min.js"></script>
 	<script src="resources/main/js/jquery.stellar.min.js"></script>
