@@ -27,8 +27,13 @@
 					<li class="nav-item">
 						<a href="education" class="nav-link">귀농교육</a>
 					</li>
-					<li class="nav-item">
-						<a href="intoTheFarm" class="nav-link">농촌속으로</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="intoTheFarm" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농촌속으로</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown02">
+							<a class="dropdown-item" href="getFarmList">체험신청</a>
+							<a class="dropdown-item" href="insertFarm">체험등록</a>
+							<a class="dropdown-item" href="">농촌속으로 문의</a>
+						</div>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>

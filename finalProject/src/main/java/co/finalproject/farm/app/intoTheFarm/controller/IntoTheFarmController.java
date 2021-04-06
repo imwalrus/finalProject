@@ -28,19 +28,19 @@ public class IntoTheFarmController {
 	@RequestMapping("/getFarmList")
 	public String getFarmList(IntoTheFarmVO vo, Model model) {
 		model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
-		return "intoTheFarm";
+		return "intoTheFarm/intoTheFarm";
 	}
 	
 	//단건조회
 	@RequestMapping("/getSearchFarm")
 	public String getSearchFarm(IntoTheFarmVO vo, Model model) {
 		model.addAttribute("getlist",intoTheFarmMapper.getSearchFarm(vo));
-		return "applyModal";
+		return "notiles/intoTheFarm/applyModal";
 	}
 	//등록
 	@GetMapping("/insertFarm") //등록 페이지
 	public String insertFarm(IntoTheFarmVO vo,Model model) {
-		return "insertIntoFarm";
+		return "notiles/intoTheFarm/insertIntoFarm";
 	}
 	
 	
@@ -69,7 +69,7 @@ public class IntoTheFarmController {
 	@GetMapping("/updateFarm") //수정 페이지
 	public String updateFarm(IntoTheFarmVO vo, Model model) {
 		model.addAttribute("upFarm", intoTheFarmMapper.getSearchFarm(vo));
-		return "updateModal";
+		return "notiles/intoTheFarm/updateModal";
 	}
 	
 	@PostMapping("/updateFarm") //수정
