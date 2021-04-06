@@ -148,7 +148,7 @@
 		<div class="row mt-4 d-flex align-items-center">
 			<div class="col-sm-6 order-md-2 text-right">
 				<!-- 주문 버튼 -->
-				<a href="#" class="btn btn-success mb-4 btn-lg pl-5 pr-5">주문하기</a>
+				<a href="checkout" class="btn btn-success mb-4 btn-lg pl-5 pr-5">주문하기</a>
 			</div>
 			<div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
 				<a href="shop">

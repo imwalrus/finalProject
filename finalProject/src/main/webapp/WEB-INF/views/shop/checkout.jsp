@@ -27,6 +27,61 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+	function execPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var addr = ''; // 주소 변수
+						var extraAddr = ''; // 참고항목 변수
+
+						//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							addr = data.roadAddress;
+						} else { // 사용자가 지번 주소를 선택했을 경우(J)
+							addr = data.jibunAddress;
+						}
+
+						// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+						if (data.userSelectedType === 'R') {
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraAddr += (extraAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraAddr !== '') {
+								extraAddr = ' (' + extraAddr + ')';
+							}
+							// 조합된 참고항목을 해당 필드에 넣는다.
+							document.getElementById("sample6_detailAddress").value = extraAddr;
+
+						} else {
+							document.getElementById("sample6_detailAddress").value = '';
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('sample6_postcode').value = data.zonecode;
+						document.getElementById("sample6_address").value = addr;
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById("sample6_detailAddress")
+								.focus();
+					}
+				}).open();
+	}
+</script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="ftco-navbar">
 	<div class="container">
@@ -64,75 +119,59 @@
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
 				<form action="#" class="billing-form">
-					<h3 class="mb-4 billing-heading">Billing Details</h3>
+					<h3 class="mb-4 billing-heading">상세 주문</h3>
 					<div class="row align-items-end">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="firstname">Firt Name</label>
-								<input type="text" class="form-control" placeholder="">
+								<label for="ID">ID</label>
+								<input type="text" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="lastname">Last Name</label>
-								<input type="text" class="form-control" placeholder="">
+								<label for="name">이름</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="phone">연락처</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="emailaddress">이메일</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="zipcode">우편번호</label>
+								<input type="text" class="form-control" id="sample6_postcode">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="zipcodeSearch">
+									<button class="btn btn-primary" onclick="execPostcode()">우편번호 찾기</button>
+								</label>
 							</div>
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="country">State / Country</label>
-								<div class="select-wrap">
-									<div class="icon">
-										<span class="ion-ios-arrow-down"></span>
-									</div>
-									<select name="" id="" class="form-control">
-										<option value="">France</option>
-										<option value="">Italy</option>
-										<option value="">Philippines</option>
-										<option value="">South Korea</option>
-										<option value="">Hongkong</option>
-										<option value="">Japan</option>
-									</select>
-								</div>
+								<label for="address">주소</label>
+								<input type="text" class="form-control" id="sample6_address">
 							</div>
 						</div>
 						<div class="w-100"></div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label for="streetaddress">Street Address</label>
-								<input type="text" class="form-control" placeholder="House number and street name">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-							</div>
-						</div>
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="towncity">Town / City</label>
-								<input type="text" class="form-control" placeholder="">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="postcodezip">Postcode / ZIP *</label>
-								<input type="text" class="form-control" placeholder="">
-							</div>
-						</div>
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="phone">Phone</label>
-								<input type="text" class="form-control" placeholder="">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="emailaddress">Email Address</label>
-								<input type="text" class="form-control" placeholder="">
+								<label for="detailAddress">상세 주소</label>
+								<input type="text" class="form-control" id="sample6_detailAddress">
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -205,11 +244,10 @@
 					</div>
 				</div>
 			</div>
-			<!-- .col-md-8 -->
 		</div>
 	</div>
 </section>
-<!-- 주문 페이지 END -->
+<!-- 결제 페이지 END -->
 <!-- 푸터 START -->
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	<div class="container py-4">

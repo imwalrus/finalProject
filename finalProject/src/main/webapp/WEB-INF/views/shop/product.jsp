@@ -133,7 +133,7 @@
 					<p>
 						<!-- 구매 url 추가하기★ -->
 						<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
-						<a href="cart.html" class="btn btn-primary py-3 px-5">바로구매</a>
+						<a href="checkout" class="btn btn-primary py-3 px-5">바로구매</a>
 					</p>
 				</div>
 			</div>

@@ -164,4 +164,12 @@ public class ShopController {
 		shopMapper.deleteCart(vo);
 		return "redirect:/cart";
 	}
+	
+	// 주문페이지
+	@GetMapping("/checkout")
+	public String checkout(CartVO vo, Model model) {
+		model.addAttribute("order", shopMapper.getCart(vo));
+		return "shop/checkout";
+	}
+	
 }
