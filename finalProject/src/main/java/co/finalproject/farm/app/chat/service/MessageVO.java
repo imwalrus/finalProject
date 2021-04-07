@@ -17,14 +17,5 @@ public class MessageVO {
 	private Date msg_readtime;
 	private String msg_type;
 	private int chatroom_no;
-	private String user_id_one;
-	private String user_id_two;
-	
-	public static MessageVO convertMessage(String source) {
-		MessageVO message = new MessageVO();
-		Gson gson = new Gson();
-		message = gson.fromJson(source,  MessageVO.class);
-		return message;
-	}
 	
 }

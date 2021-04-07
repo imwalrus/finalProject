@@ -51,7 +51,7 @@
 <!-- 채팅 팝업 처음 켰을때 리스트 띄우기 -->
 <select id = "getChatRoomList" resultType = "ChatRoomVO"><!-- 대화리스트 불러오기 -->
 	SELECT * FROM CHATROOM WHERE   USER_ID_ONE = #{user_id_one} 
-								OR USER_ID_TWO = #{user_id_two} 
+								OR USER_ID_TWO = #{user_id_one} 
 </select>
 
 <!-- 최근 메세지 -->
@@ -59,7 +59,7 @@
 	SELECT * FROM MESSAGE 
 			 WHERE CHATROOM_NO = #{chatroom_no} 
 			 AND ROWNUM <![CDATA[<=]]>1
-			 ORDER BY MESSAGE_ID DESC
+			 ORDER BY MESSAGE_ID
 </select>
 
 <update id ="updateReadTime1" parameterType="MessageVO">

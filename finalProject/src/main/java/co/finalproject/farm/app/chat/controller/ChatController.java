@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import co.finalproject.farm.app.chat.service.ChatRoomVO;
 import co.finalproject.farm.app.chat.service.ChatService;
 import co.finalproject.farm.app.chat.service.MessageVO;
@@ -48,18 +47,10 @@ public class ChatController {
 			return msgList;
 		}
 		
-		@RequestMapping("/getChatRoom")
+		@RequestMapping("/getChatRoomList")
 		@ResponseBody
-		public String getChatRoom(ChatRoomVO vo) {
-			//해당하는 아이디에 대해 
-			ChatRoomVO crVO = chatService.getChatRoom(vo);
-			String result = null;
-			if(crVO != null) {
-				result = "ok";
-			} else {
-				result = "no";
-				chatService.insertChatRoom(vo);
-			}
-			return result;
+		public List<ChatRoomVO> getChatRoomList(ChatRoomVO vo) {
+			List<ChatRoomVO> crVO = chatService.getChatRoomList(vo);
+			return crVO;
 		}
 }

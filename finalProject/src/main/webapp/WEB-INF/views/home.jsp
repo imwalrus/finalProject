@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	//임시로 작성하는 채팅 팝업 보기	
 	function showChat(){
-		var pop = window.open("showChat","chat","width=1220,height=710,resizable=no");
+		var pop = window.open("showChat","chat","width=1220,height=690px,resizable=no,scrollbars=no;");
 	}
 	
 

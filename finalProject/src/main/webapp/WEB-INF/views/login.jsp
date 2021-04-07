@@ -59,11 +59,11 @@
 					<span class="txt1 p-b-11">
 						비밀번호
 					</span>
-					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required" required="required">
+					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="user_pwd" >
+						<input class="input100" type="password" name="user_pwd" required="required">
 						<span class="focus-input100"></span>
 					</div>
 					
