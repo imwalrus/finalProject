@@ -8,17 +8,17 @@ public class PageController {
 	
 	@GetMapping("/login")
 	public String loginMove() {
-		return "login";
+		return "nofooter/login";
 	}
 
 	@GetMapping("/admin")
 	public String adminMove() {
-		return "admin/admin";
+		return "adminTiles/admin/admin";
 	}
 	
 	@GetMapping("/myPage")
 	public String myPageMove() {
-		return "myPage";
+		return "mypageTiles/mypage/myPage";
 	}
 
 	@GetMapping("/notice")

@@ -21,7 +21,6 @@ public class ShopVO {
 	private String pro_name;
 	private String pro_price;
 	private String pro_dcompany;
-	private String pro_dcost;
 	private String pro_quantity;
 	private String pro_condition;
 	private String pro_content;

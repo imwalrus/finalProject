@@ -8,7 +8,6 @@ public class CartVO {
 	private String user_id;
 	private String pro_no;
 	private String pro_name;
-	private String pro_dcost;
 	private String pro_content;
 	private String pro_filename;
 	private String cart_count;
