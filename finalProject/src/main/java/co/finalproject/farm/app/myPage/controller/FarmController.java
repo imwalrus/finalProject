@@ -73,7 +73,7 @@ public class FarmController {
 	public String updateFarmProc(FarmVO vo) {
 		logger.debug(vo.toString());
 		farmMapper.updateFarm(vo);
-		return "redirect:getFarm?farm_no=" + vo.getFarm_no();
+		return "redirect:getFarmList";
 	}
 
 //삭제

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmMapper">
+
+<!-- 전체조회 -->
+	<select id="getFarmList" resultType="FarmVO">
+			SELECT *
+			FROM FARM
+	</select>
+	
+<!-- 단건조회 -->
+
+	<select id="getFarm" resultType="FarmVO"
+						parameterType="FarmVO">
+						
+				SELECT *
+				FROM FARM
+				WHERE farm_no=#{farm_no}						
+	</select>
+<!-- 등록 -->
+	<insert id="insertFarm" parameterType="FarmVO">	
+		INSERT INTO farm
+            (
+            FARM_NO
+            ,FARM_NAME
+            ,FARM_ADR
+            ,FARM_AREA
+            ,FARM_CONTENT
+            ,USER_ID
+            )
+    VALUES(
+            ( select nvl(max(farm_no),0)+1 from farm )
+            ,#{farm_name }
+            ,#{farm_adr }
+            ,#{farm_area }
+            ,#{farm_content }
+            ,#{user_id }
+            )	
+	</insert>
+	
+<!-- 수정 -->
+	<update id="updateFarm" parameterType="FarmVO">
+			UPDATE farm 
+					SET 
+						FARM_NAME = #{farm_name}
+						,FARM_ADR = #{farm_adr }
+						,FARM_AREA = #{farm_area }
+						,FARM_CONTENT=#{farm_content }
+					WHERE FARM_no=#{farm_no}
+			
+	</update>
+
+
+<!-- 삭제 -->
+	<delete id="deleteFarm" >
+		DELETE FROM FARM
+		WHERE farm_no = #{farm_no}
+	</delete>
+</mapper>

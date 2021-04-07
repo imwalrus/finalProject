@@ -10,7 +10,6 @@ public interface FarmMapper {
 	
 	public FarmVO getFarm(FarmVO vo);
 	
-//	public List<FarmVO> getFarm(FarmVO vo);
 	
 	public int insertFarm(FarmVO vo);
 	
