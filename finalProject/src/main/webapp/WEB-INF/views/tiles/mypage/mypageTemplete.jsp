@@ -59,7 +59,7 @@
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">판매내역</a></li>
+					        <li><a href="getSaleList">판매내역</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
