@@ -7,47 +7,101 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
+<!-- include summernote-ko-KR -->
+<script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
 <script>
-		/*모달*/
+ function cgsummernote(){
+	 $('#summernote')
+		.summernote(
+				{
+					height : 300,
+					minHeight : null,
+					maxHeight : null,
+					/* focus: true,  */
+					lang : 'ko-KR',
+					toolbar : [
+							// [groupName, [list of button]]
+							[ 'fontname', [ 'fontname' ] ],
+							[ 'fontsize', [ 'fontsize' ] ],
+							[ 'style',[ 'bold', 'italic', 'underline','strikethrough', 'clear' ] ],
+							[ 'color', [ 'forecolor', 'color' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'height', [ 'height' ] ],
+							[ 'insert', [ 'picture', 'link', 'video' ] ],
+							[ 'view', [ 'fullscreen', 'help' ] ] ],
+					fontNames : [ 'Arial', 'Arial Black','Comic Sans MS', 'Courier New', '맑은 고딕','궁서', '굴림체', '굴림', '돋움체', '바탕체' ],
+					fontSizes : [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30','36', '50', '72' ]
+				});
+ }
+		
+	</script>  
+<script>
+		/*모달-상세보기*/
 		function fngetSearchInfo(str) { //into_no 가지고 보냄
-			//event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-			/* $('#myUpdate').hide(); */
 			$('#myLargeModal .modal-body').load("getSearchFarm?into_no="+str);
 				$('#myLargeModal').modal('show');
 				$('#myUpdate').modal('hide'); 
-			/*만약 myUpdate를 누르면 수정폼이 보이게..*/
-			
 		}	
 		
 		function fnUpdate(str1){
-					 	$('#myUpdate .modal-body').load("updateFarm?into_no="+str1);
+					 	$('#myUpdate .modal-body').load("updateFarm?into_no="+str1,cgsummernote);
 						$('#myLargeModal').modal('hide');
 						$('#myUpdate').modal('show');
 				}
-		 
-		 /* function goupdate(str2){
-			 
-		 } */
 		
+		/*모달-수정*/
+		 function goupdate(str2){
+		     var into_no = $("input[name=into_no]").val();
+		     
+			$.ajax({
+				url:"updateFarm?into_no="+into_no,
+				type:"post",
+				data: {
+						  into_title:$("input[name=into_title]").val(),
+						  into_city:$("input[name=into_city]").val(),
+						  into_product:$("input[name=into_product]").val(),
+						  into_date:$("input[name=into_date]").val(),
+						  into_entry:$("input[name=into_entry]").val(),
+						  into_info:$("textarea[name=into_info]").val(),
+						  into_phone:$("input[name=into_phone]").val(),
+						  into_filename:$("input[name=into_filename]").val()
+						 },
+
+				success:function(response){
+					console.log("result:"+response);
+					 if(response != null){
+						alert("수정 완료");
+						location.reload();
+					} 
+				}
+			})
+		 }  
+		
+		/*모달-삭제*/
+		 function fnDelete(str3){
+			var into_no = $("input[name=into_no]").val();
+			
+			$.ajax({
+				url:"deleteFarm?into_no="+into_no,
+				type:"post",
+				data:into_no,
+				success:function(response){
+					console.log("result:"+response);
+					if(response != null){
+						alert("삭제 완료");
+						location.reload();
+					}
+				}
+		})
+	} 
+		 
 </script>
-<!-- <script type="text/javascript">
-//Bootstrap multiple modal
-	var count = 0; // 모달이 열릴 때 마다 count 해서  z-index값을 높여줌
-	$(document).on(
-			'show.bs.modal',
-			'.modal',
-			function() {
-				var zIndex = 1040 + (10 * count);
-				$(this).css('z-index', zIndex);
-				setTimeout(function() {
-					$('.modal-backdrop').not('.modal-stack').css('z-index',
-							zIndex - 1).addClass('modal-stack');
-				}, 0);
-				count = count + 1
-			});
-	
-</script> -->
+
 <style>
 .modal.modal-center {
   text-align: center;
@@ -101,18 +155,14 @@
 				<div class="modal-body"></div> <!--내용 append -->
 				
 					<!--농업인& 관리자 수정-->
-					
-					<%-- <button class="btn btn-primary" id="firstUpdate" onclick="fnUpdate('${upFarm.into_no}')" type="button" data-dismiss="modal">수정</button> --%>
-					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
 				</div>
 			</div>
 		</div>
 	
 	
 	<!--모달 수정화면 -->
-	<form id="updatefrm" method="post" action="updateFarm" >
+	
 	<div class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<!-- <div class="modal-dialog modal-dialog-centered"> -->
 		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -122,18 +172,11 @@
 					</button>
 				</div>
 				<div class="modal-body"></div> <!--내용 append -->
-				<div class="modal-footer">
-					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
-					<a class="btn btn-primary" href="#myLargeModal" data-bs-toggle="modal" role="button">Open #modal</a>
-					<!--농업인& 관리자 수정-->
-					<button class="btn btn-primary" type="button" data-dismiss="modal" onclick="goupdate('${upFarm.into_no}')">저장</button>
-					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
-				</div>
 			</div>
 		</div>
 	</div>
-	<!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#myLargeModal" role="button">Open #modal</a> -->
-	</form>
+	
+		
 	
 </body>
 </html>

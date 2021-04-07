@@ -69,7 +69,6 @@
 						INTO_ENTRY=#{into_entry},
 						INTO_FILENAME=#{into_filename},
 						INTO_INFO=#{into_info},
-					    USER_ID=#{user_id},
 					    INTO_CITY=#{into_city}
 	WHERE INTO_NO=#{into_no}				    
 	</update>
