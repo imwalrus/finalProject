@@ -14,9 +14,9 @@
 			data: {"user_id_one":"${user_id}"},
 			dataType: 'json',
 			success:function(result){
-				if(result != null){
 					console.log(result);
-/* 					$(".col-md-4 border-right").append(
+/* 				if(result != null){
+ 					$(".col-md-4 border-right").append(
 							$("<div class='friend-drawer friend-drawer--onhover'>"
 							+'<div class="text">'
 							+'<h6>'+  +'</h6>'
@@ -32,7 +32,7 @@
 							+'<p class="text-muted">'+ +'</p></div>'
 				      	 	+'<i class="material-icons">exit</i>'
 				   			+'</div><hr>')
-				} */
+				}  */
 			}
 		});
 					
