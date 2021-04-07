@@ -14,25 +14,41 @@
 			data: {"user_id_one":"${user_id}"},
 			dataType: 'json',
 			success:function(result){
-					console.log(result);
-/* 				if(result != null){
- 					$(".col-md-4 border-right").append(
-							$("<div class='friend-drawer friend-drawer--onhover'>"
-							+'<div class="text">'
-							+'<h6>'+  +'</h6>'
-							+'<p class="text-muted">'+ +'</p></div>'
-				      	 	+'<i class="material-icons">exit</i>'
-				   			+'</div><hr>')
-					)
+ 				if(result != null){
+ 					for(var i = 0; i<result.length; i++){
+						if(result[i].user_id_one =="${user_id}"){
+		 					$(".chatList").append(
+									$("<div class='friend-drawer friend-drawer--onhover'>"
+									+"<img class='profile-image' src='https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg'>"
+									+'<div class="text">'
+									+'<h6>'+ result[i].user_id_two +'</h6>'
+									+'<p class="text-muted" data-no="'+result[i].chatRoom_no+'"></p></div>'
+						      	 	+'<i class="material-icons">logout</i>'
+						   			+'</div><hr>')
+							)
+						} else {
+		 					$(".chatList").append(
+									$("<div class='friend-drawer friend-drawer--onhover'>"
+									+"<img class='profile-image' src='https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg'>"
+									+'<div class="text">'
+									+'<h6>'+ result[i].user_id_one +'</h6>'
+									+'<p class="text-muted" data-no="'+result[i].chatRoom_no+'"></p></div>'
+						      	 	+'<i class="material-icons">logout</i>'
+						   			+'</div><hr>')
+							)
+						}
+ 					}
 				} else {
-					$(".col-md-4 border-right").append(
+					$(".chatList").append(
 							$("<div class='friend-drawer friend-drawer--onhover'>"
+							+"<img class='profile-image' src='https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg'>"
 							+'<div class="text">'
 							+'<h6>'+  +'</h6>'
 							+'<p class="text-muted">'+ +'</p></div>'
 				      	 	+'<i class="material-icons">exit</i>'
 				   			+'</div><hr>')
-				}  */
+				   	)		
+				}  
 			}
 		});
 					
@@ -161,12 +177,12 @@
   <!-- 대화리스트 받는 화면 시작 -->
     <div class="col-md-4 border-right">
       <div class="settings-tray">
-      <img class="profile-image" src="resources/chat/images/chat1.png" alt="Profile img">
-        <span class="settings-tray--right">
-          <i class="material-icons">cached</i>
-          <i class="material-icons">message</i>
-          <i class="material-icons">menu</i>
-        </span>
+	      <img class="profile-image" src="resources/chat/images/chat1.png" alt="Profile img">
+	        <span class="settings-tray--right">
+	          <i class="material-icons">cached</i>
+	          <i class="material-icons">message</i>
+	          <i class="material-icons">menu</i>
+	        </span>
       </div>
       <div class="search-box">
         <div class="input-wrapper">
@@ -174,7 +190,9 @@
           <input placeholder="Search here" type="text" >
         </div>
       </div>
-      <!-- 채팅 리스트 동적생성...? -->
+      <div class="chatList">
+      	<!-- 대화리스트 동적생성... -->
+      </div>
       </div>
     <!-- 대화리스트 받는 화면 끝 -->
     <!-- 대화 보내고 받는 화면 시작 -->
