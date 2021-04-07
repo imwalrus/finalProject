@@ -101,6 +101,7 @@
 				USER_ID = #{user_id}
 			</if>
 		</where>
+	  ORDER BY PRO_NO DESC
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<!-- 상품 등록 -->

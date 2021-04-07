@@ -96,12 +96,13 @@ public class ShopController {
 		// 첨부 파일 처리
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
-
+		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
+		
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
 			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(
-					new File("C:\\Dev\\workspace.dev\\test\\src\\main\\webapp\\resources\\main\\images", filename));
+					new File(path, filename));
 			pro_filename += rename.getName();
 			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
 		} else if (uploadFile.getOriginalFilename() == null && uploadFile.getOriginalFilename() == "") {
@@ -114,13 +115,14 @@ public class ShopController {
 
 	// 상품 수정
 	@PostMapping("/updateProduct")
-	public String updateProduct(ShopVO vo, Model model) throws IOException {
+	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
+		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
 			File rename = FileRenamePolicy.rename(
-					new File("C:\\Dev\\workspace.dev\\test\\src\\main\\webapp\\resources\\main\\images", filename));
+					new File(path, filename));
 			pro_filename += rename.getName();
 			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
 		}

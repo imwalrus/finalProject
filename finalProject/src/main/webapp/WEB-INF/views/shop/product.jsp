@@ -112,7 +112,6 @@
 							<c:if test="${prod.user_id ne user_id}">
 								<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
 							</c:if>
-							<a href="checkout" class="btn btn-primary py-3 px-5">바로구매</a>
 						</p>
 					</div>
 				</div>
