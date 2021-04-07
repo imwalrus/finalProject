@@ -17,6 +17,10 @@
 			  }
 			event.stopPropagation();
 		});
+		
+		 $('#sendBtn').click(function() {
+			 sendMessage(); 
+		 }); 
 	})
 	
 	var sock;
@@ -33,26 +37,28 @@
 	}
 	
 	//메세지 전송
+	//message에 담을 값 전역변수 선언하고 보내기
+	var sendMessage={};
 	function sendMessage(){
 		var msg = $('#message').val();
+		var time = getTimeStamp();
 		if(msg != ""){
-			const data = {
-					"msg_type" : "CHAT",
-					"msg_sender" : "${user_id}",
-					"msg_receiver" : "",
-					"msg_content": msg,
-					"chatroom_no" : ""  };
-			
+			sendMessage.msg_type ="CHAT"; 
+			sendMessage.msg_sender="${user_id}";
+			sendMessage.msg_content=msg;
+			sendMessage.chatroom_no = "";
+			sendMessage.msg_receiver="";
+			sendMessage.msg_sendtime= time;
+			console.log("전송할 msg =====>" + sendMessage);
 			//json 타입으로 변환하여 메세지 전달
 			//전송 후 value 값 초기화
-			msg = JSON.stringify(data);
+			msg = JSON.stringify(sendMessage);
 			sock.send(msg); 
 			$('#message').val("");
-			appendMessage(data);
+			appendMessage(sendMessage);
 		}
 
 	}
-	
 	//메세지 수신
 	function onMessage(evt){
 		var receive = evt.data.split(",");
@@ -68,22 +74,7 @@
 	function onError(evt){
 		console.log(evt);
 	}
-	
-    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
-    function CheckLR(data) {
-        // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
-        const LR = (data.user_id != ${user_id}) ? "left" : "right";
-         // 메세지 추가
-        appendMessageTag(LR, data.email, data.message, data.name);
-    }
-     
-    // * 3 메세지 태그 append
-    function appendMessageTag(LR_className, email, message, name) {
-        const chatLi = createMessageTag(LR_className, email, message, name);
-        $('div.chatMiddle:not(.format) ul').append(chatLi);
-        // 스크롤바 아래 고정
-        $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
-    }	
+		
 	
 	function getTimeStamp() {
 	  var d = new Date();
@@ -104,18 +95,7 @@
 		 if(msg == ''){
 			 return false;
 		 }else{
-		 var t = getTimeStamp();
-		
-/* 		 $.ajax({
-			 url:,
-			 type:,
-			 dataType:"json",
-			 data:{
-				 chatroom
-			 }
-		 }) */
-		 
-	
+			 var t = getTimeStamp();
 		 }
 	}
 	
@@ -132,9 +112,7 @@
 	}
 	
 
-	 $('#sendBtn').click(function() {
-		 send(); 
-	 }); 
+
 </script>
 </head>
 <body>
@@ -217,12 +195,16 @@
       </div>
     </div>
     <!-- 대화 보내고 받는 화면 끝 -->
-    <form class="hideForm">
-<%--     	<input type="hidden" value="${chatRoomVO. }"> --%>
-    	<input type="hidden" value="">
-    	<input type="hidden" value=""> 
-    	<input type="hidden" value="">
-    </form>
+    <c:if test="${room ne null}" >
+	    <form class="hideForm">
+     		<input type="hidden" id="msg_type" value="">
+	    	<input type="hidden" id="msg_sender" value="">
+	    	<input type="hidden" id="msg_receiver" value=""> 
+	    	<input type="hidden" id="chatroom_no" value="">
+	    </form>
+    </c:if>
+    
+
 
 </div>
 </div> <!-- end of container -->
