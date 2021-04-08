@@ -1,4 +1,4 @@
-package co.finalproject.farm.app.myPage.controller;
+package co.finalproject.farm.common;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,5 +38,4 @@ public class FileRenamePolicy {
 	      return false;
 	    }
 	  }
-
 }

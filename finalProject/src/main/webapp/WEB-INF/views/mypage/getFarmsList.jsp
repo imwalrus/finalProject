@@ -20,7 +20,7 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<style>
+<!-- <style>
 .table{
 	text-align: center;
 }
@@ -30,6 +30,20 @@
     color: #37474f;
     background: #e3f1d4 !important;
     text-transform: uppercase;
+}
+
+</style> -->
+<style>
+
+.table{
+min-width:100% !important;
+}
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
+.table {
+	text-align: center;
 }
 
 </style>
@@ -95,7 +109,7 @@
 									</div>
 									<div class="col-md-10" align="center">
 										<button type="submit" class="btn  btn-outline-success"
-											onclick="location.href='insertFarm'">등록</button>
+											onclick="location.href='insertFarms'">등록</button>
 									</div>
 								</div>
 								<!-- [ Contextual-table ] end -->
@@ -134,20 +148,20 @@
 		function deleteAlert(str) {
 			var yn = confirm("정말 삭제할까요?");
 			if (yn) {
-				location.href = "deleteFarm?farm_no=" + str;
+				location.href = "deleteFarms?farm_no=" + str;
 			} else {
 				alert("삭제하지 못하였습니다.  ");
 			}
 		}
 
 		function fnfarmView(str) {
-			$('#farmCenter .modal-content').load("getFarm?farm_no=" + str);
+			$('#farmCenter .modal-content').load("getFarms?farm_no=" + str);
 			$('#farmCenter').modal();
 
 		}
 		
 		function fnfarmUpdate(str) {
-			$('#farmCenter .modal-content').load("updateFarm?farm_no=" + str);
+			$('#farmCenter .modal-content').load("updateFarms?farm_no=" + str);
 			$('#farmCenter').modal();
 
 		}

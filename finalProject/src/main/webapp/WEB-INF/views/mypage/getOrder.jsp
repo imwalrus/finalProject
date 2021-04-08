@@ -20,16 +20,17 @@
 <script src="resources/admin/js/plugins/bootstrap.min.js"></script>
 <script src="resources/admin/js/ripple.js"></script>
 <script src="resources/admin/js/pcoded.min.js"></script>
+
 <script type="text/javascript">
 $.ajax({
-		url:"getOrderView",
-		data: { order_no : ${olist.order_no } },
+		url:"ajaxgetOrder",
+		data:  {order_no :  1 },
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
 				$("#orderview").append(
 						"<tr><td>" + response[i].order_no  + "</td><td>"
-						+ response[i].orderlist_pro_name + "</td><td>"
+						+ response[i].pro_no + "</td><td>"
 						+ response[i].orderlist_pro_count + "</td><td>"
 						+ response[i].orderlist_pro_price + "</td></tr>" 
 						);

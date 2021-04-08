@@ -22,7 +22,7 @@
 <body class="">
 <tiles:insertAttribute name="header"/>
 
-	<!-- [ navigation menu ] start -->https://github.com/shehjkim/SpringBanks.git
+	<!-- [ navigation menu ] start -->
 	<nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
 			<div class="navbar-content scroll-div " >
@@ -51,7 +51,7 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="bc_alert.html">회원정보수정</a></li>
 					        <li><a href="memberOut">회원탈퇴</a></li>
-					        <li><a href="getFarmList">나의농지</a></li>
+					        <li><a href="getFarmsList">나의농지</a></li>
                             <li><a href="insertFarmer">농업인 권한 신청</a></li>
 					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>
 					    </ul>
@@ -67,7 +67,7 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList">구매내역</a></li>
-					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
+					        <li><a href="getpuchasInqList?user_id=${user_id} }">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>

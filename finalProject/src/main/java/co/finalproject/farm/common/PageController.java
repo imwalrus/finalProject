@@ -36,15 +36,9 @@ public class PageController {
 		return "intoTheFarm";
 	}
 
-	@GetMapping("/shop")
-	public String shopMove() {
-		return "shop";
-	}
-
 	@GetMapping("/community")
 	public String communityMove() {
 		return "community";
 	}
-	
 
 }

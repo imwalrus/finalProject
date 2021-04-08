@@ -20,12 +20,20 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
- <style>
- table{
- text-align: center;
-  }
- 
- </style>  
+<style>
+
+.table{
+min-width:100% !important;
+}
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
+.table {
+	text-align: center;
+}
+
+</style>
 </head>
 <body>
 	    <div class="pcoded-main-container">
@@ -33,7 +41,7 @@
             <section class="pcoded-main-container">
                 <div class="col-md-9" align="center">
                     <div class="card">
-                        <form id="frm" name="frm" action="insertFarm" method="post">
+                        <form id="frm" name="frm" action="insertFarms" method="post">
                             <h3 align="center">
                                 <input type="text" class="form-control form-control-lg" id="farm_name" name="farm_name"
                                     placeholder="농장이름을 입력하세요">

@@ -5,13 +5,27 @@
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<style>
+<!-- <style>
 .table.td {
   width:50px !important;
   height:25px !important;
   font-size:20px !important;
   text-align: center;
 }
+</style> -->
+<style>
+
+.table{
+min-width:100% !important;
+}
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
+.table {
+	text-align: center;
+}
+
 </style>
 </head>
 
@@ -25,7 +39,7 @@
 			<img class="img-fluid card-img-top"
 				src="resources/admin/images/slider/img-slide-1.jpg" alt="Card image cap">
 			<div class="card-body">
-			<form id="frm" name="frm" action="updateFarm" method="post">
+			<form id="frm" name="frm" action="updateFarms" method="post">
 			
 				<!-- 숨겨진 유저 ID -->
 				<input type="hidden" name="userId" value="${ufarm.user_id } }">

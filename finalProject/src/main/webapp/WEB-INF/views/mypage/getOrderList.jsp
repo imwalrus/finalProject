@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../mypage/adminMenu.jsp" />
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -24,8 +24,7 @@
 
 <style type="text/css">
 table {
-	
-	text-align:center;
+	text-align: center;
 }
 
 .hide {
@@ -39,7 +38,6 @@ table {
 .item td {
 	cursor: pointer;
 }
-
 </style>
 </head>
 <body>
@@ -69,9 +67,8 @@ table {
 										<h2>구매 내역</h2>
 									</div>
 									<div class="card-body table-border-style">
-										<div class="table-responsive">
-										
-											<table class="table" id="recruit" align="center">
+										<div class="table-responsive">	
+											<table class="table" id="order" align="center">
 												<colgroup>
 													<col width="25%">
 													<col width="25%">
@@ -81,32 +78,18 @@ table {
 												<thead>
 													<tr class="table-success">
 														<th>주문일자/주문번호</th>
-														<th>주문상품</th>
-														<th>결제수단/총금액</th>
-														<th>주문상태/송장번호</th>
+														<th>결제수단</th>
+														<th>총금액</th>
+														<th>주문상태</th>
+														<th>구매자</th>
+														<th>송장번호</th>
 													</tr>
-												</thead>		
-												<c:forEach items="${list }" var="od">									
-													<tr id="item">
-														<td>${od.order_date }<br> 
-															<button type="button" class="btn  btn-primary btn-sm" onclick="getOrder('${od.order_no}')">${od.order_no }</button></td>
-														<td>주문상품</td>
-														<td>${od.order_payment}<br>
-															${od.order_totalprice }
-														</td>
-														<td>${od.order_condition }
-															<br><a href="#">${od.order_invoice}</a>
-														
-														</td>												
-													</tr>
-												</c:forEach>
+												</thead>
 											</table>
-											
 										</div>
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 
@@ -114,7 +97,7 @@ table {
 
 				</div>
 			</div>
-<!-- 상세모달시작 -->
+			<!-- 상세모달시작 -->
 			<div class="modal fade bd-example-modal-lg" id="getOrder"
 				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 				aria-hidden="true">
@@ -133,12 +116,38 @@ table {
 			<!-- 모달끝 -->
 		</div>
 	</section>
+
 	<script type="text/javascript">
-	
+
+/* 모달불러오기 */
 		function getOrder(str) {
 			$('#getOrder .modal-body').load("getOrder?order_no=" + str);
 			$('#getOrder').modal('show');
 		}
+		
+	$.ajax({
+			url:"ajaxgetOrderList",
+			data: "user_id=" + '${user_id}',
+			dataType: "json",
+			success: function (data) {
+			 	for(i=0; i<data.length; i++){ 
+					$("#order").append(
+						"<tr><td>" + data[i].order_date + "<br>" 
+						+ "<button type='button' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
+						+ data[i].order_payment + "</td><td>"
+						+ data[i].order_totalprice + "</td><td>"
+						+ data[i].order_condition  + "</td><td>"
+						+ data[i].user_id  + "</td><td>"
+						+ data[i].order_invoice +  + "</td></tr>"
+				); 
+			} 
+			
+		
+		
+	}
+ 			
+	});
+	
 	</script>
 </body>
 </html>

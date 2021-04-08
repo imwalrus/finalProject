@@ -21,6 +21,7 @@ import co.finalproject.farm.app.myPage.service.FarmVO;
 import co.finalproject.farm.app.myPage.service.puchasInqVO;
 import co.finalproject.farm.app.myPage.service.puchasReplyVO;
 import co.finalproject.farm.app.myPage.service.impl.PurchaseInqMapper;
+import co.finalproject.farm.common.FileRenamePolicy;
 import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
@@ -40,7 +41,7 @@ public class PurchaseInqController {
 	@RequestMapping("/getpuchasInqList")
 	public String getpuchasInqList(Model model) {
 		model.addAttribute("list", pciMapper.getpuchasInqList());
-		return "mypage/getpuchasInqList";
+		return "mypageTiles/mypage/getpuchasInqList";
 		
 	}
 	
@@ -76,7 +77,7 @@ public class PurchaseInqController {
 				
 			logger.debug(vo.toString());
 			pciMapper.insertpuchasInq(vo);
-			return "mypage/getpuchasInqList";
+			return "mypageTiles/mypage/getpuchasInqList";
 		}
 	
 

@@ -26,10 +26,10 @@ public class FarmController {
 	Logger logger = LoggerFactory.getLogger(FarmController.class);
 
 //전체조회
-	@RequestMapping("/getFarmList")
+	@RequestMapping("/getFarmsList")
 	public String getFarmList(Model model) {
 		model.addAttribute("farmlist", farmMapper.getFarmList());
-		return "mypage/getFarmList";
+		return "mypage/getFarmsList";
 	}
 
 ////단건조회
@@ -39,49 +39,49 @@ public class FarmController {
 //	}
 	
 //단건조회
-		@RequestMapping("/getFarm")
+		@RequestMapping("/getFarms")
 		public String getFarm(Model model, FarmVO vo) {
 			model.addAttribute("farm", farmMapper.getFarm(vo));		
-			return "mypage/getFarm";
+			return "notiles/mypage/getFarms";
 		}
 
 //등록폼
-	@RequestMapping("/insertFarm")
+	@RequestMapping("/insertFarms")
 	public String insertFarm(Model model) {
-		return "mypage/insertFarm";
+		return "mypage/insertFarms";
 	}
 
 //등록처리
-	@PostMapping("/insertFarm")
+	@PostMapping("/insertFarms")
 	public String insertFarmProc(FarmVO vo) {
 		logger.debug(vo.toString());
 		farmMapper.insertFarm(vo);
-		return "redirect:getFarmList";
+		return "redirect:getFarmsList";
 
 	}
 
 //수정
 	// 수정폼
-	@RequestMapping("/updateFarm")
+	@RequestMapping("/updateFarms")
 	public String updateFarm(Model model,FarmVO vo) {
 		model.addAttribute("ufarm", farmMapper.getFarm(vo));
-		return "mypage/updateFarm";
+		return "notiles/mypage/updateFarms";
 	}
 
 	// 수정처리
-	@PostMapping("/updateFarm")
+	@PostMapping("/updateFarms")
 	public String updateFarmProc(FarmVO vo) {
 		logger.debug(vo.toString());
 		farmMapper.updateFarm(vo);
-		return "redirect:getFarmList";
+		return "redirect:getFarmsList";
 	}
 
 //삭제
-	@GetMapping("/deleteFarm")
+	@GetMapping("/deleteFarms")
 	public String deleteFarm(FarmVO vo) {
 		farmMapper.deleteFarm(vo);
 
-		return "redirect:getFarmList";
+		return "redirect:getFarmsList";
 	}
 
 }

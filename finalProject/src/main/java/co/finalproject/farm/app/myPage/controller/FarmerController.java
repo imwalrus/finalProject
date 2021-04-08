@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import co.finalproject.farm.app.myPage.service.FarmVO;
 import co.finalproject.farm.app.myPage.service.FarmerVO;
 import co.finalproject.farm.app.myPage.service.impl.FarmerMapper;
+import co.finalproject.farm.common.FileRenamePolicy;
 
 @Controller
 public class FarmerController {

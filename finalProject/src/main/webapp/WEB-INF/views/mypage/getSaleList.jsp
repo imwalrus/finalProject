@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../mypage/adminMenu.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -20,7 +19,20 @@
     <link rel="stylesheet" href="resources/admin/css/style.css">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
-    
+<style>
+
+.table{
+min-width:100% !important;
+}
+.table tbody tr td {
+padding: 10px 8px !important;
+}
+
+.table {
+	text-align: center;
+}
+
+</style>    
 
 </head>
 <body>
@@ -48,29 +60,35 @@
                             <!-- [ Contextual-table ] start -->
                             <div class="col-md-9">
                                 <div class="card-header">
-                                    <h2>제목</h2>
+                                    <h2>판매 내역</h2>
                                 </div>
                                 <div class="table-responsive">
 									<table class="table" id="sale">
-										<tr>
+										<tr class="table-success">
 											<th>주문번호</th>
 											<th>판매제품</th>
 											<th>수량</th>
 											<th>결제금액</th>
 											<th>결제수단</th>
 											<th>구매자</th>
+											<th>주문상태</th>
 											<th>송장번호등록</th>
+											
 										</tr>
-										<tr>
-										<td>${sale.order_no }</td>
-										<td>${sale.orderlist_pro_name}</td>
-										<td>${sale.orderlist_pro_count}</td>
-										<td>${sale.account}</td>
-										<td>${sale.order_payment}</td>
-										<td>${sale.client }</td>
-										<td><button type="button" class="btn  btn-outline-danger btn-sm" 
-																	onclick="delivery('${order_no }')">송장번호</button>										
-										</tr>								
+										<c:forEach items="${sale }" var="sa">
+											<tr>
+												<td>${sa.order_no }
+												<td>${sa.orderlist_pro_name}</td>
+												<td>${sa.orderlist_pro_count}</td>
+												<td>${sa.account}</td>
+												<td>${sa.order_payment}</td>
+												<td>${sa.client }</td>
+												<%-- <td>${sa.order_condition } --%>
+												<td><button type="button" class="btn  btn-outline-danger btn-sm" 
+																	onclick="invoiceUp('${sa.order_no }')">송장번호</button>										
+												</td>
+											</tr>
+										</c:forEach>								
 									</table>
                                 </div>
                                 <!-- [ Contextual-table ] end -->
@@ -86,8 +104,37 @@
 
             </div>
         </div>
+        
+        
+        
+        <!-- 송장번호시작 모달 -->
+			<div class="modal fade bd-example-modal-lg" id="invoiceUp"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" type="button" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+					</div>
+				</div>
+			</div>
+		<!-- 모달끝 -->
 </div>
 </section>
+<script type="text/javascript">
+function pQNAview(str) {
+	$('#invoiceUp .modal-body').load("updateOrder?order_no=" + str);
+	$('#invoiceUp').modal('show');
 
+
+}
+
+
+</script>
 </body>
 </html>
