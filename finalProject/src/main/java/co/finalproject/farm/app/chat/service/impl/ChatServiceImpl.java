@@ -43,7 +43,7 @@ public class ChatServiceImpl implements ChatService {
 		return result;
 	}
 
-	public List<Map<String,Object>> getMessageList(MessageVO vo) {
+	public List<MessageVO> getMessageList(MessageVO vo) {
 		return chatDAO.getMessageList(vo);
 	}
 

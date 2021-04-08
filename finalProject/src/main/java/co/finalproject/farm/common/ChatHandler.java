@@ -70,7 +70,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		MessageVO msgVO = objectMapper.readValue(msg, MessageVO.class);
 		
 		ChatRoomVO roomVO = new ChatRoomVO();
-		roomVO.setUser_id_one(msgVO.getMsg_recevier());
+		roomVO.setUser_id_one(msgVO.getMsg_receiver());
 		roomVO.setUser_id_two(msgVO.getMsg_sender());
 		
 		ChatRoomVO room = new ChatRoomVO();
@@ -87,11 +87,11 @@ public class ChatHandler extends TextWebSocketHandler {
 		}
 		
 		String sm = msgVO.getMsg_sender()+","
-				+ msgVO.getMsg_recevier()+","
+				+ msgVO.getMsg_receiver()+","
 				+ msgVO.getMsg_content()+","
 				+ msgVO.getMsg_sendtime();
 		
-		WebSocketSession rs = users.get(msgVO.getMsg_recevier());
+		WebSocketSession rs = users.get(msgVO.getMsg_receiver());
 		if(rs != null) {
 			rs.sendMessage(new TextMessage(sm));
 		}
@@ -100,7 +100,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		//DB에 message insert
 		MessageVO insertVO = new MessageVO();
 		insertVO.setMsg_sender(msgVO.getMsg_sender());
-		insertVO.setMsg_recevier(msgVO.getMsg_recevier());
+		insertVO.setMsg_receiver(msgVO.getMsg_receiver());
 		insertVO.setMsg_content(msgVO.getMsg_content());
 		insertVO.setMsg_sendtime(msgVO.getMsg_sendtime());
 		insertVO.setChatroom_no(msgVO.getChatroom_no());

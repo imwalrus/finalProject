@@ -37,13 +37,15 @@ public class ChatController {
 
 		@RequestMapping("/getMessageList")
 		@ResponseBody
-		public List<Map<String,Object>> getMessageList(MessageVO vo,Model model) {
+		public  List<MessageVO> getMessageList(MessageVO vo) {
+			System.out.println("vo=======================================> " + vo);
 			//메세지 list 불러오기 
-			List<Map<String,Object>> msgList = chatService.getMessageList(vo);
+			List<MessageVO> msgList = chatService.getMessageList(vo);
 			//메세지 리스트 불러오면서 해당하는 chatroom에 읽지않은 message 읽은 시간 update
-			if(msgList != null) {
-				chatService.updateReadTime1(vo);
-			}
+				if(msgList != null) { 
+					chatService.updateReadTime1(vo); 
+				}
+	
 			return msgList;
 		}
 		
