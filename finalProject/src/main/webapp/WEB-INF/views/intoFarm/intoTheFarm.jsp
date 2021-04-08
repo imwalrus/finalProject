@@ -171,7 +171,7 @@
 	
 	
 	<!--모달 수정화면 -->
-	
+	<!--  -->
 	<div style="overflow: scroll; " class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
