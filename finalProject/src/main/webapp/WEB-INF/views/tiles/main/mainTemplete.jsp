@@ -50,7 +50,7 @@
   
   
   
-
+<!-- 	<script src="resources/main/js/jquery.min.js"></script> -->
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/main/js/jquery.easing.1.3.js"></script>
 	<script src="resources/main/js/jquery.waypoints.min.js"></script>

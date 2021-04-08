@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper">
+	<!--전체조회 -->
+	
+	<select id="getFarmList" resultType="IntoTheFarmVO">
+	SELECT INTO_NO,
+		   INTO_TITLE,
+		   INTO_PHONE,
+		   INTO_PRODUCT,
+		   INTO_DATE,
+		   INTO_ENTRY,
+		   INTO_INFO,
+		   USER_ID,
+		   INTO_CITY
+	FROM INTOFARM
+	</select>
+	
+	<!--단건조회 -->
+	<select id="getSearchFarm" resultType="IntoTheFarmVO">
+	SELECT INTO_NO,
+		   INTO_TITLE,
+		   INTO_PHONE,
+		   INTO_PRODUCT,
+		   INTO_DATE,
+		   INTO_ENTRY,
+		   INTO_INFO,
+		   USER_ID,
+		   INTO_CITY
+	FROM INTOFARM
+	WHERE INTO_NO=#{into_no}
+	</select>
+	
+	<!--등록 -->
+	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+	
+	<selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+		SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
+	</selectKey>
+	INSERT INTO INTOFARM <!--확인! -->
+				( INTO_NO
+				 ,INTO_TITLE
+		  		 ,INTO_PHONE
+		  		 ,INTO_PRODUCT
+				 ,INTO_DATE
+				 ,INTO_ENTRY
+				 ,INTO_INFO
+				 <if test="uploadFileName != null and uploadFileName != ''">
+				 ,INTO_FILENAME
+				 </if>
+			     ,USER_ID
+			     ,INTO_CITY
+			    )
+	VALUES ( #{into_no}
+			,#{into_title}
+	 		,#{into_phone}
+		   	,#{into_product}
+	   	    ,#{into_date}
+		   	,#{into_entry}
+		   	,#{into_info}
+		   	<if test="uploadFileName != null and uploadFileName != ''">
+		   	,#{into_filename}
+		   	</if>
+		   	,#{user_id}
+		   	,#{into_city}
+		   	)
+	</insert>
+	
+	<!--수정 -->
+	<update id="updateFarm" parameterType="IntoTheFarmVO">
+	UPDATE INTOFARM SET INTO_TITLE=#{into_title},
+						INTO_PHONE=#{into_phone},
+						INTO_PRODUCT=#{into_product},
+						INTO_DATE=#{into_date},
+						INTO_ENTRY=#{into_entry},
+						INTO_INFO=#{into_info},
+						INTO_FILENAME=#{into_filename}
+					    USER_ID=#{user_id},
+					    INTO_CITY=#{into_city}
+	WHERE INTO_NO=#{into_no}				    
+	</update>
+	
+	<!--삭제 -->
+	<delete id="deleteFarm" parameterType="IntoTheFarmVO">
+	DELETE FROM INTOFARM 
+	WHERE INTO_NO=#{into_no}
+	</delete>
+	
+</mapper>
