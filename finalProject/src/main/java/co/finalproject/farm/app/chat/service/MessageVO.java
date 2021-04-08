@@ -2,8 +2,6 @@ package co.finalproject.farm.app.chat.service;
 
 import java.util.Date;
 
-import com.google.gson.Gson;
-
 import lombok.Data;
 
 @Data
