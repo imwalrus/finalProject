@@ -25,7 +25,6 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 <link rel="stylesheet" href="resources/main/css/bootstrap.css">
 <script src="resources/main/js/jquery.min.js"></script>
-<script src="resources/main/js/jquery.min.js"></script>
 <script src="resources/main/js/popper.min.js"></script>
 <script src="resources/main/js/bootstrap.min.js"></script>
 </head>

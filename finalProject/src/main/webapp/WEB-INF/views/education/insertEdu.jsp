@@ -6,8 +6,6 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
-<script src="resources/main/js/jquery.min.js"></script>
-
 <script>
 $(function() {
 	 $("#gdsImg").change(function(){

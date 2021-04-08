@@ -6,7 +6,6 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
-<script src="resources/main/js/jquery.min.js"></script>
 <script>
 //모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
    function fnModuleInfo(str) {
