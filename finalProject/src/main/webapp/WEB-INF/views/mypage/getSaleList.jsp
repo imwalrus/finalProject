@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<jsp:include page="../mypage/adminMenu.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -18,7 +18,8 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="resources/admin/css/style.css">
-    
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
     
 
 </head>

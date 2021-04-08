@@ -18,5 +18,5 @@ public interface OrderMapper {
 	public int deleteOrder(OrderVO vo);
 
 	//판매
-	public List<OrderListVO> getSaleList();
+	public List<OrderListVO> getSaleList(OrderListVO vo);
 }

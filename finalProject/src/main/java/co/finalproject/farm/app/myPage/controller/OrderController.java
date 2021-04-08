@@ -37,10 +37,10 @@ public class OrderController {
 	}
 	
 	
-////판매내역조회
+//판매내역조회
 	@RequestMapping("/getSaleList")
-	public String getSaleList(Model model) {
-		model.addAttribute("sale", orderMapper.getSaleList());
+	public String getSaleList(Model model, OrderListVO vo) {
+		model.addAttribute("sale", orderMapper.getSaleList(vo));
 		return "mypage/getSaleList";
 	}
 

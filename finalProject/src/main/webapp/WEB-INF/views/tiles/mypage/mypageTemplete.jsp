@@ -22,7 +22,7 @@
 <body class="">
 <tiles:insertAttribute name="header"/>
 
-	<!-- [ navigation menu ] start -->
+	<!-- [ navigation menu ] start -->https://github.com/shehjkim/SpringBanks.git
 	<nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
 			<div class="navbar-content scroll-div " >
@@ -65,16 +65,16 @@
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">장바구니</a></li>
-					        <li><a href="bc_button.html">구매내역</a></li>
+					        <li><a href="#">장바구니</a></li>
+					        <li><a href="getOrderList">구매내역</a></li>
 					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
-                                <li><a href="bc_alert.html">신청 내역 관리</a></li>
-                                <li><a href="bc_alert.html">나의 신청 내역</a></li>
-                                <li><a href="getintoFarmInqList">체험 관련 문의</a></li>
+                                <li><a href="#">신청 내역 관리</a></li>
+                                <li><a href="#">나의 신청 내역</a></li>
+                                <li><a href="#">체험 관련 문의</a></li>
                             </ul>
                         </li>
 					</li>
