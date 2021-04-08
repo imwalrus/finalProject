@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="resources/admin/css/style.css">
 
 <style>
+<<<<<<< HEAD
 .table{
 min-width:100% !important;
 }
@@ -29,6 +30,11 @@ min-width:100% !important;
 padding: 10px 8px !important;
 }
 
+=======
+.table {
+	text-align: center;
+}
+>>>>>>> branch 'hyunjung' of https://github.com/imwalrus/finalProject.git
 </style>
 
 

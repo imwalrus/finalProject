@@ -67,6 +67,7 @@
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
+<<<<<<< HEAD
 					        <li><a href="bc_alert.html">판매내역</a></li>
 					    </ul>
 					</li>
@@ -75,6 +76,16 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="bc_alert.html">장바구니</a></li>
 					        <li><a href="bc_button.html">구매내역</a></li>
+=======
+					        <li><a href="getSaleList">판매내역</a></li>
+					    </ul>
+					</li>
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="bc_alert.html">장바구니</a></li>
+					        <li><a href="getOrderList">구매내역</a></li>
+>>>>>>> branch 'hyunjung' of https://github.com/imwalrus/finalProject.git
 					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">

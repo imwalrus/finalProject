@@ -20,6 +20,7 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
+<<<<<<< HEAD
 <style>
 .table{
 min-width:100% !important;
@@ -59,6 +60,46 @@ padding: 10px 8px !important;
 									<div class="card-body table-border-style">
 										<div class="table-responsive">
 											<table class="table table-hover">
+=======
+
+<style>
+.table {
+	text-align: center;
+}
+</style>
+
+
+</head>
+<body>
+	<section class="pcoded-main-container">
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-content">
+				<!-- [ breadcrumb ] start -->
+				<div class="page-header">
+					<div class="page-block">
+						<div class="row align-items-center">
+							<div class="col-md-12"></div>
+						</div>
+					</div>
+				</div>
+				<!-- [ breadcrumb ] end -->
+				<!-- [ Main Content ] start -->
+				<div class="row">
+					<!-- [ vertically-modal ] start -->
+					<div class="col-md-10">
+						<div class="card">
+							<div class="card-body" align="center">
+
+								<!-- [ Contextual-table ] start -->
+								<div class="col-md-9">
+									<div class="card-header">
+										<h2>농촌속으로 문의</h2>
+									</div>
+									<div class="card-body table-border-style">
+										<div class="table-responsive">
+											<table class="table">
+>>>>>>> branch 'hyunjung' of https://github.com/imwalrus/finalProject.git
 												<tr class="table-success">
 													<th>No</th>
 													<th>Title</th>

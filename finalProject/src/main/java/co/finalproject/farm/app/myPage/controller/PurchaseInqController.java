@@ -85,9 +85,8 @@ public class PurchaseInqController {
 	public String updatepuchasInq(Model model,puchasInqVO vo) {
 		model.addAttribute("pupdate", pciMapper.getpuchasInq(vo));
 		return "notiles/mypage/updatepuchasInq";
-		
 	}
-	
+
 	//수정-수정처리
 	@PostMapping("/updatepuchasInq")
 	public String updatepuchasInq(puchasInqVO vo,MultipartHttpServletRequest request) throws Exception,IOException {

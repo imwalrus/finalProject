@@ -41,6 +41,7 @@ public class IntoFarmInqController {
 	@RequestMapping("/getintoFarmInq")
 		public String getintoFarmInq(Model model,IntoFarmInqVO vo) {
 			model.addAttribute("ilist", ifiMapper.getIntoFarmInq(vo));
+
 			return "notiles/mypage/getintoFarmInq";
 	}
 	
@@ -64,8 +65,9 @@ public class IntoFarmInqController {
 			public String updateintoFarmInq(Model model,IntoFarmInqVO vo) {
 				model.addAttribute("ulist", ifiMapper.getIntoFarmInq(vo));
 				return "notiles/mypage/updateintoFarmInq";
-			}
 
+	}
+	
 			// 수정처리
 			@PostMapping("/updateintoFarmInq")
 			public String updateintoFarmInqProc(IntoFarmInqVO vo) {
