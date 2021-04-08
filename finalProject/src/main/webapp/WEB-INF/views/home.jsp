@@ -12,7 +12,6 @@
 		var pop = window.open("showChat","chat","width=1220,height=690px,resizable=no,scrollbars=no;");
 	}
 	
-
 </script>
 </head>
 <body class="goto-here">

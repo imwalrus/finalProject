@@ -21,11 +21,20 @@
 					<li class="nav-item active">
 						<a href="./" class="nav-link">Home</a>
 					</li>
-					<li class="nav-item">
-						<a href="notice" class="nav-link">공지 & FAQ</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">공지 & FAQ</a>
+					    <div class="dropdown-menu" aria-labelledby="dropdown">
+					    <a class="dropdown-item" href="getNotices">공지사항</a>
+					    <a class="dropdown-item" href="getFaq">FAQ</a>
+					    </div>
 					</li>
-					<li class="nav-item">
-						<a href="education" class="nav-link">귀농교육</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">귀농교육</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown">
+					    <a class="dropdown-item" href="education">귀농 작성 체크리스트</a>
+					    <a class="dropdown-item" href="onEducation">온라인 교육</a>
+					    <a class="dropdown-item" href="getOffEdu">오프라인 교육</a>
+					    </div>
 					</li>
 					<li class="nav-item">
 						<a href="intoTheFarm" class="nav-link">농촌속으로</a>

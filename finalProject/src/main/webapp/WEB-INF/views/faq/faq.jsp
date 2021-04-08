@@ -9,22 +9,22 @@
 <script src="resources/main/js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-	$("#notice_title").on('keyup', function() {
-		$("#notice_content").val($(this).val())
+	$("#faq_title").on('keyup', function() {
+		$("#faq_content").val($(this).val())
 	});
 });
 </script>
 
 <script>
 function categoryChange() {
-	notice_sch.submit();
+	faq_sch.submit();
     }
 </script>
 
 <style type="text/css">
-#notice_title {  width:170px; 
-                 height:40px !important; }
-#notice_category {  width:120px; 
+#faq_title    {     width:170px; 
+                    height:40px !important; }
+#faq_category {     width:120px; 
                     text-align: center;
                     margin:0px;
                     padding: 5px;
@@ -32,9 +32,8 @@ function categoryChange() {
 #title > h1 {
        font-size: 35px;
        color: #00cc99;
-       } 
+            } 
 </style>
-
 </head>
 <body class="goto-here">
     <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
@@ -50,28 +49,31 @@ function categoryChange() {
    
     
      <section class="ftco-section testimony-section">
-     <form action="getNotices" name="notice_sch">
+     <form action="getFaq" name="faq_sch">
       <input type="hidden" name="page" value="1">
-      <input type="hidden" id="notice_content" name="notice_content" value="${noticePagingVO.notice_content}">
-		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
+      <input type="hidden" id="faq_content" name="faq_content" value="${faqPagingVO.faq_content}">
+		<div align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title">
-			<h1>공지사항</h1>
+			<h1>FAQ</h1>
 		</div><br/>
 		<div class="form-group" style="margin-left:980px">
-		<select class="form-control" id="notice_category" name="notice_category" onchange="categoryChange()">
+		<select class="form-control" id="faq_category" name="faq_category" onchange="categoryChange()">
 		<option value="">분류</option>
-        <option value="관련기사"
-        <c:if test ="${noticePagingVO.notice_category == '관련기사'}">
-	             selected </c:if>>관련기사</option>
-	    <option value="관련공문"
-	    <c:if test ="${noticePagingVO.notice_category == '관련공문'}">
-	             selected </c:if>>관련공문</option>
-        <option value="농산물가격"
-        <c:if test ="${noticePagingVO.notice_category == '농산물가격'}">
-	             selected </c:if>>농산물가격</option>
-        <option value="축제,박람회"
-        <c:if test ="${noticePagingVO.notice_category == '축제,박람회'}">
-	             selected </c:if>>축제,박람회</option>
+        <option value="농업지식"
+        <c:if test ="${faqPagingVO.faq_category == '농업지식'}">
+	             selected </c:if>>농업지식</option>
+	    <option value="교육/기타"
+	    <c:if test ="${faqPagingVO.faq_category == '교육/기타'}">
+	             selected </c:if>>교육/기타</option>
+        <option value="정책/금융"
+        <c:if test ="${faqPagingVO.faq_category == '정책/금융'}">
+	             selected </c:if>>정책/금융</option>
+        <option value="주택"
+        <c:if test ="${faqPagingVO.faq_category == '주택'}">
+	             selected </c:if>>주택</option>
+	    <option value="농지"
+        <c:if test ="${faqPagingVO.faq_category == '농지'}">
+	             selected </c:if>>농지</option>          
         </select>
 		</div>
 		<div align="center">
@@ -82,32 +84,30 @@ function categoryChange() {
 					<td align="center" width="300">제 목</td>
 					<td align="center" width="150">분류</td>
 					<td align="center" width="200">작성일자</td>
-					<td align="center" width="150">조회수</td>
 				</tr>
-		<c:forEach items="${list}" var="ntc">
-		<tr onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}&page=${paging.page}'">
-         <td align="center">${ntc.notice_no}</td>
-         <td>&nbsp; ${ntc.notice_title}</td>
-         <td align="center">${ntc.notice_category}</td>
-         <td align="center">${ntc.notice_date}</td>
-         <td align="center">${ntc.notice_hit}</td>
+		<c:forEach items="${list}" var="faq">
+		<tr onclick="location.href='getSearchFaq?faq_no=${faq.faq_no}&page=${paging.page}'">
+         <td align="center">${faq.faq_no}</td>
+         <td>&nbsp; ${faq.faq_title}</td>
+         <td align="center">${faq.faq_category}</td>
+         <td align="center">${faq.faq_date}</td>
         </tr>
         </c:forEach>
         </thead>
         </table><br/>
         </div>
         </div>
-    
+   
     <div class="row justify-content-around" style="margin-left:400px; margin-right:400px;">
     <div class="col-auto mr-auto">
     <c:if test="${user_auth == 'admin' }">  
-    <button type="button" class="btn btn-primary disabled" onclick="location.href='insertNotices'">글쓰기</button>
+    <button type="button" class="btn btn-primary disabled" onclick="location.href='insertFaq'">글쓰기</button>
     </c:if>
     </div>
     
     <div class="col-auto">
-    <input class="form-control" type="text" placeholder="Search..." id="notice_title" name="notice_title"
-    value="${noticePagingVO.notice_title}" onclick="this.select()">
+    <input class="form-control" type="text" placeholder="Search..." id="faq_title" name="faq_title"
+    value="${faqPagingVO.faq_title}" onclick="this.select()">
     </div>
     </div>
     
@@ -115,8 +115,8 @@ function categoryChange() {
     <script>
     function goPage(p) {
     //location.href="getNotices?page=" +p;
-    notice_sch.page.value= p;
-    notice_sch.submit();
+    faq_sch.page.value= p;
+    faq_sch.submit();
     }
     </script>
     </form>

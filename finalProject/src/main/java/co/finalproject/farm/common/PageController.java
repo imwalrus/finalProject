@@ -46,5 +46,4 @@ public class PageController {
 		return "community";
 	}
 	
-
 }

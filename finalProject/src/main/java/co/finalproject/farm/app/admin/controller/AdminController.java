@@ -1,5 +1,5 @@
 package co.finalproject.farm.app.admin.controller;
 
-public class AdminController {
+public class AdminController { 
 
 }

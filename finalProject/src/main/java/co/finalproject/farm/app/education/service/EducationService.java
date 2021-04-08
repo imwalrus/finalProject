@@ -1,11 +1,9 @@
-package co.finalproject.farm.app.education.service.impl;
+package co.finalproject.farm.app.education.service;
 
 import java.util.List;
 
-import co.finalproject.farm.app.education.service.EduPagingVO;
-import co.finalproject.farm.app.education.service.EducationVO;
 
-public interface EducationMapper {
+public interface EducationService {
 	
 	//등록
     public void insertEdu(EducationVO vo);
@@ -24,5 +22,5 @@ public interface EducationMapper {
     
     //건수
   	public int getCount(EduPagingVO vo);
-	
+
 }
