@@ -4,7 +4,7 @@
 
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.OrderMapper">
 
-<!-- 구매내역 리스트 -->
+<!-- 구매내역 전체리스트 -->
 	<select id="getOrderList"  parameterType="OrderVO"
 								resultType="OrderVO">
 	
@@ -14,65 +14,63 @@
 	
 	</select>
 
-<!-- 구매내역 단건 -->	
-	<select id="getOrder" parameterType="OrderVO"
-							resultType="OrderVO">		
-		SELECT *
-		FROM ORDERLIST
-		WHERE ORDER_NO = #{order_no}
-										
-	</select>
-
- <!-- /////상세 주문///////-->
-<select id="getOrderView" parameterType="OrderVO"
+ <!-- 구매내역 상세리스트-->
+<select id="getOrder" parameterType="OrderVO"
 							resultType="OrderVO">
 	
-		SELECT O.ORDER_NO
-        		,O.PRO_NO
-        		,O.ORDERLIST_PRO_NAME
-        		,O.ORDERLIST_PRO_COUNT
-       			 ,O.ORDERLIST_PRO_PRICE
-        		,P.PRO_NO
-        		,P.PRO_NAME
-        		,P.PRO_PRICE
-        		,P.PRO_DCOMPANY
-        		,P.PRO_DCOST
-		FROM PRODUCT P JOIN ORDERLIST O
-		ON( P.PRO_NO = O.PRO_NO )
-		WHERE O.ORDER_NO=${order_no}
+	SELECT O.ORDER_NO
+        ,L.ORDERLIST_NO
+        ,L.PRO_NO
+        ,P.PRO_NAME
+        ,L.CART_COUNT
+        ,P.PRO_PRICE
+        ,(L.CART_COUNT * P.PRO_PRICE) as account
+        ,O.ORDER_CONDITION
+        ,O.ORDER_PAYMENT
+        ,O.USER_ID as BUYER
+        ,L.ORDERLIST_INVOICE
+	FROM ORDERS O INNER JOIN ORDERLIST L 
+            ON O.ORDER_NO = L.ORDER_NO
+    INNER JOIN PRODUCT P
+            ON P.PRO_NO = L.PRO_NO
+	WHERE O.ORDER_NO=#{order_no}
 		
 </select> 	
-	
+
+<!-- 판매내역 조회-->
+<select id="getSaleList" resultType="OrderVO">
+						
+SELECT O.ORDER_NO
+            ,P.PRO_NAME 
+            ,L.CART_COUNT
+            ,(L.CART_COUNT * P.PRO_PRICE) as ACCOUNT
+            ,P.PRO_PRICE
+            ,O.USER_ID as BUYER
+            ,O.ORDER_CONDITION
+            ,O.ORDER_PAYMENT
+            ,L.ORDERLIST_INVOICE
+            ,L.ORDERLIST_NO
+            ,P.USER_ID as SELLER            
+FROM ORDERLIST L
+INNER JOIN PRODUCT P
+            ON P.PRO_NO = L.PRO_NO
+INNER JOIN ORDERS O
+            ON O.ORDER_NO = L.ORDER_NO
+WHERE P.USER_ID = #{user_id}
+        
+</select>
 <!-- 결제상태/ 송장번호수정 -->
 	<update id="updateOrder"  parameterType="OrderVO">
 			
 			UPDATE ORDERS O, ORDERLIST L
 						SET
-						O.order_condition = #{order_condition}
-						.order_invoice = #{order_invoice}
-			WHERE order_no = #{order_no} and 
+						 O.ORDER_CONDITION = #{order_condition}
+						,O.ORDER_INVOICE = #{order_invoice}
+			WHERE L.ORDERLIST_NO = #{orderlist_no}
 	</update>
 	
 
-<!-- 판매내역 조회-->
-<select id="getSaleList" resultType="OrderVO">
-						
-        SELECT L.ORDER_NO             
-               ,L.ORDERLIST_PRO_NAME
-               ,L.ORDERLIST_PRO_COUNT
-               ,L.ORDERLIST_PRO_PRICE
-               ,( L.ORDERLIST_PRO_COUNT * L.ORDERLIST_PRO_PRICE) as account
-               ,O.ORDER_PAYMENT
-               ,O.USER_ID as CLIENT
-               ,P.USER_ID as SELLER
-               ,O.ORDER_CONDITION
-        FROM ORDERLIST L
-        INNER JOIN PRODUCT P
-            ON P.PRO_NO = L.PRO_NO
-         INNER JOIN ORDERS O
-            ON O.ORDER_NO = L.ORDER_NO
-        
-</select>
+
 
 </mapper>
 

@@ -10,6 +10,8 @@
 			<th class="table-success">주문상품</th>
 			<th class="table-success">수량</th>
 			<th class="table-success">주문금액</th>
+			<th class="table-success">주문상태</th>
+			<th class="table-success">송장번호</th>
 		</tr>
 	</table>
 </div>
@@ -30,12 +32,16 @@ $.ajax({
 			for(i=0; i<response.length; i++){
 				$("#orderview").append(
 						"<tr><td>" + response[i].order_no  + "</td><td>"
-						+ response[i].pro_no + "</td><td>"
-						+ response[i].orderlist_pro_count + "</td><td>"
-						+ response[i].orderlist_pro_price + "</td></tr>" 
+						+ response[i].pro_name + "</td><td>"
+						+ response[i].cart_count + "</td><td>"
+						+ response[i].account +"원"+ "</td><td>"
+						+ response[i].order_condition + "</td><td>"
+						+ response[i].orderlist_invoice + "</td></tr>"
 						);
 			
 			}
+			
+			
 		}
 	
 	

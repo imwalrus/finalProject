@@ -6,8 +6,9 @@ import co.finalproject.farm.app.shop.service.OrderVO;
 
 public interface OrderMapper {
 	
+	//구매내역
 	public List<OrderVO> getOrderList(OrderVO vo);
-		
+	//상세내역
 	public List<OrderVO> getOrder(OrderVO vo);
 	
 	public int insertOrder(OrderVO vo);
@@ -16,6 +17,6 @@ public interface OrderMapper {
 	
 	public int deleteOrder(OrderVO vo);
 
-	//판매
-	public List<OrderVO> getSaleList();
+	//판매내역
+	public List<OrderVO> getSaleList(OrderVO vo);
 }

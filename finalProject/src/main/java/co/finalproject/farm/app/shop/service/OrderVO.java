@@ -24,7 +24,9 @@ public class OrderVO {
 	private String pro_price;
 	private String pro_dcompany;
 	private String pro_dcost;
-	private String account;
-	private String client;
-	private String seller;
+	private String account;	// 수량 * 개당가격
+	private String buyer;// 구매자ID
+	private String seller;// 판매자ID
+	private String cart_count;
+	private String orderlist_no;
 }

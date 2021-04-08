@@ -63,33 +63,20 @@ padding: 10px 8px !important;
                                     <h2>판매 내역</h2>
                                 </div>
                                 <div class="table-responsive">
+                                <form action="updateOrder" method="post">
 									<table class="table" id="sale">
 										<tr class="table-success">
-											<th>주문번호</th>
+											<th>주문번호-상세</th>
 											<th>판매제품</th>
 											<th>수량</th>
 											<th>결제금액</th>
 											<th>결제수단</th>
-											<th>구매자</th>
-											<th>주문상태</th>
-											<th>송장번호등록</th>
-											
-										</tr>
-										<c:forEach items="${sale }" var="sa">
-											<tr>
-												<td>${sa.order_no }
-												<td>${sa.orderlist_pro_name}</td>
-												<td>${sa.orderlist_pro_count}</td>
-												<td>${sa.account}</td>
-												<td>${sa.order_payment}</td>
-												<td>${sa.client }</td>
-												<%-- <td>${sa.order_condition } --%>
-												<td><button type="button" class="btn  btn-outline-danger btn-sm" 
-																	onclick="invoiceUp('${sa.order_no }')">송장번호</button>										
-												</td>
-											</tr>
-										</c:forEach>								
+											<th>판매자</th>
+											<th>주문상태/송장번호</th>
+											<th>송장번호등록</th>											
+										</tr>								
 									</table>
+								</form>
                                 </div>
                                 <!-- [ Contextual-table ] end -->
                             </div>
@@ -127,14 +114,43 @@ padding: 10px 8px !important;
 </div>
 </section>
 <script type="text/javascript">
-function pQNAview(str) {
-	$('#invoiceUp .modal-body').load("updateOrder?order_no=" + str);
+function invoiceUp(str) {
+	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str);
 	$('#invoiceUp').modal('show');
 
 
 }
 
-
+$.ajax({
+	url: "ajaxgetSaleList",
+	data: "user_id=" + '${user_id}',
+	dataType: "json",
+	success: function(data){
+		for(i=0; i<data.length; i++){
+			$("#sale").append(
+					"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
+					+ data[i].pro_name + "</td><td>" 
+					+ data[i].cart_count + "</td><td>"
+					+ data[i].account + "</td><td>"
+					+ data[i].order_payment + "</td><td>"
+					+ data[i].seller + "</td><td>"
+					+ data[i].order_condition +"<br>"
+					+ data[i].orderlist_invoice + "</td><td>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='invoiceUp("+data[i].orderlist_no+")'>" + "송장번호등록"+ "</button>"
+					+"</td></tr>"
+	
+					);
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+});
 </script>
 </body>
 </html>
