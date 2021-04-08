@@ -1,5 +1,7 @@
 package co.finalproject.farm.app.education.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +17,6 @@ public class EducationVO {
 	private String edu_content;
 	private String edu_filename;
 	private String edu_adr;
+	private MultipartFile uploadFile;
 	
 }

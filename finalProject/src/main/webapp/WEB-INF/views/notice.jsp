@@ -6,6 +6,7 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
+<script src="resources/main/js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 	$("#notice_title").on('keyup', function() {
@@ -50,6 +51,8 @@ function categoryChange() {
     
      <section class="ftco-section testimony-section">
      <form action="getNotices" name="notice_sch">
+      <input type="hidden" name="page" value="1">
+      <input type="hidden" id="notice_content" name="notice_content" value="${noticePagingVO.notice_content}">
 		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title">
 			<h1>공지사항</h1>
@@ -92,31 +95,31 @@ function categoryChange() {
         </c:forEach>
         </thead>
         </table><br/>
-        <div style="margin-left:1029px">
-        <button type="button" class="btn btn-success" onclick="location.href='insertNotices'">글쓰기</button>
         </div>
         </div>
-        </div>
-        
-        <div class="container box_1170" style="margin-right:380px">
-        <input type="hidden" name="page" value="1">
-        <div class="form-group" >
-        <input class="form-control" type="text" placeholder="Search..." id="notice_title" name="notice_title" value="${noticePagingVO.notice_title}" onclick="this.select()">
-        <input type="hidden" id="notice_content" name="notice_content" value="${noticePagingVO.notice_content}">
-        </div>
-        </div>
-       
-        <div align="center">
-        <my:paging paging="${paging}" jsFunc="goPage" />
-        <script>
-        function goPage(p) {
-    	//location.href="getNotices?page=" +p;
-    	notice_sch.page.value= p;
-    	notice_sch.submit();
-        }
-        </script>
-        </div>
-        </form>
+    
+    <div class="row justify-content-around" style="margin-left:400px; margin-right:400px;">
+    <div class="col-auto mr-auto">
+    <c:if test="${user_auth == 'admin' }">  
+    <button type="button" class="btn btn-primary disabled" onclick="location.href='insertNotices'">글쓰기</button>
+    </c:if>
+    </div>
+    
+    <div class="col-auto">
+    <input class="form-control" type="text" placeholder="Search..." id="notice_title" name="notice_title"
+    value="${noticePagingVO.notice_title}" onclick="this.select()">
+    </div>
+    </div>
+    
+    <my:paging paging="${paging}" jsFunc="goPage" />
+    <script>
+    function goPage(p) {
+    //location.href="getNotices?page=" +p;
+    notice_sch.page.value= p;
+    notice_sch.submit();
+    }
+    </script>
+    </form>
     </section>
 </body>
 </html>

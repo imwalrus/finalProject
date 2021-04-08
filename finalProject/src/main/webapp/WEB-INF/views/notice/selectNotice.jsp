@@ -81,13 +81,16 @@
 				</thead>
 			</table>
 		</div><br /><br/>
-		<div style="margin-left:100px;">
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='getNotices?page=${noticePagingVO.page}'">목록보기</button>
-		&nbsp;&nbsp;&nbsp;
+		<div style="margin-left:550px;">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='getNotices?page=${noticePagingVO.page}'" style="float:left;">목록보기</button>
+		</div>
+		<c:if test="${user_auth == 'admin' }">
+		<div style="margin-left:228px; float:left;">
 		<button type="button" class="btn btn-outline-primary" onclick="deleteAlert()">글 삭제</button>
-		&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;
 		<input type="submit"  class="btn btn-outline-primary" value="글 수정">
 		</div>
+		</c:if>
 		</form>
 	</div>
     </section>

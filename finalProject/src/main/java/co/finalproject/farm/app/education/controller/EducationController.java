@@ -1,6 +1,7 @@
 package co.finalproject.farm.app.education.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -16,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import co.finalproject.farm.app.education.service.EduPagingVO;
 import co.finalproject.farm.app.education.service.EducationService;
 import co.finalproject.farm.app.education.service.EducationVO;
 import co.finalproject.farm.app.notice.controller.FaqController;
+import co.finalproject.farm.common.FileRenamePolicy;
 import co.finalproject.farm.common.Paging;
 
 @Controller
@@ -78,9 +81,9 @@ public class EducationController {
     @RequestMapping("/getSchOffEdu")
     public String getSchOffEdu (Model model, EducationVO vo, EduPagingVO pagingvo) {
     	model.addAttribute("edu", eduService.getSchOffEdu(vo));
-        return "education/offEducation";
+        return "notiles/education/schOffEdu";
     }
-
+    
     
 	//등록폼
     @RequestMapping("/insertEdu")
@@ -88,13 +91,29 @@ public class EducationController {
     	return "education/insertEdu";
     }
 	
-	//등록처리
-    @PostMapping("/insertEdu")
-    public String insertEduProc(EducationVO vo, EduPagingVO pagingvo) {
-    	logger.debug(vo.toString());
-    	eduService.insertEdu(vo);
-    	return "redirect:getOffEdu";
-    }
+    //등록 처리
+ 	@PostMapping("/insertEdu")
+ 	public String insertEduImg(EducationVO vo, HttpServletRequest req) throws IOException {
+ 		// 첨부 파일 처리
+ 		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
+ 		MultipartFile uploadFile = vo.getUploadFile();
+ 		String edu_filename = "";
+
+ 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
+ 			String filename = uploadFile.getOriginalFilename();
+ 			// 파일명 중복체크 -> rename
+ 			File rename = FileRenamePolicy.rename(
+ 					new File(path, filename));
+ 			edu_filename += rename.getName();
+ 			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
+ 		} else if (uploadFile.getOriginalFilename() == null && uploadFile.getOriginalFilename() == "") {
+ 			vo.setEdu_filename(req.getParameter("edu_filename"));
+ 		}
+ 		vo.setEdu_filename(edu_filename); // vo 업로드된 파일명 담아서 DB에 저장
+ 		eduService.insertEdu(vo);
+ 		return "redirect:getOffEdu";
+ 	}
+
     	
 	//수정처리
     @PostMapping("/updateEdu")

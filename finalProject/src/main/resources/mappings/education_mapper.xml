@@ -10,9 +10,9 @@
          <if test="edu_adr != null and edu_adr != ''">
 			    EDU_ADR=#{edu_adr}
 		 </if>
-         <if test="edu_title != null and edu_title != '' and edu_content != null and edu_content != ''">
+         <if test="edu_title != null and edu_title != ''">
 			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
-				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_content}) || '%' )
+				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_title}) || '%' )
 		 </if>
         </where>
          order by edu_no desc
@@ -95,9 +95,9 @@
          <if test="edu_adr != null and edu_adr != ''">
 			    EDU_ADR=#{edu_adr}
 		 </if>
-         <if test="edu_title != null and edu_title != '' and edu_content != null and edu_content != ''">
+         <if test="edu_title != null and edu_title != ''">
 			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
-				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_content}) || '%' )
+				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_title}) || '%' )
 		 </if>
 	 </where>
     </select>

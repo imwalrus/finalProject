@@ -57,11 +57,10 @@
 			<div style="margin-left:100px;">
 			<button class="btn btn-outline-primary" type="submit">저장하기</button> &nbsp;&nbsp;
 			<button class="btn btn-outline-primary" type="reset">취소</button> &nbsp;&nbsp;
-		</div>
-		
+		    </div>
+		    
 	</form>
-		</div><br />
-		
+	</div><br/>
 	</div>
     </section>
 </body>

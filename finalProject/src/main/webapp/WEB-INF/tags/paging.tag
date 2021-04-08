@@ -8,7 +8,8 @@
 <c:if test="${empty jsFunc}">
 	<c:set var="jsFunc" value="go_page"></c:set>
 </c:if>
-<ul>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
 <c:if test="${paging.startPage>1}">
 	<li><a href="javascript:${jsFunc}(${paging.startPage-1})">이전</a>
 </c:if>
@@ -24,3 +25,4 @@
 	<li><a href="javascript:${jsFunc}(${paging.endPage+1})">다음</a>
 </c:if>
 </ul>
+</nav>

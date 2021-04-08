@@ -6,13 +6,47 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
+<script src="resources/main/js/jquery.min.js"></script>
 <script>
 //모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
-$('#offEduModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-})
+   function fnModuleInfo(str) {
+	   $('#offEduModal .modal-body').load("getSchOffEdu?edu_no="+str); //한칸 띄워야함
+	   $('#offEduModal').modal();
+	}
+	function deleteAlert() {
+		var yn = confirm("정말 삭제할까요?");
+		if (yn) {
+			edu_sch.action = "deleteEdu?edu_no=${educationVO.edu_no}&page=${eduPagingVO.page}"
+			edu_sch.submit();
+		}
+	}
 </script>
-<style>
+<script>
+$(document).ready(function() {
+	$('#edu_title').val() == $('#edu_content').val();
+
+//검색창 한개일 때는 자동으로 엔터 이벤트 걸리지만 두개일 땐 두개 다 엔터 이벤트 걸어줘야 한다.
+$('#edu_title').keypress(function(event){
+	 var keycode = (event.keyCode ? event.keyCode : event.which);
+     if(keycode == '13'){
+    	 edu_sch.submit();
+  }
+event.stopPropagation();
+      });
+$('#edu_adr').keypress(function(event){
+	 var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+   	 edu_sch.submit();
+ }
+event.stopPropagation();
+      });
+});
+</script>
+<style type="text/css">
+#edu_title {  width:170px; 
+              height:35px !important; }
+#edu_adr   {  width:170px; 
+              height:35px !important; }              
 #title > h1 {
        font-size: 35px;
        color: #00cc99;
@@ -30,15 +64,35 @@ $('#offEduModal').on('show.bs.modal', function (event) {
         </div>
       </div>
     </div>
-   
-    
+
     <section class="ftco-section testimony-section">
     <form action="getOffEdu" name="edu_sch">
+    <input type="hidden" name="page" value="1">
+    <input type="hidden" id="edu_content" name="edu_content" >
     <div align="center" style="margin-left:400px; margin-right:400px;">
     <div id="title">
 			<h1>오프라인 교육</h1>
 		</div><br/>
-    <table class="table table-hover">
+    <div class="container box_1170" style="padding:1px;">
+        <div class="form-inline form-group" style="margin-left:860px;">
+        <label for="edu_title">주제</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="text" id="edu_title" name="edu_title" value="${eduPagingVO.edu_title}" onclick="this.select()">
+        </div>
+        </div>
+        </div>
+        
+        <div class="container box_1170" style="padding:1px;">
+        <div class="form-inline form-group" style="margin-left:859px;">
+        <label for="edu_adr">지역</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="text" id="edu_adr" name="edu_adr" value="${eduPagingVO.edu_adr}" onclick="this.select()">
+        </div>
+        </div>
+        </div>
+     
+     <hr style="margin:8px;"><br/>
+    <table class="table table-hover" >
          <thead>
                 <tr>
 					<td align="center" width="150">번호</td>
@@ -62,16 +116,18 @@ $('#offEduModal').on('show.bs.modal', function (event) {
          type="button" 
          class="btn btn-primary disabled" 
          style="padding: 1px"
-         data-toggle="modal" 
-         data-target="#offEduModal">상세보기</button>
+         onclick="fnModuleInfo('${edu.edu_no}')">상세보기</button>
          </td>
         </tr>
         </c:forEach>
         </thead>
     </table><br>
+    <div style="margin-left:992px">
+        <button type="button" class="btn btn-primary disabled" onclick="location.href='insertEdu'">새교육 등록</button>
+    </div>
 <!-- 모달팝업 -->
 <div class="modal" id="offEduModal" tabindex="-1" role="dialog" aria-labelledby="offEduModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="offEduModalLabel">과정상세정보</h5>
@@ -80,25 +136,27 @@ $('#offEduModal').on('show.bs.modal', function (event) {
         </button>
       </div>
       <div class="modal-body" align="center">
-      
-      
+     
       </div>
-      <div class="modal-footer">
+        <div class="modal-footer"> 
+        <button type="button" class="btn btn-primary disabled" id="update" onclick="updateFnc()">수정</button>
+        <button type="button" class="btn btn-primary disabled" id="delete" onclick="deleteAlert()">삭제</button>
         <button type="button" class="btn btn-primary disabled" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-        <div align="center">
+        
         <my:paging paging="${paging}" jsFunc="goPage" />
         <script>
         function goPage(p) {
-    	location.href="getOffEdu?page=" +p;
-    	//edu_sch.page.value= p;
-    	//edu_sch.submit();
+    	//location.href="getOffEdu?page=" +p;
+    	edu_sch.page.value= p;
+    	edu_sch.submit();
         }
         </script>
-        </div></div>
+        </div>
+        
     </form>
     </section>
 </body>
