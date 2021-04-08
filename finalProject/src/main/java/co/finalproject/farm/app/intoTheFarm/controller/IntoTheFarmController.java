@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
+import co.finalproject.farm.common.FileRenamePolicy;
+import co.finalproject.farm.common.Paging;
 
 @Controller
 public class IntoTheFarmController {
@@ -27,15 +29,12 @@ public class IntoTheFarmController {
 	
 	//전체조회
 	@RequestMapping("/getFarmList")
-	public String getFarmList(IntoTheFarmVO vo, /* Paging paging, */ Model model) {
+	public String getFarmList(IntoTheFarmVO vo, Paging paging,  Model model) {
 		
 		//paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수
 		//paging.setPageSize(5); // 표시되는 페이지 번호
-		 
+		
 		// 페이징
-		
-		
-		
 		
 		/*
 		 * if (vo.getPage() == null) { vo.setPage(1); } vo.setStart(paging.getFirst());

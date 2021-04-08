@@ -99,10 +99,10 @@
 		})
 	} 
 		/*페이징*/
-	       /* function goPage(p) {
+	        /* function goPage(p) {
 				getSearchFm.page.value=p;
 				getSearchFm.submit(); 
-			    } */
+			    }  */
 </script>
 
 <style>
@@ -113,11 +113,11 @@
 </head>
 <body class="goto-here">
 	<!--검색바  -->
-	<%-- <form action="getFarmList" name="getSearchFm">
+	 <%-- <form action="getFarmList" name="getSearchFm">
 		<input type="hidden" name="page" value="1">
-		지역  <input name="into_city" value="${list.into_city}">
-		농작물 종류  <input name="into_product" value="${list.into_product}">
-		기간  <input type="date" name="into_date" value="${list.into_date}">
+		지역  <input name="into_city" value="${intoTheFarmVO.into_city}"> 
+		농작물 종류  <input name="into_product" value="${intoTheFarmVO.into_product}">
+		기간  <input type="date" name="into_date" value="${intoTheFarmVO.into_date}">
 		<button>검색</button>
 	</form>	 --%>
 
@@ -144,7 +144,7 @@
 				</div>
 			</c:forEach>
 		</div>
-	 <%-- <my:paging paging="${paging}" jsFunc="goPage" /> --%>
+	  <%-- <my:paging paging="${paging}" jsFunc="goPage" />  --%>
 	</div>
 		
 	</section>

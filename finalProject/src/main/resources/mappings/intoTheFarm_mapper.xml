@@ -52,6 +52,19 @@
              , USER_ID
              , INTO_CITY
 		FROM INTOFARM
+		<where>
+         <if test="into_no != null and into_no != '' and into_title != null and into_title != '' and
+         		   into_phone != null and into_phone != '' and into_product != null and into_product != '' and
+         		   into_date != null and into_date != '' and into_entry != null and into_entry != '' and
+         		   into_info != null and into_info != '' and user_id != null and user_id != '' and
+         		   into_city != null and into_city != '' and user_id != null and user_id != ''">
+			    AND ( UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+				OR UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%' 
+				<!-- 기간설정 --> 
+				
+				)
+		 </if>
+        </where>
 		ORDER BY INTO_NO
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 		
