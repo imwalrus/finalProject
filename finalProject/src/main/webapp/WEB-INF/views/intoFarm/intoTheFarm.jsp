@@ -39,7 +39,7 @@
 				});
  }
 		
-	</script>  
+</script>  
 <script>
 		/*모달-상세보기*/
 		function fngetSearchInfo(str) { //into_no 가지고 보냄
@@ -99,10 +99,10 @@
 		})
 	} 
 		/*페이징*/
-	        /* function goPage(p) {
+	         function goPage(p) {
 				getSearchFm.page.value=p;
 				getSearchFm.submit(); 
-			    }  */
+			    }  
 </script>
 
 <style>
@@ -112,19 +112,18 @@
 </style>
 </head>
 <body class="goto-here">
-	<!--검색바  -->
-	 <%-- <form action="getFarmList" name="getSearchFm">
-		<input type="hidden" name="page" value="1">
-		지역  <input name="into_city" value="${intoTheFarmVO.into_city}"> 
-		농작물 종류  <input name="into_product" value="${intoTheFarmVO.into_product}">
-		기간  <input type="date" name="into_date" value="${intoTheFarmVO.into_date}">
-		<button>검색</button>
-	</form>	 --%>
 
-	
 	<!--농촌속으로 리스트  -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	
+		<!--검색바  -->
+		  <form action="getFarmList" name="getSearchFm">
+			<input type="hidden" name="page" value="1">
+			지역  <input name="into_city" value="${intoTheFarmVO.into_city}"> 
+			농작물 종류  <input name="into_product" value="${intoTheFarmVO.into_product}">
+			기간  <input type="date" name="into_date" value="${intoTheFarmVO.into_date}"> 
+			<button>검색</button>
+			
 	 <div class="container">
 		<div class="row">
 			<c:forEach items="${list}" var="listt">
@@ -144,11 +143,11 @@
 				</div>
 			</c:forEach>
 		</div>
-	  <%-- <my:paging paging="${paging}" jsFunc="goPage" />  --%>
 	</div>
+	   <my:paging paging="${paging}" jsFunc="goPage" />  
 		
+	</form>	
 	</section>
-
 	<!--모달 상세보기 -->
 	
 	<div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

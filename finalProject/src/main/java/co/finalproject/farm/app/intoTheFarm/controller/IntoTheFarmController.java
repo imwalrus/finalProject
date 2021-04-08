@@ -31,17 +31,20 @@ public class IntoTheFarmController {
 	@RequestMapping("/getFarmList")
 	public String getFarmList(IntoTheFarmVO vo, Paging paging,  Model model) {
 		
-		//paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수
-		//paging.setPageSize(5); // 표시되는 페이지 번호
+		paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수
+		paging.setPageSize(5); // 표시되는 페이지 번호
 		
 		// 페이징
 		
-		/*
-		 * if (vo.getPage() == null) { vo.setPage(1); } vo.setStart(paging.getFirst());
-		 * vo.setEnd(paging.getLast());
-		 * paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
-		 * model.addAttribute("paging", paging);
-		 */
+		
+		  if (vo.getPage() == null) {
+			  vo.setPage(1); 
+			  } 
+		  vo.setStart(paging.getFirst());
+		  vo.setEnd(paging.getLast());
+		  paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
+		  model.addAttribute("paging", paging);
+		 
 		  model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
 		  
 		return "intoFarm/intoTheFarm";

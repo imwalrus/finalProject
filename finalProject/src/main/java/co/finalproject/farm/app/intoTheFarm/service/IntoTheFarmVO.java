@@ -3,6 +3,7 @@ package co.finalproject.farm.app.intoTheFarm.service;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -25,6 +26,7 @@ public class IntoTheFarmVO {
 	private String into_title;
 	private String into_phone;
 	private String into_product;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date into_date;
 	private String into_entry;
 	private String into_info;
