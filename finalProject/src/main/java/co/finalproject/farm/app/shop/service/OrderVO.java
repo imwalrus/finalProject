@@ -16,4 +16,7 @@ public class OrderVO {
 	private String order_name;
 	private String order_phone;
 	private String user_id;
+	private String orderlist_no;
+	private String pro_no;
+	private String cart_count;
 }

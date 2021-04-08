@@ -37,6 +37,16 @@
 					$('.input-number').val(quantity - 1);
 				}
 			});
+			
+			// 장바구니 버튼 클릭시 로그인 되어있지 않으면 경고창
+			$('.cart').click(function(){
+				var id = $('input[name=user_id]').val();
+				console.log(id);
+		        if (id == '') {
+		            alert("로그인이 필요합니다.");
+		            return false;
+		        } 
+			});
 		});
 	});
 </script>
@@ -110,7 +120,7 @@
 								<a href="prodManage?user_id=${user_id}" class="btn btn-success py-3 px-5">상품수정</a>
 							</c:if>
 							<c:if test="${prod.user_id ne user_id}">
-								<a href="#modalAlert" class="btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
+								<a href="#modalAlert" class="cart btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
 							</c:if>
 						</p>
 					</div>

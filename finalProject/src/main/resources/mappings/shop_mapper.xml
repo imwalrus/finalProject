@@ -230,29 +230,39 @@
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
 			SELECT NVL(MAX(ORDER_NO), 0) + 1 FROM ORDERS
 		</selectKey>
-			INSERT INTO ORDERS (ORDER_NO
-						      , ORDER_DATE
-						      , ORDER_CONDITION
-						      , ORDER_INVOICE
-						      , ORDER_PAYMENT
-						      , ORDER_TOTALPRICE
-						      , ORDER_ZIP
-						      , ORDER_ADR
-						      , ORDER_DETAILADR
-						      , ORDER_NAME
-						      , ORDER_PHONE
-						      , USER_ID)
-					    VALUES (#{order_no}
-						      , SYSDATE
-						      , '결제완료'
-						      , '대한통운'
-						   	  , #{order_payment}
-						      , #{order_totalprice}
-						      , #{order_zip}
-						      , #{order_adr}
-						      , #{order_detailadr}
-						      , #{order_name}
-						      , #{order_phone}
-						      , #{user_id})
+		INSERT INTO ORDERS (ORDER_NO
+					 	  , ORDER_DATE
+					      , ORDER_CONDITION
+					   	  , ORDER_PAYMENT
+					   	  , ORDER_TOTALPRICE
+					   	  , ORDER_ZIP
+					      , ORDER_ADR
+					      , ORDER_DETAILADR
+					   	  , ORDER_NAME
+					      , ORDER_PHONE
+					      , USER_ID)
+			        VALUES (#{order_no}
+			     	      , SYSDATE
+			     	   	  , '결제완료'
+			     	   	  , #{order_payment}
+			     	   	  , #{order_totalprice}
+			     	   	  , #{order_zip}
+			     	   	  , #{order_adr}
+			     	   	  , #{order_detailadr}
+			     	   	  , #{order_name}
+			     	   	  , #{order_phone}
+			     	   	  , #{user_id})
+	</insert>
+	<!-- 상세 주문 등록 -->
+	<insert id="insertOrderlist" parameterType="OrderVO">
+		INSERT INTO ORDERLIST(ORDERLIST_NO
+							, ORDER_NO
+							, PRO_NO
+							, CART_COUNT)
+    				   SELECT ORDERLIST_SEQ.NEXTVAL
+    				   		, O.ORDER_NO
+    				   		, C.PRO_NO
+    				   		, C.CART_COUNT
+    					 FROM CART C, ORDERS O
 	</insert>
 </mapper>

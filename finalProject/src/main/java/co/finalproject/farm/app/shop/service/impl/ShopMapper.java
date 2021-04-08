@@ -54,4 +54,8 @@ public interface ShopMapper {
 	
 	// 주문 등록
 	public void insertOrder(OrderVO vo);
+	
+	// 주문 상세등록
+	public void insertOrderlist(OrderVO vo);
+	
 }

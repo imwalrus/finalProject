@@ -35,28 +35,34 @@
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="#"></a>
 							<a class="dropdown-item" href="shop">판매리스트</a>
-							<c:if test="${ user_auth eq 'farmer' }"><!-- session 내 아이디 값 없을시 -->
+							<c:if test="${user_auth eq 'farmer'}"><!-- session 내 아이디 값 없을시 -->
 							<a class="dropdown-item" href="prodManage?user_id=${user_id}">판매 관리</a>
-							</c:if>
+							</c:if>							
+							<c:if test="${user_id ne null}"><!-- session 내 아이디 값 존재 할 경우 -->
 							<a class="dropdown-item" href="cart?user_id=${user_id}">장바구니</a>
+							</c:if>
 							<a class="dropdown-item" href="infoShop">판매 소개</a>
 						</div>
 					</li>
 					<li class="nav-item">
 						<a href="community" class="nav-link">커뮤니티</a>
 					</li>
+					<c:if test="${user_auth ne 'admin'}"><!-- session 내 아이디 값 있을시 마이페이지 표시 -->
 					<li class="nav-item">
 						<a href="myPage" class="nav-link">마이페이지</a>
 					</li>
+					</c:if>
+					<c:if test="${user_auth eq 'admin'}"><!-- 'ADMIN'일시 관리자페이지 표시 -->
 					<li class="nav-item">
 						<a href="admin" class="nav-link">관리자</a>
 					</li>
-					<c:if test="${ user_id eq null }"><!-- session 내 아이디 값 없을시 -->
+					</c:if>
+					<c:if test="${user_id eq null}"><!-- session 내 아이디 값 없을시 -->
 						<li class="nav-item cta cta-colored">
 							<a href="login" class="nav-link"><span class="icon-person_outline"></span>로그인</a>
 						</li>
 					</c:if>
-					<c:if test="${ user_id ne null }"><!-- session 내 아이디 값 존재 할 경우 -->
+					<c:if test="${user_id ne null}"><!-- session 내 아이디 값 존재 할 경우 -->
 						<li class="nav-item cta cta-colored">
 							<a href="logout" class="nav-link"><span class="icon-person_outline"></span>로그아웃</a>
 						</li>

@@ -12,10 +12,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	// 검색시 pro_name + pro_content 값 같이 넘겨주기
-	$(document).ready(function() {
-		$("#pro_name").on('keyup', function() {
-			$("#pro_content").val($(this).val())
+	$(function() {
+		// 검색시 pro_name + pro_content 값 같이 넘겨주기
+		$(document).ready(function() {
+			$("#pro_name").on('keyup', function() {
+				$("#pro_content").val($(this).val())
+			});
+		});
+
+		// 장바구니 버튼 클릭시 로그인 되어있지 않으면 경고창
+		$('.buy-now').click(function() {
+			var id = $('input[name=user_id]').val();
+			console.log(id);
+			if (id == '') {
+				alert("로그인이 필요합니다.");
+				return false;
+			}
 		});
 	});
 
@@ -40,6 +52,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+						<input type="hidden" name="user_id" value="${user_id}">
 						<div class="right-product-box">
 							<!-- 정렬 -->
 							<div class="product-item-filter">
@@ -160,8 +173,7 @@
 									</div>
 								</div>
 							</div>
-							<br />
-							<br />
+							<br /> <br />
 							<!-- 카테고리 END -->
 							<!-- 가격대 필터 START -->
 							<div class="filter-price-left">

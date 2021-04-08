@@ -68,7 +68,8 @@
 												<!-- 판매가(jstl - 3자리마다 ',') -->
 												<c:set var="com" value="${cart.cart_price}" />
 												<td data-th="Price">
-													￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
+													￦
+													<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
 												</td>
 												<td data-th="Quantity">
 													<!-- 수량 -->
@@ -97,7 +98,10 @@
 								<h4>총 금액</h4>
 								<!-- jstl - 총액 계산 · 3자리마다 ','  -->
 								<c:set var="com" value="${price}" />
-								<h1>￦	<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" /></h1>
+								<h1>
+									￦
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
+								</h1>
 							</div>
 						</c:if>
 				</div>

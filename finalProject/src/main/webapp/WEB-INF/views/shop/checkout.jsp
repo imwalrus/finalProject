@@ -126,6 +126,8 @@
 									<h3 class="billing-heading mb-4">장바구니</h3>
 									<c:set var="price" value="0" />
 									<c:forEach items="${order}" var="order" varStatus="status">
+										<input type="hidden" name="pro_no" value="${order.pro_no }">
+										<input type="hidden" name="cart_count" value="${order.cart_count }">
 										<p class="d-flex">
 											<c:set var="name" value="${order.pro_name}" />
 											<c:set var="com" value="${order.cart_price}" />
@@ -138,7 +140,7 @@
 									</p>
 									<hr>
 									<p class="d-flex total-price">
-										<c:set var="com" value="${price + 1}" />
+										<c:set var="com" value="${price + 2500}" />
 										<span>결제금액</span> <span>￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" /></span>
 									</p>
 									<input type="hidden" name="order_totalprice" value="${com}">
@@ -176,10 +178,10 @@
 			pg : 'inicis',
 			method : '',
 			show_agree_window : 0,
-			user_info: {
-				username: '${user.user_name}',
-				email: '${user.user_email}',
-				phone: '${user.user_phone}'
+			user_info : {
+				username : '${user.user_name}',
+				email : '${user.user_email}',
+				phone : '${user.user_phone}'
 			},
 			order_id : 'order_id_1234',
 		}).error(function(data) {
@@ -189,7 +191,7 @@
 		}).close(function(data) {
 			console.log(data);
 		}).done(function(data) {
-			orderForm.submit();		
+			orderForm.submit();
 			alert('결제완료!');
 			console.log(data);
 		});
