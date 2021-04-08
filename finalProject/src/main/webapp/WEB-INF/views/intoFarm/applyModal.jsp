@@ -7,7 +7,7 @@
 		
 		<tr class="content">
 			<th class="text-left">체험 이름 : ${getlist.into_title}
-			<input type="hidden" value="${getlist.into_no}">
+			<input type="hidden" value="${getlist.into_no}" name="into_no">
 			</th>
 		</tr>
 		<tr class="content">

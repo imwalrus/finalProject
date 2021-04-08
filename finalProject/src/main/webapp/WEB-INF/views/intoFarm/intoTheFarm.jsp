@@ -1,6 +1,6 @@
-  
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,7 +63,7 @@
 				type:"post",
 				data: {
 						  into_title:$("input[name=into_title]").val(),
-						  into_city:$("input[name=into_city]").val(),
+						  into_city:$("select[name=into_city]").val(),
 						  into_product:$("input[name=into_product]").val(),
 						  into_date:$("input[name=into_date]").val(),
 						  into_entry:$("input[name=into_entry]").val(),
@@ -89,7 +89,6 @@
 			$.ajax({
 				url:"deleteFarm?into_no="+into_no,
 				type:"post",
-				data:into_no,
 				success:function(response){
 					console.log("result:"+response);
 					if(response != null){
@@ -99,7 +98,11 @@
 				}
 		})
 	} 
-		 
+		/*페이징*/
+	       /* function goPage(p) {
+				getSearchFm.page.value=p;
+				getSearchFm.submit(); 
+			    } */
 </script>
 
 <style>
@@ -109,7 +112,14 @@
 </style>
 </head>
 <body class="goto-here">
-	
+	<!--검색바  -->
+	<%-- <form action="getFarmList" name="getSearchFm">
+		<input type="hidden" name="page" value="1">
+		지역  <input name="into_city" value="${list.into_city}">
+		농작물 종류  <input name="into_product" value="${list.into_product}">
+		기간  <input type="date" name="into_date" value="${list.into_date}">
+		<button>검색</button>
+	</form>	 --%>
 
 	
 	<!--농촌속으로 리스트  -->
@@ -134,6 +144,7 @@
 				</div>
 			</c:forEach>
 		</div>
+	 <%-- <my:paging paging="${paging}" jsFunc="goPage" /> --%>
 	</div>
 		
 	</section>
@@ -162,7 +173,7 @@
 	
 	<!--모달 수정화면 -->
 	
-	<div class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div style="overflow: scroll; " class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -177,6 +188,5 @@
 	</div>
 	
 		
-	
 </body>
 </html>

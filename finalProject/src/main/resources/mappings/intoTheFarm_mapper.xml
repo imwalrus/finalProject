@@ -2,20 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper">
-	<!--전체조회 -->
+
+	<!--total 건수 구하기 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM INTOFARM
+		<where>
+			<if test="into_no != null and into_no !=''">
+				INTO_NO = #{into_no}
+			</if>
+			<if test="into_title != null and into_title !=''">
+				INTO_TITLE = #{into_title}
+			</if>
+			<if test="into_phone != null and into_phone !=''">
+				INTO_PHONE = #{into_phone}
+			</if>
+			<if test="into_product != null and into_product !=''">
+				INTO_PRODUCT = #{into_product}
+			</if>
+			<if test="into_date != null and into_date !=''">
+				INTO_DATE = #{into_date}
+			</if>
+			<if test="into_entry != null and into_entry !=''">
+				INTO_ENTRY = #{into_entry}
+			</if>
+			<if test="into_info != null and into_info !=''">
+				INTO_INFO = #{into_info}
+			</if>
+			<if test="user_id != null and user_id !=''">
+				USER_ID = #{user_id}
+			</if>
+			<if test="into_city != null and into_city !=''">
+				INTO_CITY = #{into_city}
+			</if>
+		</where>
+	</select>
+	
+	<!--전체조회 & 페이징 -->
 	
 	<select id="getFarmList" resultType="IntoTheFarmVO">
-	SELECT INTO_NO,
-		   INTO_TITLE,
-		   INTO_PHONE,
-		   INTO_PRODUCT,
-		   INTO_DATE,
-		   INTO_ENTRY,
-		   INTO_FILENAME,
-		   INTO_INFO,
-		   USER_ID,
-		   INTO_CITY
-	FROM INTOFARM
+	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT INTO_NO
+			 , INTO_TITLE
+			 , INTO_PHONE
+			 , INTO_PRODUCT
+             , INTO_DATE
+             , INTO_ENTRY
+             , INTO_INFO
+             , USER_ID
+             , INTO_CITY
+		FROM INTOFARM
+		ORDER BY INTO_NO
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+		
 	</select>
 	
 	<!--단건조회 -->
@@ -36,27 +75,36 @@
 	
 	<!--등록 -->
 	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+	
+	<selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+		SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
+	</selectKey>
 	INSERT INTO INTOFARM <!--확인! -->
-				(INTO_TITLE,
-		  		 INTO_PHONE,
-		  		 INTO_PRODUCT,
-				 INTO_DATE,
-				 INTO_ENTRY,
-				 INTO_FILENAME,
-				 INTO_INFO,
-			     USER_ID,
-			     INTO_CITY
+				( INTO_NO
+				 ,INTO_TITLE
+		  		 ,INTO_PHONE
+		  		 ,INTO_PRODUCT
+				 ,INTO_DATE
+				 ,INTO_ENTRY
+				 ,INTO_INFO
+				 <if test="uploadFileName != null and uploadFileName != ''">
+				 ,INTO_FILENAME
+				 </if>
+			     ,USER_ID
+			     ,INTO_CITY
 			    )
-	VALUES ((SELECT NVL(MAX(SEQ),1)+1 FROM INTOFARM),
-			#{into_title},
-	 		#{into_phone},
-		   	#{into_product},
-	   	    #{into_date}, 
-		   	#{into_entry},
-		    #{into_filename},
-		   	#{into_info},
-		   	#{user_id},
-		   	#{into_city}
+	VALUES ( #{into_no}
+			,#{into_title}
+	 		,#{into_phone}
+		   	,#{into_product}
+	   	    ,#{into_date}
+		   	,#{into_entry}
+		   	,#{into_info}
+		   	<if test="uploadFileName != null and uploadFileName != ''">
+		   	,#{into_filename}
+		   	</if>
+		   	,#{user_id}
+		   	,#{into_city}
 		   	)
 	</insert>
 	

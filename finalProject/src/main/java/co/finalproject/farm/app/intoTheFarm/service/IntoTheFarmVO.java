@@ -5,10 +5,22 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class IntoTheFarmVO {
+	//페이징
+	Integer page = 1;
+	int start = 1;
+	int end = 10;
+	/* int into_count; */ 
 	private String into_no;
 	private String into_title;
 	private String into_phone;

@@ -62,12 +62,13 @@ function insertFarm() {
 </script>
 </head>
 <body>
+<div style="overflow: scroll;">
 <h2 style="text-align: center;">체험 등록</h2><br><br><br>
 
 	<div style="width: 60%; margin: auto;">
 		<form id="frm" method="post" action="insertFarm"
 			enctype="multipart/form-data">
-			<input type="hidden" name="user_id" id="user_id" value="a"> 
+			<input type="hidden" name="user_id" id="user_id" value="hw"> 
 			<select name="into_city" id="city-select" style="margin-top: 1%;">
 				<option value="">--지역을 선택 하여 주십시오--</option>
 				<option value="광주">광주</option>
@@ -122,6 +123,7 @@ function insertFarm() {
 				fontNames : [ 'Arial', 'Arial Black','Comic Sans MS', 'Courier New', '맑은 고딕','궁서', '굴림체', '굴림', '돋움체', '바탕체' ],
 				fontSizes : [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30','36', '50', '72' ]
 			});
-	</script>  
+	</script>
+</div>	  
 </body>
 </html>

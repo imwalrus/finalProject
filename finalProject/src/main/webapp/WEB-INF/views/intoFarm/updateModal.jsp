@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
 <style>
  input{
  	border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;  /* 테두리 없애기 */
@@ -21,7 +19,22 @@
 			<th class="text-left">체험 이름 : <input type="text" name="into_title" value="${upFarm.into_title}"></th>
 		</tr>
 		<tr class="content">
-			<th class="text-left">지역 : <input type="text" name="into_city" value="${upFarm.into_city}"></th>
+			<th class="text-left">
+				지역 :
+				<select name="into_city" id="city-select" style="margin-top: 1%;">
+					<option value="">${upFarm.into_city}</option>
+					<option value="광주">광주</option>
+					<option value="대구">대구</option>
+					<option value="대전">대전</option>
+					<option value="독도">독도</option>
+					<option value="부산">부산</option>
+					<option value="서울">서울</option>
+					<option value="울릉도">울릉도</option>
+					<option value="울산">울산</option>
+					<option value="인천">인천</option>
+					<option value="제주도">제주도</option>
+				</select><br> 
+			</th>
 		</tr>
 		<tr class="content">
 			<th class="text-left">농작물 종류 : <input type="text" name="into_product" value="${upFarm.into_product}"></th>
@@ -49,6 +62,5 @@
 					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
 					<!--농업인& 관리자 수정-->
 					<button class="btn btn-primary" type="button" data-dismiss="modal" onclick="goupdate('${upFarm.into_no}')">저장</button>
-					<!-- <button type="button" id="updateFarm" class="btn btn-default" data-dismiss="modal">Update</button> -->
 				</div>
 </form>
