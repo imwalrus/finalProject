@@ -21,7 +21,7 @@
 				<div class="col-lg-12 col-md-12 col-12">
 					<div class="row">
 						<!-- single -->
-						<div class="col d-flex ftco-animate">
+						<div class="col-lg-6">
 							<div class="blog-entry align-self-stretch d-md-flex">
 								<a href="blog-single.html" class="block-20" style="background-image: url('resources/main/images/image_2.jpg');"> </a>
 								<div class="text d-block pl-md-4">
@@ -36,7 +36,7 @@
 							</div>
 						</div>
 						<!-- single -->
-						<div class="col d-flex ftco-animate">
+						<div class="col-lg-6">
 							<div class="blog-entry align-self-stretch d-md-flex">
 								<a href="blog-single.html" class="block-20" style="background-image: url('resources/main/images/image_2.jpg');"> </a>
 								<div class="text d-block pl-md-4">
@@ -51,7 +51,7 @@
 							</div>
 						</div>
 						<!-- single -->
-						<div class="col d-flex ftco-animate">
+						<div class="col-xs-12">
 							<div class="blog-entry align-self-stretch d-md-flex">
 								<a href="blog-single.html" class="block-20" style="background-image: url('resources/main/images/image_2.jpg');"> </a>
 								<div class="text d-block pl-md-4">

@@ -15,10 +15,11 @@
 				OR PRO_CATEGORY = #{pro_category}
 			</if>
 			<if test="pro_price != null and pro_price != ''">
-				OR PRO_PRICE &lt;= #{pro_price}
+				OR PRO_PRICE = #{pro_price}
 			</if>
 		</where>
 	</select>
+	
 	<!-- 전체 리스트 -->
 	<select id="getListShop" parameterType="ShopVO" resultType="ShopVO">
 		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
@@ -54,11 +55,13 @@
 		</choose>
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
 	<!-- 전체 수량 -->
 	<select id="allCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PRODUCT
 	</select>
+	
 	<!-- 카테고리 수량 -->
 	<select id="cateCount" resultType="ShopVO">
 		SELECT PRO_CATEGORY,
@@ -67,6 +70,7 @@
 		GROUP BY PRO_CATEGORY
 		ORDER BY PRO_COUNT DESC
 	</select>
+	
 	<!-- 상품 상세 보기 -->
 	<select id="getProduct" parameterType="ShopVO" resultType="ShopVO">
 		SELECT PRO_NO
@@ -82,6 +86,7 @@
 		  FROM PRODUCT
 		 WHERE PRO_NO = #{pro_no}
 	</select>
+	
 	<!-- 상품 관리 리스트 -->
 	<select id="getListProd" parameterType="ShopVO" resultType="ShopVO">
 		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
@@ -104,8 +109,9 @@
 	  ORDER BY PRO_NO DESC
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
 	<!-- 상품 등록 -->
-	<insert id="insertProduct" statementType="CALLABLE" parameterType="ShopVO">
+	<insert id="insertProduct" parameterType="ShopVO">
 		<selectKey keyProperty="pro_no" resultType="String" order="BEFORE">
 			SELECT NVL(MAX(PRO_NO), 0) + 1 FROM PRODUCT
 		</selectKey>
@@ -130,6 +136,7 @@
 						   , #{pro_filename}
 						   , #{pro_category})
 	</insert>
+	
 	<!-- 상품 수정 -->
 	<update id="updateProduct" parameterType="ShopVO">
 		UPDATE PRODUCT
@@ -164,11 +171,13 @@
 		</set>
 		WHERE PRO_NO = #{pro_no}
 	</update>
+	
 	<!-- 상품 삭제 -->
 	<delete id="deleteProduct" parameterType="ShopVO">
 		DELETE FROM PRODUCT
 		      WHERE PRO_NO = #{pro_no}
 	</delete>
+	
 	<!-- 장바구니 불러오기 -->
 	<select id="getCart" parameterType="CartVO" resultType="CartVO">
 		SELECT C.CART_NO
@@ -188,8 +197,9 @@
 		</where>
 		ORDER BY C.CART_NO
 	</select>
+	
 	<!-- 장바구니 등록 -->
-	<insert id="insertCart" statementType="CALLABLE" parameterType="CartVO">
+	<insert id="insertCart" parameterType="CartVO">
 		<selectKey keyProperty="cart_no" resultType="String" order="BEFORE">
 			SELECT NVL(MAX(CART_NO), 0) + 1 FROM CART
 		</selectKey>
@@ -202,22 +212,26 @@
 						   , #{cart_count}
 						   , #{user_id})
 	</insert>
+	
 	<!-- 장바구니 수량 변경 -->
 	<update id="updateCart" parameterType="CartVO">
 		UPDATE CART
 		   SET CART_COUNT = #{cart_count}
 		 WHERE PRO_NO = #{pro_no}
 	</update>
+	
 	<!-- 장바구니 삭제 -->
 	<delete id="deleteCart" parameterType="CartVO">
 		DELETE FROM CART
 		      WHERE CART_NO IN (#{cart_no})
 	</delete>
+	
 	<!-- 장바구니 비우기 -->
 	<delete id="deleteAllCart" parameterType="CartVO">
 		DELETE FROM CART
 		      WHERE USER_ID IN (#{user_id})
 	</delete>
+	
 	<!-- 동일한 상품이있는지 체크 -->
 	<select id="cartCheck" parameterType="CartVO" resultType="int">
 		SELECT COUNT(*)
@@ -225,14 +239,15 @@
 		 WHERE USER_ID = #{user_id}
 		   AND PRO_NO = #{pro_no}
 	</select>
+	
 	<!-- 주문 등록 -->
-	<insert id="insertOrder" statementType="CALLABLE" parameterType="OrderVO">
+	<insert id="insertOrder" parameterType="OrderVO">
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
-			SELECT NVL(MAX(ORDER_NO), 0) + 1 FROM ORDERS
+		SELECT TO_NUMBER(TO_CHAR(sysdate,'YYYYMMDDHH24MI') || NVL(TO_CHAR(MAX(SUBSTR(order_no, 7))),'00')) + 1
+          FROM ORDERS
 		</selectKey>
 		INSERT INTO ORDERS (ORDER_NO
 					 	  , ORDER_DATE
-					      , ORDER_CONDITION
 					   	  , ORDER_PAYMENT
 					   	  , ORDER_TOTALPRICE
 					   	  , ORDER_ZIP
@@ -243,7 +258,6 @@
 					      , USER_ID)
 			        VALUES (#{order_no}
 			     	      , SYSDATE
-			     	   	  , '결제완료'
 			     	   	  , #{order_payment}
 			     	   	  , #{order_totalprice}
 			     	   	  , #{order_zip}
@@ -253,14 +267,17 @@
 			     	   	  , #{order_phone}
 			     	   	  , #{user_id})
 	</insert>
+	
 	<!-- 상세 주문 등록 -->
 	<insert id="insertOrderlist" parameterType="OrderVO">
 		INSERT INTO ORDERLIST(ORDERLIST_NO
 							, ORDER_NO
+					        , ORDERLIST_CONDITION
 							, PRO_NO
 							, CART_COUNT)
     				   SELECT ORDERLIST_SEQ.NEXTVAL
     				   		, O.ORDER_NO
+    				   		, '결제완료'
     				   		, C.PRO_NO
     				   		, C.CART_COUNT
     					 FROM CART C, ORDERS O

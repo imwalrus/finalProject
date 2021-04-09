@@ -15,11 +15,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <style>
 	.chat-bubble{
-		width: 350px !important;
+		width: 300px !important;
 		font-size: small;
 	}
 	.offset-md-9 {
-	   	margin-left: 46% !important;
+	   	margin-left: 53% !important;
 	}
 	.chat-bubble--right{
 		text-align:right !important;
@@ -30,6 +30,10 @@
 	.sendBtn{
 		cursor:pointer;
 	}
+	.col-md-3{
+		max-width:100% !important;
+	}
+
 </style>
 </head>
 <body>

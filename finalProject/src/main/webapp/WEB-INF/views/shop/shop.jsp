@@ -116,17 +116,15 @@
 										<!-- 페이징 -->
 										<div class="row mt-5">
 											<div class="col text-center">
-												<div class="block-27">
-													<form action="shop" name="searchFrm">
-														<input type="hidden" name="page" value="1">
-														<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
-														<input type="hidden" name="pro_name" value="${shopVO.pro_name}">
-														<input type="hidden" name="pro_content" value="${shopVO.pro_content}">
-														<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
-														<input type="hidden" name="pro_price" value="${shopVO.pro_price}">
-														<my:paging paging="${paging}" jsFunc="goPage" />
-													</form>
-												</div>
+												<form action="shop" name="searchFrm">
+													<input type="hidden" name="page" value="1">
+													<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
+													<input type="hidden" name="pro_name" value="${shopVO.pro_name}">
+													<input type="hidden" name="pro_content" value="${shopVO.pro_content}">
+													<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
+													<input type="hidden" name="pro_price" value="${shopVO.pro_price}">
+													<my:paging paging="${paging}" jsFunc="goPage" />
+												</form>
 											</div>
 										</div>
 									</div>

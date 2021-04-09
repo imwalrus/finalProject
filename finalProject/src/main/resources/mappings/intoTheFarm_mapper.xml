@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper">
+
+	<!--total 건수 구하기 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM INTOFARM
+		<where>
+			<if test="into_no != null and into_no !=''">
+				INTO_NO = #{into_no}
+			</if>
+			<if test="into_title != null and into_title !=''">
+				INTO_TITLE = #{into_title}
+			</if>
+			<if test="into_phone != null and into_phone !=''">
+				INTO_PHONE = #{into_phone}
+			</if>
+			<if test="into_product != null and into_product !=''">
+				INTO_PRODUCT = #{into_product}
+			</if>
+			<if test="into_date != null and into_date !=''">
+				INTO_DATE = #{into_date}
+			</if>
+			<if test="into_entry != null and into_entry !=''">
+				INTO_ENTRY = #{into_entry}
+			</if>
+			<if test="into_info != null and into_info !=''">
+				INTO_INFO = #{into_info}
+			</if>
+			<if test="user_id != null and user_id !=''">
+				USER_ID = #{user_id}
+			</if>
+			<if test="into_city != null and into_city !=''">
+				INTO_CITY = #{into_city}
+			</if>
+		</where>
+	</select>
+	
+	<!--전체조회 & 페이징 -->
+	
+	<select id="getFarmList" resultType="IntoTheFarmVO">
+	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT INTO_NO
+			 , INTO_TITLE
+			 , INTO_PHONE
+			 , INTO_PRODUCT
+             , INTO_DATE
+             , INTO_ENTRY
+             , INTO_INFO
+             , USER_ID
+             , INTO_CITY
+		FROM INTOFARM
+		<where>
+         <if test="into_no != null and into_no != '' and into_title != null and into_title != '' and
+         		   into_phone != null and into_phone != '' and into_product != null and into_product != '' and
+         		   into_date != null and into_date != '' and into_entry != null and into_entry != '' and
+         		   into_info != null and into_info != '' and user_id != null and user_id != '' and
+         		   into_city != null and into_city != '' and user_id != null and user_id != ''">
+			    AND ( UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+				OR UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%' 
+				<!-- 기간설정 --> 
+				
+				)
+		 </if>
+        </where>
+		ORDER BY INTO_NO
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+		
+	</select>
+	
+	<!--단건조회 -->
+	<select id="getSearchFarm" resultType="IntoTheFarmVO">
+	SELECT INTO_NO,
+		   INTO_TITLE,
+		   INTO_PHONE,
+		   INTO_PRODUCT,
+		   INTO_DATE,
+		   INTO_ENTRY,
+		   INTO_FILENAME,
+		   INTO_INFO,
+		   USER_ID,
+		   INTO_CITY
+	FROM INTOFARM
+	WHERE INTO_NO=#{into_no}
+	</select>
+	
+	<!--등록 -->
+	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+	
+	<selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+		SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
+	</selectKey>
+	INSERT INTO INTOFARM <!--확인! -->
+				( INTO_NO
+				 ,INTO_TITLE
+		  		 ,INTO_PHONE
+		  		 ,INTO_PRODUCT
+				 ,INTO_DATE
+				 ,INTO_ENTRY
+				 ,INTO_INFO
+				 <if test="uploadFileName != null and uploadFileName != ''">
+				 ,INTO_FILENAME
+				 </if>
+			     ,USER_ID
+			     ,INTO_CITY
+			    )
+	VALUES ( #{into_no}
+			,#{into_title}
+	 		,#{into_phone}
+		   	,#{into_product}
+	   	    ,#{into_date}
+		   	,#{into_entry}
+		   	,#{into_info}
+		   	<if test="uploadFileName != null and uploadFileName != ''">
+		   	,#{into_filename}
+		   	</if>
+		   	,#{user_id}
+		   	,#{into_city}
+		   	)
+	</insert>
+	
+	<!--수정 -->
+	<update id="updateFarm" parameterType="IntoTheFarmVO">
+	UPDATE INTOFARM SET INTO_TITLE=#{into_title},
+						INTO_PHONE=#{into_phone},
+						INTO_PRODUCT=#{into_product},
+						INTO_DATE=#{into_date},
+						INTO_ENTRY=#{into_entry},
+						INTO_FILENAME=#{into_filename},
+						INTO_INFO=#{into_info},
+					    INTO_CITY=#{into_city}
+	WHERE INTO_NO=#{into_no}				    
+	</update>
+	
+	<!--삭제 -->
+	<delete id="deleteFarm" parameterType="IntoTheFarmVO">
+	DELETE FROM INTOFARM 
+	WHERE INTO_NO=#{into_no}
+	</delete>
+	
+</mapper>

@@ -6,7 +6,6 @@ import lombok.Data;
 public class OrderVO {
 	private String order_no;
 	private String order_date;
-	private String order_condition;
 	private String order_invoice;
 	private String order_payment;
 	private String order_totalprice;
@@ -17,6 +16,7 @@ public class OrderVO {
 	private String order_phone;
 	private String user_id;
 	private String orderlist_no;
+	private String orderlist_condition;
 	private String pro_no;
 	private String cart_count;
 }

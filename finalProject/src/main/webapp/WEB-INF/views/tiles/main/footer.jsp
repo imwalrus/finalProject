@@ -10,7 +10,7 @@
 </head>
 <body class="goto-here">
     <!-- footer 시작 -->
-    <footer class="ftco-footer ftco-section bg-light">
+    <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
 

@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 	
 	//회원 권한 변경(user-> farmer)
 	public int updateUserToFarmer(UserVO vo) {
-		int result = userDAO.updateUserToFarmer(vo);
+		int result = userDAO.updateFarmer(vo);
 		return result;
 	}
 	

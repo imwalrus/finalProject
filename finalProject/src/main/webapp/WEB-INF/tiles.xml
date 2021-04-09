@@ -60,7 +60,6 @@
 			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 	
-	
 	<!-- tiles 안쓰는 화면 설정 ex) 주소팝업...-->
 	<definition name="notiles/*/*" template="/WEB-INF/views/tiles/notiles.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
@@ -68,9 +67,8 @@
 	<definition name="notiles/*" template="/WEB-INF/views/tiles/notiles.jsp">
 			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
-	
-	
-	
+
+
 	<definition name="*/*" extends="mainTemplete">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
  		<put-attribute name="footer" value="/WEB-INF/views/tiles/main/footer.jsp"/> 

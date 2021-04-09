@@ -5,6 +5,8 @@ import java.util.List;
 import co.finalproject.farm.app.user.service.UserVO;
 
 public interface UserMapper {
+	public int getCount(UserVO vo);				//페이징 건수
+	public int getCountFarmer(UserVO vo);				//페이징 건수
 	
 	public int idCheck(UserVO vo);    			//id 중복체크
 	public int emailCheck(UserVO vo); 			//이메일 중복체크
@@ -17,7 +19,10 @@ public interface UserMapper {
 	
 	public int insertUser(UserVO vo); 			//회원가입
 	public int updateUser(UserVO vo); 			//회원 정보수정 
-	public int updateUserToFarmer(UserVO vo);	//회원 권한 변경(user-> farmer)
 	public int deleteUser(UserVO vo);			//회원탈퇴 또는 관리자 페이지 내에서 회원 삭제
-
+	
+	public List<UserVO> getFarmerList(UserVO vo);	//농업인 신청현황
+	public UserVO getFarmer(UserVO vo);				//농업인 신청현황(단건)
+	public int updateFarmer(UserVO vo);				//회원 권한 변경(user-> farmer)
+	public int updateFarmerCheck(UserVO vo);		//권한 진행 상태(0:진행중, 1:승인, 2:취소)
 }
