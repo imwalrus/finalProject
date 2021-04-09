@@ -66,18 +66,26 @@
 			 ORDER BY MESSAGE_ID
 </select>
 
+<!-- 읽은 시간 update -->
 <update id ="updateReadTime1" parameterType="MessageVO">
 	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
 				   WHERE CHATROOM_NO=${chatroom_no} and 
 				   		 MSG_RECEIVER = #{msg_receiver}
 </update>
 
-<update id ="updateReadTime2" parameterType="MessageVO">
-	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
-				   where USER_ID_two = #{user_id_two}  AND 
-				   MSG_READTIME = MSG_SENDTIME and 
-				   message_sender = USER_ID_two and 
-				   USER_ID_one = #{user_id_one}
-</update>
+<!-- 메세지 삭제 -->
+<delete id="deleteMessage" parameterType="String">
+	DELETE FROM MESSAGE WHERE CHATROOM_NO = #{chatroom_id}
+</delete>
+
+<!-- 채팅방 삭제 -->
+<delete id="deleteChatRoom" parameterType="String">
+	DELETE FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_id}
+</delete>
+
+<!-- 읽지않은 메세지 갯수 -->
+<select id="getUnreadMessage" resultType="int" parameterType="String">
+	select count(*) from message where msg_receiver = ${user_id}
+</select>
 
 </mapper>

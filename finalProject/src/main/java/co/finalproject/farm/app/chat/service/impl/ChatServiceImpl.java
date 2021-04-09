@@ -47,4 +47,19 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.getMessageList(vo);
 	}
 
+	public int deleteMessage(String chatroom_no) {
+		int result = chatDAO.deleteMessage(chatroom_no);
+		return result;
+	}
+
+	public int deleteChatRoom(String chatroom_no) {
+		int result = chatDAO.deleteChatRoom(chatroom_no);
+		return result;
+	}
+
+	public int getUnreadMessage(String user_id) {
+		int result = chatDAO.getUnreadMessage(user_id);
+		return result;
+	}
+
 }

@@ -16,4 +16,7 @@ public interface ChatMapper {
 		public MessageVO getRecentMessage(MessageVO vo); 	//최근 메세지 불러오기
 		public int updateReadTime1(MessageVO vo); 			//읽은 시간 update
 		
+		public int deleteMessage(String chatroom_no);
+		public int deleteChatRoom(String chatroom_no);
+		public int getUnreadMessage(String user_id);
 }

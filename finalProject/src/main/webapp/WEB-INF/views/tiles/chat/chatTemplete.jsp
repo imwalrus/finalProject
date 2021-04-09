@@ -21,7 +21,7 @@
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	.chat-bubble{
-		width: 300px !important;
+		width: 290px !important;
 		font-size: small;
 	}
 	.offset-md-9 {
@@ -41,8 +41,31 @@
 	}
 	.chatMiddle{
 		overflow:auto;
-		height:456px;
+		height:476px;
 	}
+	.chat-box-tray {
+		    margin-top: 0px !important;
+	}
+	.chatList{
+		overflow:auto;
+		height:482px;
+	}
+	#message{
+		padding-left: 15px;
+		width: 85%;
+	}
+	#sendMsg, .material-icons{
+		cursor:pointer;
+	}
+	.noList{
+		text-align:center;
+		margin-top:170px;
+	}
+ 	.firstPage{
+		height:600px;
+		width:760px !important;
+	} 
+
 
 </style>
 </head>

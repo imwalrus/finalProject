@@ -54,7 +54,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		log.info(session.getId()+" 연결 종료됨!!!! ");
 	}
 	
-	/*   
+	/**   
 	* < 메세지 전송 >
 	* 클라이언트가 메시지를 전송했을 때 호출되는메소드
 	* session은 메시지를 전송한 클라이언트
@@ -103,7 +103,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		insertVO.setMsg_receiver(msgVO.getMsg_receiver());
 		insertVO.setMsg_content(msgVO.getMsg_content());
 		insertVO.setMsg_sendtime(msgVO.getMsg_sendtime());
-		insertVO.setChatroom_no(msgVO.getChatroom_no());
+		insertVO.setChatroom_no(room.getChatroom_no());
 		int insertMessage = chatService.insertMessage(insertVO);
 		
 		if(createRoom + insertMessage == 2) {
