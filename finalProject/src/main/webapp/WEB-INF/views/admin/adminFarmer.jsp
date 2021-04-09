@@ -34,13 +34,13 @@
 	// 승인 모달로 넘기기
 	function chkFunc(e) {
 		var tds = $(e.target).closest("tr").children()
-		$('#user_id').val(tds.eq(1).html());
+		$('#user_id1').val(tds.eq(1).html());
 	}
 
 	// 취소 모달로 넘기기
 	function canFunc(e) {
 		var tds = $(e.target).closest("tr").children()
-		$('#user_id').val(tds.eq(1).html());
+		$('#user_id2').val(tds.eq(1).html());
 	}
 
 	// 페이징
@@ -136,7 +136,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form action="updateFarmer" method="post">
-							<input type="hidden" id="user_id" name="user_id">
+							<input type="hidden" id="user_id1" name="user_id">
 							<input type="hidden" name="user_auth" value="farmer">
 							<input type="hidden" name="farmer_check" value="1">
 							<div class="modal-body">
@@ -156,7 +156,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form action="updateFarmer" method="post">
-							<input type="hidden" id="user_id" name="user_id">
+							<input type="hidden" id="user_id2" name="user_id">
 							<input type="hidden" name="user_auth" value="user">
 							<input type="hidden" name="farmer_check" value="2">
 							<div class="modal-body">

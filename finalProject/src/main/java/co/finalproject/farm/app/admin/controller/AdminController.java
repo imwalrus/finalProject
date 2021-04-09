@@ -80,6 +80,6 @@ public class AdminController {
 	public String updateFarmer(UserVO vo) {
 		userMapper.updateFarmer(vo);
 		userMapper.updateFarmerCheck(vo);
-		return "redirect:/getFarmerList";
+		return "redirect:/adminFarmer";
 	}
 }
