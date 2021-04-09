@@ -21,24 +21,6 @@
 <link rel="stylesheet" href="resources/admin/css/style.css">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-
-<style type="text/css">
-table {
-	text-align: center;
-}
-
-.hide {
-	display: none;
-}
-
-.show {
-	display: table-row;
-}
-
-.item td {
-	cursor: pointer;
-}
-</style>
 </head>
 <body>
 	<section class="pcoded-main-container">

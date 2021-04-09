@@ -50,7 +50,7 @@
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="bc_alert.html">회원정보수정</a></li>
-					        <li><a href="memberOut">회원탈퇴</a></li>
+					        <li><a href="memberOut?=${user_id }">회원탈퇴</a></li>
 					        <li><a href="getFarmsList">나의농지</a></li>
                             <li><a href="insertFarmer">농업인 권한 신청</a></li>
 					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../mypage/adminMenu.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -73,19 +72,19 @@
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label"><h6>ID</h6></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" id="#" value="#" readonly="readonly" >
+                                                            <input type="text" class="form-control" id="user_id" value="${userVO.user_id }" readonly="${userVO.user_id }" >
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label"><h6>이름</h6></label>
                                                         <div class="col-sm-8">
-                                                            <input type="email" class="form-control" id="#" value="#" readonly="readonly">
+                                                            <input type="email" class="form-control" id="user_name" value="${userVO.user_name }" readonly="${userVO.user_id }">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label"><h6>Password</h6></label>
                                                         <div class="col-sm-8">
-                                                            <input type="password" class="form-control" id="#" placeholder="Password">
+                                                            <input type="password" class="form-control" id="user_PWD" placeholder="Password">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">

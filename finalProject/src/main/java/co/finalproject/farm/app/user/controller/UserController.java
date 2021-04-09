@@ -133,4 +133,17 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	//회원탈퇴폼
+		@RequestMapping("/memberOut")
+		public String memberOut(UserVO vo) {
+			return "mypageTiles/mypage/memberOut";
+		}
+		
+		@PostMapping("/memberOut")
+		public String memberOutProc(UserVO vo) {
+			userService.memberOut(vo);
+			return "redirect:/";
+		}
+		
+	
 }

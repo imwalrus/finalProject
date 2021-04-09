@@ -77,6 +77,10 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
-
+	//회원탈퇴 또는 관리자 페이지 내에서 회원 삭제
+	public int memberOut(UserVO vo) {
+		int result = userDAO.memberOut(vo);
+		return result;
+	}
 
 }

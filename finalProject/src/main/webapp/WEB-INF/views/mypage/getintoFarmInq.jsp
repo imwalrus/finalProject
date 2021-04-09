@@ -2,11 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'hyunjung' of https://github.com/imwalrus/finalProject.git
 <!-- 모달바디 시작 -->
 <form action="updateintoFarmInq" method="post">
 	<div class="row" align="center">

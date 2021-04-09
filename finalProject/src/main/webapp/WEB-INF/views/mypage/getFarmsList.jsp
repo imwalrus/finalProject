@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../mypage/adminMenu.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,33 +19,6 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<!-- <style>
-.table{
-	text-align: center;
-}
-.table thead th {
-    border-bottom: 1px solid #e2e5e8;
-    font-size: 13px;
-    color: #37474f;
-    background: #e3f1d4 !important;
-    text-transform: uppercase;
-}
-
-</style> -->
-<style>
-
-.table{
-min-width:100% !important;
-}
-.table tbody tr td {
-padding: 10px 8px !important;
-}
-
-.table {
-	text-align: center;
-}
-
-</style>
 </head>
 
 <body>

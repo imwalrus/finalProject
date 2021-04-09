@@ -21,22 +21,6 @@
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
 
-<style>
-
-.table{
-min-width:100% !important;
-}
-.table tbody tr td {
-padding: 10px 8px !important;
-}
-
-.table {
-	text-align: center;
-}
-
-</style>
-
-
 </head>
 <body>
 	<section class="pcoded-main-container">

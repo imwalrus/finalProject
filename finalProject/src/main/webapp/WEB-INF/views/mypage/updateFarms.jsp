@@ -5,28 +5,6 @@
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<!-- <style>
-.table.td {
-  width:50px !important;
-  height:25px !important;
-  font-size:20px !important;
-  text-align: center;
-}
-</style> -->
-<style>
-
-.table{
-min-width:100% !important;
-}
-.table tbody tr td {
-padding: 10px 8px !important;
-}
-
-.table {
-	text-align: center;
-}
-
-</style>
 </head>
 
 

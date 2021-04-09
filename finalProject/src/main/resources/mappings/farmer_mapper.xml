@@ -19,12 +19,14 @@
 							FARMER_NO
 							,FARMER_FILENAME
 							,USER_ID
+							,FARMER_DATE
 							)
 		
 		VALUES (
 				(select nvl(max(farmer_no),0)+1 from farmer)
 				,#{farmer_filename}
 				,#{user_id}
+				,'sysdate'
 				)
 	
 	</insert>
