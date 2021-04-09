@@ -2,14 +2,12 @@ package co.finalproject.farm.app.chat.controller;
 
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +28,7 @@ public class ChatController {
 			model.addAttribute("user_id",user_id);
 			vo.setUser_id_one(user_id);
 			model.addAttribute("chatList", chatService.getChatRoomList(vo));
+			model.addAttribute("unreadMessage", chatService.getUnreadMessage(user_id));
 			return "chat/chat/showChat";
 		}
 		
@@ -60,10 +59,10 @@ public class ChatController {
 			//메세지 list 불러오기 
 			List<MessageVO> msgList = chatService.getMessageList(vo);
 			System.out.println(msgList);
-			//메세지 리스트 불러오면서 해당하는 chatroom에 읽지않은 message 읽은 시간 update
-				if(msgList != null) { 
-					chatService.updateReadTime1(vo); 
-				}
+			/*
+			 * //메세지 리스트 불러오면서 해당하는 chatroom에 읽지않은 message 읽은 시간 update if(msgList != null)
+			 * { chatService.updateReadTime1(vo); }
+			 */
 			return msgList;
 		}
 		
@@ -79,9 +78,16 @@ public class ChatController {
 		
 		@RequestMapping("/getUnreadMessage")
 		@ResponseBody
-		public int getUnreadMessage(HttpSession session) {
+		public List<MessageVO> getUnreadMessage(HttpSession session) {
 			String user_id = (String) session.getAttribute("user_id");
-			int result = chatService.getUnreadMessage(user_id);
+			List<MessageVO> list = chatService.getUnreadMessage(user_id);
+			return list;
+		}
+		
+		@RequestMapping("/updateReadTime")
+		@ResponseBody
+		public int updateReadTime(MessageVO vo) {
+			int result = chatService.updateReadTime1(vo);
 			return result;
 		}
 }

@@ -1,7 +1,6 @@
 package co.finalproject.farm.app.chat.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import co.finalproject.farm.app.chat.service.ChatRoomVO;
 import co.finalproject.farm.app.chat.service.MessageVO;
@@ -18,5 +17,5 @@ public interface ChatMapper {
 		
 		public int deleteMessage(String chatroom_no);
 		public int deleteChatRoom(String chatroom_no);
-		public int getUnreadMessage(String user_id);
+		public List<MessageVO> getUnreadMessage(String user_id);
 }

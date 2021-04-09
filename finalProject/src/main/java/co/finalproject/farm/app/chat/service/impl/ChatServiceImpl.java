@@ -2,7 +2,6 @@ package co.finalproject.farm.app.chat.service.impl;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,9 +56,8 @@ public class ChatServiceImpl implements ChatService {
 		return result;
 	}
 
-	public int getUnreadMessage(String user_id) {
-		int result = chatDAO.getUnreadMessage(user_id);
-		return result;
+	public List<MessageVO> getUnreadMessage(String user_id) {
+		return chatDAO.getUnreadMessage(user_id);
 	}
 
 }

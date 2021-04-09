@@ -1,7 +1,6 @@
 package co.finalproject.farm.app.chat.service;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ChatService {
 
@@ -15,5 +14,5 @@ public interface ChatService {
 	public int updateReadTime1(MessageVO vo); 			//읽은 시간 update
 	public int deleteMessage(String chatroom_no);
 	public int deleteChatRoom(String chatroom_no);
-	public int getUnreadMessage(String user_id);
+	public List<MessageVO> getUnreadMessage(String user_id);
 }

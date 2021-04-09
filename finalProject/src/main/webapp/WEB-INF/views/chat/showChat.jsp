@@ -9,6 +9,10 @@
 <script>
 $(document).ready(function(){
 	connect();
+	
+	 //ajax를 정기적으로 반복(5초마다 반복)하여 읽지않은 대화가 있다면 갯수 카운트 해서 보여주기
+	setInterval(getUnreadMessage(),5000);
+	 
 	//메세지 입력 후 enter키 누르면 메세지 전송
 	 $('#message').keypress(function(event){
 		  var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -34,6 +38,7 @@ $(document).ready(function(){
  	 $('.firstPage').show();
 	 $('#listDiv').hide();
 	 
+
 })
 </script>
 <script>
@@ -95,8 +100,8 @@ $(document).ready(function(){
 	function getTimeStamp() {
 		  var d = new Date();
 		  var s =
-		    leadingZeros(d.getFullYear(), 4) + '.' +
-		    leadingZeros(d.getMonth() + 1, 2) + '.' +
+		    leadingZeros(d.getFullYear(), 4) + '-' +
+		    leadingZeros(d.getMonth() + 1, 2) + '-' +
 		    leadingZeros(d.getDate(), 2) + ' ' +
 		    leadingZeros(d.getHours(), 2) + ':' +
 		    leadingZeros(d.getMinutes(), 2) + ':' +
@@ -145,6 +150,7 @@ $(document).ready(function(){
 	} // end of appendMessage()
 </script>
 <script>
+
 	//새로고침 버튼 클릭시 리스트 reload 이벤트
 	function listReload(){  
 	     $('#container').load(location.href + '#container');
@@ -156,16 +162,19 @@ $(document).ready(function(){
 		$.ajax({
 			url:'getMessageList',
 			data: {"chatroom_no":roomId , "msg_receiver":"${user_id}"},
+			async:false,
 			dataType: "json",
 			success:function(list){ //list안에 data로 넘어옴
- 				 $('.firstPage').hide();
-				 $('#listDiv').show(); 
+ 				$('.firstPage').hide();
+				$('#listDiv').show(); 
  				$('.chatMiddle').empty();
  		 		$('#memberName').find('h5').empty();
 		 		$('#memberName').find('p').empty(); 
-
 				for(var i=0; i<list.length;i++){
 					if(list[i].msg_sender != "${user_id}"){
+					 	 if(list[i].msg_readtime == null){
+						 		updateReadTime(roomId);
+						 	 }
 						 $('.chatMiddle').append(
 									$('<div class="row no-gutters"><div class="col-md-3">'
 									 +'<div class="chat-bubble chat-bubble--left">'
@@ -210,7 +219,32 @@ $(document).ready(function(){
 			}
 		})
 	}
+
+	function getUnreadMessage(){
+		$.ajax({
+			url:"getUnreadMessage",
+			data:{"msg_receiver":"${user_id}"},
+			dataType: "json",
+			success:function(response){
+				if(response != null){
+					for(var i=0; i<response.length ; i++){
+						console.log(response[i].chatroom_no); 
+						console.log(response[i].msg_num); 
+					}
+				}
+			}
+		})
+	}
 	
+	function updateReadTime(roomId){
+		$.ajax({
+			url: "updateReadTime",
+			data: {"chatroom_no":roomId , "msg_receiver":"${user_id}"},
+			success:function(result){
+				console.log(result);
+			}
+		})
+	}
 </script>
 
 </head>
@@ -242,7 +276,7 @@ $(document).ready(function(){
 		      	<div class='friend-drawer friend-drawer--onhover' onclick='listClick("${list.chatroom_no }")'>
 					<img class='profile-image' src='resources/chat/images/person.jpg'>
 					<div class="text" style="padding-top:15px; color:grey;">
-					<c:if test="${list.user_id_one eq user_id }"> <!-- 공백이 있으면 안됀다... 공백있으면 인식못함... -->
+					<c:if test="${list.user_id_one eq user_id }"> <!-- 따옴표안에 공백이 있으면 안됀다... 공백있으면 인식못함... -->
 						<h5>${list.user_id_two }</h5>
 					</c:if>
 					<c:if test="${list.user_id_one ne user_id }">

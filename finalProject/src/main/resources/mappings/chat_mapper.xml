@@ -83,9 +83,24 @@
 	DELETE FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_id}
 </delete>
 
-<!-- 읽지않은 메세지 갯수 -->
-<select id="getUnreadMessage" resultType="int" parameterType="String">
-	select count(*) from message where msg_receiver = ${user_id}
+<!-- 읽지않은 메세지 갯수 (채팅방별로)-->
+<select id="getUnreadMessage" resultType="MessageVO" parameterType="String">
+	SELECT CHATROOM_NO , NVL(COUNT(*),0) "msg_num" FROM MESSAGE 
+								  WHERE MSG_RECEIVER = #{user_id} 
+								  AND MSG_READTIME IS NULL 
+								  GROUP BY CHATROOM_NO
+</select>
+
+<!-- 읽지않은 전체 메세지 갯수 -->
+<select id="getUnreadMessageAll" resultType="int" parameterType="String">
+	SELECT COUNT(*) "msg_num" FROM MESSAGE WHERE MSG_RECEIVER = ${user_id} AND MSG_READTIME IS NULL 
+</select>
+
+<!-- 검색기능 -->
+<select id="getSearchList" parameterType="String" resultType="MessageVO">
+	SELECT * FROM MESSAGE
+			 WHERE MSG_RECEIVER LIKE '%'||#{msg_receiver}||'%' 
+			 	OR MSG_SENDER LIKE '%'||#{msg_receiver}||'%'
 </select>
 
 </mapper>
