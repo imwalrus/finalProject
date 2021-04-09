@@ -32,11 +32,6 @@ public class FarmController {
 		return "mypage/getFarmsList";
 	}
 
-////단건조회
-//	@RequestMapping("/getFarm")
-//	public @ResponseBody List<FarmVO> getFarm(FarmVO vo) {
-//		return farmMapper.getFarm(vo);
-//	}
 	
 //단건조회
 		@RequestMapping("/getFarms")

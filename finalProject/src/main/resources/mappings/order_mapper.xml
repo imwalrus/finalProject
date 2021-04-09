@@ -8,8 +8,7 @@
 	<select id="getOrderList"  parameterType="OrderVO"
 								resultType="OrderVO">
 	
-		SELECT *
-		FROM ORDERS
+		SELECT * FROM ORDERS
 		WHERE USER_ID = #{user_id}
 	
 	</select>
@@ -25,7 +24,7 @@
         ,L.CART_COUNT
         ,P.PRO_PRICE
         ,(L.CART_COUNT * P.PRO_PRICE) as account
-        ,O.ORDER_CONDITION
+        ,L.ORDERLIST_CONDITION
         ,O.ORDER_PAYMENT
         ,O.USER_ID as BUYER
         ,L.ORDERLIST_INVOICE
@@ -46,11 +45,12 @@ SELECT O.ORDER_NO
             ,(L.CART_COUNT * P.PRO_PRICE) as ACCOUNT
             ,P.PRO_PRICE
             ,O.USER_ID as BUYER
-            ,O.ORDER_CONDITION
+            ,L.ORDERLIST_CONDITION
             ,O.ORDER_PAYMENT
-            ,L.ORDERLIST_INVOICE
             ,L.ORDERLIST_NO
-            ,P.USER_ID as SELLER            
+            ,P.USER_ID as SELLER
+            ,P.PRO_DCOMPANY
+            ,L.ORDERLIST_INVOICE          
 FROM ORDERLIST L
 INNER JOIN PRODUCT P
             ON P.PRO_NO = L.PRO_NO
@@ -59,14 +59,17 @@ INNER JOIN ORDERS O
 WHERE P.USER_ID = #{user_id}
         
 </select>
+
+
 <!-- 결제상태/ 송장번호수정 -->
 	<update id="updateOrder"  parameterType="OrderVO">
 			
-			UPDATE ORDERS O, ORDERLIST L
-						SET
-						 O.ORDER_CONDITION = #{order_condition}
-						,O.ORDER_INVOICE = #{order_invoice}
-			WHERE L.ORDERLIST_NO = #{orderlist_no}
+			UPDATE ORDERLIST 
+			SET 
+				ORDERLIST_INVOICE = #{orderlist_invoice}
+				,ORDERLIST_CONDITION =  #{orderlist_condition}
+			WHERE ORDERLIST_NO = #{orderlist_no}
+			
 	</update>
 	
 

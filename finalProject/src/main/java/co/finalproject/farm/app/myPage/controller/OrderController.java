@@ -46,7 +46,6 @@ public class OrderController {
 	@RequestMapping("/ajaxgetOrder")
 	@ResponseBody
 	public List<OrderVO> getOrder(OrderVO vo){
-
 		return orderMapper.getOrder(vo);
 		
 	}
@@ -59,12 +58,13 @@ public class OrderController {
 //판매내역조회
 	@RequestMapping("/ajaxgetSaleList")
 	@ResponseBody
-	public List<OrderVO> getSaleList(OrderVO vo){
-		
+	public List<OrderVO> getSaleList(OrderVO vo){		
 		return orderMapper.getSaleList(vo);
 	}
 
-//수정 - 송장번호, 주문상태 
+//수정 - 송장번호, 주문상태
+	
+	
 	//수정폼
 	@RequestMapping("/updateOrder")
 	public String updateOrder(OrderVO vo) {
@@ -76,6 +76,7 @@ public class OrderController {
 		orderMapper.updateOrder(vo);
 		return "redirect:getSaleList";
 	}
-	
+
+
 	
 }

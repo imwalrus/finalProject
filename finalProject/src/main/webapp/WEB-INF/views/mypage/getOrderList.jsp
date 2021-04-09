@@ -77,10 +77,10 @@ table {
 												</colgroup>
 												<thead>
 													<tr class="table-success">
-														<th>주문일자/주문번호</th>
+														<th>주문번호</th>
 														<th>결제수단</th>
-														<th>총 주문금액</th>
-														<th>주문상태</th>
+														<th>총금액</th>
+														<th>주문일자</th>
 													</tr>
 												</thead>
 											</table>
@@ -130,11 +130,11 @@ table {
 			success: function (data) {
 			 	for(i=0; i<data.length; i++){ 
 					$("#order").append(
-						"<tr><td>" + data[i].order_date + "<br>" 
-						+ "<button type='button'  class='btn  btn-info btn-sm' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
+						"<tr><td>"  
+						+ "<button type='button' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
 						+ data[i].order_payment + "</td><td>"
-						+ data[i].order_totalprice +"원"+ "</td><td>"
-						+ data[i].order_condition  + "</td><tr>"
+						+ data[i].order_totalprice + "</td><td>"
+						+ data[i].order_date + "</td></tr>"
 				); 
 			} 
 			

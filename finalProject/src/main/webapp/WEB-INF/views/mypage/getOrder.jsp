@@ -6,7 +6,7 @@
 	<h4>상세 주문</h4>
 	<table class="table" id="orderview">
 		<tr>
-			<th class="table-success">주문번호</th>
+			<th class="table-success">상세주문번호</th>
 			<th class="table-success">주문상품</th>
 			<th class="table-success">수량</th>
 			<th class="table-success">주문금액</th>
@@ -31,12 +31,15 @@ $.ajax({
 		success: function(response) {
 			for(i=0; i<response.length; i++){
 				$("#orderview").append(
-						"<tr><td>" + response[i].order_no  + "</td><td>"
+						"<tr><td>" + response[i].orderlist_no  + "</td><td>"
 						+ response[i].pro_name + "</td><td>"
 						+ response[i].cart_count + "</td><td>"
 						+ response[i].account +"원"+ "</td><td>"
-						+ response[i].order_condition + "</td><td>"
-						+ response[i].orderlist_invoice + "</td></tr>"
+						+ response[i].orderlist_condition + "</td><td>"
+						+ "<a href=" + "https://tracker.delivery/#/kr.cjlogistics/" + response[i].orderlist_invoice + 
+						"onclick="+ "window.open("+ "this.href," + "_blank," + "width=800," + "height=600);" + "return false;>" + response[i].orderlist_invoice + "</a>"
+						
+						+ "</td></tr>"
 						);
 			
 			}
@@ -44,7 +47,7 @@ $.ajax({
 			
 		}
 	
-	
+		 /* + "<a href=" + "https://tracker.delivery/#/kr.cjlogistics/" + response[i].orderlist_invoice + "target='_blank' >" + response[i].orderlist_invoice + "</a>" */
 	
 })
 

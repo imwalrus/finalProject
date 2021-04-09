@@ -42,7 +42,7 @@ padding: 10px 8px !important;
 			<form id="frm" name="frm" action="updateFarms" method="post">
 			
 				<!-- 숨겨진 유저 ID -->
-				<input type="hidden" name="userId" value="${ufarm.user_id } }">
+				<input type="hidden" name="userId" value="${ufarm.user_id } ">
 				<!-- 숨겨진 유저 ID -->
 			
 					<table class="table">

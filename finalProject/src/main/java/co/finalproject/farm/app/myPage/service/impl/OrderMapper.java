@@ -19,4 +19,5 @@ public interface OrderMapper {
 
 	//판매내역
 	public List<OrderVO> getSaleList(OrderVO vo);
+	
 }

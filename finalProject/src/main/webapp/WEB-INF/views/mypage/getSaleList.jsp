@@ -19,20 +19,6 @@
     <link rel="stylesheet" href="resources/admin/css/style.css">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
-<style>
-
-.table{
-min-width:100% !important;
-}
-.table tbody tr td {
-padding: 10px 8px !important;
-}
-
-.table {
-	text-align: center;
-}
-
-</style>    
 
 </head>
 <body>
@@ -60,10 +46,10 @@ padding: 10px 8px !important;
                             <!-- [ Contextual-table ] start -->
                             <div class="col-md-9">
                                 <div class="card-header">
-                                    <h2>판매 내역</h2>
+                                    <h2>판매 내역${list }</h2>
                                 </div>
                                 <div class="table-responsive">
-                                <form action="updateOrder" method="post">
+                               <form action="updateOrder" method="post">
 									<table class="table" id="sale">
 										<tr class="table-success">
 											<th>주문번호-상세</th>
@@ -71,14 +57,15 @@ padding: 10px 8px !important;
 											<th>수량</th>
 											<th>결제금액</th>
 											<th>결제수단</th>
-											<th>판매자</th>
-											<th>주문상태/송장번호</th>
-											<th>송장번호등록</th>											
-										</tr>								
+											<th>구매자</th>
+											<th>주문상태</th>
+											<th>택배사/송장번호등록</th>											
+										</tr>																	
 									</table>
 								</form>
                                 </div>
                                 <!-- [ Contextual-table ] end -->
+
                             </div>
                         </div>
                         <!-- [ vertically-modal ] end -->
@@ -95,10 +82,10 @@ padding: 10px 8px !important;
         
         
         <!-- 송장번호시작 모달 -->
-			<div class="modal fade bd-example-modal-lg" id="invoiceUp"
-				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			<div class="modal fade" id="invoiceUp"
+				tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button class="close" type="button" data-dismiss="modal"
@@ -114,8 +101,8 @@ padding: 10px 8px !important;
 </div>
 </section>
 <script type="text/javascript">
-function invoiceUp(str) {
-	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str);
+function invoiceUp(str,dcom) {
+	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&pro_dcompany=" + dcom );
 	$('#invoiceUp').modal('show');
 
 
@@ -133,13 +120,15 @@ $.ajax({
 					+ data[i].cart_count + "</td><td>"
 					+ data[i].account + "</td><td>"
 					+ data[i].order_payment + "</td><td>"
-					+ data[i].seller + "</td><td>"
-					+ data[i].order_condition +"<br>"
+					+ data[i].buyer + "</td><td>"
+					+ data[i].orderlist_condition +"<br>"
+					+ "(" + data[i].pro_dcompany + ")" +"<br>"
 					+ data[i].orderlist_invoice + "</td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='invoiceUp("+data[i].orderlist_no+")'>" + "송장번호등록"+ "</button>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호등록"+ "</button>"
 					+"</td></tr>"
 	
 					);
+			
 			
 		}
 		
