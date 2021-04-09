@@ -8,15 +8,20 @@
 		SELECT COUNT(*)
 		FROM INTOFARM
 		<where>
-			<if test="into_city != null and into_city != '' and into_product != null and into_product != '' and
-         		   into_date != null and into_date != ''">
-			    AND (UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
-				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%') 
-				<!-- 기간설정 --> 
-				
+         <if test="into_city != null and into_city != ''">
+			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+		 </if>
+		 <if test="into_product != null and into_product != ''">	    
+				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+		 </if>
+		 <if test="into_date != null and into_date != ''">					
+		        AND  <![CDATA[
+						    INTO_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
+						    and INTO_DATE < to_date(#{finish_date}, 'YYYY-MM-DD')
+						]]>
 				)
 		 </if>
-		</where>
+        </where>
 	</select>
 	
 	<!--전체조회 & 페이징 -->
@@ -34,13 +39,16 @@
              , INTO_CITY
 		FROM INTOFARM
 		<where>
-         <if test="into_city != null and into_city != '' and into_product != null and into_product != '' and
-         		   into_date != null and into_date != ''">
-			    AND (UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+         <if test="into_city != null and into_city != ''">
+			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+		 </if>
+		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
-				AND  <![CDATA[
-						    INTO_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
-						    and INTO_DATE < to_date(#{finish_date}, 'YYYY-MM-DD')
+		 </if>
+		 <if test="into_date != null and into_date != ''">					
+		        AND  <![CDATA[
+						    INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
+						    and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
 						]]>
 				)
 		 </if>

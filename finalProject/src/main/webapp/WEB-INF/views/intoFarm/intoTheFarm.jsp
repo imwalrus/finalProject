@@ -13,6 +13,10 @@
 
 <!-- include summernote-ko-KR -->
 <script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
+
+<!--이미지 슬라이드-->
+ <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+ <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 <script>
  function cgsummernote(){
 	 $('#summernote')
@@ -41,6 +45,20 @@
 		
 </script>  
 <script>
+			/*페이징 값 넣기*/
+			$(document).ready(function(){
+				$("#into_city").val($(this).val());
+				$("#into_product").val($(this).val());
+				$("#into_date").val($(this).val());
+			});	
+			
+			/*페이징*/
+	         function goPage(p) {
+				getSearchFm.page.value=p;
+				getSearchFm.submit(); 
+			    } 
+			
+		
 		/*모달-상세보기*/
 		function fngetSearchInfo(str) { //into_no 가지고 보냄
 			$('#myLargeModal .modal-body').load("getSearchFarm?into_no="+str);
@@ -98,17 +116,47 @@
 				}
 		})
 	} 
-		/*페이징*/
-	         function goPage(p) {
-				getSearchFm.page.value=p;
-				getSearchFm.submit(); 
-			    }  
+		 /*이미지 슬라이드 */
+		 var slideIndex = 0;
+			 showSlides();
+			
+			function showSlides() {
+			    var i;
+			    var slides = document.getElementsByClassName("mySlides");
+			    var dots = document.getElementsByClassName("dot");
+			    for (i = 0; i < slides.length; i++) {
+			       slides[i].style.display = "none";  
+			    }
+			    slideIndex++;
+			    if (slideIndex > slides.length) {slideIndex = 1}    
+			    for (i = 0; i < dots.length; i++) {
+			        dots[i].className = dots[i].className.replace(" active", "");
+			    }
+			    slides[slideIndex-1].style.display = "block";  
+			    dots[slideIndex-1].className += " active";
+			    setTimeout(showSlides, 2000); // Change image every 2 seconds
+			}
+					 
 </script>
+
 
 <style>
 .modal.modal-center {
   text-align: center;
 }
+
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
 </style>
 </head>
 <body class="goto-here">
@@ -117,15 +165,28 @@
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	
 		<!--검색바  -->
-		  <form action="getFarmList" name="getSearchFm">
+		
+		<div style="width: 60%; margin: auto;">
+		  <form id="getSearchFm" name="getSearchFm" action="getFarmList">
 			<input type="hidden" name="page" value="1">
-			지역  <input name="into_city" value="${intoTheFarmVO.into_city}"> 
-			농작물 종류  <input name="into_product" value="${intoTheFarmVO.into_product}">
-			기간  <input type="date" name="into_date" value="${intoTheFarmVO.into_date}"> 
+			지역 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="into_city" id="into_city" value="${intoTheFarmVO.into_city}" style="margin-top: 1%;"><br>
+			농작물 종류 &nbsp; <input name="into_product" id="into_product" value="${intoTheFarmVO.into_product}" style="margin-top: 1%;"><br>
+			기간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<input type="date" name="s_date" id="s_date" value="${intoTheFarmVO.into_date}" style="margin-top: 1%;"> ~ 
+				<input type="date" name="e_date" id="e_date" value="${intoTheFarmVO.into_date}" style="margin-top: 1%;">
+				<br>
 			<button>검색</button>
+		   </form>	
 			
 	 <div class="container">
 		<div class="row">
+		<c:if test="${empty list}">
+			검색 결과가 없습니다.
+		<div style="margin-right:150px;">
+			<button type="button" onclick="location.href='getFarmList?page=1'" >목록보기</button>
+		</div>	
+		</c:if>
+		
 			<c:forEach items="${list}" var="listt">
 				<div class="col-6">
 					<div class="card">
@@ -145,8 +206,39 @@
 		</div>
 	</div>
 	   <my:paging paging="${paging}" jsFunc="goPage" />  
+	   	
 		
-	</form>	
+	</div>
+	
+	<!--이미지 슬라이드 -->
+	<div class="slideshow-container">
+			<c:forEach items="${list}" var="images">
+				<div class="mySlides fade">
+				  <div class="numbertext">1 / 3</div>
+				  	<img src="${images.into_filename}" style="width:100%">
+				  <div class="text">Caption One</div>
+				</div>
+			</c:forEach>
+		
+		
+		<!-- <div class="mySlides fade">
+		  <div class="numbertext">2 / 3</div>
+		  <img src="http://placehold.it/300x100" style="width:100%">
+		  <div class="text">Caption Two</div>
+		</div>
+		
+		<div class="mySlides fade">
+		  <div class="numbertext">3 / 3</div>
+		  <img src="http://placehold.it/300x100" style="width:100%">
+		  <div class="text">Caption Three</div>
+		</div> -->
+		
+		</div>
+		<br>
+		
+		<div style="text-align:center">
+		  <span class="dot"></span> 
+		</div>
 	</section>
 	<!--모달 상세보기 -->
 	
@@ -186,6 +278,8 @@
 		</div>
 	</div>
 	
-		
+ <!--이미지 슬라이드 -->
+ <script type="text/javascript" src="slick/slick.min.js"></script>
+ 		
 </body>
 </html>

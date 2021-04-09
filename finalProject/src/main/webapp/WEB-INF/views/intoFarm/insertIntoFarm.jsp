@@ -20,7 +20,7 @@ function insertFarm() {
 	var into_title = frm.into_title.value;
 	var into_product = frm.into_product.value;
 	var into_phone = frm.into_phone.value;
-	var into_date = frm.into_date.value;
+	 var into_date = frm.into_date.value;
 	var into_entry = frm.into_entry.value;
 	var into_info = frm.into_info.value;
 	
@@ -40,10 +40,10 @@ function insertFarm() {
 		alert("연락처를 입력해주세요");
 		return false;
 	}
-	if (into_date.trim() == ''){
+	 if (into_date.trim() == ''){
 		alert("일정을 선택해주세요");
 		return false;
-	}
+	} 
 	if (into_entry.trim() == ''){
 		alert("참여가능 인원 수를 입력해주세요");
 		return false;
@@ -59,7 +59,19 @@ function insertFarm() {
 		frm.submit();
 	}
 }
+
+/*이미지 실제 경로*/
+/*  $("#uploadFile").change(function(){
+	 if(this.files && this.files[0]){
+		 var reader = new FileReader;
+		 reader.onload = function(data) {
+			 $(".select_img img").attr("src",data.target)
+		 }
+		 reader.readAsDataURL(this.files[0]);
+	 }
+ }); */
 </script>
+
 </head>
 <body>
 <div style="overflow: scroll;">
@@ -86,15 +98,17 @@ function insertFarm() {
 			<input type="text" name="into_product" style="width: 40%; margin-top: 1%;" placeholder="농작물 종류" /><br> 
 			<input type="text" name="into_phone" style="width: 40%; margin-top: 1%;" placeholder="연락처" /><br>
 			<!--체험일정 calendar 넣기  -->
-			<input type="date" name="into_date" style="width: 40%; margin-top: 1%;" placeholder="체험일정" /><br> 
+			 <input type="date" name="into_date" style="width: 40%; margin-top: 1%;" placeholder="체험일정" /><br> 
 			<input type="text" name="into_entry" style="width: 40%; margin-top: 1%;" placeholder="참여 가능 인원 수 " /><br> 
-			<input multiple="multiple" type="file" name="uploadFile" id="uploadFile" accept="image/png, image/jpeg, image/jpg"><br> 
+			<input multiple="multiple" type="file" name="uploadFile" id="uploadFile" accept="image/png, image/jpeg, image/jpg">
+			<input type="hidden" name="uploadFile"><!-- <div class="select_img"><img src=""></div> -->
+			<br> 
 			<br><br>
 			<textarea id="summernote" name="into_info"></textarea>
 
 			<button type="button" id="save" onclick="insertFarm()">등록</button>
 			<button type="reset" onclick="getSearchFarm">취소</button>
-
+			
 		</form>
 
 	</div>
