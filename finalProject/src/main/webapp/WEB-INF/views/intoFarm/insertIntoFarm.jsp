@@ -14,7 +14,7 @@
 <!-- include summernote-ko-KR -->
 <script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
 <script>
-	
+	/*  */
 function insertFarm() {
 	var into_city = frm.into_city.value;
 	var into_title = frm.into_title.value;
