@@ -50,35 +50,33 @@
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="bc_alert.html">회원정보수정</a></li>
-					        <li><a href="memberOut">회원탈퇴</a></li>
-					        <li><a href="getFarmList">나의농지</a></li>
+					        <li><a href="memberOut?=${user_id }">회원탈퇴</a></li>
+					        <li><a href="getFarmsList">나의농지</a></li>
                             <li><a href="insertFarmer">농업인 권한 신청</a></li>
-					        <li><a href="bc_breadcrumb-pagination.html">문의 답변 관리</a></li>
+					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">판매내역</a></li>
+					        <li><a href="getSaleList?user_id=${user_id }">판매내역</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">장바구니</a></li>
-					        <li><a href="bc_button.html">구매내역</a></li>
-					        <li><a href="bc_badges.html">구매 관련 문의</a></li>
+					        <li><a href="#">장바구니</a></li>
+					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
+					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
-                                <li><a href="bc_alert.html">신청 내역 관리</a></li>
-                                <li><a href="bc_alert.html">나의 신청 내역</a></li>
-                                <li><a href="bc_button.html">체험 관련 문의</a></li>
+                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
+                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                                <li><a href="getintoFarmInqList">체험 관련 문의</a></li>
                             </ul>
                         </li>
-					</li>
-					
 				</ul>
 			</div>
 		</div>
@@ -140,7 +138,6 @@
 										<li class="n-title">
 											<p class="m-b-0">EARLIER</p>
 										</li>
-										<li class="notification">
 											<div class="media">
 												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
 												<div class="media-body">

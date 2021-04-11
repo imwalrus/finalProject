@@ -192,6 +192,7 @@ public class ShopController {
 		return "shop/checkout";
 	}
 	
+
 	// 주문 · 상세주문 등록
 	@RequestMapping("/insertOrder")
 	public String insertOrder(OrderVO vo, HttpServletRequest request) {

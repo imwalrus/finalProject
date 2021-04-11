@@ -12,6 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script>
 	// 툴팁 활성화
 	$(document).ready(function() {

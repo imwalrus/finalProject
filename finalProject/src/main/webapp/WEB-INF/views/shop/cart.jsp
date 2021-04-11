@@ -68,6 +68,7 @@
 												<!-- 판매가(jstl - 3자리마다 ',') -->
 												<c:set var="com" value="${cart.cart_price}" />
 												<td data-th="Price">
+
 													￦
 													<fmt:formatNumber type="number" maxFractionDigits="3" value="${com}" />
 												</td>

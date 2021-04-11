@@ -225,6 +225,7 @@
 		 WHERE USER_ID = #{user_id}
 		   AND PRO_NO = #{pro_no}
 	</select>
+	
 	<!-- 주문 등록 -->
 	<insert id="insertOrder" statementType="CALLABLE" parameterType="OrderVO">
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
@@ -264,5 +265,31 @@
     				   		, C.PRO_NO
     				   		, C.CART_COUNT
     					 FROM CART C, ORDERS O
+
+			INSERT INTO ORDERS (ORDER_NO
+						      , ORDER_DATE
+						      , ORDER_CONDITION
+						      , ORDER_INVOICE
+						      , ORDER_PAYMENT
+						      , ORDER_TOTALPRICE
+						      , ORDER_ZIP
+						      , ORDER_ADR
+						      , ORDER_DETAILADR
+						      , ORDER_NAME
+						      , ORDER_PHONE
+						      , USER_ID)
+					    VALUES (#{order_no}
+						      , SYSDATE
+						      , '결제완료'
+						      , '대한통운'
+						   	  , #{order_payment}
+						      , #{order_totalprice}
+						      , #{order_zip}
+						      , #{order_adr}
+						      , #{order_detailadr}
+						      , #{order_name}
+						      , #{order_phone}
+						      , #{user_id})
+
 	</insert>
 </mapper>

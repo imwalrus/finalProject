@@ -63,7 +63,7 @@ public class IntoTheFarmController {
 	@PostMapping("/insertFarm") //등록
 	public String insertFarmProc(IntoTheFarmVO vo, MultipartHttpServletRequest request) throws Exception, IOException {
 		//파일 업로드
-		List<MultipartFile> files = vo.getUploadFile();
+		MultipartFile[] files = vo.getUploadFile();
 		String filename1=""; 
 		for(MultipartFile file : files) {
 			

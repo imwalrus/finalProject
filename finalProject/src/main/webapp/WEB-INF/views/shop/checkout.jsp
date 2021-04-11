@@ -126,6 +126,7 @@
 									<h3 class="billing-heading mb-4">장바구니</h3>
 									<c:set var="price" value="0" />
 									<c:forEach items="${order}" var="order" varStatus="status">
+
 										<input type="hidden" name="pro_no" value="${order.pro_no }">
 										<input type="hidden" name="cart_count" value="${order.cart_count }">
 										<p class="d-flex">

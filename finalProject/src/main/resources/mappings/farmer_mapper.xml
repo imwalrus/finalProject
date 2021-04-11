@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmerMapper">
+
+<!-- 전체조회 -->
+	<select id="listFarmer" resultType="FarmerVO">
+	
+		SELECT *
+		FROM FARMER
+	
+	</select>
+
+<!-- 등록 -->
+	<insert id="insertFarmer" parameterType="FarmerVO">
+	
+		INSERT INTO FARMER (
+							FARMER_NO
+							,FARMER_FILENAME
+							,USER_ID
+							,FARMER_DATE
+							)
+		
+		VALUES (
+				(select nvl(max(farmer_no),0)+1 from farmer)
+				,#{farmer_filename}
+				,#{user_id}
+				,'sysdate'
+				)
+	
+	</insert>
+
+
+<!-- 수정 -->
+	<update id="updateFarmer" parameterType="FarmerVO">
+       
+        UPDATE FARMER
+        SET FARMER_CHECK=#{farmer_check}
+        WHERE FARMER_NO=#{farmer_no}
+   	
+	</update>
+	
+	
+	
+</mapper>
