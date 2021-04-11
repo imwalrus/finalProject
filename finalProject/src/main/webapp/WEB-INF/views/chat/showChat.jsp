@@ -259,17 +259,18 @@ $(document).ready(function(){
   <!-- 대화리스트 받는 화면 시작 -->
     <div class="col-md-4 border-right" >
       <div class="settings-tray" onclick="listReload()">
-	      <img class="profile-image" src="resources/chat/images/chat1.png" alt="Profile img">
-	        <span class="settings-tray--right" >
-	          <i class="material-icons">cached</i>
-	        </span>
+	      <img src="resources/chat/images/logosample2.png" alt="Profile img" style="width:100px;">
+	      <login>${user_id }님 접속중</login>
+	       <span class="settings-tray--right" >
+	         <span class="material-icons" style="margin-top: 15px;">home</span>
+	       </span>
       </div>
-      <div class="search-box">
+<!--       <div class="search-box">
         <div class="input-wrapper">
           <i class="material-icons">search</i>
           <input placeholder="Search here" type="text" >
         </div>
-      </div>
+      </div> -->
       <div class="chatList">
 	      <c:if test="${fn:length(chatList) >= 1}">	
 	      	<c:forEach items="${chatList }" var="list">
@@ -283,6 +284,13 @@ $(document).ready(function(){
 						<h5>${list.user_id_one }</h5>
 					</c:if>
 					</div>
+					<c:forEach items="${unreadMessage }" var="msg">
+					<c:if test="${list.chatroom_no == msg.chatroom_no }">
+						<div id="unReadNum"> <!-- 안읽은 메세지 있으면 갯수표시 -->
+							${msg.msg_num }					
+						</div>
+					</c:if>
+					</c:forEach>
 				</div>
 				<hr>
 			</c:forEach>
@@ -326,7 +334,7 @@ $(document).ready(function(){
     <!-- 대화 보내고 받는 화면 끝 -->
     <!-- 채팅방 첫 화면 div 시작 -->
     <div class="firstPage">
-    	<h6>  </h6>
+		<img src='resources/chat/images/commu.png'>
     </div>
     <!-- 채팅방 첫화면 div 끝  -->
 </div>

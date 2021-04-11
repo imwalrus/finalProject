@@ -91,10 +91,10 @@ public class ChatHandler extends TextWebSocketHandler {
 				+ msgVO.getMsg_content()+","
 				+ msgVO.getMsg_sendtime();
 		
-		WebSocketSession rs = users.get(msgVO.getMsg_receiver());
-		if(rs != null) {
-			rs.sendMessage(new TextMessage(sm));
-		}
+		/*
+		 * WebSocketSession rs = users.get(msgVO.getMsg_receiver()); if(rs != null) {
+		 * rs.sendMessage(new TextMessage(sm)); }
+		 */
 		session.sendMessage(new TextMessage(sm)); //클라이언트에게 보냄
 		
 		//DB에 message insert

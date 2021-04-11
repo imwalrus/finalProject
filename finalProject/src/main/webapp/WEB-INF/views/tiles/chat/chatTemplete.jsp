@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1 대화창</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<!--   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> -->
+  <link rel="stylesheet" href="resources/chat/bootstrap.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,14 +42,15 @@
 	}
 	.chatMiddle{
 		overflow:auto;
-		height:476px;
+		height:474px;
 	}
 	.chat-box-tray {
 		    margin-top: 0px !important;
 	}
 	.chatList{
 		overflow:auto;
-		height:482px;
+		height:530px;
+		/* height:482px; */
 	}
 	#message{
 		padding-left: 15px;
@@ -64,6 +66,17 @@
  	.firstPage{
 		height:600px;
 		width:760px !important;
+	}
+	#unReadNum{
+		background-color: #ffc107;
+	    color: #fbfbfb;
+	    font-weight: bold;
+	    border-radius: 50%;
+	    width: 40px;
+	    height: 40px;
+	    text-align: center;
+	    padding: 9px;
+    	font-size: 12px;
 	} 
 
 

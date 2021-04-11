@@ -22,6 +22,7 @@ body {
   background: #eee;
   padding: 10px 15px;
   border-radius: 0px;
+  height: 70px;
 }
 .settings-tray .no-gutters {
   padding: 0;
@@ -94,7 +95,7 @@ input:focus {
   color: grey;
 }
 .friend-drawer--onhover:hover {
-  background: #78c2ad;
+  /* background: #78c2ad; */
   cursor: pointer;
 }
 .friend-drawer--onhover:hover p,
