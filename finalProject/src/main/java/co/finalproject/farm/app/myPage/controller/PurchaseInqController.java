@@ -56,7 +56,7 @@ public class PurchaseInqController {
 	//등록폼
 		@RequestMapping("/insertpuchasInq")
 		public String insertpuchasInq(puchasInqVO vo, Model model) {
-			return "mypage/insertpuchasInq";
+			return "mypageTiles/mypage/insertpuchasInq";
 		}
 
 	//등록처리

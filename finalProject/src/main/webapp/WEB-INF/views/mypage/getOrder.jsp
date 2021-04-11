@@ -26,7 +26,7 @@
 <script type="text/javascript">
 $.ajax({
 		url:"ajaxgetOrder",
-		data:  {order_no :  1 },
+		data:  "order_no=" + "<%= request.getAttribute("order_no") %>",
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
@@ -46,9 +46,7 @@ $.ajax({
 			
 			
 		}
-	
-		 /* + "<a href=" + "https://tracker.delivery/#/kr.cjlogistics/" + response[i].orderlist_invoice + "target='_blank' >" + response[i].orderlist_invoice + "</a>" */
-	
+
 })
 
 

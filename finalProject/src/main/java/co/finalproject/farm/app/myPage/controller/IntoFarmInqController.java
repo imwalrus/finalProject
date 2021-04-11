@@ -34,7 +34,7 @@ public class IntoFarmInqController {
 	@RequestMapping("/getintoFarmInqList")
 	public String getintoFarmInqList(Model model) {
 		model.addAttribute("list", ifiMapper.getIntoFarmInqList());
-		return "mypage/getintoFarmInqList";
+		return "mypageTiles/mypage/getintoFarmInqList";
 	}
 	
 	//단건조회
@@ -48,7 +48,7 @@ public class IntoFarmInqController {
 	//등록폼
 	@RequestMapping("/insertintoFarmInq")
 	public String insertintoFarmInq(IntoFarmInqVO vo, Model model) {
-		return "mypage/insertintoFarmInq";
+		return "mypageTiles/mypage/insertintoFarmInq";
 	}
 	
 	//등록처리

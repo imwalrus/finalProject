@@ -10,8 +10,6 @@
 
 <body>
 
-	<!-- 모달헤드 끝 -->
-	
 	<!-- 모달바디 시작 -->
 	<div class="modal-body">
 			<img class="img-fluid card-img-top"

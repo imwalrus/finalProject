@@ -72,9 +72,9 @@
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
-                                <li><a href="#">신청 내역 관리</a></li>
-                                <li><a href="#">나의 신청 내역</a></li>
-                                <li><a href="#">체험 관련 문의</a></li>
+                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
+                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                                <li><a href="getintoFarmInqList">체험 관련 문의</a></li>
                             </ul>
                         </li>
 				</ul>
@@ -138,7 +138,6 @@
 										<li class="n-title">
 											<p class="m-b-0">EARLIER</p>
 										</li>
-										<li class="notification">
 											<div class="media">
 												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
 												<div class="media-body">

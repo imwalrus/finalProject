@@ -5,7 +5,6 @@
 <html lang="ko">
 
 <head>
-    <title>회원 탈퇴</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -46,7 +45,7 @@
                             <!-- [ Contextual-table ] start -->
                             <div class="col-md-9">
                                 <div class="card-header">
-                                    <h2>판매 내역${list }</h2>
+                                    <h2>판매 내역</h2>
                                 </div>
                                 <div class="table-responsive">
                                <form action="updateOrder" method="post">

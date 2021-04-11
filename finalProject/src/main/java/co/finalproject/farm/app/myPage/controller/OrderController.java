@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.finalproject.farm.app.shop.service.OrderVO;
@@ -29,7 +30,7 @@ public class OrderController {
 		return "mypageTiles/mypage/getOrderList";
 	}
 	
-//아작스로 리스트 조회
+//리스트 조회
 	@RequestMapping("/ajaxgetOrderList")
 	@ResponseBody
 	public List<OrderVO> getOrderlist(OrderVO vo){
@@ -38,7 +39,8 @@ public class OrderController {
 
 //상세내역 뷰페이지 이동
 	@RequestMapping("/getOrder")
-	public String getOrder() {
+	public String getOrder(Model model, @RequestParam String order_no ) {
+		model.addAttribute("order_no", order_no);
 		return "notiles/mypage/getOrder";
 	}
 		
@@ -62,9 +64,7 @@ public class OrderController {
 		return orderMapper.getSaleList(vo);
 	}
 
-//수정 - 송장번호, 주문상태
-	
-	
+//수정 - 송장번호, 주문상태	
 	//수정폼
 	@RequestMapping("/updateOrder")
 	public String updateOrder(OrderVO vo) {

@@ -40,7 +40,7 @@ public class FarmerController {
 	
 	@GetMapping("/insertFarmer")
 	public String insertFarmer(FarmerVO vo,Model model) {
-		return "mypage/insertFarmer";
+		return "mypageTiles/mypage/insertFarmer";
 	}
 	
 	@PostMapping("insertFarmer")
