@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.education.service.impl.EducationMapper">
+<!-- 전체보기 -->
+	<select id="getOffEdu" parameterType="EduPagingVO" resultType="EducationVO">
+		select b.* from (select  rownum rn, a.* from (
+        select * from offlineedu
+        <where>
+         <if test="edu_adr != null and edu_adr != ''">
+			    EDU_ADR=#{edu_adr}
+		 </if>
+         <if test="edu_title != null and edu_title != ''">
+			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
+				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_title}) || '%' )
+		 </if>
+        </where>
+         order by edu_no desc
+         ) a ) b where rn between #{start} and #{end} 
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="getSchOffEdu" resultType="EducationVO">
+		SELECT EDU_NO
+		,EDU_TITLE
+		,EDU_DATE
+		,EDU_TIME
+		,EDU_ORGAN
+		,EDU_CHECK
+		,EDU_PERSON
+		,EDU_PHONE
+		,EDU_CONTENT
+		,EDU_FILENAME
+		,EDU_ADR
+		FROM OFFLINEEDU
+		WHERE EDU_NO = #{edu_no}
+	</select>
+
+	<!-- 등록하기 -->
+	<insert id="insertEdu" parameterType="EducationVO">
+		INSERT INTO OFFLINEEDU
+		(EDU_NO,
+	    EDU_TITLE,
+	    EDU_DATE,
+	    EDU_TIME,
+	    EDU_ORGAN,
+	    EDU_CHECK,
+	    EDU_PERSON,
+	    EDU_PHONE,
+	    EDU_CONTENT,
+	    EDU_FILENAME,
+	    EDU_ADR)
+		VALUES ( ( select nvl(max(edu_no),0)+1 from offlineedu),
+		#{edu_title},
+		#{edu_date},
+		#{edu_time},
+		#{edu_organ},
+		#{edu_check},
+		#{edu_person},
+		#{edu_phone},
+		#{edu_content},
+		#{edu_filename},
+		#{edu_adr}
+		)
+	</insert>
+
+	<!-- 글 수정처리 -->
+	<update id="updateEdu" parameterType="EducationVO">
+		UPDATE OFFLINEEDU
+		<set>
+<if test="edu_title !=null"> EDU_TITLE=#{edu_title},</if>
+<if test="edu_date !=null"> EDU_DATE=#{edu_date},</if>
+<if test="edu_time !=null"> EDU_TIME=#{edu_time}</if>
+<if test="edu_organ !=null"> EDU_ORGAN=#{edu_organ},</if>
+<if test="edu_check !=null"> EDU_CHECK=#{edu_check},</if>
+<if test="edu_person !=null"> EDU_PERSON=#{edu_person}</if>
+<if test="edu_phone !=null"> EDU_PHONE=#{edu_phone},</if>
+<if test="edu_filename !=null"> EDU_FILENAME=#{edu_filename},</if>
+<if test="edu_adr !=null"> EDU_ADR=#{edu_adr}</if>
+		</set>
+		WHERE EDU_NO = #{edu_no}
+	</update>
+	
+
+	<!-- 글 삭제 -->
+	<delete id="deleteEdu" parameterType="EducationVO">
+		DELETE FROM OFFLINEEDU
+		WHERE EDU_NO = #{edu_no}
+	</delete>
+	
+	  <!-- 레코드 건수 -->
+    <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM OFFLINEEDU
+    <where>
+         <if test="edu_adr != null and edu_adr != ''">
+			    EDU_ADR=#{edu_adr}
+		 </if>
+         <if test="edu_title != null and edu_title != ''">
+			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
+				OR UPPER(EDU_CONTENT) LIKE '%' || UPPER(#{edu_title}) || '%' )
+		 </if>
+	 </where>
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.notice.service.impl.FaqMapper">
+	<!-- 전체보기 -->
+	<select id="getFaq" parameterType="FaqPagingVO" resultType="FaqVO">
+		select b.* from (select  rownum rn, a.* from (
+        select * from faq
+        <where>
+         <if test="faq_category != null and faq_category != ''">
+			    FAQ_CATEGORY=#{faq_category}
+		 </if>
+         <if test="faq_title != null and faq_title != '' and faq_content != null and faq_content != ''">
+			    AND ( UPPER(FAQ_TITLE) LIKE '%' || UPPER(#{faq_title}) || '%'
+				OR UPPER(FAQ_CONTENT) LIKE '%' || UPPER(#{faq_content}) || '%' )
+		 </if>
+        </where>
+         order by faq_no desc
+         ) a ) b where rn between #{start} and #{end} 
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="getSearchFaq" resultType="FaqVO">
+		SELECT FAQ_NO
+		,FAQ_TITLE
+		,FAQ_CATEGORY
+		,FAQ_DATE
+		,FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO = #{faq_no}
+	</select>
+
+	<!-- 등록하기 -->
+	<insert id="insertFaq" parameterType="FaqVO">
+		INSERT INTO FAQ
+		(FAQ_NO,
+	    FAQ_TITLE,
+	    FAQ_CATEGORY,
+	    FAQ_CONTENT)
+		VALUES ( ( select nvl(max(faq_no),0)+1 from FAQ),
+		#{faq_title},
+		#{faq_category},
+		#{faq_content}
+		)
+	</insert>
+
+	<!-- 글 수정처리 -->
+	<update id="updateFaq" parameterType="FaqVO">
+		UPDATE FAQ
+		<set>
+<if test="faq_title !=null"> FAQ_TITLE=#{faq_title},</if>
+<if test="faq_category !=null"> FAQ_CATEGORY=#{faq_category},</if>
+<if test="faq_content !=null"> FAQ_CONTENT=#{faq_content}</if>
+		</set>
+		WHERE FAQ_NO = #{faq_no}
+	</update>
+	
+
+	<!-- 글 삭제 -->
+	<delete id="deleteFaq" parameterType="FaqVO">
+		DELETE FROM FAQ
+		WHERE FAQ_NO = #{faq_no}
+	</delete>
+	
+	  <!-- 레코드 건수 -->
+    <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM FAQ
+     <where>
+        <if test="faq_category != null and faq_category != ''">
+			    FAQ_CATEGORY=#{faq_category}
+		</if>
+        <if test="faq_title != null and faq_title != '' and faq_content != null and faq_content != ''">
+				AND ( UPPER(FAQ_TITLE) LIKE '%' || UPPER(#{faq_title}) || '%'
+				OR UPPER(FAQ_CONTENT) LIKE '%' || UPPER(#{faq_content}) || '%' )
+		</if>
+	 </where>
+    </select>
+</mapper>
