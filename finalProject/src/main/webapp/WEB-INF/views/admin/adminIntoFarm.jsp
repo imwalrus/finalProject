@@ -22,36 +22,34 @@
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
+
+		// 화면 전환 후 select box 고정
+		$(".custom-select").val('${param.into_progress}');
+		
 	});
 
 	// modal-단건 보기 불러오기
-	function adminFarmerSel(str) {
-		$('#modal .modal-content').load("adminFarmerSel?user_id=" + str);
+	function adminIntoFarmSel(str) {
+		$('#modal .modal-content').load("adminIntoFarmSel?into_no=" + str);
 		$('#modal').modal();
 	}
-	
-	// 승인 모달로 넘기기
-	function chkFunc(e) {
-		var tds = $(e.target).closest("tr").children()
-		$('#user_id1').val(tds.eq(1).html());
-	}
 
-	// 취소 모달로 넘기기
-	function canFunc(e) {
+	// 삭제 모달로 넘기기
+	function delFunc(e) {
 		var tds = $(e.target).closest("tr").children()
-		$('#user_id2').val(tds.eq(1).html());
+		$('#into_no').val(tds.eq(0).html());
 	}
 
 	// 페이징
 	function goPage(p) {
-		//	location.href="adminFarmer?page="+p;
+		//	location.href="adminIntoFarm?page="+p;
 		searchFrm.page.value = p;
 		searchFrm.submit();
 	}
 </script>
 </head>
 <body>
-	<!-- 신청 현황 START -->
+	<!-- 농촌속으로 현황 START -->
 	<section class="pcoded-main-container">
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
@@ -67,52 +65,52 @@
 						<div class="card">
 							<div class="card-body" align="center">
 								<div class="col-md-9">
-									<h2>농업인 권한 신청 현황</h2>
+									<h2>농촌속으로 현황</h2>
+									<div class="form-group float-right">
+										<select class="custom-select" onchange="location.href='adminIntoFarm?into_progress=' + (this.value);">
+											<option value="">전체</option>
+											<option value="0">진행중</option>
+											<option value="1">종료</option>
+										</select>
+									</div>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr class="table-success">
 													<th>No.</th>
 													<th>ID</th>
-													<th>이름</th>
-													<th>날짜</th>
-													<th>결과</th>
+													<th>체험이름</th>
+													<th>지역</th>
+													<th>일정</th>
+													<th>모집인원수</th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${farmer}" var="farmer">
+												<c:forEach items="${intoFarm}" var="intoFarm">
 													<tr>
-														<td>${farmer.farmer_no}</td>
-														<td>${farmer.user_id}</td>
-														<td>${farmer.user_name}</td>
-														<td>${farmer.farmer_date}</td>
-														<c:choose>
-															<c:when test="${farmer.farmer_check eq 0}"><td>진행중</td></c:when>
-															<c:when test="${farmer.farmer_check eq 1}"><td>승인</td></c:when>
-															<c:when test="${farmer.farmer_check eq 2}"><td>취소</td></c:when>
-														</c:choose>
+														<td>${intoFarm.into_no}</td>
+														<td>${intoFarm.user_id}</td>
+														<td>${intoFarm.into_title}</td>
+														<td>${intoFarm.into_city}</td>
+														<td>${intoFarm.into_date}</td>
+														<td>${intoFarm.into_entry}</td>
 														<td>
 															<!-- 보기 Modal -->
-															<a href="javascript:;" class="view" onclick="adminFarmerSel('${farmer.user_id}')">
+															<a href="javascript:;" class="view" onclick="adminIntoFarmSel('${intoFarm.into_no}')">
 																<i class="material-icons" data-toggle="tooltip" title="보기">&#xe8f4;</i>
 															</a>
-															<c:if test="${farmer.farmer_check eq 0}">
-															<!-- 승인 Modal -->
-															<a href="#chkFarmerModal" class="check" data-toggle="modal" onclick="chkFunc(event)">
-																<i class="material-icons btn-outline-success" data-toggle="tooltip" title="승인">&#xe5ca;</i>
+															<!-- 삭제 Modal -->
+															<a href="#intoFarmDelModal" class="delete" data-toggle="modal" onclick="delFunc(event)">
+																<i class="material-icons btn-outline-danger" data-toggle="tooltip" title="삭제">&#xE872;</i>
 															</a>
-															<!-- 취소 Modal -->
-															<a href="#canFarmerModal" class="cancel" data-toggle="modal" onclick="canFunc(event)">
-																<i class="material-icons btn-outline-danger" data-toggle="tooltip" title="취소">&#xe5cd;</i>
-															</a>
-															</c:if>
 														</td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
-										<form action="adminFarmer" name="searchFrm">
+										<form action="adminIntoFarm" name="searchFrm">
+											<input type="hidden" name="into_progress" value="${intoTheFarmVO.into_progress}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>
@@ -130,48 +128,29 @@
 				</div>
 			</div>
 			<!-- 단건 보기 Modal 이동 END -->
-			<!-- 승인 Modal START -->
-			<div id="chkFarmerModal" class="modal fade">
+			<!-- 삭제 Modal START -->
+			<div id="intoFarmDelModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<form action="adminFarmerUpt" method="post">
-							<input type="hidden" id="user_id1" name="user_id">
-							<input type="hidden" name="user_auth" value="farmer">
-							<input type="hidden" name="farmer_check" value="1">
+						<form action="adminIntoFarmDel" method="post">
+							<input type="hidden" id="into_no" name="into_no">
 							<div class="modal-body">
-								<p>신청을 승인하시겠습니까?</p>
+								<p>정말로 삭제하시겠습니까?</p>
+								<p class="text-warning">
+									<small>이 작업은 되돌릴 수 없습니다.</small>
+								</p>
 							</div>
 							<div class="modal-footer">
-								<input type="submit" class="btn btn-success" value="확인">
+								<input type="submit" class="btn btn-danger" value="삭제">
 								<input type="button" class="btn btn-info" data-dismiss="modal" value="닫기">
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<!-- 승인 Modal END -->
-			<!-- 취소 Modal START -->
-			<div id="canFarmerModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<form action="adminFarmerUpt" method="post">
-							<input type="hidden" id="user_id2" name="user_id">
-							<input type="hidden" name="user_auth" value="user">
-							<input type="hidden" name="farmer_check" value="2">
-							<div class="modal-body">
-								<p>신청을 취소하시겠습니까?</p>
-							</div>
-							<div class="modal-footer">
-								<input type="submit" class="btn btn-success" value="확인">
-								<input type="button" class="btn btn-info" data-dismiss="modal" value="닫기">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-- 취소 Modal END -->
+			<!-- 삭제 Modal END -->
 		</div>
 	</section>
-	<!-- 신청 현황 END -->
+	<!-- 농촌속으로 현황 END -->
 </body>
 </html>

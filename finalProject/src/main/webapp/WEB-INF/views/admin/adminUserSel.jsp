@@ -6,40 +6,44 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <body>
 	<div class="modal-header">
-		<h4 class="modal-title">${user.user_name}</h4>
+		<h4 class="modal-title">ID : ${user.user_id}</h4>
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	</div>
 	<div class="modal-body">
-		<div class="form-group">
-			<label>ID</label>
-			<input type="text" class="form-control" value="${user.user_id}" readonly="readonly">
+		<div class="form-group row">
+			<div class="col-md-6">
+				<strong>이름</strong>
+				<input type="text" class="form-control" value="${user.user_name}" readonly="readonly">
+			</div>
+			<div class="col-md-6">
+				<strong>생년월일</strong>
+				<input type="text" class="form-control" value="${user.user_birth}" readonly="readonly">
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-md-6">
+				<strong>연락처</strong>
+				<input type="text" class="form-control" value="${user.user_phone}" readonly="readonly">
+			</div>
+			<div class="col-md-6">
+				<strong>이메일</strong>
+				<input type="text" class="form-control" value="${user.user_email}" readonly="readonly">
+			</div>
 		</div>
 		<div class="form-group">
-			<label>연락처</label>
-			<input type="text" class="form-control" value="${user.user_phone}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label>이메일</label>
-			<input type="text" class="form-control" value="${user.user_email}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label>생년월일</label>
-			<input type="text" class="form-control" value="${user.user_birth}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label>우편번호</label>
+			<strong>우편번호</strong>
 			<input type="text" class="form-control" value="${user.user_zip}" readonly="readonly">
 		</div>
 		<div class="form-group">
-			<label>주소</label>
+			<strong>주소</strong>
 			<input type="text" class="form-control" value="${user.user_adr}" readonly="readonly">
 		</div>
 		<div class="form-group">
-			<label>상세주소</label>
+			<strong>상세주소</strong>
 			<input type="text" class="form-control" value="${user.user_detailadr}" readonly="readonly">
 		</div>
 		<div class="form-group">
-			<label>농업인</label>
+			<strong>농업인</strong>
 			<c:choose>
 				<c:when test="${user.user_auth eq 'farmer'}">
 					<input type="text" class="form-control" value="O" readonly="readonly">

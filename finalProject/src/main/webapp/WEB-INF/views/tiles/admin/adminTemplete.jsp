@@ -60,10 +60,10 @@
 							<span class="pcoded-micon"><i class="material-icons dashboard">&#xe871;</i></span><span class="pcoded-mtext">게시판 관리</span>
 						</a>
 						<ul class="pcoded-submenu">
-							<li><a href="bc_alert.html">배너 관리</a></li>
-							<li><a href="bc_button.html">농촌속으로 관리</a></li>
-							<li><a href="bc_badges.html">판매 관리</a></li>
-							<li><a href="bc_badges.html">커뮤니티 관리</a></li>
+							<li><a href="#">배너 관리</a></li>
+							<li><a href="adminIntoFarm">농촌속으로 관리</a></li>
+							<li><a href="#">판매 관리</a></li>
+							<li><a href="adminCommunity">커뮤니티 관리</a></li>
 						</ul></li>
 				</ul>
 			</div>

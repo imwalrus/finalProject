@@ -58,8 +58,7 @@
 							</td>
 							<td></td>
 							<td class="h6">
-								<input type="text" class="form-control-sm" name="pro_price" value="${modal.pro_price}">
-								원
+								<input type="text" class="form-control-sm" name="pro_price" value="${modal.pro_price}">원
 							</td>
 						</tr>
 						<tr>

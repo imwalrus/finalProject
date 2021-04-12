@@ -17,23 +17,14 @@
 <meta name="author" content="Phoenixcoded" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
 
-		// 화면 전환 후 select box 고정    
-		var selected = window.location.search.substr(11, 4);
-		console.log(selected);
-		if (selected == 'farm') {
-			$('#농업인').attr('selected', 'selected');
-		} else if (selected == 'user') {
-			$('#유저').attr('selected', 'selected');
-		} else {
-			$('#전체').attr('selected', 'selected');
-		}
+		// 화면 전환 후 select box 고정
+		$(".custom-select").val('${param.user_auth}');
 	});
 
 	// modal-단건 보기 불러오기
@@ -61,7 +52,6 @@
 	<section class="pcoded-main-container">
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -73,14 +63,13 @@
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body" align="center">
-								<!-- [ Contextual-table ] start -->
 								<div class="col-md-9">
 									<h2>회원 관리</h2>
 									<div class="form-group float-right">
-										<select class="custom-select" onchange="if(this.value) location.href=(this.value);">
-											<option value="adminUser" id="전체">전체</option>
-											<option value="adminUser?user_auth=farmer" id="농업인">농업인</option>
-											<option value="adminUser?user_auth=user" id="유저">유저</option>
+										<select class="custom-select" onchange="location.href='adminUser?user_auth=' + (this.value);">
+											<option value="">전체</option>
+											<option value="farmer">농업인</option>
+											<option value="user">유저</option>
 										</select>
 									</div>
 									<div class="table-responsive">
@@ -162,5 +151,7 @@
 		</div>
 	</section>
 	<!-- 회원 관리 END -->
+	<script>
+	</script>
 </body>
 </html>
