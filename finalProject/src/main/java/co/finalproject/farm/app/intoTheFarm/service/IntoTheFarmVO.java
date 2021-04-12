@@ -36,6 +36,7 @@ public class IntoTheFarmVO {
 	private String into_city;
 	private String into_filename;
 	private MultipartFile[] uploadFile;
+	private String into_progress;
 	
 	public String getUploadFileName() {
 		return into_filename;

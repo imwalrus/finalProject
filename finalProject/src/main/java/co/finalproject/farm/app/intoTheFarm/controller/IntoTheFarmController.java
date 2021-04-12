@@ -131,5 +131,14 @@ public class IntoTheFarmController {
 		intoTheFarmMapper.deleteFarm(vo);
 		return "redirect:/getFarmList";
 	}
+	
+	// 체험 종료
+	@RequestMapping("/updateFarmExit")
+	public @ResponseBody String updateFarmExit(IntoTheFarmVO vo, Model model) {
+		intoTheFarmMapper.updateFarmExit(vo);
+		return "redirect:/getFarmList";
+	}
+	
+	
 }
 //file 테이블 만들어서 스케쥴 걸어서.. y/n으로 

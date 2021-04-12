@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoFarmReqMapper">
+	<!--등록 -->
+   <insert id="insertReqFarm" parameterType="IntoFarmReqVO">
+   
+   <selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+      SELECT NVL(MAX(INTO_REQ_NUM),1)+1 FROM INTOFARM_REQ
+   </selectKey>
+   INSERT INTO INTOFARM_REQ 
+            ( INTO_REQ_NUM
+			  ,USER_ID
+			  ,INTO_REQ_PHONE
+			  ,INTO_REQ_ENTRY
+			  ,INTO_REQ_REWARD
+			  ,INTO_REQ_DATE
+			  ,INTO_NO
+             )
+   VALUES ( #{into_req_num}
+         ,#{user_id}
+          ,#{into_req_phone}
+            ,#{into_req_entry}
+             ,#{into_req_reward}
+            ,#{into_req_date}
+            ,#{into_no}
+            )
+   </insert>
+
+</mapper>
