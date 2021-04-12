@@ -50,7 +50,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a href="community" class="nav-link">커뮤니티</a>
+						<a href="getComm" class="nav-link">커뮤니티</a>
 					</li>
 					<li class="nav-item">
 						<a href="myPage" class="nav-link">마이페이지</a>

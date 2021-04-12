@@ -40,10 +40,11 @@ public class PageController {
 	public String shopMove() {
 		return "shop";
 	}
-
+	
 	@GetMapping("/community")
 	public String communityMove() {
 		return "community";
 	}
+
 	
 }

@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.finalproject.farm.app.education.service.EduPagingVO;
@@ -116,10 +118,27 @@ public class EducationController {
 
     	
 	//수정처리
-    @PostMapping("/updateEdu")
-    public String updateFaqProc(EducationVO vo, EduPagingVO pagingvo) {
-    	logger.debug(vo.toString());
-    	eduService.updateEdu(vo);
+ 	@ResponseBody
+ 	@RequestMapping("/updateEdu")
+    public String updateFaqProc(EducationVO vo, EduPagingVO pagingvo, HttpServletRequest req) throws IllegalStateException, IOException {
+ 	        // 첨부 파일 처리
+ 	 		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
+ 	 		MultipartFile uploadFile = vo.getUploadFile();
+ 	 		String edu_filename = "";
+
+ 	 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
+ 	 			String filename = uploadFile.getOriginalFilename();
+ 	 			// 파일명 중복체크 -> rename
+ 	 			File rename = FileRenamePolicy.rename(
+ 	 					new File(path, filename));
+ 	 			edu_filename += rename.getName();
+ 	 			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
+ 	 		} else if (uploadFile.getOriginalFilename() == null && uploadFile.getOriginalFilename() == "") {
+ 	 			vo.setEdu_filename(req.getParameter("edu_filename"));
+ 	 		}
+ 	 		vo.setEdu_filename(edu_filename); // vo 업로드된 파일명 담아서 DB에 저장
+    	    logger.debug(vo.toString());
+    	    eduService.updateEdu(vo);
     	return "redirect:getSchOffEdu?edu_no="+vo.getEdu_no()+"&page="+pagingvo.getPage();
     }
     
