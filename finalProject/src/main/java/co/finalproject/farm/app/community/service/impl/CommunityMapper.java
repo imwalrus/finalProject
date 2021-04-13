@@ -26,6 +26,9 @@ public interface CommunityMapper {
     //건수
   	public int getCount(CommPagingVO vo);
   	
+    // 전체 건수(관리자 페이지서 활용)
+	public int getCount();
+  	
     // 조회 증가
     public void updatereviewcnt(CommunityVO vo);
 	

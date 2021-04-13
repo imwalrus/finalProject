@@ -22,10 +22,14 @@
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
-
 		// 화면 전환 후 select box 고정
-		$(".custom-select").val('${param.into_progress}');
-		
+		$("#select-sort").val('${param.into_progress}');
+		// 검색 기능 : select태그 value값을 input태그 name으로 전달
+		$('#select-search').change(function() {
+			var select = $(this).find('option:selected');
+			var value = select.attr('value');
+			$('#search-input').attr('name', value);
+		})
 	});
 
 	// modal-단건 보기 불러오기
@@ -66,14 +70,16 @@
 							<div class="card-body" align="center">
 								<div class="col-md-9">
 									<h2>농촌속으로 현황</h2>
+									<!-- 카테고리 : 전체·진행중·종료 -->
 									<div class="form-group float-right">
-										<select class="custom-select" onchange="location.href='adminIntoFarm?into_progress=' + (this.value);">
+										<select class="custom-select" id="select-sort" onchange="location.href='adminIntoFarm?into_progress=' + (this.value);">
 											<option value="">전체</option>
 											<option value="0">진행중</option>
 											<option value="1">종료</option>
 										</select>
 									</div>
 									<div class="table-responsive">
+										<!-- 테이블 START -->
 										<table class="table">
 											<thead>
 												<tr class="table-success">
@@ -83,6 +89,7 @@
 													<th>지역</th>
 													<th>일정</th>
 													<th>모집인원수</th>
+													<th>진행여부</th>
 													<th></th>
 												</tr>
 											</thead>
@@ -94,7 +101,15 @@
 														<td>${intoFarm.into_title}</td>
 														<td>${intoFarm.into_city}</td>
 														<td>${intoFarm.into_date}</td>
-														<td>${intoFarm.into_entry}</td>
+														<td>${intoFarm.into_entry}명</td>
+														<c:choose>
+															<c:when test="${intoFarm.into_progress eq 0}">
+																<td>진행중</td>
+															</c:when>
+															<c:when test="${intoFarm.into_progress eq 1}">
+																<td>종료</td>
+															</c:when>
+														</c:choose>
 														<td>
 															<!-- 보기 Modal -->
 															<a href="javascript:;" class="view" onclick="adminIntoFarmSel('${intoFarm.into_no}')">
@@ -109,12 +124,39 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<!-- 테이블 END -->
+										<!-- 페이징 START -->
 										<form action="adminIntoFarm" name="searchFrm">
 											<input type="hidden" name="into_progress" value="${intoTheFarmVO.into_progress}">
+											<input type="hidden" name="into_title" value="${intoTheFarmVO.into_title}">
+											<input type="hidden" name="into_city" value="${intoTheFarmVO.into_city}">
+											<input type="hidden" name="into_product" value="${intoTheFarmVO.into_product}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>
+										<!-- 페이징 END -->
 									</div>
+									<!-- 검색창 START -->
+									<form action="adminIntoFarm" class="search-form col-md-10 row">
+										<div class="col-md-3">
+											<select class="custom-select" id="select-search">
+												<option value="into_title" selected>체험이름</option>
+												<option value="into_city">지역</option>
+												<option value="into_product">종류</option>
+											</select>
+										</div>
+										<div class="col-md-7">
+											<input type="hidden" name="page" value="1">
+											<div class="form-group">
+												<span class="icon ion-ios-search"></span>
+												<input type="text" class="form-control" id="search-input" name="into_title" placeholder="Search...">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<button type="submit" class="btn btn-secondary">검색</button>
+										</div>
+									</form>
+									<!-- 검색창 END -->
 								</div>
 							</div>
 						</div>

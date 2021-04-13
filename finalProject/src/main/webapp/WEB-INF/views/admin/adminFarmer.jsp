@@ -22,6 +22,8 @@
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
+		// 화면 전환 후 select box 고정
+		$("#select-sort").val('${param.farmer_check}');
 	});
 
 	// modal-단건 보기 불러오기
@@ -68,6 +70,15 @@
 							<div class="card-body" align="center">
 								<div class="col-md-9">
 									<h2>농업인 권한 신청 현황</h2>
+									<!-- 카테고리 : 전체·진행중·승인·취소 -->
+									<div class="form-group float-right">
+										<select class="custom-select" id="select-sort" onchange="location.href='adminFarmer?farmer_check=' + (this.value);">
+											<option value="">전체</option>
+											<option value="0">진행중</option>
+											<option value="1">승인</option>
+											<option value="2">취소</option>
+										</select>
+									</div>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>

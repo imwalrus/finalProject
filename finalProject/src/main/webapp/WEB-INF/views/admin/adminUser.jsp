@@ -22,9 +22,14 @@
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
-
 		// 화면 전환 후 select box 고정
-		$(".custom-select").val('${param.user_auth}');
+		$("#select-sort").val('${param.user_auth}');
+		// 검색 기능 : select태그 value값을 input태그 name으로 전달
+		$('#select-search').change(function() {
+			var select = $(this).find('option:selected');
+			var value = select.attr('value');
+			$('#search-input').attr('name', value);
+		})
 	});
 
 	// modal-단건 보기 불러오기
@@ -32,13 +37,11 @@
 		$('#modal .modal-content').load("adminUserSel?user_id=" + str);
 		$('#modal').modal();
 	}
-
 	// user_id 삭제 모달로 넘기기
 	function delFunc(e) {
 		var tds = $(e.target).closest("tr").children()
 		$('#user_id').val(tds.eq(0).html());
 	}
-
 	// 페이징
 	function goPage(p) {
 		//	location.href="adminUser?page="+p;
@@ -65,14 +68,16 @@
 							<div class="card-body" align="center">
 								<div class="col-md-9">
 									<h2>회원 관리</h2>
+									<!-- 카테고리 : 전체·농업인·유저 -->
 									<div class="form-group float-right">
-										<select class="custom-select" onchange="location.href='adminUser?user_auth=' + (this.value);">
+										<select class="custom-select" id="select-sort" onchange="location.href='adminUser?user_auth=' + (this.value);">
 											<option value="">전체</option>
 											<option value="farmer">농업인</option>
 											<option value="user">유저</option>
 										</select>
 									</div>
 									<div class="table-responsive">
+										<!-- 테이블 START -->
 										<table class="table">
 											<thead>
 												<tr class="table-success">
@@ -108,12 +113,39 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<!-- 테이블 END -->
+										<!-- 페이징 START -->
 										<form action="adminUser" name="searchFrm">
 											<input type="hidden" name="user_auth" value="${userVO.user_auth}">
+											<input type="hidden" name="user_id" value="${userVO.user_id}">
+											<input type="hidden" name="user_name" value="${userVO.user_name}">
+											<input type="hidden" name="user_adr" value="${userVO.user_adr}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>
+										<!-- 페이징 END -->
 									</div>
+									<!-- 검색창 START -->
+									<form action="adminUser" class="search-form col-md-10 row">
+										<div class="col-md-3">
+											<select class="custom-select" id="select-search">
+												<option value="user_id" selected>ID</option>
+												<option value="user_name">이름</option>
+												<option value="user_adr">지역</option>
+											</select>
+										</div>
+										<div class="col-md-7">
+											<input type="hidden" name="page" value="1">
+											<div class="form-group">
+												<span class="icon ion-ios-search"></span>
+												<input type="text" class="form-control" id="search-input" name="user_id" placeholder="Search...">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<button type="submit" class="btn btn-secondary">검색</button>
+										</div>
+									</form>
+									<!-- 검색창 END -->
 								</div>
 							</div>
 						</div>
@@ -151,7 +183,5 @@
 		</div>
 	</section>
 	<!-- 회원 관리 END -->
-	<script>
-	</script>
 </body>
 </html>

@@ -4,6 +4,11 @@ import lombok.Data;
 
 @Data
 public class OrderVO {
+	// 페이징
+	Integer page = 1;
+	int start = 1;
+	int end = 10;
+	int pro_count;
 	private String order_no;
 	private String order_date;
 	private String order_invoice;
@@ -18,5 +23,9 @@ public class OrderVO {
 	private String orderlist_no;
 	private String orderlist_condition;
 	private String pro_no;
+	private String pro_name;
+	private String pro_price;
 	private String cart_count;
+	private String buyer;
+	private String seller;
 }

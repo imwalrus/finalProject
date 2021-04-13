@@ -11,6 +11,15 @@
 			<if test="user_auth != null and user_auth != ''">
 				AND UPPER(USER_AUTH) LIKE '%' || UPPER(#{user_auth}) || '%'
 			</if>
+			<if test="user_id != null and user_id != ''">
+				AND UPPER(USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+			</if>
+			<if test="user_name != null and user_name != ''">
+				AND USER_NAME LIKE '%' || #{user_name} || '%'
+			</if>
+			<if test="user_adr != null and user_adr != ''">
+				AND USER_ADR LIKE '%' || #{user_adr} || '%'
+			</if>
 		</where>
 	</select>
 	
@@ -18,6 +27,11 @@
 	<select id="getCountFarmer" resultType="int">
 		SELECT COUNT(*)
 		FROM FARMER
+	  <where>
+        <if test="farmer_check != null and farmer_check != ''">
+     	     FARMER_CHECK = #{farmer_check}
+       	</if>
+      </where>
 	</select>
 	
 	<!-- ID 중복체크 -->
@@ -101,6 +115,15 @@
 		<if test="user_auth != null and user_auth !=''">
 		    AND USER_AUTH = #{user_auth}
 		</if>
+		<if test="user_id != null and user_id != ''">
+			AND UPPER(USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+		</if>
+		<if test="user_name != null and user_name != ''">
+			AND USER_NAME LIKE '%' || #{user_name} || '%'
+		</if>
+		<if test="user_adr != null and user_adr != ''">
+			AND USER_ADR LIKE '%' || #{user_adr} || '%'
+		</if>
 		</where> 
 	  ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
@@ -165,7 +188,10 @@
 			 , F.FARMER_FILENAME
 			 , F.FARMER_CHECK
 		  FROM FARMER F, USERS U
-     	WHERE  F.USER_ID = U.USER_ID
+		WHERE  F.USER_ID = U.USER_ID
+     	  <if test="farmer_check != null and farmer_check != ''">
+     	   AND F.FARMER_CHECK = #{farmer_check}
+       	  </if>
 	    ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	

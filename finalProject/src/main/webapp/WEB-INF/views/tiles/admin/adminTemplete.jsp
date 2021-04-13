@@ -62,7 +62,7 @@
 						<ul class="pcoded-submenu">
 							<li><a href="#">배너 관리</a></li>
 							<li><a href="adminIntoFarm">농촌속으로 관리</a></li>
-							<li><a href="#">판매 관리</a></li>
+							<li><a href="adminOrder">판매 현황</a></li>
 							<li><a href="adminCommunity">커뮤니티 관리</a></li>
 						</ul></li>
 				</ul>

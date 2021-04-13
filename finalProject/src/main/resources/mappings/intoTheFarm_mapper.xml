@@ -41,39 +41,46 @@
 		</where>
 	</select>
 	
-	<!--전체조회 & 페이징 -->
-	
-	<select id="getFarmList" resultType="IntoTheFarmVO">
-	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
-		SELECT INTO_NO
-			 , INTO_TITLE
-			 , INTO_PHONE
-			 , INTO_PRODUCT
-             , INTO_DATE
-             , INTO_ENTRY
-             , INTO_INFO
-             , USER_ID
-             , INTO_CITY
-		FROM INTOFARM
-		<where>
-         <if test="into_no != null and into_no != '' and into_title != null and into_title != '' and
-         		   into_phone != null and into_phone != '' and into_product != null and into_product != '' and
-         		   into_date != null and into_date != '' and into_entry != null and into_entry != '' and
-         		   into_info != null and into_info != '' and user_id != null and user_id != '' and
-         		   into_city != null and into_city != '' and user_id != null and user_id != ''">
-			    AND ( UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
-				OR UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%' 
-				<!-- 기간설정 --> 
-				)
-		 </if>
-		 <if test="into_progress != null and into_progress != ''">
-		 		AND INTO_PROGRESS = #{into_progress}
-		 </if>
+<!--전체조회 & 페이징 -->
+   
+   <select id="getFarmList" resultType="IntoTheFarmVO">
+   SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+      SELECT INTO_NO
+           , INTO_TITLE
+           , INTO_PHONE
+           , INTO_PRODUCT
+           , INTO_DATE
+           , INTO_ENTRY
+           , INTO_INFO
+           , USER_ID
+           , INTO_CITY
+           , INTO_PROGRESS
+      FROM INTOFARM
+      <where>
+       <if test="into_progress != null and into_progress != ''">
+             INTO_PROGRESS = #{into_progress}
+       </if>
+       <if test="into_title != null and into_title != ''">
+             AND UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+       </if>
+         <if test="into_city != null and into_city != ''">
+             AND UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+       </if>
+       <if test="into_product != null and into_product != ''">       
+             AND UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+       </if>
+       <if test="into_date != null and into_date != ''">               
+             AND  <![CDATA[
+                      INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
+                      and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
+                  ]]>
+            )
+       </if>
         </where>
-		ORDER BY INTO_NO DESC
-		) A) B WHERE RN BETWEEN #{start} AND #{end}
-		
-	</select>
+      ORDER BY INTO_NO DESC
+      ) A) B WHERE RN BETWEEN #{start} AND #{end}
+      
+   </select>
 	
 	<!--단건조회 -->
 	<select id="getSearchFarm" resultType="IntoTheFarmVO">

@@ -11,6 +11,8 @@ import co.finalproject.farm.app.community.service.CommunityVO;
 import co.finalproject.farm.app.community.service.impl.CommunityMapper;
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
+import co.finalproject.farm.app.shop.service.OrderVO;
+import co.finalproject.farm.app.shop.service.impl.ShopMapper;
 import co.finalproject.farm.app.user.service.UserVO;
 import co.finalproject.farm.app.user.service.impl.UserMapper;
 import co.finalproject.farm.common.Paging;
@@ -19,11 +21,16 @@ import co.finalproject.farm.common.Paging;
 public class AdminController {
 	@Autowired UserMapper userMapper;
 	@Autowired IntoTheFarmMapper intoFarmMapper;
+	@Autowired ShopMapper shopMapper;
 	@Autowired CommunityMapper communityMapper;
 
 	// 메인페이지
 	@GetMapping("/admin")
-	public String adminMove() {
+	public String adminMove(Model model) {
+		model.addAttribute("user", userMapper.getCount());
+		model.addAttribute("intoFarm", intoFarmMapper.getCount());
+		model.addAttribute("order", shopMapper.getCount());
+		model.addAttribute("comm", communityMapper.getCount());
 		return "adminTiles/admin/admin";
 	}
 	
@@ -122,9 +129,26 @@ public class AdminController {
 		return "redirect:/adminIntoFarm";
 	}
 	
+	// 판매 현황 - 전체 조회
+	@GetMapping("/adminOrder")
+	public String adminShop(OrderVO vo, Paging paging, Model model) {
+		paging.setPageUnit(5); // 한 페이지에 표시되는 레코드 건 수
+		paging.setPageSize(3); // 표시되는 페이지 번호
+		// 페이징
+		if (vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		paging.setTotalRecord(shopMapper.getCountAdmin(vo));
+		model.addAttribute("paging", paging); // 페이징
+    	model.addAttribute("order", shopMapper.adminShop(vo));
+		return "adminTiles/admin/adminOrder";
+	}
+	
 	// 커뮤니티 현황 - 전체 조회
     @GetMapping("/adminCommunity")
-    public String  adminCommunity(CommPagingVO vo, Paging paging, Model model) {
+    public String adminCommunity(CommPagingVO vo, Paging paging, Model model) {
     	paging.setPageUnit(5); //한 페이지에 표시되는 레코드 건수
 		paging.setPageSize(3); //페이지 번호수
 		//페이징

@@ -10,12 +10,18 @@
          <if test="comm_adr != null and comm_adr != ''">
 			    COMM_ADR=#{comm_adr}
 		 </if>
+         <if test="comm_subject != null and comm_subject != ''">
+                AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
+		 </if>
+         <if test="comm_title != null and comm_title != ''">
+			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+		 </if>
+         <if test="comm_content != null and comm_content != ''">
+			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
 				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
-		 </if>
-		 <if test="comm_subject != null and comm_subject != ''">
-			    COMM_SUBJECT=#{comm_subject}
 		 </if>
         </where>
          order by comm_no desc
@@ -94,12 +100,18 @@
          <if test="comm_adr != null and comm_adr != ''">
 			    COMM_ADR=#{comm_adr}
 		 </if>
+         <if test="comm_subject != null and comm_subject != ''">
+                AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
+		 </if>
+         <if test="comm_title != null and comm_title != ''">
+			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+		 </if>
+         <if test="comm_content != null and comm_content != ''">
+			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
 				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
-		 </if>
-		 <if test="comm_subject != null and comm_subject != ''">
-			    COMM_SUBJECT=#{comm_subject}
 		 </if>
 	 </where>
     </select>

@@ -22,9 +22,14 @@
 	$(document).ready(function() {
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
-
-		// 화면 전환 후 select box 고정    
-		$(".custom-select").val('${param.comm_adr}');
+		// 화면 전환 후 select box 고정
+		$("#select-sort").val('${param.into_progress}');
+		// 검색 기능 : select태그 value값을 input태그 name으로 전달
+		$('#select-search').change(function() {
+			var select = $(this).find('option:selected');
+			var value = select.attr('value');
+			$('#search-input').attr('name', value);
+		})
 	});
 
 	// modal-단건 보기 불러오기
@@ -65,8 +70,9 @@
 							<div class="card-body" align="center">
 								<div class="col-md-9">
 									<h2>커뮤니티 현황</h2>
+									<!-- 카테고리 : 지역별 -->
 									<div class="form-group float-right">
-										<select class="custom-select" onchange="location.href='adminCommunity?comm_adr=' + (this.value);">
+										<select class="custom-select" id="select-sort" onchange="location.href='adminCommunity?comm_adr=' + (this.value);">
 											<option value="">전체</option>
 											<option value="서울/경기/인천">서울/경기/인천</option>
 											<option value="대전/세종/충청">대전/세종/충청</option>
@@ -78,6 +84,7 @@
 										</select>
 									</div>
 									<div class="table-responsive">
+										<!-- 테이블 START -->
 										<table class="table">
 											<thead>
 												<tr class="table-success">
@@ -113,12 +120,39 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<!-- 테이블 END -->
+										<!-- 페이징 START -->
 										<form action="adminCommunity" name="searchFrm">
 											<input type="hidden" name="comm_adr" value="${commPagingVO.comm_adr}">
+											<input type="hidden" name="comm_subject" value="${commPagingVO.comm_subject}">
+											<input type="hidden" name="comm_title" value="${commPagingVO.comm_title}">
+											<input type="hidden" name="comm_content" value="${commPagingVO.comm_content}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>
+										<!-- 페이징 END -->
 									</div>
+									<!-- 검색창 START -->
+									<form action="adminCommunity" class="search-form col-md-10 row">
+										<div class="col-md-3">
+											<select class="custom-select" id="select-search">
+												<option value="comm_subject" selected>말머리</option>
+												<option value="comm_title">제목</option>
+												<option value="comm_content">내용</option>
+											</select>
+										</div>
+										<div class="col-md-7">
+											<input type="hidden" name="page" value="1">
+											<div class="form-group">
+												<span class="icon ion-ios-search"></span>
+												<input type="text" class="form-control" id="search-input" name="comm_subject" placeholder="Search...">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<button type="submit" class="btn btn-secondary">검색</button>
+										</div>
+									</form>
+									<!-- 검색창 END -->
 								</div>
 							</div>
 						</div>
