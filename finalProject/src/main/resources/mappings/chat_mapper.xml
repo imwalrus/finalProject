@@ -12,14 +12,18 @@
 							USER_ID_TWO=#{user_id_one})
 </select>
 
-<!-- 채팅방 번호 조회 -->
-<select id="getRoomNo" resultType="ChatRoomVO" parameterType="ChatRoomVO">
-	SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_no}
-</select>
-
 <!-- 해당 채팅방에 속하는 메세지 조회 조회 -->
-<select id="getMessageList" resultType="map" >
-	SELECT * FROM MESSAGE WHERE CHATROOM_NO = #{chatroom_no}
+<select id="getMessageList" resultType="MessageVO" >
+	SELECT 	MSG_NO,
+			MSG_SENDER,
+			MSG_RECEIVER,
+			MSG_CONTENT,
+			CHATROOM_NO,
+			TO_CHAR(MSG_SENDTIME,'yyyy-mm-dd HH:mm:dd:ss') "MSG_SENDTIME",
+			MSG_READTIME 
+	FROM MESSAGE 
+	WHERE CHATROOM_NO = #{chatroom_no}
+	ORDER BY MSG_NO
 </select>
 
 <!-- 채팅방 조회후 일치하는 값이 없으면 채팅방 생성 -->
@@ -36,13 +40,13 @@
 <insert id="insertMessage" parameterType="MessageVO">
 	insert into MESSAGE (	MSG_NO,
 							MSG_SENDER,
-							MSG_RECEVIER,
+							MSG_RECEIVER,
 							MSG_CONTENT,
 							MSG_SENDTIME,
 							CHATROOM_NO)
 				VALUES ((SELECT NVL(MAX(MSG_NO),0) FROM MESSAGE)+1,
 						#{msg_sender},
-						#{msg_recevier},
+						#{msg_receiver},
 						#{msg_content},
 						systimestamp,
 						#{chatroom_no})
@@ -62,19 +66,41 @@
 			 ORDER BY MESSAGE_ID
 </select>
 
+<!-- 읽은 시간 update -->
 <update id ="updateReadTime1" parameterType="MessageVO">
 	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
-				   WHERE CHATROOM_ID=${chatroom_no} and 
-				   		 MSG_RECIEVER = #{msg_reciever} and
-				   		 MSG_READTIME = #{msg_readtime, jdbcType=DATE}
+				   WHERE CHATROOM_NO=${chatroom_no} and 
+				   		 MSG_RECEIVER = #{msg_receiver}
 </update>
 
-<update id ="updateReadTime2" parameterType="MessageVO">
-	update MESSAGE SET MSG_READTIME = SYSTIMESTAMP 
-				   where USER_ID_two = #{user_id_two}  AND 
-				   MSG_READTIME = MSG_SENDTIME and 
-				   message_sender = USER_ID_two and 
-				   USER_ID_one = #{user_id_one}
-</update>
+<!-- 메세지 삭제 -->
+<delete id="deleteMessage" parameterType="String">
+	DELETE FROM MESSAGE WHERE CHATROOM_NO = #{chatroom_id}
+</delete>
+
+<!-- 채팅방 삭제 -->
+<delete id="deleteChatRoom" parameterType="String">
+	DELETE FROM CHATROOM WHERE CHATROOM_NO = #{chatroom_id}
+</delete>
+
+<!-- 읽지않은 메세지 갯수 (채팅방별로)-->
+<select id="getUnreadMessage" resultType="MessageVO" parameterType="String">
+	SELECT CHATROOM_NO , NVL(COUNT(*),0) "msg_num" FROM MESSAGE 
+								  WHERE MSG_RECEIVER = #{user_id} 
+								  AND MSG_READTIME IS NULL 
+								  GROUP BY CHATROOM_NO
+</select>
+
+<!-- 읽지않은 전체 메세지 갯수 -->
+<select id="getUnreadMessageAll" resultType="int" parameterType="String">
+	SELECT COUNT(*) "msg_num" FROM MESSAGE WHERE MSG_RECEIVER = ${user_id} AND MSG_READTIME IS NULL 
+</select>
+
+<!-- 검색기능 -->
+<select id="getSearchList" parameterType="String" resultType="MessageVO">
+	SELECT * FROM MESSAGE
+			 WHERE MSG_RECEIVER LIKE '%'||#{msg_receiver}||'%' 
+			 	OR MSG_SENDER LIKE '%'||#{msg_receiver}||'%'
+</select>
 
 </mapper>
