@@ -80,6 +80,8 @@ public class UserController {
 			//로그인 체크에 성공하면 세션에 user_id, user_auth 담아두기
 			session.setAttribute("user_id", resultVO.getUser_id());
 			session.setAttribute("user_auth", resultVO.getUser_auth());
+			
+			
 		} else {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
 			return "redirect:login";

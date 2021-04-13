@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
+import co.finalproject.farm.app.user.service.UserService;
+import co.finalproject.farm.app.user.service.UserVO;
 import co.finalproject.farm.common.FileRenamePolicy;
 import co.finalproject.farm.common.Paging;
 
@@ -31,7 +34,10 @@ import co.finalproject.farm.common.Paging;
 public class IntoTheFarmController {
 	@Autowired
 	IntoTheFarmMapper intoTheFarmMapper;
-
+	
+	@Autowired 
+	UserService userService;
+	
 	Logger logger = LoggerFactory.getLogger(IntoTheFarmController.class);
 	
 	@InitBinder
@@ -42,27 +48,41 @@ public class IntoTheFarmController {
 
 
 	// 전체조회
-	@RequestMapping("/getFarmList")
-	public String getFarmList(IntoTheFarmVO vo, Paging paging, Model model) {
-
-		paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수
-		paging.setPageSize(5); // 표시되는 페이지 번호
-
-		// 페이징
-
-		if (vo.getPage() == null) {
-			vo.setPage(1);
-		}
-		vo.setStart(paging.getFirst());
-		vo.setEnd(paging.getLast());
-		paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
-		model.addAttribute("paging", paging);
-
-		model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
-
-		return "intoFarm/intoTheFarm";
-	}
-
+	
+	  @RequestMapping("/getFarmList") public String getFarmList(IntoTheFarmVO vo,
+	  Paging paging, UserVO uservo, Model model, HttpSession session) {
+	  
+	  paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는
+	  //페이지 번호
+	  
+	  // 페이징
+	  
+	 if (vo.getPage() == null) {
+		 vo.setPage(1); 
+		 } vo.setStart(paging.getFirst());
+	  vo.setEnd(paging.getLast());
+	  
+	  paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
+	  
+	  model.addAttribute("paging", paging); 
+	  
+	  // 로그인 아이디 가져오기 
+	  String id = (String)session.getAttribute("user_id"); 
+	  vo.setUser_id(id); 
+	  uservo.setUser_id(id);
+	  model.addAttribute("uservo", userService.loginCheck(uservo));
+	  model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
+	  
+	  return "intoFarm/intoTheFarm"; 
+	  }
+	 
+	//test
+	/*
+	 * @RequestMapping("/getFarmList") public String getFarmList() { return
+	 * "intoFarm/calender"; }
+	 */
+	
+	
 	// 단건조회
 	@RequestMapping("/getSearchFarm")
 	public String getSearchFarm(IntoTheFarmVO vo, Model model) {
@@ -141,4 +161,3 @@ public class IntoTheFarmController {
 	
 	
 }
-//file 테이블 만들어서 스케쥴 걸어서.. y/n으로 

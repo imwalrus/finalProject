@@ -25,7 +25,7 @@ public class IntoTheFarmVO {
 	private String into_phone;
 	private String into_product;
 	//@DateTimeFormat(pattern="yyyy-MM-dd")
-	private String into_date;
+	private String into_date[];
 	//@DateTimeFormat(pattern="yyyy-MM-dd")
 	private String s_date;
 	//@DateTimeFormat(pattern="yyyy-MM-dd")

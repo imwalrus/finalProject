@@ -72,7 +72,7 @@
 						$('#myUpdate').modal('show');
 				}
 	
-	   /*모달-신청하기 */	
+	   /*모달-신청하기 모달열기 */	
 		function fndoapply(){
 			$('#myReqModal .nav nav-tabs').on('show.bs.tab',function (e) {
 				 e.target // newly activated tab
@@ -80,6 +80,18 @@
 				 $('#myTab a:first ').tab('show') // Select first tab
 				});
 		}
+	   /*모달-개인신청*/
+	    function fnpersonalapply(str5){
+	    	var yn = confirm("신청하시겠니까?");
+	    	if(yn) {
+	    		applyReqFrm.action = "insertReqFarm";
+	    		applyReqFrm.submit();
+			} else {
+				alert("취소 되었습니다.");
+			}
+	    		
+	    	}
+		   
 		/*모달-체험종료  */ 
 		function fndoexit(str4){
 			var yn = confirm("체험을 종료하시겠습니까?");
@@ -345,25 +357,39 @@ ul.imgs li{
 								<form id="applyReqFrm" method="post" action="insertReqFarm" >
 									<table class="table table-hover">
 										<thead class="text-center">
-											
 											<tr class="content">
-												<th class="text-left">회원 아이디 : ${userVO.user_id}
-												<input type="hidden" value="${intoFarmReqVO.into_req_num}" name="into_req_num">
+												<th class="text-left">회원 아이디 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_id" name="user_id" value="${uservo.user_id}" readonly >
+												<input type="hidden" value="${reqSearchList.into_req_num}" name="into_req_num">
+												<input type="hidden" value="${reqSearchList.into_no}" name="into_no">
 												</th>
 											</tr>
 											<tr class="content">
-												<th class="text-left">이름 : ${userVO.user_name}</th>
+												<th class="text-left">이름 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_name" name="user_name" value="${uservo.user_name}" readonly></th>
 											</tr>
 											<tr class="content">
-												<th class="text-left">연락처 : ${userVO.user_phone}</th>
+												<th class="text-left">연락처 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></th>
 											</tr>
 											<!--보상선택  -->
+											<tr class="content">  
+												<th class="text-left">
+												  보상선택:
+													  <input type="radio" id="product" name="req_reward" value="작물" checked>
+														  <label for="product">작물</label>
+													  <input type="radio" id="cash" name="req_reward" value="현금">
+														  <label for="cash">현금</label>
+													  <input type="radio" id="valtime" name="req_reward" value="봉사시간">
+														  <label for="valtime">봉사시간</label>
+												</th>		  
+											</tr>
+											<tr class="content">
+												<th class="text-left"><input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${reqSearchList.into_req_date}" readonly></th>
+											</tr>
 										</thead>
 										
 									</table>
 									<div class="modal-footer">
 										<button class="btn btn-primary" type="reset" data-dismiss="modal">취소</button>
-										<%-- <button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="fnUpdate('${getlist.into_no}')">신청</button> --%>
+										<button class="btn btn-primary" type="button" onclick="fnpersonalapply('${intoFarmReqVO.into_req_num}')">신청</button>
 									</div>	
 									</form>
 							</div>

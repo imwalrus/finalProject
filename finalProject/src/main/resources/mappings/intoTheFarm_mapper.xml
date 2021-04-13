@@ -39,6 +39,9 @@
              , INTO_CITY
 		FROM INTOFARM
 		<where>
+		 <if test="into_title != null and into_title != ''">
+			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+		 </if>
          <if test="into_city != null and into_city != ''">
 			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
 		 </if>
@@ -95,6 +98,7 @@
               ,INTO_CITY
               ,INTO_PROGRESS
              )
+           
    VALUES ( #{into_no}
          ,#{into_title}
           ,#{into_phone}
@@ -109,8 +113,9 @@
             ,#{into_city}
             ,0
             )
+            
    </insert>
-
+	
 	 <!--수정 -->
    <update id="updateFarm" parameterType="IntoTheFarmVO">
    UPDATE INTOFARM
