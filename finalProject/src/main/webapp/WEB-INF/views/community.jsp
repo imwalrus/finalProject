@@ -1,15 +1,66 @@
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>청년농장</title>
+<script>
+$(document).ready(function() {
+	$("#comm_title").on('keyup', function() {
+		$("#comm_content").val($(this).val())
+	});
+});
+$(document).ready(function(){
+	$("input:checkbox[name='comm_adrs']").val([${commPagingVO.getComm_adrs1()}])
+});
+</script>
+
+
+<script>
+function subjectChange() {
+	comm_sch.submit();
+    }
+function adrChange() {
+	comm_sch.submit();
+    }
+</script>
+
+<script>
+function selectAll(allChk)  {
+	  const checkboxes 
+	       = document.getElementsByName('comm_adrs');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = allChk.checked;
+     })
+}
+</script>
+<style type="text/css">
+#comm_title {  width:170px; 
+                 height:40px !important; }
+#comm_subject {  width:120px; 
+                    text-align: center;
+                    margin:0px;
+                    padding: 5px;
+                    height:35px !important; }
+#title > h1 {
+       font-size: 35px;
+       color: #00cc99;
+       } 
+#comm_adr {
+       font-size: 18px;
+          }
+</style>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -19,231 +70,98 @@
         </div>
       </div>
     </div>
-
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/about.jpg);">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="icon-play"></span>
-						</a>
-					</div>
-					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section-bold mb-4 mt-md-5">
-	          	<div class="ml-md-0">
-		            <h2 class="mb-4">Welcome to Vegefoods an eCommerce website</h2>
-	            </div>
-	          </div>
-	          <div class="pb-md-5">
-	          	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-							<p>But nothing the copy said could convince her and so it didnât take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p><a href="#" class="btn btn-primary">Shop now</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
+     <section class="ftco-section testimony-section">
+     <form action="getComm" name="comm_sch">
+      <input type="hidden" name="page" value="1">
+      <input type="hidden" id="comm_content" name="comm_content" value="${commPagingVO.comm_content}">
+		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
+		<div id="title">
+			<h1>영농인 커뮤니티</h1>
+		</div><br/>
+		<hr style="margin:8px;"><br/>
+		 <div align="left" class="row" id="comm_adr">
+		 <div class="col-md-6" onchange="adrChange()">
+		 지역 <br/>
+         <input type='checkbox' name='comm_adrs' id="chk1" value='전체' onclick='selectAll(this)'/> 전체&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk2" value='서울/경기/인천' /> 서울/경기/인천&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk3" value='대전/세종/충청' /> 대전/세종/충청&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk4" value='강원' /> 강원&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk5" value='광주/전라' /> 광주/전라&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk6" value='대구/경북' /> 대구/경북&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk7" value='부산/울산/경남' /> 부산/울산/경남&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk8" value='제주' /> 제주&nbsp;
+         </div>
+        <div class="col-md-4 ml-auto">
+		<div class="form-group" style="margin-left:228px; padding-top:40px">
+		<select class="form-control" id="comm_subject" name="comm_subject" onchange="subjectChange()">
+		<option value="">말머리</option>
+        <option value="정보공유"
+        <c:if test ="${commPagingVO.comm_subject == '정보공유'}">
+	             selected </c:if>>정보공유</option>
+	    <option value="질문"
+	    <c:if test ="${commPagingVO.comm_subject == '질문'}">
+	             selected </c:if>>질문</option>
+        <option value="일상"
+        <c:if test ="${commPagingVO.comm_subject == '일상'}">
+	             selected </c:if>>일상</option>
+        <option value="고민"
+        <c:if test ="${commPagingVO.comm_subject == '고민'}">
+	             selected </c:if>>고민</option>
+        </select>
+		</div>
+		</div>
+		</div>
+		<hr style="margin:8px;"><br/>
+		<div align="center">
+		<table class="table table-bordered">
+		 <thead>
+				<tr>
+					<td align="center" width="100">글번호</td>
+					<td align="center" width="100">말머리</td>
+					<td align="center" width="350">제 목</td>
+					<td align="center" width="150">아이디</td>
+					<td align="center" width="200">지역</td>
+					<td align="center" width="200">작성일자</td>
+					<td align="center" width="100">조회수</td>
+				</tr>
+		<c:forEach items="${list}" var="comm">
+		<tr onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">
+         <td align="center">${comm.comm_no}</td>
+         <td align="center">${comm.comm_subject}</td>
+         <td>&nbsp; ${comm.comm_title}</td>
+         <td align="center">${comm.user_id}</td>
+         <td align="center">${comm.comm_adr}</td>
+         <td align="center">${comm.comm_date}</td>
+         <td align="center">${comm.comm_hit}</td>
+        </tr>
+        </c:forEach>
+        </thead>
+        </table><br/>
         </div>
-      </div>
+        </div>
+    
+    <div class="row justify-content-around" style="margin-left:385px; margin-right:385px;">
+    <div class="col-auto mr-auto">
+    <c:if test="${user_auth == 'admin' }">  
+    <button type="button" class="btn btn-primary disabled" onclick="location.href='insertComm'">글쓰기</button>
+    </c:if>
+    </div>
+    
+    <div class="col-auto">
+    <input class="form-control" type="text" placeholder="Search..." id="comm_title" name="comm_title"
+    value="${commPagingVO.comm_title}" onclick="this.select()">
+    </div>
+    </div>
+    
+    <my:paging paging="${paging}" jsFunc="goPage" />
+    <script>
+    function goPage(p) {
+    //location.href="getComm?page=" +p;
+    comm_sch.page.value= p;
+    comm_sch.submit();
+    }
+    </script>
+    </form>
     </section>
-		
-		<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_3.jpg);">
-    	<div class="container">
-    		<div class="row justify-content-center py-5">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="10000">0</strong>
-		                <span>Happy Customers</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Branches</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span>Partner</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Awards</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
-		
-		<section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-          	<span class="subheading">Testimony</span>
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row no-gutters ftco-services">
-          <div class="col-lg-3 text-center d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-shipped"></span>
-              </div>
-              <div class="media-body">
-                <h3 class="heading">Free Shipping</h3>
-                <span>On order over $100</span>
-              </div>
-            </div>      
-          </div>
-          <div class="col-lg-3 text-center d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-diet"></span>
-              </div>
-              <div class="media-body">
-                <h3 class="heading">Always Fresh</h3>
-                <span>Product well package</span>
-              </div>
-            </div>    
-          </div>
-          <div class="col-lg-3 text-center d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-award"></span>
-              </div>
-              <div class="media-body">
-                <h3 class="heading">Superior Quality</h3>
-                <span>Quality Products</span>
-              </div>
-            </div>      
-          </div>
-          <div class="col-lg-3 text-center d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-customer-service"></span>
-              </div>
-              <div class="media-body">
-                <h3 class="heading">Support</h3>
-                <span>24/7 Support</span>
-              </div>
-            </div>      
-          </div>
-        </div>
-			</div>
-		</section>
-
 </body>
 </html>

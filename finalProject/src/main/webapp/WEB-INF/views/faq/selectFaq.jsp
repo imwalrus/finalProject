@@ -15,6 +15,15 @@
 		}
 	}
 </script>
+<script>
+$(document).ready(function(){
+	$('input[type="text"]').keypress(function() {
+		  if (event.keyCode == 13) {
+		    event.preventDefault();
+		  };
+	});
+})
+</script>
 <style type="text/css">
 #faq_title {  width:836px;
                  padding:5px;

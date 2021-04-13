@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.community.service.impl.CommunityMapper">
+<!-- 전체보기 -->
+	<select id="getComm" parameterType="CommPagingVO" resultType="CommunityVO">
+		select b.* from (select  rownum rn, a.* from (
+        select * from community
+        <where>
+         <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
+		 </if>
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
+		 </if>
+         <if test="comm_title != null and comm_title != ''">
+			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
+		 </if>
+        </where>
+         order by comm_no desc
+         ) a ) b where rn between #{start} and #{end} 
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="getSchComm" resultType="CommunityVO">
+		SELECT USER_ID
+		,COMM_NO
+		,COMM_DATE
+		,COMM_SUBJECT
+		,COMM_TITLE
+		,COMM_CONTENT
+		,COMM_ADR
+		,COMM_HIT
+		,COMM_DATE
+		FROM COMMUNITY
+		WHERE COMM_NO = #{comm_no}
+	</select>
+
+	<!-- 등록하기 -->
+	<insert id="insertComm" parameterType="CommunityVO">
+		INSERT INTO COMMUNITY
+		(COMM_NO,
+	    USER_ID,
+	    COMM_DATE,
+	    COMM_SUBJECT,
+	    COMM_TITLE,
+	    COMM_CONTENT,
+	    COMM_ADR,
+	    COMM_HIT,
+	    COMM_DATE
+	    )
+		VALUES ( ( select nvl(max(comm_no),0)+1 from community),
+		#{user_id},
+		#{comm_date},
+		#{comm_subject},
+		#{comm_title},
+		#{comm_content},
+		#{comm_adr},
+		#{comm_hit},
+		#{comm_date}
+		)
+	</insert>
+
+	<!-- 글 수정처리 -->
+	<update id="updateComm" parameterType="CommunityVO">
+		UPDATE COMMUNITY
+		<set>
+<if test="comm_subject !=null and comm_subject !=''"> COMM_SUBJECT=#{comm_subject},</if>
+<if test="comm_title !=null and comm_title !=''"> COMM_TITLE=#{comm_title},</if>
+<if test="comm_content !=null and comm_content !=''"> COMM_CONTENT=#{comm_content},</if>
+<if test="comm_adr !=null and comm_adr !=''"> COMM_ADR=#{comm_adr}</if>
+		</set>
+		WHERE COMM_NO = #{comm_no}
+	</update>
+	
+	<!-- 게시글 조회수 증가처리 -->
+    <update id="updatereviewcnt" parameterType="CommunityVO">
+        UPDATE COMMUNITY SET COMM_HIT = COMM_HIT + 1 
+        WHERE COMM_NO = #{comm_no}
+    </update>
+	
+
+	<!-- 글 삭제 -->
+	<delete id="deleteComm" parameterType="CommunityVO">
+		DELETE FROM COMMUNITY
+		WHERE COMM_NO = #{comm_no}
+	</delete>
+	
+	  <!-- 레코드 건수 -->
+    <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM COMMUNITY
+    <where>
+        <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
+		 </if>
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
+		 </if>
+         <if test="comm_title != null and comm_title != ''">
+			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
+		 </if>
+	 </where>
+    </select>
+</mapper>

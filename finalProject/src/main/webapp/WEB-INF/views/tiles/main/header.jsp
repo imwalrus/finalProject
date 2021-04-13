@@ -59,7 +59,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a href="community" class="nav-link">커뮤니티</a>
+						<a href="getComm" class="nav-link">커뮤니티</a>
 					</li>
 					<c:if test="${user_auth ne 'admin'}"><!-- session 내 아이디 값 있을시 마이페이지 표시 -->
 
