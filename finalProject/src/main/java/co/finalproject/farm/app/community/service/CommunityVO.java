@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CommunityVO {
 	private String user_id;
-	private String comm_no;
+	private int comm_no;
 	private String comm_subject;
 	private String comm_title;
 	private String comm_content;

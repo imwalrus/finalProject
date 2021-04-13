@@ -7,15 +7,18 @@
 		select b.* from (select  rownum rn, a.* from (
         select * from community
         <where>
-         <if test="comm_adr != null and comm_adr != ''">
-			    COMM_ADR=#{comm_adr}
+         <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
+		 </if>
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
 				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
-		 </if>
-		 <if test="comm_subject != null and comm_subject != ''">
-			    COMM_SUBJECT=#{comm_subject}
 		 </if>
         </where>
          order by comm_no desc
@@ -91,15 +94,18 @@
     <select id="getCount" resultType="int">
     SELECT COUNT(*) FROM COMMUNITY
     <where>
-         <if test="comm_adr != null and comm_adr != ''">
-			    COMM_ADR=#{comm_adr}
+        <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
+		 </if>
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
 				OR UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_title}) || '%' )
-		 </if>
-		 <if test="comm_subject != null and comm_subject != ''">
-			    COMM_SUBJECT=#{comm_subject}
 		 </if>
 	 </where>
     </select>

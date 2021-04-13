@@ -13,14 +13,31 @@ $(document).ready(function() {
 		$("#comm_content").val($(this).val())
 	});
 });
+$(document).ready(function(){
+	$("input:checkbox[name='comm_adrs']").val([${commPagingVO.getComm_adrs1()}])
+});
 </script>
+
 
 <script>
 function subjectChange() {
 	comm_sch.submit();
     }
+function adrChange() {
+	comm_sch.submit();
+    }
 </script>
 
+<script>
+function selectAll(allChk)  {
+	  const checkboxes 
+	       = document.getElementsByName('comm_adrs');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = allChk.checked;
+     })
+}
+</script>
 <style type="text/css">
 #comm_title {  width:170px; 
                  height:40px !important; }
@@ -36,14 +53,12 @@ function subjectChange() {
 #comm_adr {
        font-size: 18px;
           }
-.col-md-6 input[type='checkbox'] {
-                                 
-                                 }
 </style>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
+
 <body class="goto-here">
     <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
       <div class="container">
@@ -55,7 +70,6 @@ function subjectChange() {
         </div>
       </div>
     </div>
-   
      <section class="ftco-section testimony-section">
      <form action="getComm" name="comm_sch">
       <input type="hidden" name="page" value="1">
@@ -66,16 +80,16 @@ function subjectChange() {
 		</div><br/>
 		<hr style="margin:8px;"><br/>
 		 <div align="left" class="row" id="comm_adr">
-		 <div class="col-md-6">
+		 <div class="col-md-6" onchange="adrChange()">
 		 지역 <br/>
-         <input type='checkbox' name='comm_adr' value='전체' /> 전체&nbsp;
-         <input type='checkbox' name='comm_adr' value='서울/경기/인천' /> 서울/경기/인천&nbsp;
-         <input type='checkbox' name='comm_adr' value='대전/세종/충청' /> 대전/세종/충청&nbsp;
-         <input type='checkbox' name='comm_adr' value='강원' /> 강원&nbsp;
-         <input type='checkbox' name='comm_adr' value='광주/전라' /> 광주/전라&nbsp;
-         <input type='checkbox' name='comm_adr' value='대구/경북' /> 대구/경북&nbsp;
-         <input type='checkbox' name='comm_adr' value='부산/울산/경남' /> 부산/울산/경남&nbsp;
-         <input type='checkbox' name='comm_adr' value='제주' /> 제주&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk1" value='전체' onclick='selectAll(this)'/> 전체&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk2" value='서울/경기/인천' /> 서울/경기/인천&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk3" value='대전/세종/충청' /> 대전/세종/충청&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk4" value='강원' /> 강원&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk5" value='광주/전라' /> 광주/전라&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk6" value='대구/경북' /> 대구/경북&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk7" value='부산/울산/경남' /> 부산/울산/경남&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk8" value='제주' /> 제주&nbsp;
          </div>
         <div class="col-md-4 ml-auto">
 		<div class="form-group" style="margin-left:228px; padding-top:40px">
@@ -104,11 +118,11 @@ function subjectChange() {
 				<tr>
 					<td align="center" width="100">글번호</td>
 					<td align="center" width="100">말머리</td>
-					<td align="center" width="300">제 목</td>
+					<td align="center" width="350">제 목</td>
 					<td align="center" width="150">아이디</td>
-					<td align="center" width="100">지역</td>
+					<td align="center" width="200">지역</td>
 					<td align="center" width="200">작성일자</td>
-					<td align="center" width="150">조회수</td>
+					<td align="center" width="100">조회수</td>
 				</tr>
 		<c:forEach items="${list}" var="comm">
 		<tr onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">

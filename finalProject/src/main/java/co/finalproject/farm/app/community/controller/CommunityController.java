@@ -57,7 +57,7 @@ public class CommunityController {
 	//등록폼
     @RequestMapping("/insertComm")
     public String insertNotices(Model model) {
-    	return "notice/insertComm";
+    	return "community/insertComm";
     }
 	
 	//등록처리
