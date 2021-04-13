@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="resources/chat/style.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>	
   <script  src="resources/chat/script.js" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 	body{
 		font-family: 'Noto Sans KR', sans-serif;

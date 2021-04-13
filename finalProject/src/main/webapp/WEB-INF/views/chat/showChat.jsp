@@ -9,9 +9,6 @@
 <script>
 $(document).ready(function(){
 	connect();
-	
-	 //ajax를 정기적으로 반복(5초마다 반복)하여 읽지않은 대화가 있다면 갯수 카운트 해서 보여주기
-	setInterval(getUnreadMessage(),5000);
 	 
 	//메세지 입력 후 enter키 누르면 메세지 전송
 	 $('#message').keypress(function(event){
@@ -49,6 +46,7 @@ $(document).ready(function(){
 /* 		sock.onopen = onOpen; */ 
 		sock.onerror=onError;
 		sock.onmessage = onMessage; 
+		sock.onclose = onClose;
 	}
 
 	//메세지 전송
@@ -79,6 +77,7 @@ $(document).ready(function(){
 	}
 	//메세지 수신
 	function onMessage(evt){
+		console.log(evt);
 		var receive = evt.data.split(",");
 		var time = getTimeStamp();
  		const data = {
@@ -148,6 +147,11 @@ $(document).ready(function(){
 		 }
 			$('#chatMiddle').scrollTop($('#chatMiddle').prop('scrollHeight'));
 	} // end of appendMessage()
+	
+	function onClose(evt){
+		console.log("연결닫기 이벤트가 먹는지 체크...");
+	}
+	
 </script>
 <script>
 
@@ -200,7 +204,7 @@ $(document).ready(function(){
 					} else if (list[i].msg_content == null){
 						$('.chatMiddle').append("<h5>대화를 시작해보세요!</h5>");
 					}
-					
+					$('#unReadNum').hide();
 					$('[name=room_id]').val(roomId);
 					$('#chatMiddle').scrollTop($('#chatMiddle').prop('scrollHeight'));
 				}
@@ -220,21 +224,6 @@ $(document).ready(function(){
 		})
 	}
 
-	function getUnreadMessage(){
-		$.ajax({
-			url:"getUnreadMessage",
-			data:{"msg_receiver":"${user_id}"},
-			dataType: "json",
-			success:function(response){
-				if(response != null){
-					for(var i=0; i<response.length ; i++){
-						console.log(response[i].chatroom_no); 
-						console.log(response[i].msg_num); 
-					}
-				}
-			}
-		})
-	}
 	
 	function updateReadTime(roomId){
 		$.ajax({
@@ -265,18 +254,12 @@ $(document).ready(function(){
 	         <span class="material-icons" style="margin-top: 15px;">home</span>
 	       </span>
       </div>
-<!--       <div class="search-box">
-        <div class="input-wrapper">
-          <i class="material-icons">search</i>
-          <input placeholder="Search here" type="text" >
-        </div>
-      </div> -->
       <div class="chatList">
 	      <c:if test="${fn:length(chatList) >= 1}">	
 	      	<c:forEach items="${chatList }" var="list">
 		      	<div class='friend-drawer friend-drawer--onhover' onclick='listClick("${list.chatroom_no }")'>
 					<img class='profile-image' src='resources/chat/images/person.jpg'>
-					<div class="text" style="padding-top:15px; color:grey;">
+					<div class="text" style="padding-top:15px; color:grey;" >
 					<c:if test="${list.user_id_one eq user_id }"> <!-- 따옴표안에 공백이 있으면 안됀다... 공백있으면 인식못함... -->
 						<h5>${list.user_id_two }</h5>
 					</c:if>

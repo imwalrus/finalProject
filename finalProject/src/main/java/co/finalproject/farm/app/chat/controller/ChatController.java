@@ -47,6 +47,9 @@ public class ChatController {
 				resultVO.setUser_id_one(user_id);
 				resultVO.setUser_id_two(member_id);
 				chatService.insertChatRoom(resultVO);
+				model.addAttribute("newChat", "newChat");
+			} else {
+				chatService.getChatRoom(vo);
 			}
 			
 			model.addAttribute("chatList", chatService.getChatRoomList(vo));
@@ -60,7 +63,8 @@ public class ChatController {
 			List<MessageVO> msgList = chatService.getMessageList(vo);
 			System.out.println(msgList);
 			/*
-			 * //메세지 리스트 불러오면서 해당하는 chatroom에 읽지않은 message 읽은 시간 update if(msgList != null)
+			 * //메세지 리스트 불러오면서 해당하는 chatroom에 읽지않은 message 읽은 시간 
+			 * update if(msgList != null)
 			 * { chatService.updateReadTime1(vo); }
 			 */
 			return msgList;
