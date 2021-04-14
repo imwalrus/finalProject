@@ -90,7 +90,6 @@ public class IntoTheFarmController {
 	public String insertFarm(IntoTheFarmVO vo, Model model) {
 		return "intoFarm/insertIntoFarm";
 	}
-<<<<<<< HEAD
 
 	//date null값 허용
 	@InitBinder
@@ -116,22 +115,7 @@ public class IntoTheFarmController {
 				file.transferTo(new File(path, rename.getName()));
 				file1 += '@'+rename.getName();
 				vo.setInto_filename(rename.getName());
-=======
-	
-	
-	@PostMapping("/insertFarm") //등록
-	public String insertFarmProc(IntoTheFarmVO vo, MultipartHttpServletRequest request) throws Exception, IOException {
-		//파일 업로드
-		MultipartFile[] files = vo.getUploadFile();
-		String filename1=""; 
-		for(MultipartFile file : files) {
-			
-			if(file != null && !file.isEmpty() && ((MultipartFile) file).getSize() > 0) {
-				filename1 = ((MultipartFile) file).getOriginalFilename();
-				File rename = FileRenamePolicy.rename(new File("c:/upload/"+filename1));
-				filename1 += '@'+rename.getName();
-				file.transferTo(rename);
->>>>>>> refs/remotes/origin/master
+
 			}
 		}
 		System.out.println(vo);
