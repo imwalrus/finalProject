@@ -159,10 +159,10 @@ right:70px;
 		<tr class="content">
 			<th class="text-left">모집 인원 수 : <input type="text" name="into_entry" value="${upFarm.into_entry}"></th>
 		</tr>
-		<!-- <tr class="content">
+		 <tr class="content">
 			<th class="text-left">체험 일정 : <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>
 			</th>
-		</tr> -->
+		</tr>
 		<tr class="content">
 			<th class="text-left">체험 내용  <textarea id="summernote" name="into_info" >${upFarm.into_info}</textarea></th>
 		</tr>

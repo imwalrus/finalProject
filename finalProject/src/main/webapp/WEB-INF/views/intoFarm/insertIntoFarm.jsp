@@ -240,7 +240,7 @@ right:70px;
 			<br><br>
 			<textarea id="summernote" name="into_info"></textarea>
 			
-			<input type="text" name="into_date" style="width: 40%; margin-top: 1%;" placeholder="체험 일정 " /><br>
+			<input type="text" style="width: 40%; margin-top: 1%;" value="체험 일정 등록" /><br> -->
 			<div class="calendalcontainer">
 							<div class="my-calendar clearfix">
 								
