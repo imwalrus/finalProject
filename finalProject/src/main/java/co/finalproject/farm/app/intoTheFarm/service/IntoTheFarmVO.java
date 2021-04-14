@@ -36,6 +36,7 @@ public class IntoTheFarmVO {
 	private String into_city;
 	private String into_filename;
 	private MultipartFile[] uploadFile;
+	private String into_progress;
 	private String into_dates; //마이페이지-신청내역관리에서 사용
 	
 	public String getUploadFileName() {

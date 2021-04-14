@@ -49,9 +49,9 @@
 	<update id="updateNotices" parameterType="NoticeVO">
 		UPDATE NOTICE
 		<set>
-<if test="notice_title !=null"> NOTICE_TITLE=#{notice_title},</if>
-<if test="notice_category !=null"> NOTICE_CATEGORY=#{notice_category},</if>
-<if test="notice_content !=null"> NOTICE_CONTENT=#{notice_content}</if>
+<if test="notice_title !=null and notice_title !=''"> NOTICE_TITLE=#{notice_title},</if>
+<if test="notice_category !=null and notice_category !=''"> NOTICE_CATEGORY=#{notice_category},</if>
+<if test="notice_content !=null and notice_content !=''"> NOTICE_CONTENT=#{notice_content}</if>
 		</set>
 		WHERE NOTICE_NO = #{notice_no}
 	</update>
@@ -59,7 +59,7 @@
 	<!-- 게시글 조회수 증가처리 -->
     <update id="updatereviewcnt" parameterType="NoticeVO">
         UPDATE NOTICE SET NOTICE_HIT = NOTICE_HIT + 1 
-        WHERE notice_no = #{notice_no}
+        WHERE NOTICE_NO = #{notice_no}
     </update>
 
 	<!-- 글 삭제 -->

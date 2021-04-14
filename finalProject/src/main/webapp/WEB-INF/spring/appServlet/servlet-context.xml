@@ -20,7 +20,7 @@
 
 	<!-- 정적컨텐츠 : css, img, js... -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	
 	 <!-- Tiles -->
     <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <beans:property name="definitions">

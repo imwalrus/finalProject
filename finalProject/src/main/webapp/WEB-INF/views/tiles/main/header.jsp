@@ -41,7 +41,7 @@
 						<div class="dropdown-menu" aria-labelledby="dropdown02">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
 							<a class="dropdown-item" href="insertFarm">체험등록</a>
-							<a class="dropdown-item" href="">농촌속으로 문의</a>
+							<a class="dropdown-item" href="getFarmInfo">농촌속으로 문의</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -59,7 +59,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a href="community" class="nav-link">커뮤니티</a>
+						<a href="getComm" class="nav-link">커뮤니티</a>
 					</li>
 					<c:if test="${user_auth ne 'admin'}"><!-- session 내 아이디 값 있을시 마이페이지 표시 -->
 

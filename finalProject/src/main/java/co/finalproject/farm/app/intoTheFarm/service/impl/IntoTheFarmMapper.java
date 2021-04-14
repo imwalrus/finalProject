@@ -12,5 +12,6 @@ public interface IntoTheFarmMapper {
 	public int insertFarm(IntoTheFarmVO vo);
 	public int updateFarm(IntoTheFarmVO vo);
 	public int deleteFarm(IntoTheFarmVO vo);
+	public int updateFarmExit(IntoTheFarmVO vo);
 	
 }
