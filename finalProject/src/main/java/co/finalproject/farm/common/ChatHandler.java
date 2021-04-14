@@ -39,26 +39,23 @@ public class ChatHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// 웹소켓 세션이 intercept한 httpsession값을 사용.
 		String user_id = (String) session.getAttributes().get("user_id");
-		if (user_id != null)
-			System.out.println("로그인한 아이디 : " + user_id);
-		log.info("{} 연결됨", user_id);
-		users.put(user_id, session);
-		connectUsers.add(session);
+		if(user_id!=null) {
+			log.info("{} 연결됨", user_id);
+			users.put(user_id,session);
+		}
+			connectUsers.add(session);
 	}
 
-	// 클라이언트 연결 해제 이후 시행되는 메서드
-	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		connectUsers.remove(session);
-		users.remove(session.getId());
-		log.info(session.getId() + " 연결 종료됨!!!! ");
-	}
 
-	/*
-	 * < 메세지 전송 > 클라이언트가 메시지를 전송했을 때 호출되는메소드 session은 메시지를 전송한 클라이언트 message는 클라이언트가
-	 * 전송한 메시지 : getPayload()를 호출하면 전송한 메시지를 확인할 수 있음. 클라이언트에게 메시지를 전송하고자 할 때는 ->
-	 * session, sendMessage(new TextMessage("메시지"));
-	 */
+	
+	/**   
+	* < 메세지 전송 >
+	* 클라이언트가 메시지를 전송했을 때 호출되는메소드
+	* session은 메시지를 전송한 클라이언트
+	* message는 클라이언트가 전송한 메시지 : getPayload()를 호출하면 전송한 메시지를 확인할 수 있음.
+	* 클라이언트에게 메시지를 전송하고자 할 때는 ->
+	* session, sendMessage(new TextMessage("메시지"));
+	*/
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("현재 접속중인 유저==============> " + users);
@@ -67,7 +64,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		MessageVO msgVO = objectMapper.readValue(msg, MessageVO.class);
 
 		ChatRoomVO roomVO = new ChatRoomVO();
-		roomVO.setUser_id_one(msgVO.getMsg_recevier());
+		roomVO.setUser_id_one(msgVO.getMsg_receiver());
 		roomVO.setUser_id_two(msgVO.getMsg_sender());
 
 		ChatRoomVO room = new ChatRoomVO();
@@ -82,11 +79,13 @@ public class ChatHandler extends TextWebSocketHandler {
 		} else {
 			room = chatService.getChatRoom(roomVO);
 		}
-
-		String sm = msgVO.getMsg_sender() + "," + msgVO.getMsg_recevier() + "," + msgVO.getMsg_content() + ","
+		
+		String sm = msgVO.getMsg_sender()+","
+				+ msgVO.getMsg_receiver()+","
+				+ msgVO.getMsg_content()+","
 				+ msgVO.getMsg_sendtime();
 
-		WebSocketSession rs = users.get(msgVO.getMsg_recevier());
+		WebSocketSession rs = users.get(msgVO.getMsg_receiver());
 		if (rs != null) {
 			rs.sendMessage(new TextMessage(sm));
 		}
@@ -95,10 +94,10 @@ public class ChatHandler extends TextWebSocketHandler {
 		// DB에 message insert
 		MessageVO insertVO = new MessageVO();
 		insertVO.setMsg_sender(msgVO.getMsg_sender());
-		insertVO.setMsg_recevier(msgVO.getMsg_recevier());
+		insertVO.setMsg_receiver(msgVO.getMsg_receiver());
 		insertVO.setMsg_content(msgVO.getMsg_content());
 		insertVO.setMsg_sendtime(msgVO.getMsg_sendtime());
-		insertVO.setChatroom_no(msgVO.getChatroom_no());
+		insertVO.setChatroom_no(room.getChatroom_no());
 		int insertMessage = chatService.insertMessage(insertVO);
 
 		if (createRoom + insertMessage == 2) {
@@ -108,6 +107,16 @@ public class ChatHandler extends TextWebSocketHandler {
 		}
 	}
 
+	
+	//클라이언트 연결 해제 이후 시행되는 메서드
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		String user_id = (String) session.getAttributes().get("user_id");
+		users.remove(user_id);
+		connectUsers.remove(session);
+		log.info(session.getId()+" 연결 종료됨!!!! ");
+	}
+	
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		log.info(session.getId() + " 익셉션 발생: " + exception.getMessage());

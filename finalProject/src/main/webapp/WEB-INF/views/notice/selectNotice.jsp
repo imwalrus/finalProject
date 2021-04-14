@@ -15,6 +15,16 @@
 		}
 	}
 </script>
+<script>
+$(document).ready(function(){
+	$('input[type="text"]').keypress(function() {
+		  if (event.keyCode == 13) {
+		    event.preventDefault();
+		  };
+	});
+})
+</script>
+
 <style type="text/css">
 #notice_title {  width:836px;
                  padding:5px;
@@ -49,6 +59,7 @@
 			<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
 				<thead>
 				<tr>
+				    
 					<td align="center" width="70">글번호</td>
 					<td align="center" width="50">${NoticeVO.notice_no}</td>
 					<td align="center" width="70">분류</td>
@@ -72,7 +83,7 @@
 				</tr>
 				<tr>
 					<td align="center" width="80">제 목</td>
-					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>
+					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>   
 				</tr>
 				<tr>
 					<td align="center" width="70">내용</td>
