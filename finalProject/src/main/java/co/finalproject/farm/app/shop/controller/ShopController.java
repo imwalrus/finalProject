@@ -208,14 +208,8 @@ public class ShopController {
 	}
 
 	// 소개 페이지
-	@GetMapping("/infoShop")
-		public String infoShopForm() {
-			return "shop/infoShop";
-		}
-	
-	// 소개 페이지
-	@PostMapping("/infoShop")
-	public String infoShop(@RequestParam String cnt, Model model) {
+	@RequestMapping("/infoShop")
+	public String infoShop(@RequestParam(defaultValue = "1", required = false) String cnt, Model model) {
 		// 크롤링
 		String url = "http://www.nongsaro.go.kr/portal/ps/psz/pszc/farmProduct.ps?pageIndex=" + cnt;
 		Document doc = null;
