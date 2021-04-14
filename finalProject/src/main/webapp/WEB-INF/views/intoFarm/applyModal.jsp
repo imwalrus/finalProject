@@ -24,6 +24,7 @@
 </table>
 <div class="modal-footer">
 	<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+	<button class="btn btn-primary" type="button" data-bs-target="#myInquiry" data-dismiss="modal" onclick="fnInquiry('${getlist.into_no}','${getlist.into_title}')">문의하기</button>
 	<button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal" data-bs-dismiss="modal"  onclick="fnUpdate('${getlist.into_no}')">수정</button>
 	<button class="btn btn-primary" type="button" onclick="fnDelete('${getlist.into_no}')">삭제</button>
 </div>	

@@ -41,7 +41,7 @@
 						<div class="dropdown-menu" aria-labelledby="dropdown02">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
 							<a class="dropdown-item" href="insertFarm">체험등록</a>
-							<a class="dropdown-item" href="">농촌속으로 문의</a>
+							<a class="dropdown-item" href="getFarmInfo">농촌속으로 문의</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">

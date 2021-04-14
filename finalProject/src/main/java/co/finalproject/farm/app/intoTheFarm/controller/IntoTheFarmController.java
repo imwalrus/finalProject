@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
+import co.finalproject.farm.app.myPage.service.IntoFarmInqVO;
+import co.finalproject.farm.app.myPage.service.impl.IntoFarmInqMapper;
 import co.finalproject.farm.app.user.service.UserService;
 import co.finalproject.farm.app.user.service.UserVO;
 import co.finalproject.farm.common.FileRenamePolicy;
@@ -34,6 +36,7 @@ import co.finalproject.farm.common.Paging;
 public class IntoTheFarmController {
 	@Autowired
 	IntoTheFarmMapper intoTheFarmMapper;
+	@Autowired IntoFarmInqMapper intoFarmInqMapper;
 	
 	@Autowired 
 	UserService userService;
@@ -154,6 +157,27 @@ public class IntoTheFarmController {
 	public @ResponseBody String updateFarmExit(IntoTheFarmVO vo, Model model) {
 		intoTheFarmMapper.updateFarmExit(vo);
 		return "redirect:/getFarmList";
+	}
+	
+	
+	//농촌속으로 설명 보는 뷰페이지로 이동
+	@GetMapping("/getFarmInfo")
+	public String getFarmInfo(IntoTheFarmVO vo) {
+		return "intoFarm/getFarmInfo";
+	}
+	
+	//농촌속으로 문의 뷰페이지(모달)
+	@GetMapping("/insertFarmInq")
+	public String insertFarmInq(IntoTheFarmVO vo) {
+		logger.debug("insertFarmInq ========================> " +vo.toString());
+		return "notiles/intoFarm/insertFarmInq";
+	}
+	
+	//농촌속으로 문의저장 
+	@PostMapping("/insertFarmInq")
+	public String insertFarmInqProc(IntoFarmInqVO vo) {
+		intoFarmInqMapper.insertIntoFarmInq(vo);
+		return "redirect:/getintoFarmInqList";
 	}
 	
 	
