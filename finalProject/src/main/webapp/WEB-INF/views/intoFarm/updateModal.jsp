@@ -160,7 +160,7 @@ right:70px;
 			<th class="text-left">모집 인원 수 : <input type="text" name="into_entry" value="${upFarm.into_entry}"></th>
 		</tr>
 		 <tr class="content">
-			<th class="text-left">체험 일정 : <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>
+			<th class="text-left" id="upfarmm">체험 일정 : <a href="#" id="upfarmdate" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>
 			</th>
 		</tr>
 		<tr class="content">
@@ -236,16 +236,13 @@ right:70px;
 							</div>
 							
 						</div>
+						<button class="btn btn-primary" type="button" onclick="chooseDate('${upFarm.into_date}')">선택</button>
 			 	</div>
 			</div>
 		</div>
 	</div>	
 <script>
-/* 
-function showCal() { 
-	$('#showDate .modal-body').show();
-		
-} */
+
 
 	var plusdate=0;
 	/////////////////////////////////////////날짜 
@@ -259,7 +256,7 @@ function showCal() {
 		plusdate--;
 		var deleteDay=document.getElementById(id).remove();
 	}
-const init = {
+	var init = {
 		  monList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 		  dayList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 		  today: new Date(),
@@ -378,6 +375,17 @@ const init = {
 		    
 		  }
 		});
+		function chooseDate(str) {
+			var into_no = $("input[name=into_no]").val();
+		    var classDates = document.getElementsByName("classDates");
+		    var into_date = []; //빈 배열 선언
+			 	for(i=0; i<classDates.length; i++){
+			 		into_date.push(classDates[i].value); 
+			 	}
+			var a=document.getElementById("upfarmm")
+			a.append(into_date)
+			$('#myLargeModal').modal('show');
+			$('#showDate').modal('hide');
+		}
 
-	alert("ddd");
 </script>  

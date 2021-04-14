@@ -112,9 +112,16 @@
 		}
 		 
 		/*모달-수정*/
-		 function goupdate(str2){
+		function goupdate(str2){
 		     var into_no = $("input[name=into_no]").val();
-		     
+		     var classDates = document.getElementsByName("classDates");
+		     var into_date = []; //빈 배열 선언
+			 	for(i=0; i<classDates.length; i++){
+			 		into_date.push(classDates[i].value); 
+			 	}
+			 	//배열을 string으로 묶어줌(join)
+			 	frm.into_date.value=into_date.join(',');
+		 	
 			$.ajax({
 				url:"updateFarm?into_no="+into_no,
 				type:"post",
@@ -122,7 +129,7 @@
 						  into_title:$("input[name=into_title]").val(),
 						  into_city:$("select[name=into_city]").val(),
 						  into_product:$("input[name=into_product]").val(),
-						  into_date:$("input[name=into_date]").val(),
+						  into_date:$("input[name=classDates]").val(),
 						  into_entry:$("input[name=into_entry]").val(),
 						  into_info:$("textarea[name=into_info]").val(),
 						  into_phone:$("input[name=into_phone]").val(),
@@ -137,7 +144,7 @@
 					} 
 				}
 			})
-		 }  
+		 }
 		
 		/*모달-삭제*/
 		 function fnDelete(str3){
