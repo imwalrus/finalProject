@@ -23,7 +23,7 @@
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
 		// 화면 전환 후 select box 고정
-		$("#select-sort").val('${param.into_progress}');
+		$("#select-sort").val('${param.comm_adr}');
 		// 검색 기능 : select태그 value값을 input태그 name으로 전달
 		$('#select-search').change(function() {
 			var select = $(this).find('option:selected');

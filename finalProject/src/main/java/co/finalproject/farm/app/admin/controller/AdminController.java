@@ -1,10 +1,15 @@
 package co.finalproject.farm.app.admin.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.finalproject.farm.app.community.service.CommPagingVO;
 import co.finalproject.farm.app.community.service.CommunityVO;
@@ -30,8 +35,23 @@ public class AdminController {
 		model.addAttribute("user", userMapper.getCount());
 		model.addAttribute("intoFarm", intoFarmMapper.getCount());
 		model.addAttribute("order", shopMapper.getCount());
+		model.addAttribute("orderSum", shopMapper.getSumOrders());
 		model.addAttribute("comm", communityMapper.getCount());
 		return "adminTiles/admin/admin";
+	}
+	
+	// 차트 - 일별 건수
+	@RequestMapping("/weekChart")
+	@ResponseBody
+	public List<Map<String, Object>> weekChart() {
+		return shopMapper.weekChart();
+	}
+	
+	// 차트 - 월별 건수
+	@RequestMapping("/monthChart")
+	@ResponseBody
+	public List<Map<String, Object>> monthChart() {
+		return shopMapper.monthChart();
 	}
 	
 	// 회원 관리 - 전체 조회

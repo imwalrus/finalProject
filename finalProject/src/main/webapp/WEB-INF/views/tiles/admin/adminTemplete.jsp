@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="resources/admin/css/style.css">
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
 </head>
 <body class="">
 	<tiles:insertAttribute name="header" />
@@ -78,6 +80,7 @@
 	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
 	<script src="resources/admin/js/ripple.js"></script>
 	<script src="resources/admin/js/pcoded.min.js"></script>
+	<script src="resources/admin/js/chart.js"></script>
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/main/js/popper.min.js"></script>
 	<script src="resources/main/js/bootstrap.min.js"></script>
