@@ -137,5 +137,12 @@
 		WHERE USER_ID = #{user_id}
 	</delete>
 	
+	<!-- 회원탈퇴시  -->
+	<update id="memberOut" parameterType="UserVO">
+		UPDATE USERS
+		SET USER_ACTIVE = #{user_active}
+		WHERE USER_ID=#{user_id}
+	</update>
+	
 	
 </mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.IntoFarmMapper">
+
+<!-- 농업인 농촌속으로 신청내역 관리 -->
+	<select id="farmerIntoList" parameterType="IntoTheFarmVO" 
+								resultType="IntoTheFarmVO">
+	
+		SELECT INTO_NO
+				,INTO_TITLE
+				,INTO_PRODUCT
+				,INTO_CITY
+				,TO_CHAR(INTO_DATE, 'YYYY-MM-DD') as INTO_DATES
+		FROM INTOFARM
+		WHERE USER_ID=#{user_id}
+			
+	</select>
+	
+<!-- 신청명단 불러오기 -->
+	<select id="intoUserList" parameterType="IntoTheFarmVO" 
+								resultType="IntoTheFarmVO">
+		SELECT U.USER_NAME
+				,U.USER_ID
+				,Q.INTO_REQ_NUM
+       			,Q.INTO_REQ_PHONE
+       			,TO_CHAR(Q.INTO_REQ_DATE, 'YYYY-MM-DD') as INTO_REQ_DATES
+        		,Q.INTO_REQ_DATE
+        		,Q.INTO_REQ_REWARD
+       			,Q.INTO_REQ_ENTRY
+       			,Q.INTO_NO
+		FROM USERS U JOIN INTOFARM_REQ Q
+		ON (U.USER_ID = Q.USER_ID)
+		WHERE INTO_NO = #{into_no}						
+								
+	</select>
+	
+<!-- 신청명단 신청취소 -->
+	<delete id="deleteUserList" parameterType="IntoTheFarmVO">
+
+	
+		DELETE FROM INTOFARM_REQ
+		WHERE INTO_REQ_NUM=${into_req_num}
+	
+	</delete>
+
+<!-- 나의 신청 내역 조회 -->
+	<select id="myIntoList" parameterType="IntoTheFarmVO"
+							resultType="IntoTheFarmVO" >
+							
+		SELECT	Q.INTO_REQ_NUM
+                    ,Q.USER_ID
+                    ,Q.INTO_REQ_PHONE
+                    ,Q.INTO_REQ_ENTRY
+                    ,Q.INTO_REQ_REWARD
+                    ,TO_CHAR(Q.INTO_REQ_DATE, 'YYYY-MM-DD') as INTO_REQ_DATES
+                    ,I.INTO_NO
+                    ,I.INTO_TITLE
+                    ,I.INTO_PHONE
+		FROM INTOFARM I JOIN INTOFARM_REQ Q
+		ON (I.INTO_NO = Q.INTO_NO)
+		WHERE Q.USER_ID = ${user_id}				
+
+	</select>
+</mapper>

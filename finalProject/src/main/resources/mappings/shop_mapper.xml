@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.shop.service.impl.ShopMapper">
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		<where>
+			<if test="pro_name != null and pro_name != '' and pro_content != null and pro_content != ''">
+				AND UPPER(PRO_NAME) LIKE '%' || UPPER(#{pro_name}) || '%'
+				OR UPPER(PRO_CONTENT) LIKE '%' || UPPER(#{pro_content}) || '%'
+			</if>
+			<if test="pro_category != null and pro_category != ''">
+				OR PRO_CATEGORY = #{pro_category}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+				OR PRO_PRICE &lt;= #{pro_price}
+			</if>
+		</where>
+	</select>
+	<!-- 전체 리스트 -->
+	<select id="getListShop" parameterType="ShopVO" resultType="ShopVO">
+		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT PRO_NO
+			 , PRO_NAME
+			 , TO_CHAR(PRO_PRICE, '999,999,999') PRO_PRICE
+			 , PRO_DCOMPANY
+			 , PRO_QUANTITY
+			 , PRO_CONDITION
+			 , PRO_CONTENT
+			 , USER_ID
+			 , PRO_FILENAME
+			 , PRO_CATEGORY
+		  FROM PRODUCT
+		<where>
+			<if test="pro_name != null and pro_name != '' and pro_content != null and pro_content != ''">
+				AND UPPER(PRO_NAME) LIKE '%' || UPPER(#{pro_name}) || '%'
+				OR UPPER(PRO_CONTENT) LIKE '%' || UPPER(#{pro_content}) || '%'
+			</if>
+			<if test="pro_category != null and pro_category != ''">
+				OR PRO_CATEGORY = #{pro_category}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+				OR PRO_PRICE &lt;= #{pro_price}
+			</if>
+		</where>
+		  ORDER BY
+		<choose>
+			<when test="orderCond == 'popular'">PRO_QUANTITY</when>
+			<when test="orderCond == 'cheap'">PRO_PRICE </when>
+			<when test="orderCond == 'expensive'">PRO_PRICE DESC</when>
+			<otherwise>PRO_NO DESC</otherwise>
+		</choose>
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<!-- 전체 수량 -->
+	<select id="allCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
+	<!-- 카테고리 수량 -->
+	<select id="cateCount" resultType="ShopVO">
+		SELECT PRO_CATEGORY,
+	 		   COUNT(*) PRO_COUNT
+		  FROM PRODUCT
+		GROUP BY PRO_CATEGORY
+		ORDER BY PRO_COUNT DESC
+	</select>
+	<!-- 상품 상세 보기 -->
+	<select id="getProduct" parameterType="ShopVO" resultType="ShopVO">
+		SELECT PRO_NO
+			 , PRO_NAME
+	  		 , PRO_PRICE
+			 , PRO_DCOMPANY
+			 , PRO_QUANTITY
+			 , PRO_CONDITION
+			 , PRO_CONTENT
+			 , USER_ID
+			 , PRO_FILENAME
+			 , PRO_CATEGORY
+		  FROM PRODUCT
+		 WHERE PRO_NO = #{pro_no}
+	</select>
+	<!-- 상품 관리 리스트 -->
+	<select id="getListProd" parameterType="ShopVO" resultType="ShopVO">
+		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT PRO_NO
+			 , PRO_NAME
+			 , TO_CHAR(PRO_PRICE, '999,999,999') PRO_PRICE
+			 , PRO_DCOMPANY
+			 , PRO_QUANTITY
+			 , PRO_CONDITION
+			 , PRO_CONTENT
+			 , USER_ID
+			 , PRO_FILENAME
+			 , PRO_CATEGORY
+		  FROM PRODUCT
+		<where>
+			<if test="user_id != null and user_id != ''">
+				USER_ID = #{user_id}
+			</if>
+		</where>
+	  ORDER BY PRO_NO DESC
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<!-- 상품 등록 -->
+	<insert id="insertProduct" statementType="CALLABLE" parameterType="ShopVO">
+		<selectKey keyProperty="pro_no" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(PRO_NO), 0) + 1 FROM PRODUCT
+		</selectKey>
+		INSERT INTO PRODUCT (PRO_NO
+		   		  	   	   , PRO_NAME
+			      	  	   , PRO_PRICE
+			 			   , PRO_DCOMPANY
+			  			   , PRO_QUANTITY
+			  			   , PRO_CONDITION
+						   , PRO_CONTENT
+						   , USER_ID
+						   , PRO_FILENAME
+						   , PRO_CATEGORY)
+					  VALUES(#{pro_no}
+						   , #{pro_name}
+						   , #{pro_price}
+						   , #{pro_dcompany}
+						   , #{pro_quantity}
+						   , #{pro_condition}
+						   , #{pro_content}
+						   , #{user_id}
+						   , #{pro_filename}
+						   , #{pro_category})
+	</insert>
+	<!-- 상품 수정 -->
+	<update id="updateProduct" parameterType="ShopVO">
+		UPDATE PRODUCT
+		<set>
+			<if test="pro_name != null and pro_name != ''">
+				PRO_NAME = #{pro_name}
+			</if>
+			<if test="pro_price != null and pro_price != ''">
+				, PRO_PRICE = #{pro_price}
+			</if>
+			<if test="pro_dcompany != null and pro_dcompany != ''">
+				, PRO_DCOMPANY = #{pro_dcompany}
+			</if>
+			<if test="pro_quantity != null and pro_quantity != ''">
+				, PRO_QUANTITY = #{pro_quantity}
+			</if>
+			<if test="pro_condition != null and pro_condition != ''">
+				, PRO_CONDITION = #{pro_condition}
+			</if>
+			<if test="pro_content != null and pro_content != ''">
+				, PRO_CONTENT = #{pro_content}
+			</if>
+			<if test="user_id != null and user_id != ''">
+				, USER_ID = #{user_id}
+			</if>
+			<if test="pro_filename != null and pro_filename != ''">
+				, PRO_FILENAME = #{pro_filename}
+			</if>
+			<if test="pro_category != null and pro_category !=''">
+				, PRO_CATEGORY = #{pro_category}
+			</if>
+		</set>
+		WHERE PRO_NO = #{pro_no}
+	</update>
+	<!-- 상품 삭제 -->
+	<delete id="deleteProduct" parameterType="ShopVO">
+		DELETE FROM PRODUCT
+		      WHERE PRO_NO = #{pro_no}
+	</delete>
+	<!-- 장바구니 불러오기 -->
+	<select id="getCart" parameterType="CartVO" resultType="CartVO">
+		SELECT C.CART_NO
+	 		 , C.USER_ID
+			 , C.PRO_NO
+			 , P.PRO_NAME
+			 , P.PRO_CONTENT
+			 , P.PRO_FILENAME
+			 , C.CART_COUNT, (P.PRO_PRICE * C.CART_COUNT) CART_PRICE
+			 , P.USER_ID SELLER
+		  FROM CART C, PRODUCT P, USERS U
+		<where>
+			C.USER_ID = U.USER_ID AND C.PRO_NO = P.PRO_NO
+			<if test="user_id != null and user_id != ''">
+				AND C.USER_ID = #{user_id}
+			</if>
+		</where>
+		ORDER BY C.CART_NO
+	</select>
+	<!-- 장바구니 등록 -->
+	<insert id="insertCart" statementType="CALLABLE" parameterType="CartVO">
+		<selectKey keyProperty="cart_no" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(CART_NO), 0) + 1 FROM CART
+		</selectKey>
+			INSERT INTO CART(CART_NO
+ 						   , PRO_NO
+						   , CART_COUNT
+						   , USER_ID)
+					 VALUES (#{cart_no}
+						   , #{pro_no}
+						   , #{cart_count}
+						   , #{user_id})
+	</insert>
+	<!-- 장바구니 수량 변경 -->
+	<update id="updateCart" parameterType="CartVO">
+		UPDATE CART
+		   SET CART_COUNT = #{cart_count}
+		 WHERE PRO_NO = #{pro_no}
+	</update>
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart" parameterType="CartVO">
+		DELETE FROM CART
+		      WHERE CART_NO IN (#{cart_no})
+	</delete>
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteAllCart" parameterType="CartVO">
+		DELETE FROM CART
+		      WHERE USER_ID IN (#{user_id})
+	</delete>
+	<!-- 동일한 상품이있는지 체크 -->
+	<select id="cartCheck" parameterType="CartVO" resultType="int">
+		SELECT COUNT(*)
+		  FROM CART
+		 WHERE USER_ID = #{user_id}
+		   AND PRO_NO = #{pro_no}
+	</select>
+	
+	<!-- 주문 등록 -->
+	<insert id="insertOrder" statementType="CALLABLE" parameterType="OrderVO">
+		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
+			SELECT NVL(MAX(ORDER_NO), 0) + 1 FROM ORDERS
+		</selectKey>
+		INSERT INTO ORDERS (ORDER_NO
+					 	  , ORDER_DATE
+					      , ORDER_CONDITION
+					   	  , ORDER_PAYMENT
+					   	  , ORDER_TOTALPRICE
+					   	  , ORDER_ZIP
+					      , ORDER_ADR
+					      , ORDER_DETAILADR
+					   	  , ORDER_NAME
+					      , ORDER_PHONE
+					      , USER_ID)
+			        VALUES (#{order_no}
+			     	      , SYSDATE
+			     	   	  , '결제완료'
+			     	   	  , #{order_payment}
+			     	   	  , #{order_totalprice}
+			     	   	  , #{order_zip}
+			     	   	  , #{order_adr}
+			     	   	  , #{order_detailadr}
+			     	   	  , #{order_name}
+			     	   	  , #{order_phone}
+			     	   	  , #{user_id})
+	</insert>
+	<!-- 상세 주문 등록 -->
+	<insert id="insertOrderlist" parameterType="OrderVO">
+		INSERT INTO ORDERLIST(ORDERLIST_NO
+							, ORDER_NO
+							, PRO_NO
+							, CART_COUNT)
+    				   SELECT ORDERLIST_SEQ.NEXTVAL
+    				   		, O.ORDER_NO
+    				   		, C.PRO_NO
+    				   		, C.CART_COUNT
+    					 FROM CART C, ORDERS O
+
+			INSERT INTO ORDERS (ORDER_NO
+						      , ORDER_DATE
+						      , ORDER_CONDITION
+						      , ORDER_INVOICE
+						      , ORDER_PAYMENT
+						      , ORDER_TOTALPRICE
+						      , ORDER_ZIP
+						      , ORDER_ADR
+						      , ORDER_DETAILADR
+						      , ORDER_NAME
+						      , ORDER_PHONE
+						      , USER_ID)
+					    VALUES (#{order_no}
+						      , SYSDATE
+						      , '결제완료'
+						      , '대한통운'
+						   	  , #{order_payment}
+						      , #{order_totalprice}
+						      , #{order_zip}
+						      , #{order_adr}
+						      , #{order_detailadr}
+						      , #{order_name}
+						      , #{order_phone}
+						      , #{user_id})
+
+	</insert>
+</mapper>

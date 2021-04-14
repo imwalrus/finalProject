@@ -493,7 +493,24 @@ svg {
 }
 
 table {
+	text-align: center;
     border-collapse: collapse;
+}
+
+.table{
+	min-width:100% !important;
+}
+
+.table thead th {
+	border-bottom: 1px solid #e2e5e8;
+	font-size: 13px;
+	color: #37474f;
+	background: #e3f1d4 !important;
+	text-transform: uppercase;
+}
+
+.table tbody tr td {
+	padding: 10px 8px !important;
 }
 
 caption {
