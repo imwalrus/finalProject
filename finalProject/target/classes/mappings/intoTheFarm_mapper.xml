@@ -69,17 +69,9 @@
        <if test="into_product != null and into_product != ''">       
              AND UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
        </if>
-       <if test="into_date != null and into_date != ''">               
-             AND  <![CDATA[
-                      INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
-                      and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
-                  ]]>
-            )
-       </if>
         </where>
       ORDER BY INTO_NO DESC
       ) A) B WHERE RN BETWEEN #{start} AND #{end}
-      
    </select>
 	
 	<!--단건조회 -->
