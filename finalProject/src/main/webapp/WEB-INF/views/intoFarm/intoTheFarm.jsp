@@ -175,6 +175,13 @@
 			    /* dots[slideIndex-1].className += " active"; */
 			    setTimeout(showSlides, 2000); // Change image every 2 seconds
 			}
+			
+		/* 모달 - 문의하기 */
+		function fnInquiry(no,title){
+			$('#myInquiry .modal-body').load("insertFarmInq?into_no="+no+"&into_title="+title);
+			$('#myLargeModal').modal('hide');
+			$('#myInquiry').modal('show');
+		}
 					 
 </script>
 
@@ -274,7 +281,6 @@ ul.imgs li{
 }
 
 
-출처: https://dgkim5360.tistory.com/entry/Bootstrap-modal-custom-size-and-location [개발새발로그]
 </style>
 </head>
 <body class="goto-here">
@@ -433,6 +439,21 @@ ul.imgs li{
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<div class="modal-body"></div> <!--내용 append -->
+			</div>
+		</div>
+	</div>
+	
+		<!--모달 문의화면 -->
+	<div style="overflow: scroll; " class="modal fade" id="myInquiry" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="max-width: 100%; width: 1000px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">농촌속으로 문의하기</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">x</span>
 					</button>
