@@ -66,11 +66,11 @@
 							<a href="myPage" class="nav-link">마이페이지</a>
 						</li>
 					</c:if>
-			<%-- 		<c:if test="${ user_auth eq 'admin' }"><!-- 'ADMIN'일시 관리자페이지 표시 --> --%>
+			 		<c:if test="${ user_auth eq 'admin' }"><!-- 'ADMIN'일시 관리자페이지 표시 -->
 						<li class="nav-item">
 							<a href="admin" class="nav-link">관리자</a>
 						</li>
-			<%-- 		</c:if> --%>
+			 		</c:if> 
 					<c:if test="${ user_id eq null }"><!-- session 내 아이디 값 없을시 -->
 						<li class="nav-item cta cta-colored">
 							<a href="login" class="nav-link"><span class="icon-person_outline"></span>로그인</a>
