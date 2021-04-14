@@ -76,12 +76,6 @@ public class IntoTheFarmController {
 	  return "intoFarm/intoTheFarm"; 
 	  }
 	 
-	//test
-	/*
-	 * @RequestMapping("/getFarmList") public String getFarmList() { return
-	 * "intoFarm/calender"; }
-	 */
-	
 	
 	// 단건조회
 	@RequestMapping("/getSearchFarm")
@@ -110,18 +104,20 @@ public class IntoTheFarmController {
 	public String insertFarmProc(IntoTheFarmVO vo, HttpServletRequest req) throws Exception, IOException {
 		// 파일 업로드
 		MultipartFile[] files = vo.getUploadFile();
+		String file1="";
 		for (MultipartFile file : files) {
 
 			if (file != null && !file.isEmpty() && file.getSize() > 0) {
 				String orgFile = file.getOriginalFilename();
-				String path = req.getSession().getServletContext().getRealPath("image");
+				String path = req.getSession().getServletContext().getRealPath("/resources/images/intofarm");
 
 				File rename = FileRenamePolicy.rename(new File(path, orgFile));
 				file.transferTo(new File(path, rename.getName()));
-				// filename1 += '@'+rename.getName();
+				file1 += '@'+rename.getName();
 				vo.setInto_filename(rename.getName());
 			}
 		}
+		System.out.println(vo);
 		intoTheFarmMapper.insertFarm(vo);
 		return "redirect:/getFarmList";
 

@@ -41,7 +41,9 @@
 					fontNames : [ 'Arial', 'Arial Black','Comic Sans MS', 'Courier New', '맑은 고딕','궁서', '굴림체', '굴림', '돋움체', '바탕체' ],
 					fontSizes : [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30','36', '50', '72' ]
 				});
+				
  }
+ 
 		
 </script>  
 <script>
@@ -258,7 +260,21 @@ ul.imgs li{
     margin: 0;
     transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
 }
+/*모달  */
+.modal-dialog.modal-fullsize {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.modal-content.modal-fullsize {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
+}
 
+
+출처: https://dgkim5360.tistory.com/entry/Bootstrap-modal-custom-size-and-location [개발새발로그]
 </style>
 </head>
 <body class="goto-here">
@@ -413,7 +429,7 @@ ul.imgs li{
 
 		<!--모달 수정화면 -->
 	<div style="overflow: scroll; " class="modal fade" id="myUpdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-dialog modal-xl" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
@@ -434,10 +450,10 @@ ul.imgs li{
 	    <input type="radio" name="slide" id="slide3">
 	    <input type="radio" name="slide" id="slide4">
 	    <ul id="imgholder" class="imgs">
-	        <li><img src="/temp/resources/image/b.jpg"></li>
-	        <li><img src="/temp/resources/image/b.jpg"></li>
-	        <li><img src="/temp/resources/image/b.jpg"></li>
-	        <li><img src="/temp/resources/image/b.jpg"></li>
+	        <li><img src="images/"></li>
+	        <li><img src="image/a.jpg"></li>
+	        <li><img src="image/b.jpg"></li>
+	        <li><img src="image/b.jpg"></li>
 	    </ul>
 	    <div class="bullets">
 	        <label for="slide1">&nbsp;</label>

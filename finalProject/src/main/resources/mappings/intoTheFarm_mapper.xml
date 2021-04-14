@@ -111,7 +111,7 @@
             </if>
             ,#{user_id}
             ,#{into_city}
-            ,0
+            ,'0'
             )
             
    </insert>

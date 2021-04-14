@@ -70,7 +70,7 @@ function insertFarm() {
 	}
 }
 
-/* function showCal() { 
+/*  function showCal() { 
 	$('#showDate .modal-body').load();
 		
 }	 */
@@ -240,6 +240,7 @@ right:70px;
 			<br><br>
 			<textarea id="summernote" name="into_info"></textarea>
 			
+			<input type="text" name="into_date" style="width: 40%; margin-top: 1%;" placeholder="체험 일정 " /><br>
 			<div class="calendalcontainer">
 							<div class="my-calendar clearfix">
 								
@@ -279,9 +280,9 @@ right:70px;
 					<button type="button" id="save" onclick="insertFarm()">등록</button>
 					<button type="reset" onclick="getSearchFarm">취소</button>
 				
-				</div> 
 			
 		</form>
+		</div> 
 
 	</div>
 	
@@ -443,7 +444,9 @@ const init = {
 		  init.event.push(eventData);
 		  $todoList.appendChild(createLi(id, val, date));
 		}
+		 
 		loadYYMM(init.today);
+		
 		$btnNext.addEventListener('click', () => loadYYMM(init.nextMonth()));
 		$btnPrev.addEventListener('click', () => loadYYMM(init.prevMonth()));
 		$calBody.addEventListener('click', (e) => {
