@@ -1,13 +1,11 @@
-package co.finalproject.farm.app.community.service.impl;
+package co.finalproject.farm.app.community.service;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import co.finalproject.farm.app.community.service.CommPagingVO;
-import co.finalproject.farm.app.community.service.CommunityVO;
-public interface CommunityMapper {
-	
+public interface CommunityService {
+
 	//등록
     public void insertComm(CommunityVO vo);
 
@@ -27,6 +25,6 @@ public interface CommunityMapper {
   	public int getCount(CommPagingVO vo);
   	
     // 조회 증가
-    public void updatereviewcnt(CommunityVO vo);
-	
+    public void updatereviewcnt(CommunityVO vo, HttpSession session);
+
 }

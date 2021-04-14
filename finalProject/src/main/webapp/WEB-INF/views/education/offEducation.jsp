@@ -6,12 +6,20 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
+
 <script>
 //모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
    function fnModuleInfo(str) {
-	   $('#offEduModal .modal-body').load("getSchOffEdu?edu_no="+str); //한칸 띄워야함
-	   $('#offEduModal').modal();
+	   $('#offEduModal .modal-body').load("getSchOffEdu?edu_no="+str, function(){  //한칸 띄워야함
+		   $(".before").show();
+		   $(".after").hide(); 
+		   $("#btnBfr").show();
+		   $("#btnAft").hide(); 
+	      });
+	$('#offEduModal').modal();
 	}
+	
+	//삭제 묻는 스크립트
 	function deleteAlert() {
 		var yn = confirm("정말 삭제할까요?");
 		if (yn) {
@@ -20,7 +28,57 @@
 		}
 	}
 </script>
+
 <script>
+//수정폼으로 변경
+   function modalChg1() {
+	  $(".before").hide();
+	  $(".after").show(); 
+	  $("#btnBfr").hide();
+	  $("#btnAft").show(); 
+}
+//취소버튼 눌렀을 때 원상복구
+   function modalChg2() {
+	  $(".before").show();
+	  $(".after").hide(); 
+	  $("#btnBfr").show();
+	  $("#btnAft").hide(); 
+}
+</script>
+
+<script src="./resources/js/json.min.js"></script>
+<script>
+//수정 버튼 누른 후 저장 버튼으로 바꼈을 때..
+//파일을 아작스로 넘기려면 넘기는 값이 더 추가가 되어야 함
+//jquery ajax 를 이용한 간편 파일 업로드 참고
+	function Update() {
+		 var form = $('#edu_update')[0]; //schOffedu의 폼 아이디
+		 var formData = new FormData(form);
+		//수정 버튼 클릭
+		   	$.ajax({
+				url : "updateEdu",
+				method : "post",
+				processData: false,
+                contentType: false,
+                data: formData,
+			    success : function(response) {
+			    	 alert('수정 되었습니다.');
+			    	 //제이쿼리 포이치
+			    	 //인풋 클래스를 선택함 그게 item 값으로 지정됨 (?)
+			    	 //인풋 태그의 이전은 스판태그
+			    	 //스판태그 값을 인풋태그 값으로 넣어준다.
+			    	 //그 과정에서 item을 제이쿼리로 감싸줘야.prev() 이걸 쓸 수 있다. 
+			        $('.after').each(function(index, item) {
+			    	$(item).prev().html($(item).val());
+			      });
+			    }
+			});
+		//저장 버튼 클릭하면
+	}//Update
+</script>
+
+<script>
+//검색 스크립트
 $(document).ready(function() {
 	$('#edu_title').val() == $('#edu_content').val();
 
@@ -91,7 +149,7 @@ event.stopPropagation();
         </div>
      
      <hr style="margin:8px;"><br/>
-    <table class="table table-hover" >
+    <table class="table table-bordered" >
          <thead>
                 <tr>
 					<td align="center" width="150">번호</td>
@@ -121,9 +179,11 @@ event.stopPropagation();
         </c:forEach>
         </thead>
     </table><br>
+    <c:if test="${user_auth == 'admin' }">
     <div style="margin-left:992px">
         <button type="button" class="btn btn-primary disabled" onclick="location.href='insertEdu'">새교육 등록</button>
     </div>
+    </c:if>
 <!-- 모달팝업 -->
 <div class="modal" id="offEduModal" tabindex="-1" role="dialog" aria-labelledby="offEduModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
@@ -138,8 +198,15 @@ event.stopPropagation();
      
       </div>
         <div class="modal-footer"> 
-        <button type="button" class="btn btn-primary disabled" id="update" onclick="updateFnc()">수정</button>
-        <button type="button" class="btn btn-primary disabled" id="delete" onclick="deleteAlert()">삭제</button>
+        <c:if test="${user_auth == 'admin' }">
+        <div style="padding-left:100px" id="btnAft">
+        <button type="button" class="btn btn-primary disabled" id="update" onclick="Update()">저장</button>
+        <button type="button" class="btn btn-primary disabled" onclick="modalChg2()">back</button>
+        </div>  
+        <div id="btnBfr">  
+        <button type="button" class="btn btn-primary disabled" onclick="modalChg1()">수정</button>
+        <button type="button" class="btn btn-primary disabled" onclick="deleteAlert()">삭제</button>
+        </div></c:if>        
         <button type="button" class="btn btn-primary disabled" data-dismiss="modal">Close</button>
       </div>
     </div>
