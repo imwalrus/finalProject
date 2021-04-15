@@ -14,15 +14,35 @@
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
     <!-- vendor css -->
     <link rel="stylesheet" href="resources/admin/css/style.css">
-    
-    
 
 </head>
+<script>
+$(document).ready(function(){
+	$('[name=user_pwd]').keyup(function(){
+		$('#pwCheckNotice').html('');
+		var pwd = $('[name=user_pwd]').val();
+		$.ajax({
+			url:"pwCheck",
+			data:{"user_pwd":pwd , "user_id":"${user_id}"},
+			dataType:"JSON",
+			success:function(response){
+				if(response == 1){
+					$('#pwCheckNotice').html('비밀번호 일치함<br>');
+					$('#pwCheckNotice').attr('color', '#51ad95');
+				} else {
+					$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
+					$('#pwCkNotice').attr('color', '#f82a2aa3');
+				}
+			}
+		})
+	});
+})
+
+</script>
 <body>
-     <section class="pcoded-main-container">
+<section class="pcoded-main-container">
         <!-- [ Main Content ] start -->
         <div class="pcoded-main-container">
             <div class="pcoded-content">
@@ -42,7 +62,6 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-body" align="center">
-    
                                 <!-- [ Contextual-table ] start -->
                                 <div class="col-md-9">
                                     <div class="card-header">
@@ -62,59 +81,45 @@
                                                             <label class="custom-control-label" for="customControlValidation1">위 내용에 동의시 체크해주세요.</label>
                                                             <div class="invalid-feedback">체크되지 않을 경우 탈퇴가 불가능 합니다.</div>
                                                         </div>
-                                                                                                    <div class="col-md-6">
-                                             
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label"><h6>ID</h6></label>
-                                                        <div class="col-sm-5">
-                                                            <input type="text" class="form-control" name="user_id" value="${out.user_id }" readonly="readonly" >
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label"><h6>이름</h6></label>
-                                                        <div class="col-sm-5">
-                                                            <input type="email" class="form-control" name="user_name" value="${out.user_name }" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label"><h6>Password</h6></label>
-                                                        <div class="col-sm-7">
-                                                            <input type="password" class="form-control" name="user_pwd" placeholder="Password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label"><h6>Password확인</h6></label>
-                                                        <div class="col-sm-7">
-                                                            <input type="password" class="form-control" id="#" placeholder="Password 확인">
-                                                        </div>
-                                                    </div>
-                                                    <!-- active값 0으로 고정 -->
-                                                            <input type="hidden" class="form-control" name="user_active" value="0">
-
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-10">
-                                                            <button type="submit" class="btn  btn-outline-danger" name="checkButton" disabled>탈퇴</button>
-                                                        </div>
-                                                    </div>
- 
-
-                                            </div>
+                                          		 	<div class="col-md-6">
+	                                                    <div class="form-group row">
+	                                                        <label class="col-sm-4 col-form-label"><h6>ID</h6></label>
+	                                                        <div class="col-sm-5">
+	                                                            <input type="text" class="form-control" name="user_id" value="${user_id }" readonly="readonly" >
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="form-group row">
+	                                                        <label class="col-sm-4 col-form-label"><h6>이름</h6></label>
+	                                                        <div class="col-sm-5">
+	                                                            <input type="email" class="form-control" name="user_name" value="${out.user_name }" readonly="readonly">
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="form-group row">
+	                                                        <label class="col-sm-4 col-form-label"><h6>Password</h6></label>
+	                                                        <div class="col-sm-7">
+	                                                            <input type="password" class="form-control" name="user_pwd" placeholder="Password">
+																<font id="pwCheckNotice" size=2 ></font>
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="form-group row">
+	                                                        <div class="col-sm-10">
+	                                                            <button type="submit" class="btn  btn-outline-danger" name="checkButton" disabled>탈퇴</button>
+	                                                        </div>
+	                                                    </div>
+                                           		 	</div>
                                                 </form>
-                                                </p>
+                                              </p>
                                             </div>
                                             <br>
-
-                                    </div>
-                                        </div>
-                                    </div>
+                                   		 </div>
+                                   </div>
                                 </div>
-                                <!-- [ static-layout ] end -->
-                             </div>
-                         </div>
-                      </div>
-   </section>         
+                           </div>
+                        <!-- [ static-layout ] end -->
+                    </div>
+               </div>
+           </div>
+</section>         
 
 
 	<!-- Required Js -->
@@ -122,7 +127,7 @@
 	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
 	<script src="resources/admin/js/ripple.js"></script>
 	<script src="resources/admin/js/pcoded.min.js"></script>
-	    <script>
+	<script>
         //체크박스 버튼 활성화
         function agreeCheck(frm)
 				{
