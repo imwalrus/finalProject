@@ -7,8 +7,8 @@
 		select b.* from (select  rownum rn, a.* from (
         select * from offlineedu
         <where>
-         <if test="edu_adr != null and edu_adr != ''">
-			    EDU_ADR=#{edu_adr}
+         <if test="edu_place != null and edu_place != ''">
+			    EDU_PLACE LIKE '%' || #{edu_place} || '%'
 		 </if>
          <if test="edu_title != null and edu_title != ''">
 			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
@@ -23,7 +23,6 @@
 	<select id="getSchOffEdu" resultType="EducationVO">
 		SELECT EDU_NO
 		,EDU_TITLE
-		,EDU_DATE
 		,EDU_TIME
 		,EDU_ORGAN
 		,EDU_CHECK
@@ -32,6 +31,9 @@
 		,EDU_CONTENT
 		,EDU_FILENAME
 		,EDU_ADR
+		,EDU_STARTDATE
+		,EDU_ENDDATE
+		,EDU_PLACE
 		FROM OFFLINEEDU
 		WHERE EDU_NO = #{edu_no}
 	</select>
@@ -41,7 +43,6 @@
 		INSERT INTO OFFLINEEDU
 		(EDU_NO,
 	    EDU_TITLE,
-	    EDU_DATE,
 	    EDU_TIME,
 	    EDU_ORGAN,
 	    EDU_CHECK,
@@ -49,10 +50,12 @@
 	    EDU_PHONE,
 	    EDU_CONTENT,
 	    EDU_FILENAME,
-	    EDU_ADR)
+	    EDU_ADR,
+	    EDU_STARTDATE,
+		EDU_ENDDATE,
+		EDU_PLACE)
 		VALUES ( ( select nvl(max(edu_no),0)+1 from offlineedu),
 		#{edu_title},
-		#{edu_date},
 		#{edu_time},
 		#{edu_organ},
 		#{edu_check},
@@ -60,7 +63,10 @@
 		#{edu_phone},
 		#{edu_content},
 		#{edu_filename},
-		#{edu_adr}
+		#{edu_adr},
+		#{edu_startdate},
+		#{edu_enddate},
+		#{edu_place}
 		)
 	</insert>
 
@@ -69,14 +75,16 @@
 		UPDATE OFFLINEEDU
 		<set>
 <if test="edu_title !=null and edu_title !=''"> EDU_TITLE=#{edu_title},</if>
-<if test="edu_date !=null and edu_date !=''"> EDU_DATE=#{edu_date},</if>
 <if test="edu_time !=null and edu_time !=''"> EDU_TIME=#{edu_time},</if>
 <if test="edu_organ !=null and edu_organ !=''"> EDU_ORGAN=#{edu_organ},</if>
 <if test="edu_check !=null and edu_check !=''"> EDU_CHECK=#{edu_check},</if>
 <if test="edu_person !=null and edu_person !=''"> EDU_PERSON=#{edu_person},</if>
 <if test="edu_phone !=null and edu_phone !=''"> EDU_PHONE=#{edu_phone},</if>
 <if test="edu_filename !=null and edu_filename !=''"> EDU_FILENAME=#{edu_filename},</if>
-<if test="edu_adr !=null and edu_adr !=''"> EDU_ADR=#{edu_adr}</if>
+<if test="edu_adr !=null and edu_adr !=''"> EDU_ADR=#{edu_adr},</if>
+<if test="edu_startdate !=null and edu_startdate !=''"> EDU_STARTDATE=#{edu_startdate},</if>
+<if test="edu_enddate !=null and edu_enddate !=''"> EDU_ENDDATE=#{edu_enddate},</if>
+<if test="edu_place !=null and edu_place !=''"> EDU_PLACE=#{edu_place}</if>
 		</set>
 		WHERE EDU_NO = #{edu_no}
 	</update>
@@ -92,8 +100,8 @@
     <select id="getCount" resultType="int">
     SELECT COUNT(*) FROM OFFLINEEDU
     <where>
-         <if test="edu_adr != null and edu_adr != ''">
-			    EDU_ADR=#{edu_adr}
+         <if test="edu_place != null and edu_place != ''">
+			    EDU_PLACE LIKE '%' || #{edu_place} || '%'
 		 </if>
          <if test="edu_title != null and edu_title != ''">
 			    AND ( UPPER(EDU_TITLE) LIKE '%' || UPPER(#{edu_title}) || '%'
