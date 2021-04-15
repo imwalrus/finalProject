@@ -75,7 +75,7 @@
 				<div class="col-md-6">
 					<div class="card card-c1">
 						<div class="card-header card-chart">
-							<h4 class="title" align="center">일별 매출 건수</h4>
+							<h4 class="title" align="center">요일별 매출 건수</h4><h6>(현재 월 기준)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
                             <div class="ct-chart" id="weekChart" align="center"></div>
@@ -85,7 +85,7 @@
 				<div class="col-md-6">
 					<div class="card card-c1">
 						<div class="card-header card-chart">
-							<h4 class="title" align="center">월별 매출 건수</h4>
+							<h4 class="title" align="center">월별 매출 건수</h4><h6>(현재 년 기준)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
                             <div class="ct-chart" id="monthChart" align="center"></div>

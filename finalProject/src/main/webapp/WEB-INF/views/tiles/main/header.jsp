@@ -48,7 +48,7 @@
 						<a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="#"></a>
-							<a class="dropdown-item" href="shop">판매리스트</a>
+							<a class="dropdown-item" href="shop">상품 리스트</a>
 							<c:if test="${user_auth eq 'farmer'}"><!-- session 내 아이디 값 없을시 -->
 							<a class="dropdown-item" href="prodManage?user_id=${user_id}">판매 관리</a>
 							</c:if>							

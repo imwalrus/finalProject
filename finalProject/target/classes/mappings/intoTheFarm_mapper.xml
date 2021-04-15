@@ -8,11 +8,17 @@
 		SELECT COUNT(*)
 		FROM INTOFARM
 		<where>
+		 <if test="into_title != null and into_title !=''">
+				UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+		 </if>
          <if test="into_city != null and into_city != ''">
-			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+			    AND  UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+		 </if>
+		 <if test="into_progress != null and into_progress !=''">
+				AND  INTO_PROGRESS = #{into_progress}
 		 </if>
 		 <if test="into_date != null and into_date != ''">					
 		        AND  <![CDATA[
@@ -25,7 +31,6 @@
 	</select>
 	
 	<!--전체조회 & 페이징 -->
-	
 	<select id="getFarmList" resultType="IntoTheFarmVO">
 	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
 		SELECT INTO_NO
@@ -37,6 +42,7 @@
              , INTO_INFO
              , USER_ID
              , INTO_CITY
+             , INTO_PROGRESS
 		FROM INTOFARM
 		<where>
 		 <if test="into_title != null and into_title != ''">
@@ -47,6 +53,9 @@
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+		 </if>
+		 <if test="into_progress != null and into_progress != ''">
+		 		AND	 INTO_PROGRESS = #{into_progress}
 		 </if>
 		 <if test="into_date != null and into_date != ''">					
 		        AND  <![CDATA[

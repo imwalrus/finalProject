@@ -29,6 +29,12 @@
 				return false;
 			}
 		});
+
+		// 화면 전환 후 가격 슬라이더 고정
+		<c:if test="${!empty param.pro_price}">
+		$("#slider_value_view").html('${param.pro_price}');
+		$(".custom-range").val('${param.pro_price}');
+		</c:if>
 	});
 
 	// 가격대 슬라이더
@@ -36,6 +42,7 @@
 		var obValueView = document.getElementById("slider_value_view");
 		obValueView.innerHTML = sVal
 	}
+
 
 	// 페이징
 	function goPage(p) {
@@ -118,10 +125,10 @@
 											<div class="col text-center">
 												<form action="shop" name="searchFrm">
 													<input type="hidden" name="page" value="1">
+													<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
 													<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
 													<input type="hidden" name="pro_name" value="${shopVO.pro_name}">
 													<input type="hidden" name="pro_content" value="${shopVO.pro_content}">
-													<input type="hidden" name="pro_category" value="${shopVO.pro_category}">
 													<input type="hidden" name="pro_price" value="${shopVO.pro_price}">
 													<my:paging paging="${paging}" jsFunc="goPage" />
 												</form>
@@ -184,7 +191,7 @@
 										<div class="Container">
 											<font size=2 id="slider_value_view">10000</font>
 											<!-- 최소값:0 최대값:10000 단위:1000 -->
-											<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='0' max='20000' step="1000" value='10000'>
+											<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='0' max='20000' step="1000">
 										</div>
 										<button type="submit" class="btn btn-primary">검색</button>
 									</form>

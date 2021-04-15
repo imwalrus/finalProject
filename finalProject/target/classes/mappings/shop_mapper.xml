@@ -139,9 +139,9 @@
 					  VALUES(#{pro_no}
 						   , #{pro_name}
 						   , #{pro_price}
-						   , #{pro_dcompany}
+						   , '대한통운'
 						   , #{pro_quantity}
-						   , #{pro_condition}
+						   , '판매중'
 						   , #{pro_content}
 						   , #{user_id}
 						   , #{pro_filename}
@@ -292,6 +292,8 @@
     				   		, C.PRO_NO
     				   		, C.CART_COUNT
     					 FROM CART C, ORDERS O
+    					WHERE C.USER_ID = #{user_id}
+    					  AND O.USER_ID = #{user_id}
 	</insert>
 	
 	<!-- 주문 현황 -->
@@ -317,14 +319,25 @@
 	
 	<!-- 일별 매출 건수 -->
 	<select id="weekChart" resultType="map">
-		SELECT TO_CHAR(ORDER_DATE, 'MM-DD') AS ORDER_DATE
-	 		 , TO_CHAR(ORDER_DATE, 'DY') AS ORDER_DAY
-	 		 , COUNT(*) CNT
-		  FROM ORDERS
-		 WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
-                     		  AND TRUNC(SYSDATE, 'D') + 7
-	  GROUP BY ORDER_DATE
-	  ORDER BY ORDER_DATE
+		SELECT TO_CHAR(B.DT, 'DY') AS ORDER_DATE
+     		 , NVL(SUM(A.CNT), 0) AS CNT
+  		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
+             , COUNT(*) AS CNT
+          FROM ORDERS
+         WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
+                              AND TRUNC(SYSDATE, 'D') + 8
+      GROUP BY ORDER_DATE
+        		) A
+      		  , (SELECT TRUNC(SYSDATE, 'D') + 1 + LEVEL - 1 AS DT
+            	   FROM DUAL 
+     		<![CDATA[
+             CONNECT BY LEVEL <= ((TRUNC(SYSDATE, 'D') + 8 )
+                                - (TRUNC(SYSDATE, 'D') + 1))
+                ) B
+  			      WHERE B.DT = A.ORDER_DATE(+)
+  			   GROUP BY B.DT
+  			   ORDER BY B.DT
+	 		]]>
 	</select>
 	
 	<!-- 월별 매출 건수 -->
@@ -339,15 +352,15 @@
       GROUP BY ORDER_DATE
                ) A
       		 , (SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01') + LEVEL - 1 AS DT
-           FROM DUAL 
-     <![CDATA[
-     CONNECT BY LEVEL <= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
-                                - TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01'))
+                  FROM DUAL 
+     		<![CDATA[
+            CONNECT BY LEVEL <= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
+                               - TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01'))
                 ) B
-  		  WHERE B.DT = A.ORDER_DATE(+)
-  		 GROUP BY TO_CHAR(B.DT, 'MM')
-  		 ORDER BY TO_CHAR(B.DT, 'MM')
-	 ]]>
+	  		     WHERE B.DT = A.ORDER_DATE(+)
+	  		  GROUP BY TO_CHAR(B.DT, 'MM')
+	  		  ORDER BY TO_CHAR(B.DT, 'MM')
+	 		]]>
 	</select>
 	
 	<!-- 총 판매액 -->

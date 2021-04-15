@@ -59,6 +59,8 @@
 											<option value="결제완료">결제완료</option>
 											<option value="배송중">배송중</option>
 											<option value="배송완료">배송완료</option>
+											<option value="환불요청">환불요청</option>
+											<option value="취소">취소</option>
 										</select>
 									</div>
 									<div class="table-responsive">

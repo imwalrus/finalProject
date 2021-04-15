@@ -60,29 +60,11 @@
 						</tr>
 						<tr>
 							<td class="h6">
-								<strong>배송사</strong>
-							</td>
-							<td></td>
-							<td class="h6">
-								<input type="text" class="form-control-sm" name="pro_dcompany" size="33">
-							</td>
-						</tr>
-						<tr>
-							<td class="h6">
 								<strong>수량</strong>
 							</td>
 							<td></td>
 							<td class="h6">
 								<input type="text" class="form-control-sm" name="pro_quantity" size="33">
-							</td>
-						</tr>
-						<tr>
-							<td class="h6">
-								<strong>상태</strong>
-							</td>
-							<td></td>
-							<td class="h6">
-								<input type="text" class="form-control-sm" name="pro_condition" size="33">
 							</td>
 						</tr>
 						<tr>

@@ -17,7 +17,7 @@
 			dataType : "JSON",
 			success : function(results) {
 				for(var result of results) {
-					arr.push([result.ORDER_DAY, result.CNT]);
+					arr.push([result.ORDER_DATE, result.CNT]);
 				}
 			}
 		});

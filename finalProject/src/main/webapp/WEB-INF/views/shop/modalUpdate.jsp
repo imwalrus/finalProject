@@ -58,7 +58,7 @@
 							</td>
 							<td></td>
 							<td class="h6">
-								<input type="text" class="form-control-sm" name="pro_price" value="${modal.pro_price}">원
+								<input type="text" class="form-control-sm" name="pro_price" value="${modal.pro_price}">
 							</td>
 						</tr>
 						<tr>
@@ -81,23 +81,14 @@
 						</tr>
 						<tr>
 							<td class="h5">
-								<strong>상태</strong>
-							</td>
-							<td></td>
-							<td class="h6">
-								<input type="text" class="form-control-sm" name="pro_condition" value="${modal.pro_condition}">
-							</td>
-						</tr>
-						<tr>
-							<td class="h5">
 								<strong>이미지</strong>
 							</td>
 							<td></td>
 							<td class="h6">
-								<input type="text" id="fileName" class="form-control-sm" readonly="readonly" value="${modal.pro_filename}">
 								<div class="file_input_div">
 									<input type="file" class="form-control-sm" name="uploadFile" onchange="javascript: document.getElementById('fileName').value = this.value" />
 								</div>
+								<input type="text" id="fileName" class="form-control-sm" readonly="readonly" value="${modal.pro_filename}">
 							</td>
 						</tr>
 						<tr>
