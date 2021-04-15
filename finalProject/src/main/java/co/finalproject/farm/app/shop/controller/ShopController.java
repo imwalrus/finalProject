@@ -219,19 +219,19 @@ public class ShopController {
 			e.printStackTrace();
 		}
 		Elements tabs = doc.select("div.stab-contents li");
-		Elements farmNames = doc.select("i.farm_name");
+		Elements names = doc.select("p.name");
 		Elements imgs = doc.select("a.web img");
-		Elements explains = doc.select("dt a.web");
 		Elements prices = doc.select("dd.product_inf strong");
+		Elements farmBaros = doc.select("dt a.web");
 		Elements paging = doc.select("div.page-area");
 		List<CrawlingVO> list = new ArrayList<CrawlingVO>();
 		for (int i = 0; i < tabs.size(); i++) {
-			String farmName = farmNames.get(i).text();
+			String name = names.get(i).text();
 			String img = imgs.get(i).attr("src");
-			String explain = explains.get(i).attr("href");
 			String price = prices.get(i).text();
+			String farmBaro = farmBaros.get(i).attr("href");
 
-			CrawlingVO vo = new CrawlingVO(farmName, img, explain, price);
+			CrawlingVO vo = new CrawlingVO(name, img, price, farmBaro);
 			list.add(vo);
 		}
 		model.addAttribute("list", list);

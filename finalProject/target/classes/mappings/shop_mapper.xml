@@ -15,7 +15,7 @@
 				AND PRO_CATEGORY = #{pro_category}
 			</if>
 			<if test="pro_price != null and pro_price != ''">
-				AND PRO_PRICE = #{pro_price}
+				AND PRO_PRICE &lt;= #{pro_price}
 			</if>
 		</where>
 	</select>
@@ -54,7 +54,7 @@
 				AND PRO_CATEGORY = #{pro_category}
 			</if>
 			<if test="pro_price != null and pro_price != ''">
-				AND PRO_PRICE = #{pro_price}
+				AND PRO_PRICE &lt;= #{pro_price}
 			</if>
 		</where>
 		  ORDER BY

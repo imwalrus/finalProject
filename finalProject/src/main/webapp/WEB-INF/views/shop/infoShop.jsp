@@ -21,16 +21,16 @@
 					<div class="row">
 						<!-- single -->
 						<c:forEach items="${list}" var="list">
-							<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-								<div class="product">
-									<a href="http://www.nongsaro.go.kr${list.explain}" class="img-prod">
+							<div class="col-sm-6 col-md-6 col-lg-4">
+								<div class="product" >
+									<a href="http://www.nongsaro.go.kr${list.farmBaro}" class="img-prod">
 										<!-- 이미지 -->
 										<img class="img-fluid" src="http://www.nongsaro.go.kr${list.img}" alt="Colorlib Template">
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
 										<h3>
 											<!-- 이름 -->
-											<a href="http://www.nongsaro.go.kr${list.explain}">${list.farmName}</a>
+											<a href="http://www.nongsaro.go.kr${list.farmBaro}">${list.name}</a>
 										</h3>
 										<div class="d-flex">
 											<div class="pricing">
@@ -43,7 +43,7 @@
 										<div class="bottom-area d-flex px-3">
 											<div class="m-auto d-flex">
 												<!-- 상세 페이지 이동 -->
-												<a href="http://www.nongsaro.go.kr${list.explain}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+												<a href="http://www.nongsaro.go.kr${list.farmBaro}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
 												</a>
 											</div>

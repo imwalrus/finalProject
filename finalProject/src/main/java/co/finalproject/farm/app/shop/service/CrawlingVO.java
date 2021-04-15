@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CrawlingVO {
-	private String farmName;
+	private String name;
 	private String img;
-	private String explain;
 	private String price;
+	private String farmBaro;
 }
