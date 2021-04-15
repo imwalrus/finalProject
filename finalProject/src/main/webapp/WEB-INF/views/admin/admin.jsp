@@ -26,7 +26,7 @@
 							<div class="text-left report1-cont">
 								<h2 class="font-light m-b-0" align="center">회원</h2>
 								<h3 class="text-muted" align="center">
-									<i class="ti-arrow-up text-success"></i> ${user}명
+									<i class="ti-arrow-up text-success">${user}명</i> 
 								</h3>
 							</div>
 						</div>
@@ -38,7 +38,7 @@
 							<div class="text-left report1-cont">
 								<h2 class="font-light m-b-0" align="center">농촌속으로</h2>
 								<h3 class="text-muted" align="center">
-									<i class="ti-arrow-up text-success"></i> ${intoFarm}건
+									<i class="ti-arrow-up text-success">${intoFarm}건</i> 
 								</h3>
 							</div>
 						</div>
@@ -50,7 +50,7 @@
 							<div class="text-left report1-cont">
 								<h2 class="font-light m-b-0" align="center">판매</h2>
 								<h3 class="text-muted" align="center">
-									<i class="ti-arrow-up text-success"></i> ${order}건 : ￦ ${orderSum}
+									<i class="ti-arrow-up text-success">￦ ${orderSum}(${order}건)</i> 
 								</h3>
 							</div>
 						</div>
@@ -62,7 +62,7 @@
 							<div class="text-left report1-cont">
 								<h2 class="font-light m-b-0" align="center">커뮤니티</h2>
 								<h3 class="text-muted" align="center">
-									<i class="ti-arrow-up text-success"></i> ${comm}건
+									<i class="ti-arrow-up text-success">${comm}건</i> 
 								</h3>
 							</div>
 						</div>
