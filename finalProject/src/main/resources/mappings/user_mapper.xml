@@ -3,6 +3,36 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="co.finalproject.farm.app.user.service.impl.UserMapper">
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM USERS
+		<where>
+			<if test="user_auth != null and user_auth != ''">
+				AND UPPER(USER_AUTH) LIKE '%' || UPPER(#{user_auth}) || '%'
+			</if>
+			<if test="user_id != null and user_id != ''">
+				AND UPPER(USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+			</if>
+			<if test="user_name != null and user_name != ''">
+				AND USER_NAME LIKE '%' || #{user_name} || '%'
+			</if>
+			<if test="user_adr != null and user_adr != ''">
+				AND USER_ADR LIKE '%' || #{user_adr} || '%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 페이징(Farmer 테이블) -->
+	<select id="getCountFarmer" resultType="int">
+		SELECT COUNT(*)
+		FROM FARMER
+	  <where>
+        <if test="farmer_check != null and farmer_check != ''">
+     	     FARMER_CHECK = #{farmer_check}
+       	</if>
+      </where>
+	</select>
 
 	<!-- ID 중복체크 -->
 	<select id="idCheck" resultType="int" parameterType="UserVO">
@@ -66,7 +96,8 @@
 	
 	<!-- 회원 전체조회 -->
 	<select id="getUserList" resultType="UserVO" parameterType="UserVO">
-		SELECT 	USER_ID,
+		SELECT  B.* FROM (SELECT ROWNUM RN, A.* FROM (        
+        SELECT 	USER_ID,
 				USER_PWD,
 				USER_NAME,
 				USER_EMAIL,
@@ -75,9 +106,26 @@
 				USER_PHONE,
 				USER_ADR,
 				USER_DETAILADR,
-				USER_AUTH
-		FROM USERS
-		ORDER BY USER_ID
+                USER_AUTH,
+				CASE USER_AUTH WHEN 'farmer' THEN 'O'
+                                             ELSE 'X' END AS FARMER_CHECK
+		   FROM USERS
+     	<where>
+     	    NOT USER_AUTH IN 'admin'
+		<if test="user_auth != null and user_auth !=''">
+		    AND USER_AUTH = #{user_auth}
+		</if>
+		<if test="user_id != null and user_id != ''">
+			AND UPPER(USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+		</if>
+		<if test="user_name != null and user_name != ''">
+			AND USER_NAME LIKE '%' || #{user_name} || '%'
+		</if>
+		<if test="user_adr != null and user_adr != ''">
+			AND USER_ADR LIKE '%' || #{user_adr} || '%'
+		</if>
+		</where> 
+	  ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 회원가입 -->
@@ -120,28 +168,64 @@
 			<if test="user_adr !=null and user_adr != '' ">USER_ADR=#{user_adr}, </if>
 			<if test="user_detailadr !=null and user_detailadr != '' ">USER_DETAILADR=#{user_detailadr} </if>
 		</set>
-
-		WHERE USER_ID = #{user_id} 
+		 WHERE USER_ID = #{user_id} 
 	</update>
+	
+	<!-- 농업인 신청 현황 -->
+	<select id="getFarmerList" resultType="UserVO" parameterType="UserVO">
+    	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (        
+		SELECT F.FARMER_NO
+			 , F.USER_ID
+			 , U.USER_NAME
+			 , F.FARMER_DATE
+			 , F.FARMER_FILENAME
+			 , F.FARMER_CHECK
+		  FROM FARMER F, USERS U
+		WHERE  F.USER_ID = U.USER_ID
+     	  <if test="farmer_check != null and farmer_check != ''">
+     	   AND F.FARMER_CHECK = #{farmer_check}
+       	  </if>
+	    ) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 농업인 신청 현황(단건) -->
+	<select id="getFarmer" resultType="UserVO" parameterType="UserVO">
+		SELECT F.FARMER_NO
+			 , F.USER_ID
+			 , U.USER_NAME
+			 , F.FARMER_DATE
+			 , F.FARMER_FILENAME
+			 , F.FARMER_CHECK
+		  FROM FARMER F, USERS U
+		 WHERE F.USER_ID = U.USER_ID
+		   AND F.USER_ID = #{user_id}
+	</select>
 	
 	<!-- 회원 농업인 권한 수정 -->
 	<update id="updateUserToFarmer" parameterType="UserVO">
 		UPDATE USERS
-			SET USER_AUTH= 'farmer'
-			WHERE USER_ID = #{user_id}
+		   SET USER_AUTH= #{user_auth}
+		 WHERE USER_ID = #{user_id}
+	</update>
+	
+	<!-- 농업인 권한 진행 상태 수정 -->
+	<update id="updateFarmerCheck" parameterType="UserVO">
+		UPDATE FARMER
+		   SET FARMER_CHECK = #{farmer_check}
+		 WHERE USER_ID = #{user_id}
 	</update>
 	
 	<!-- 회원탈퇴 또는 관리자페이지 내에서 회원 삭제 -->
 	<delete id="deleteUser" parameterType="UserVO">
 		DELETE FROM USERS 
-		WHERE USER_ID = #{user_id}
+		 WHERE USER_ID = #{user_id}
 	</delete>
 	
 	<!-- 회원탈퇴시  -->
 	<update id="memberOut" parameterType="UserVO">
 		UPDATE USERS
-		SET USER_ACTIVE = #{user_active}
-		WHERE USER_ID=#{user_id}
+		   SET USER_ACTIVE = #{user_active}
+		 WHERE USER_ID=#{user_id}
 	</update>
 	
 	

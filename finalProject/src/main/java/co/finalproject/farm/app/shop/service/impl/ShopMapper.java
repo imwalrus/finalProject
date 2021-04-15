@@ -1,15 +1,22 @@
 package co.finalproject.farm.app.shop.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import co.finalproject.farm.app.shop.service.CartVO;
 import co.finalproject.farm.app.shop.service.OrderVO;
 import co.finalproject.farm.app.shop.service.ShopVO;
 
 public interface ShopMapper {
-	// 건수
+	// 페이징 건수(상품)
 	public int getCount(ShopVO vo);
-
+	
+	// 페이징 건수(주문)
+	public int getCountAdmin(OrderVO vo);
+	
+	// 전체 건수(관리자 페이지서 활용)
+	public Object getCount();
+	
 	// 리스트 · 검색 · 페이징
 	public List<ShopVO> getListShop(ShopVO vo);
 
@@ -57,6 +64,16 @@ public interface ShopMapper {
 
 	// 주문 상세등록
 	public void insertOrderlist(OrderVO vo);
+	
+	// 주문 현황
+	public List<OrderVO> adminShop(OrderVO vo);
 
+	// 일별 판매건수(차트)
+	public List<Map<String, Object>> weekChart();
 
+	// 월별 판매건수(차트)
+	public List<Map<String, Object>> monthChart();
+	
+	// 총 판매액
+	public int getSumOrders();
 }

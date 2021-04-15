@@ -47,8 +47,7 @@
 						<c:set var="price" value="${modal.pro_price}" />
 						<td class="h6">
 							&nbsp;&nbsp;&nbsp;
-							<fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />
-							원
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />원
 						</td>
 					</tr>
 					<tr>

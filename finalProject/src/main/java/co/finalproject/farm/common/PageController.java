@@ -10,11 +10,6 @@ public class PageController {
 	public String loginMove() {
 		return "nofooter/login";
 	}
-
-	@GetMapping("/admin")
-	public String adminMove() {
-		return "adminTiles/admin/admin";
-	}
 	
 	@GetMapping("/myPage")
 	public String myPageMove() {

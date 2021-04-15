@@ -116,7 +116,6 @@
 										<!-- 페이징 -->
 										<div class="row mt-5">
 											<div class="col text-center">
-
 												<form action="shop" name="searchFrm">
 													<input type="hidden" name="page" value="1">
 													<input type="hidden" name="orderCond" value="${shopVO.orderCond}">
