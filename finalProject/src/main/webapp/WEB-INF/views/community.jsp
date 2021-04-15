@@ -74,6 +74,7 @@ function selectAll(allChk)  {
      <form action="getComm" name="comm_sch">
       <input type="hidden" name="page" value="1">
       <input type="hidden" id="comm_content" name="comm_content" value="${commPagingVO.comm_content}">
+       <input type="hidden" id="user_id" name="user_id" value="${user_id}">
 		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title">
 			<h1>영농인 커뮤니티</h1>

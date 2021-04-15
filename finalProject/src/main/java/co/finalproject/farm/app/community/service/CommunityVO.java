@@ -1,5 +1,7 @@
 package co.finalproject.farm.app.community.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -12,6 +14,8 @@ public class CommunityVO {
 	private String comm_adr;
 	private int comm_hit;
 	private String comm_date;
+	private String comm_filename;
+	private MultipartFile uploadFile;
 	
 	
 }

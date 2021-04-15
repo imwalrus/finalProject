@@ -22,9 +22,9 @@
 	//삭제 묻는 스크립트
 	function deleteAlert() {
 		var yn = confirm("정말 삭제할까요?");
+		var eduNo = $('[name=edu_no]').val(); //schOffEdu에서 넘어오는 히든 edu_no의 name 값을 받아줌
 		if (yn) {
-			edu_sch.action = "deleteEdu?edu_no=${educationVO.edu_no}&page=${eduPagingVO.page}"
-			edu_sch.submit();
+			location.href = "deleteEdu?edu_no="+eduNo+"&page=${eduPagingVO.page}"
 		}
 	}
 </script>
@@ -78,32 +78,37 @@
 </script>
 
 <script>
-//검색 스크립트
-$(document).ready(function() {
-	$('#edu_title').val() == $('#edu_content').val();
+	//검색 스크립트
+	$(document).ready(function() {
+		$('#edu_title').val() == $('#edu_content').val();
 
-//검색창 한개일 때는 자동으로 엔터 이벤트 걸리지만 두개일 땐 두개 다 엔터 이벤트 걸어줘야 한다.
-$('#edu_title').keypress(function(event){
-	 var keycode = (event.keyCode ? event.keyCode : event.which);
-     if(keycode == '13'){
-    	 edu_sch.submit();
-  }
-event.stopPropagation();
-      });
-$('#edu_adr').keypress(function(event){
-	 var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13'){
-   	 edu_sch.submit();
- }
-event.stopPropagation();
-      });
-});
+		//검색창 한개일 때는 자동으로 엔터 이벤트 걸리지만 두개일 땐 두개 다 엔터 이벤트 걸어줘야 한다.
+		$('#edu_title').keypress(function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				edu_sch.submit();
+			}
+			event.stopPropagation();
+		});
+
+		$('#edu_place').keypress(function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				edu_sch.submit();
+			}
+			event.stopPropagation();
+		});
+	});
 </script>
+<!-- schOffEdu에서 스타일을 id로 줬었는데
+그 아이디가 현재 페이지의 서치박스 영향을 줘서 서치박스 스타일이 바껴버리는 결과가 나타남
+schOffEdu에서 스타일 줬던 #edu_place를 
+현재 페이지의 #edu_place과는 다르게 #edu_place1로 바꿔주고
+여기는 기존의 아이디 #edu_place를 그대로 쓰기로 했다 (엔터 스크립트 때문에 id값이 필요했다)
+그리고 스타일은 네임으로 줬다.-->
 <style type="text/css">
-#edu_title {  width:170px; 
-              height:35px !important; }
-#edu_adr   {  width:170px; 
-              height:35px !important; }              
+[name=edu_title], [name=edu_place]   {  width:170px; 
+                                      height:35px !important; }
 #title > h1 {
        font-size: 35px;
        color: #00cc99;
@@ -130,7 +135,7 @@ event.stopPropagation();
     <div id="title">
 			<h1>오프라인 교육</h1>
 		</div><br/>
-    <div class="container box_1170" style="padding:1px;">
+        <div class="container box_1170" style="padding:1px;">
         <div class="form-inline form-group" style="margin-left:860px;">
         <label for="edu_title">주제</label>
         <div class="col-sm-10">
@@ -141,19 +146,20 @@ event.stopPropagation();
         
         <div class="container box_1170" style="padding:1px;">
         <div class="form-inline form-group" style="margin-left:859px;">
-        <label for="edu_adr">지역</label>
+        <label for="edu_adr">장소</label>
         <div class="col-sm-10">
-        <input class="form-control" type="text" id="edu_adr" name="edu_adr" value="${eduPagingVO.edu_adr}" onclick="this.select()">
+        <input class="form-control" type="text" id="edu_place" name="edu_place" value="${eduPagingVO.edu_place}" onclick="this.select()">
         </div>
         </div>
         </div>
+
      
      <hr style="margin:8px;"><br/>
     <table class="table table-bordered" >
          <thead>
                 <tr>
 					<td align="center" width="150">번호</td>
-					<td align="center" width="150">지역</td>
+					<td align="center" width="300">지역</td>
 					<td align="center" width="500">주제</td>
 					<td align="center" width="400">교육기간</td>
 					<td align="center" width="250">교육시간</td>
@@ -165,7 +171,7 @@ event.stopPropagation();
          <td align="center">${edu.edu_no}</td>
          <td>&nbsp; ${edu.edu_adr}</td>
          <td align="center">${edu.edu_title}</td>
-         <td align="center">${edu.edu_date}</td>
+         <td align="center">${edu.edu_startdate} - ${edu.edu_enddate}</td>
          <td align="center">${edu.edu_time}</td>
          <td align="center">${edu.edu_check}</td>
          <td>

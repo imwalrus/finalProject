@@ -43,25 +43,21 @@
 	<!-- 등록하기 -->
 	<insert id="insertComm" parameterType="CommunityVO">
 		INSERT INTO COMMUNITY
-		(COMM_NO,
-	    USER_ID,
-	    COMM_DATE,
+		(COMM_NO, 
+		USER_ID, 
 	    COMM_SUBJECT,
 	    COMM_TITLE,
 	    COMM_CONTENT,
 	    COMM_ADR,
-	    COMM_HIT,
-	    COMM_DATE
+	    COMM_HIT
 	    )
 		VALUES ( ( select nvl(max(comm_no),0)+1 from community),
 		#{user_id},
-		#{comm_date},
 		#{comm_subject},
 		#{comm_title},
 		#{comm_content},
 		#{comm_adr},
-		#{comm_hit},
-		#{comm_date}
+		#{comm_hit}
 		)
 	</insert>
 

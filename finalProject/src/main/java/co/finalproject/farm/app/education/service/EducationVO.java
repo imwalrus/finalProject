@@ -8,7 +8,6 @@ import lombok.Data;
 public class EducationVO {
 	private int edu_no;
 	private String edu_title;
-	private String edu_date;
 	private String edu_time;
 	private String edu_organ;
 	private String edu_check;
@@ -17,6 +16,8 @@ public class EducationVO {
 	private String edu_content;
 	private String edu_filename;
 	private String edu_adr;
+	private String edu_startdate;
+	private String edu_enddate;
+	private String edu_place;
 	private MultipartFile uploadFile;
-	
 }

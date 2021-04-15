@@ -21,10 +21,12 @@ $(function() {
 </script>
 
 <style type="text/css">
-#form-control1 { 
-                 height:30px !important;
+#form-control1 { height:30px !important;
                  width:330px !important; 
                  border:none !important;  }
+#date { height:30px!important;
+        width:157px !important;
+        display:inblock !important; }
 #title > h1 {
        font-size: 35px;
        color: #00cc99;
@@ -61,13 +63,15 @@ $(function() {
     </td>
     <th class="table-active" width="15%" align="center">강의일자</th>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_date" name="edu_date">
+    <input class="after" id="date" type="date" name="edu_startdate">
+    -
+    <input class="after" id="date" type="date" name="edu_enddate">
     </td>
     </tr>
     <tr>
     <th class="table-active" width="15%" align="center">교육시간</th>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_time" name="edu_time">
+    <input class="form-control" id="form-control1" type="text" id="edu_time" name="edu_time" placeholder="　　　　　　ex)10:00 - 15:00">
     </td>
     <th class="table-active" width="15%" align="center">교육기관</th>
     <td width="35%"align="left">
@@ -75,9 +79,17 @@ $(function() {
     </td>
     </tr>
     <tr>
-    <td class="table-active" width="100" align="center">장소</td>
-    <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_adr" name="edu_adr">
+    <td class="table-active" width="100" align="center">지역</td>
+    <td width="35%"align="center">
+    <select name="edu_adr" id="edu_adr">
+	<option value="서울/경기/인천">서울/경기/인천</option>
+	<option value="대전/세종/충청">대전/세종/충청</option>
+    <option value="강원">강원</option>
+    <option value="광주/전라">광주/전라</option>
+	<option value="대구/경북">대구/경북</option>
+	<option value="부산/울산/경남">부산/울산/경남</option>
+	 <option value="제주 ">제주 </option>
+	</select>				
     </td>
     <td class="table-active" width="100" align="center">신청여부</td>
     <td width="35%"align="center">
@@ -85,6 +97,12 @@ $(function() {
 	<option value="신청가능">신청가능</option>
 	<option value="신청마감">신청마감</option>
 	</select>
+    </td>
+    </tr>
+    <tr>
+    <td class="table-active" width="100" align="center">교육 장소</td>
+    <td colspan="3" align="left">
+    <input class="form-control" id="form-control1" type="text" id="edu_place" name="edu_place">
     </td>
     </tr>
     <tr>
@@ -111,7 +129,7 @@ $(function() {
     <td class="table-active" align="center" colspan="4">교육소개</td>
     </tr>
     <tr>
-    <td align="center" style="height:400px;" colspan="4" align="center">
+    <td align="center" style="height:400px;" colspan="4">
     <textarea class="form-control" rows="15" cols="133" id="edu_content" name="edu_content"></textarea>
     </td>
     </tr>

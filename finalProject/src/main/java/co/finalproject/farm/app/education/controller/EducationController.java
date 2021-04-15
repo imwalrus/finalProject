@@ -64,7 +64,7 @@ public class EducationController {
 	}
 	
 	@GetMapping("/getOffEdu")
-	 public String getFaq(EduPagingVO vo, Paging paging, Model model) {
+	 public String getFaq(EduPagingVO vo, Paging paging, Model model ) {
 		paging.setPageUnit(7); //한 페이지에 표시되는 레코드 건수
 		paging.setPageSize(4); //페이지 번호수
 		//페이징
