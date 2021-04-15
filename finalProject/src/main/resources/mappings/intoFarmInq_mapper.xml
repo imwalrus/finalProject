@@ -18,25 +18,19 @@
 									
 	</select>	
 	
-	<!-- 등록 -->	
+<!-- 등록 -->	
 	<insert id="insertIntoFarmInq" parameterType="IntoFarmInqVO">
 	
 			INSERT INTO INTOFARM_INQUIRY
-						   (INTO_INQ_NO,
-							INTO_NO,
-							INTO_INQ_DATE,
-							INTO_INQ_TITLE,
-							INTO_INQ_CHECK,
-							INTO_INQ_CONTENT,
-							USER_ID)		
 					VALUES(
 							(select nvl(max(into_inq_no),0)+1 from INTOFARM_INQUIRY)
 							,#{into_no}
 							,sysdate
 							,#{into_inq_title}
 							,#{into_inq_check}
-							,#{into_inq_content}
 							,#{user_id}
+							,#{into_inq_content}
+					
 							)
 
 	</insert>

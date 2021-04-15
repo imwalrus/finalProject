@@ -18,6 +18,7 @@
 	 <!-- 관리자 부트스트랩 css -->
  	<link rel="stylesheet" href="resources/admin/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <script src="resources/main/js/jquery.min.js"></script>
 </head>
 <body class="">
 <tiles:insertAttribute name="header"/>
@@ -44,13 +45,13 @@
 				
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item">
-					    <a href="getFDiaryList" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
+					    <a href="fDiaryCalendar" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="bc_alert.html">회원정보수정</a></li>
-					        <li><a href="memberOut?=${user_id }">회원탈퇴</a></li>
+					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
+					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
 					        <li><a href="getFarmsList">나의농지</a></li>
                             <li><a href="insertFarmer">농업인 권한 신청</a></li>
 					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>

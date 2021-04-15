@@ -56,55 +56,56 @@
                                                     <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp단, 게시판 등에 공유하신 게시물은 탈퇴 후에도 삭제되지 않습니다.
                                                     </h4>
                                                     <br>
-                                                    <form class="was-validated">
+                                                    <form action="memberOut" method="post" class="was-validated">
                                                         <div class="custom-control custom-checkbox mb-3">
-                                                            <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                                                            <input type="checkbox" class="custom-control-input" id="customControlValidation1" onClick="agreeCheck(this.form)" required>
                                                             <label class="custom-control-label" for="customControlValidation1">위 내용에 동의시 체크해주세요.</label>
                                                             <div class="invalid-feedback">체크되지 않을 경우 탈퇴가 불가능 합니다.</div>
                                                         </div>
-                                                </form>
-                                                </p>
-                                            </div>
-                                            <br>
-                                        <div align="center">
-                                            <div class="col-md-6">
-                                                <form>
+                                                                                                    <div class="col-md-6">
+                                             
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-sm-4 col-form-label"><h6>ID</h6></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control" id="user_id" value="${userVO.user_id }" readonly="${userVO.user_id }" >
+                                                        <label class="col-sm-4 col-form-label"><h6>ID</h6></label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" class="form-control" name="user_id" value="${out.user_id }" readonly="readonly" >
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-sm-4 col-form-label"><h6>이름</h6></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="email" class="form-control" id="user_name" value="${userVO.user_name }" readonly="${userVO.user_id }">
+                                                        <label class="col-sm-4 col-form-label"><h6>이름</h6></label>
+                                                        <div class="col-sm-5">
+                                                            <input type="email" class="form-control" name="user_name" value="${out.user_name }" readonly="readonly">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label for="inputPassword3" class="col-sm-4 col-form-label"><h6>Password</h6></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="password" class="form-control" id="user_PWD" placeholder="Password">
+                                                        <label class="col-sm-4 col-form-label"><h6>Password</h6></label>
+                                                        <div class="col-sm-7">
+                                                            <input type="password" class="form-control" name="user_pwd" placeholder="Password">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label for="inputPassword3" class="col-sm-4 col-form-label"><h6>Password확인</h6></label>
-                                                        <div class="col-sm-8">
+                                                        <label class="col-sm-4 col-form-label"><h6>Password확인</h6></label>
+                                                        <div class="col-sm-7">
                                                             <input type="password" class="form-control" id="#" placeholder="Password 확인">
                                                         </div>
                                                     </div>
+                                                    <!-- active값 0으로 고정 -->
+                                                            <input type="hidden" class="form-control" name="user_active" value="0">
+
 
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-10">
-                                                            <button type="submit" class="btn  btn-outline-danger" 
-                                                                onclick="deleteAlert('${user_id }')">탈퇴</button>
+                                                            <button type="submit" class="btn  btn-outline-danger" name="checkButton" disabled>탈퇴</button>
                                                         </div>
                                                     </div>
-                                                </form>
+ 
 
                                             </div>
-                                        </div>
+                                                </form>
+                                                </p>
+                                            </div>
+                                            <br>
+
                                     </div>
                                         </div>
                                     </div>
@@ -122,15 +123,16 @@
 	<script src="resources/admin/js/ripple.js"></script>
 	<script src="resources/admin/js/pcoded.min.js"></script>
 	    <script>
-        function deleteAlert(str) {
-			var yn = confirm("탈퇴시 복구되지 않습니다.그래도 탈퇴하시겠습니까?");
-			if (yn) {
-				location.href = "deletemember?user_id=" + str;
-			} else {
-				alert("탈퇴가 완료되지 않았습니다.  ");
+        //체크박스 버튼 활성화
+        function agreeCheck(frm)
+				{
+ 		  if (frm.checkButton.disabled==true){
+   				 frm.checkButton.disabled=false
+ 		  } else{
+   			 frm.checkButton.disabled=true
+ 		  }
 			}
-		}
-
+        
     </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,15 +137,16 @@ public class UserController {
 	}
 	
 	//회원탈퇴폼
-		@RequestMapping("/memberOut")
-		public String memberOut(UserVO vo) {
-			return "mypageTiles/mypage/memberOut";
-		}
+	@RequestMapping("/memberOut")
+	public String memberOut(Model model, UserVO vo) {
+		model.addAttribute("out", userService.getUser(vo));
+		return "mypageTiles/mypage/memberOut";
+	}
 		
 		@PostMapping("/memberOut")
 		public String memberOutProc(UserVO vo) {
 			userService.memberOut(vo);
-			return "redirect:/";
+			return "redirect:/logout";
 		}
 		
 	

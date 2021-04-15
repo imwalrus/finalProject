@@ -37,7 +37,7 @@ $.ajax({
 						+ response[i].account +"원"+ "</td><td>"
 						+ response[i].orderlist_condition + "</td><td>"
 						+ "<a href=" + "https://tracker.delivery/#/kr.cjlogistics/" + response[i].orderlist_invoice + 
-						"onclick="+ "window.open("+ "this.href," + "_blank," + "width=800," + "height=600);" + "return false;>" + response[i].orderlist_invoice + "</a>"
+						"onclick="+ "window.open(" + "this.href," + "_blank," + "width=800," + "height=600);" + "return false;>" + response[i].orderlist_invoice + "</a>"
 						
 						+ "</td></tr>"
 						);

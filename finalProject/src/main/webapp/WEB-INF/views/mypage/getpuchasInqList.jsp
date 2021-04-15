@@ -52,20 +52,23 @@
 										<div class="table-responsive">
 											<table class="table">
 												<tr class="table-success">
-													<th>No</th>
-													<th>Title</th>
-													<th>Secrete</th>
+													<th>번호</th>
+													<th>제목</th>
+													<th>작성자</th>
+													<th>비밀</th>
 												</tr>
-
+												
 												<tbody>
 													<c:forEach items="${list }" var="list">
 														<tr  onclick="pQNAview('${list.pur_inq_no}')">
 															<td>${list.pur_inq_no }</td>
 															<td>${list.pur_inq_title }</td>
+															<td>${list.user_id }</td>
 															<td>${list.pur_inq_check }</td>
 														</tr>
 													</c:forEach>
 												</tbody>
+	
 											</table>
 										</div>
 									</div>

@@ -59,7 +59,7 @@ public class FarmerController {
 		vo.setFarmer_filename(farmer_filename);
 		
 		farMapper.insertFarmer(vo);
-		return "mypage/insertFarmerWait";
+		return "mypageTiles/mypage/insertFarmerWait";
 	}
 	
 //수정

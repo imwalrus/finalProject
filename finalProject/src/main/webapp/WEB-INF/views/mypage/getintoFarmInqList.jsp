@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -58,11 +60,14 @@
 
 												<tbody>
 													<c:forEach items="${list }" var="list">
+														<c:if test="${list.user_id eq user_id}">	
+												
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
 															<td>${list.into_inq_title }</td>
 															<td>${list.into_inq_check }</td>
 														</tr>
+														</c:if>
 													</c:forEach>
 												</tbody>
 											</table>

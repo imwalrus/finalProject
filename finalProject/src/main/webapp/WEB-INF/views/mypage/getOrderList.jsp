@@ -19,8 +19,7 @@
 
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 </head>
 <body>
 	<section class="pcoded-main-container">
