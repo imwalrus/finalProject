@@ -5,9 +5,6 @@
 <div class="card-body">
 
 	<div class="row" id="diaryList">
-		<table  border="1">
-			<tr>
-		</table>
 
 	</div>
 </div>

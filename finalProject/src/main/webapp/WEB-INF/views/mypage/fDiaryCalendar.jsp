@@ -261,9 +261,8 @@
 		}
 
 		//날짜 클릭시 일기 상세조회
-		function selectDay(){
-			
-		$('#diaryModal' .modal-body).load("getfDiary?user_id="+ '${user_id}');
+		function selectDay(){			
+		$('#diaryModal .modal-body').load("getfDiary?user_id="+ '${user_id}' + "&fdiary_day=" + "2021-04-14");
 		$('#diaryModal').modal('show');
 	}
 
