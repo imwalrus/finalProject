@@ -29,13 +29,7 @@ public class FarmerController {
 	
 	Logger logger = LoggerFactory.getLogger(FarmerController.class);
 	
-//전체조회
-	@RequestMapping("/listFarmer")
-	public String listFarm(Model model) {
-		model.addAttribute("farmerlist" , farMapper.listFarmer());
-		return "#";
-	}
-	
+
 //등록
 	
 	@GetMapping("/insertFarmer")
@@ -62,21 +56,6 @@ public class FarmerController {
 		return "mypageTiles/mypage/insertFarmerWait";
 	}
 	
-//수정
-	// 수정폼
-	@RequestMapping("/updateFarmer")
-	public String updateFarm(FarmVO vo) {
-		return "#";
-	}
-
-	// 수정처리
-	@PostMapping("/updateFarmer")
-	public String updateFarmerProc(FarmerVO vo) {
-		logger.debug(vo.toString());
-		farMapper.updateFarmer(vo);
-		return "#";
-	}
-
 	
 
 }

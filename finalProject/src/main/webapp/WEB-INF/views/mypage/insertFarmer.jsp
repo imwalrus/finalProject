@@ -71,7 +71,7 @@
 													<h6>ID</h6>
 												</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" id="user_id" name="user_id">
+													<input type="text" class="form-control" id="user_id" name="user_id" value="${user_id }">${user_id }
 												</div>
 											</div>
 											<div class="form-group row">

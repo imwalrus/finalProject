@@ -55,7 +55,7 @@ public class FarmDiaryController {
 //다이어리 입력폼
 	@RequestMapping("/insertFdiary")
 	public String insertFdiary() {
-		return "notiles/mypage/insertFdiary";
+		return "mypageTiles/mypage/insertFdiary";
 	}
 	
 	@PostMapping("insertFdiary")
