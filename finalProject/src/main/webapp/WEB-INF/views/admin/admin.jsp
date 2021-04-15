@@ -50,7 +50,7 @@
 							<div class="text-left report1-cont">
 								<h2 class="font-light m-b-0" align="center">판매</h2>
 								<h3 class="text-muted" align="center">
-									<i class="ti-arrow-up text-success">￦ ${orderSum}(${order}건)</i> 
+									<i class="ti-arrow-up text-success">￦ ${orderSum}(${order}건)</i>
 								</h3>
 							</div>
 						</div>

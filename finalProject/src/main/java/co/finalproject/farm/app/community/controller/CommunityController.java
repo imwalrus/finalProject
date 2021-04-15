@@ -1,5 +1,10 @@
 package co.finalproject.farm.app.community.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,12 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.finalproject.farm.app.community.service.CommPagingVO;
 import co.finalproject.farm.app.community.service.CommunityService;
 import co.finalproject.farm.app.community.service.CommunityVO;
 import co.finalproject.farm.app.notice.controller.NoticeController;
+import co.finalproject.farm.common.FileRenamePolicy;
 import co.finalproject.farm.common.Paging;
 
 @Controller
@@ -49,23 +57,50 @@ public class CommunityController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("community/selectComm");
         // 뷰에 전달할 데이터
-        mav.addObject("CommunityVO", communityService.getSchComm(vo));
+        mav.addObject("communityVO", communityService.getSchComm(vo));
         return mav;
     }
 
     
 	//등록폼
     @RequestMapping("/insertComm")
-    public String insertNotices(Model model) {
-    	return "notice/insertComm";
+    public String insertComm(Model model) {
+    	return "community/insertComm";
     }
-	
-	//등록처리
+    
+    //등록처리
     @PostMapping("/insertComm")
     public String insertCommProc(CommunityVO vo, CommPagingVO pagingvo) {
     	logger.debug(vo.toString());
     	communityService.insertComm(vo);
     	return "redirect:getComm";
+    }
+	
+	//이미지등록
+    @PostMapping("/uploadImg")
+    @ResponseBody
+    public String uploadImg(CommunityVO vo, HttpServletRequest req) throws IllegalStateException, IOException {
+    	// 첨부 파일 처리
+    	        String path = "/resources/main/images/";
+    	 		String realPath = req.getSession().getServletContext().getRealPath(path);
+    	 		MultipartFile uploadFile = vo.getUploadFile();
+    	 		String comm_filename = "";
+    	 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
+    	 			String filename = uploadFile.getOriginalFilename();
+    	 			// 파일명 중복체크 -> rename
+    	 			File rename = FileRenamePolicy.rename(
+    	 					new File(realPath, filename));
+    	 			comm_filename = rename.getName();
+    	 			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
+    	 		} 
+    	 		return req.getContextPath() + path + URLEncoder.encode(comm_filename, "UTF-8");
+    }
+    
+    //수정폼
+    @RequestMapping("/updateComm")
+    public String updateComm(Model model, CommunityVO vo, CommPagingVO pagingvo) {
+    	model.addAttribute("communityVO", communityService.getSchComm(vo));
+    	return "community/updateComm";
     }
     	
 	//수정처리

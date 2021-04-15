@@ -9,7 +9,7 @@ body {
   margin: 20px auto;
   background: #fff;
   padding: 0;
-  border-radius: 7px;
+  border-radius: 0px;
 }
 
 .profile-image {
@@ -21,7 +21,8 @@ body {
 .settings-tray {
   background: #eee;
   padding: 10px 15px;
-  border-radius: 7px;
+  border-radius: 0px;
+  height: 70px;
 }
 .settings-tray .no-gutters {
   padding: 0;
@@ -70,7 +71,7 @@ input:focus {
 }
 
 .friend-drawer {
-  padding: 10px 15px;
+  padding: 10px 20px;
   display: flex;
   vertical-align: baseline;
   background: #fff;
@@ -94,7 +95,7 @@ input:focus {
   color: grey;
 }
 .friend-drawer--onhover:hover {
-  background: #78c2ad;
+  /* background: #78c2ad; */
   cursor: pointer;
 }
 .friend-drawer--onhover:hover p,
@@ -171,5 +172,5 @@ hr {
   vertical-align: middle;
 }
 .chat-box-tray i:last-of-type {
-  margin-left: 25px;
+  margin-left: 15px;
 }

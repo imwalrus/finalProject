@@ -7,17 +7,14 @@
 		select b.* from (select  rownum rn, a.* from (
         select * from community
         <where>
-         <if test="comm_adr != null and comm_adr != ''">
-			    COMM_ADR=#{comm_adr}
+         <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
 		 </if>
-         <if test="comm_subject != null and comm_subject != ''">
-                AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
-		 </if>
-         <if test="comm_title != null and comm_title != ''">
-			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
-		 </if>
-         <if test="comm_content != null and comm_content != ''">
-			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
@@ -46,25 +43,21 @@
 	<!-- 등록하기 -->
 	<insert id="insertComm" parameterType="CommunityVO">
 		INSERT INTO COMMUNITY
-		(COMM_NO,
-	    USER_ID,
-	    COMM_DATE,
+		(COMM_NO, 
+		USER_ID, 
 	    COMM_SUBJECT,
 	    COMM_TITLE,
 	    COMM_CONTENT,
 	    COMM_ADR,
-	    COMM_HIT,
-	    COMM_DATE
+	    COMM_HIT
 	    )
 		VALUES ( ( select nvl(max(comm_no),0)+1 from community),
 		#{user_id},
-		#{comm_date},
 		#{comm_subject},
 		#{comm_title},
 		#{comm_content},
 		#{comm_adr},
-		#{comm_hit},
-		#{comm_date}
+		#{comm_hit}
 		)
 	</insert>
 
@@ -97,17 +90,14 @@
     <select id="getCount" resultType="int">
     SELECT COUNT(*) FROM COMMUNITY
     <where>
-         <if test="comm_adr != null and comm_adr != ''">
-			    COMM_ADR=#{comm_adr}
+        <if test="comm_adrs != null">
+			    COMM_ADR in
+		 <foreach collection="comm_adrs" item="adr" open="(" close=")" separator=",">
+         #{adr}
+         </foreach>
 		 </if>
-         <if test="comm_subject != null and comm_subject != ''">
-                AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
-		 </if>
-         <if test="comm_title != null and comm_title != ''">
-			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
-		 </if>
-         <if test="comm_content != null and comm_content != ''">
-			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 <if test="comm_subject != null and comm_subject != ''">
+			    AND COMM_SUBJECT=#{comm_subject}
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'

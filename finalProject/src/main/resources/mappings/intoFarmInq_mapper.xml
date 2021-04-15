@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.IntoFarmInqMapper">
+
+<!-- 전체조회 -->
+	<select id="getIntoFarmInqList" resultType="IntoFarmInqVO">
+			SELECT * 
+			FROM INTOFARM_INQUIRY
+	</select>
+
+<!-- 단건조회 -->
+	<select id="getIntoFarmInq" resultType="IntoFarmInqVO">
+			SELECT * 
+			FROM INTOFARM_INQUIRY
+			WHERE into_inq_no=#{into_inq_no}
+									
+	</select>	
+	
+<!-- 등록 -->	
+	<insert id="insertIntoFarmInq" parameterType="IntoFarmInqVO">
+	
+			INSERT INTO INTOFARM_INQUIRY
+					VALUES(
+							(select nvl(max(into_inq_no),0)+1 from INTOFARM_INQUIRY)
+							,#{into_no}
+							,sysdate
+							,#{into_inq_title}
+							,#{into_inq_check}
+							,#{user_id}
+							,#{into_inq_content}
+					
+							)
+
+	</insert>
+	
+<!-- 수정 -->	
+	<update id="updateIntoFarmInq" parameterType="IntoFarmInqVO">
+	
+			UPDATE INTOFARM_INQUIRY
+			SET			INTO_INQ_TITLE = #{into_inq_title}
+						,INTO_INQ_CONTENT = #{into_inq_content}
+			WHERE into_inq_no=#{into_inq_no}
+	</update>
+	
+<!-- 삭제 -->	
+	<delete id="deleteIntoFarmInq" parameterType="IntoFarmInqVO">
+			DELETE FROM INTOFARM_INQUIRY
+			WHERE into_inq_no=#{into_inq_no}
+		
+	</delete>
+
+
+<!-- //////// 댓글 ////////// -->
+ <!-- 댓글 조회 -->
+	<select id="getintoFarmReplyList" 	parameterType="IntoFarmReplyVO"
+										resultType="IntoFarmReplyVO">
+			SELECT * 
+			FROM INTOFARM_INQUIRY_REPLY
+			WHERE INTO_INQ_NO = #{into_inq_no}	
+	</select>
+
+<!-- 댓글등록 -->	
+	<insert id="insertIntoFarmReply" parameterType="IntoFarmReplyVO">
+		  <selectKey resultType="string" keyProperty="into_inq_rep_no" order="BEFORE">
+        		select nvl(max(into_inq_rep_no),0)+1 from INTOFARM_INQUIRY_REPLY      
+    		</selectKey>  
+		INSERT INTO INTOFARM_INQUIRY_REPLY
+		VALUES (
+				#{into_inq_rep_no}
+				,#{into_inq_rep_content}
+				,#{into_inq_no}
+				,#{user_id}
+				,sysdate
+				)
+		
+	</insert>
+	
+<!-- 댓글삭제 -->
+	<delete id="deleteIntoFarmReply" parameterType="IntoFarmReplyVO">
+			DELETE FROM INTOFARM_INQUIRY_REPLY
+			WHERE into_inq_rep_no = #{into_inq_rep_no}
+
+	</delete>
+</mapper>

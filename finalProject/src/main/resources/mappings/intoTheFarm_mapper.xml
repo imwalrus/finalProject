@@ -8,71 +8,58 @@
 		SELECT COUNT(*)
 		FROM INTOFARM
 		<where>
-			<if test="into_no != null and into_no !=''">
-				INTO_NO = #{into_no}
-			</if>
-			<if test="into_title != null and into_title !=''">
-				INTO_TITLE = #{into_title}
-			</if>
-			<if test="into_phone != null and into_phone !=''">
-				INTO_PHONE = #{into_phone}
-			</if>
-			<if test="into_product != null and into_product !=''">
-				INTO_PRODUCT = #{into_product}
-			</if>
-			<if test="into_date != null and into_date !=''">
-				INTO_DATE = #{into_date}
-			</if>
-			<if test="into_entry != null and into_entry !=''">
-				INTO_ENTRY = #{into_entry}
-			</if>
-			<if test="into_info != null and into_info !=''">
-				INTO_INFO = #{into_info}
-			</if>
-			<if test="user_id != null and user_id !=''">
-				USER_ID = #{user_id}
-			</if>
-			<if test="into_city != null and into_city !=''">
-				INTO_CITY = #{into_city}
-			</if>
-			<if test="into_progress != null and into_progress !=''">
-				INTO_PROGRESS = #{into_progress}
-			</if>
-		</where>
+         <if test="into_city != null and into_city != ''">
+			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+		 </if>
+		 <if test="into_product != null and into_product != ''">	    
+				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+		 </if>
+		 <if test="into_date != null and into_date != ''">					
+		        AND  <![CDATA[
+						    INTO_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
+						    and INTO_DATE < to_date(#{finish_date}, 'YYYY-MM-DD')
+						]]>
+				)
+		 </if>
+        </where>
 	</select>
 	
-<!--전체조회 & 페이징 -->
-   
-   <select id="getFarmList" resultType="IntoTheFarmVO">
-   SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
-      SELECT INTO_NO
-           , INTO_TITLE
-           , INTO_PHONE
-           , INTO_PRODUCT
-           , INTO_DATE
-           , INTO_ENTRY
-           , INTO_INFO
-           , USER_ID
-           , INTO_CITY
-           , INTO_PROGRESS
-      FROM INTOFARM
-      <where>
-       <if test="into_progress != null and into_progress != ''">
-             INTO_PROGRESS = #{into_progress}
-       </if>
-       <if test="into_title != null and into_title != ''">
-             AND UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
-       </if>
+	<!--전체조회 & 페이징 -->
+	
+	<select id="getFarmList" resultType="IntoTheFarmVO">
+	SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
+		SELECT INTO_NO
+			 , INTO_TITLE
+			 , INTO_PHONE
+			 , INTO_PRODUCT
+             , INTO_DATE
+             , INTO_ENTRY
+             , INTO_INFO
+             , USER_ID
+             , INTO_CITY
+		FROM INTOFARM
+		<where>
+		 <if test="into_title != null and into_title != ''">
+			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+		 </if>
          <if test="into_city != null and into_city != ''">
-             AND UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
-       </if>
-       <if test="into_product != null and into_product != ''">       
-             AND UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
-       </if>
+			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+		 </if>
+		 <if test="into_product != null and into_product != ''">	    
+				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
+		 </if>
+		 <if test="into_date != null and into_date != ''">					
+		        AND  <![CDATA[
+						    INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
+						    and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
+						]]>
+				)
+		 </if>
         </where>
-      ORDER BY INTO_NO DESC
-      ) A) B WHERE RN BETWEEN #{start} AND #{end}
-   </select>
+		ORDER BY INTO_NO DESC
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+		
+	</select>
 	
 	<!--단건조회 -->
 	<select id="getSearchFarm" resultType="IntoTheFarmVO">
@@ -91,75 +78,80 @@
 	</select>
 	
 	<!--등록 -->
-	<insert id="insertFarm" parameterType="IntoTheFarmVO">
+   <insert id="insertFarm" parameterType="IntoTheFarmVO">
+   
+   <selectKey keyProperty="into_no" resultType="string" order="BEFORE">
+      SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
+   </selectKey>
+   INSERT INTO INTOFARM <!--확인! -->
+            ( INTO_NO
+             ,INTO_TITLE
+               ,INTO_PHONE
+               ,INTO_PRODUCT
+             ,INTO_DATE
+             ,INTO_ENTRY
+             ,INTO_INFO
+             <if test="uploadFileName != null and uploadFileName != ''">
+             ,INTO_FILENAME
+             </if>
+              ,USER_ID
+              ,INTO_CITY
+              ,INTO_PROGRESS
+             )
+           
+   VALUES ( #{into_no}
+         ,#{into_title}
+          ,#{into_phone}
+            ,#{into_product}
+             ,#{into_date}
+            ,#{into_entry}
+            ,#{into_info}
+            <if test="uploadFileName != null and uploadFileName != ''">
+            ,#{into_filename}
+            </if>
+            ,#{user_id}
+            ,#{into_city}
+            ,'0'
+            )
+            
+   </insert>
 	
-	<selectKey keyProperty="into_no" resultType="string" order="BEFORE">
-		SELECT NVL(MAX(INTO_NO),1)+1 FROM INTOFARM
-	</selectKey>
-	INSERT INTO INTOFARM <!--확인! -->
-				( INTO_NO
-				 ,INTO_TITLE
-		  		 ,INTO_PHONE
-		  		 ,INTO_PRODUCT
-				 ,INTO_DATE
-				 ,INTO_ENTRY
-				 ,INTO_INFO
-				 <if test="uploadFileName != null and uploadFileName != ''">
-				 ,INTO_FILENAME
-				 </if>
-			     ,USER_ID
-			     ,INTO_CITY
-			     ,INTO_PROGRESS
-			    )
-	VALUES ( #{into_no}
-			,#{into_title}
-	 		,#{into_phone}
-		   	,#{into_product}
-	   	    ,#{into_date}
-		   	,#{into_entry}
-		   	,#{into_info}
-		   	<if test="uploadFileName != null and uploadFileName != ''">
-		   	,#{into_filename}
-		   	</if>
-		   	,#{user_id}
-		   	,#{into_city}
-		   	,'진행중'
-		   	)
-	</insert>
-	
-	<!--수정 -->
-	<update id="updateFarm" parameterType="IntoTheFarmVO">
-	UPDATE INTOFARM
-		<set>
-			<if test="into_title != null and into_title != ''">
-	 		INTO_TITLE=#{into_title}
-	 		</if>
-			<if test="into_phone != null and into_phone != ''">
-			,INTO_PHONE=#{into_phone}
-	 		</if>
-			<if test="into_product != null and into_product != ''">
-			,INTO_PRODUCT=#{into_product}
-	 		</if>
-			<if test="into_date != null and into_date != ''">
-			,INTO_DATE=#{into_date}
-	 		</if>
-			<if test="into_entry != null and into_entry != ''">
-			,INTO_ENTRY=#{into_entry}
-	 		</if>
-			<if test="into_filename != null and into_filename != ''">
-			,INTO_FILENAME=#{into_filename}
-	 		</if>
-			<if test="into_info != null and into_info != ''">
-			,INTO_INFO=#{into_info}
-	 		</if>
-			<if test="into_city != null and into_city != ''">
-			,INTO_CITY=#{into_city}
-	 		</if>
-			<if test="into_progress != null and into_progress != ''">
-	 		,INTO_PROGRESS=#{into_progress}
-	 		</if>
-		</set>
-	WHERE INTO_NO=#{into_no}				    
+	 <!--수정 -->
+   <update id="updateFarm" parameterType="IntoTheFarmVO">
+   UPDATE INTOFARM
+      <set>
+         <if test="into_title != null and into_title != ''">
+          INTO_TITLE=#{into_title}
+          </if>
+         <if test="into_phone != null and into_phone != ''">
+         ,INTO_PHONE=#{into_phone}
+          </if>
+         <if test="into_product != null and into_product != ''">
+         ,INTO_PRODUCT=#{into_product}
+          </if>
+         <if test="into_date != null and into_date != ''">
+         ,INTO_DATE=#{into_date}
+          </if>
+         <if test="into_entry != null and into_entry != ''">
+         ,INTO_ENTRY=#{into_entry}
+          </if>
+         <if test="into_filename != null and into_filename != ''">
+         ,INTO_FILENAME=#{into_filename}
+          </if>
+         <if test="into_info != null and into_info != ''">
+         ,INTO_INFO=#{into_info}
+          </if>
+         <if test="into_city != null and into_city != ''">
+         ,INTO_CITY=#{into_city}
+          </if>
+      </set>
+   WHERE INTO_NO=#{into_no}                
+   </update>
+	<!--체험종료  -->
+	<update id="updateFarmExit" parameterType="IntoTheFarmVO">
+	 UPDATE INTOFARM
+	 SET INTO_PROGRESS=1
+	 WHERE INTO_NO=#{into_no}       
 	</update>
 	
 	<!--삭제 -->

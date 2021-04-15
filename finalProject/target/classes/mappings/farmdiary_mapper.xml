@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmDiaryMapper">
+
+<!--달력조회  -->
+	<select id="fDiaryCalendar" resultType="FarmDiaryVO">
+			SELECT *
+			FROM FARMDIARY
+	</select>
+
+ <!-- 작물, 아이디 별 조회 -->
+	<select id="getfDiary" resultType="FarmDiaryVO">
+		SELECT F.FDIARY_NO
+				,F.FDIARY_DAY
+        		,F.FDIARY_STIME
+        		,F.FDIARY_ETIME
+        		,F.FDIARY_WORKER
+        		,F.FDIARY_WEATHER
+        		,F.FDIARY_CONTENT
+        		,F.USER_ID
+        		,F.CROP_NO
+        		,F.FDIARY_FILENAME
+		FROM FARMDIARY F JOIN CROP C
+		ON (F.CROP_NO = C.CROP_NO)
+		WHERE F.USER_ID = #{user_id}		
+		AND F.FDIARY_DAY = #{fdiary_day}
+		 
+	</select> 
+	
+	
+	
+
+	
+<!-- 일기등록 -->
+	<insert id="insertFdiary" parameterType="FarmDiaryVO">
+				
+			INSERT INTO FARMDIARY
+									(
+									FDIARY_NO
+									,FDIARY_DAY
+									,FDIARY_STIME
+									,FDIARY_ETIME
+									,FDIARY_WORKER
+									,FDIARY_WEATHER
+									,FDIARY_CONTENT
+									,USER_ID
+									,CROP_NO
+									)
+			VALUES (
+					( SELECT NVL(MAX(FDIARY_NO),0)+1 FROM FARMDIARY )
+					,#{fdiary_day}
+					,#{fdiary_stime}
+					,#{fdiary_etime}
+					,#{fdiary_worker}
+					,#{fdiary_weather}
+					,#{fdiary_content}
+					,#{user_id}
+					,#{crop_no}		
+					)
+	
+	</insert>
+	
+	
+</mapper>

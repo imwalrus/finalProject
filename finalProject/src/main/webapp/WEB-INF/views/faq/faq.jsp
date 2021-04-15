@@ -76,7 +76,7 @@ function categoryChange() {
         </select>
 		</div>
 		<div align="center">
-		<table class="table table-hover">
+		<table class="table table-bordered">
 		 <thead>
 				<tr>
 					<td align="center" width="100">글번호</td>
@@ -97,7 +97,7 @@ function categoryChange() {
         </div>
         </div>
    
-    <div class="row justify-content-around" style="margin-left:400px; margin-right:400px;">
+    <div class="row justify-content-around" style="margin-left:385px; margin-right:385px;">
     <div class="col-auto mr-auto">
     <c:if test="${user_auth == 'admin' }">  
     <button type="button" class="btn btn-primary disabled" onclick="location.href='insertFaq'">글쓰기</button>

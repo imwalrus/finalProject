@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,6 +81,8 @@ public class UserController {
 			//로그인 체크에 성공하면 세션에 user_id, user_auth 담아두기
 			session.setAttribute("user_id", resultVO.getUser_id());
 			session.setAttribute("user_auth", resultVO.getUser_auth());
+			
+			
 		} else {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
 			return "redirect:login";
@@ -132,5 +135,19 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	//회원탈퇴폼
+	@RequestMapping("/memberOut")
+	public String memberOut(Model model, UserVO vo) {
+		model.addAttribute("out", userService.getUser(vo));
+		return "mypageTiles/mypage/memberOut";
+	}
+		
+		@PostMapping("/memberOut")
+		public String memberOutProc(UserVO vo) {
+			userService.memberOut(vo);
+			return "redirect:/logout";
+		}
+		
 	
 }

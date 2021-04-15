@@ -20,7 +20,7 @@
 
 	<!-- 정적컨텐츠 : css, img, js... -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	
 	 <!-- Tiles -->
     <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <beans:property name="definitions">
@@ -90,7 +90,7 @@
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>
-		<websocket:sockjs/>
+		<websocket:sockjs />
 	</websocket:handlers>
 
 	<beans:bean id="chatHandler" class="co.finalproject.farm.common.ChatHandler" />

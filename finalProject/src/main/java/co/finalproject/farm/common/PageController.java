@@ -35,5 +35,7 @@ public class PageController {
 	public String communityMove() {
 		return "community";
 	}
+
 	
 }
+

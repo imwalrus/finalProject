@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.finalproject.farm.app.myPage.service.impl.OrderMapper">
+
+<!-- 구매내역 전체리스트 -->
+	<select id="getOrderList"  parameterType="OrderVO"
+								resultType="OrderVO">
+	
+		SELECT * FROM ORDERS
+		WHERE USER_ID = #{user_id}
+	
+	</select>
+
+ <!-- 구매내역 상세리스트-->
+<select id="getOrder" parameterType="OrderVO"
+							resultType="OrderVO">
+	
+	SELECT O.ORDER_NO
+        ,L.ORDERLIST_NO
+        ,L.PRO_NO
+        ,P.PRO_NAME
+        ,L.CART_COUNT
+        ,P.PRO_PRICE
+        ,(L.CART_COUNT * P.PRO_PRICE) as account
+        ,L.ORDERLIST_CONDITION
+        ,O.ORDER_PAYMENT
+        ,O.USER_ID as BUYER
+        ,L.ORDERLIST_INVOICE
+	FROM ORDERS O INNER JOIN ORDERLIST L 
+            ON O.ORDER_NO = L.ORDER_NO
+    INNER JOIN PRODUCT P
+            ON P.PRO_NO = L.PRO_NO
+	WHERE O.ORDER_NO=#{order_no}
+		
+</select> 	
+
+<!-- 판매내역 조회-->
+<select id="getSaleList" resultType="OrderVO">
+						
+SELECT O.ORDER_NO
+            ,P.PRO_NAME 
+            ,L.CART_COUNT
+            ,(L.CART_COUNT * P.PRO_PRICE) as ACCOUNT
+            ,P.PRO_PRICE
+            ,O.USER_ID as BUYER
+            ,L.ORDERLIST_CONDITION
+            ,O.ORDER_PAYMENT
+            ,L.ORDERLIST_NO
+            ,P.USER_ID as SELLER
+            ,P.PRO_DCOMPANY
+            ,L.ORDERLIST_INVOICE          
+FROM ORDERLIST L
+INNER JOIN PRODUCT P
+            ON P.PRO_NO = L.PRO_NO
+INNER JOIN ORDERS O
+            ON O.ORDER_NO = L.ORDER_NO
+WHERE P.USER_ID = #{user_id}
+        
+</select>
+
+
+<!-- 결제상태/ 송장번호수정 -->
+	<update id="updateOrder"  parameterType="OrderVO">
+			
+			UPDATE ORDERLIST 
+			SET 
+				ORDERLIST_INVOICE = #{orderlist_invoice}
+				,ORDERLIST_CONDITION =  #{orderlist_condition}
+			WHERE ORDERLIST_NO = #{orderlist_no}
+			
+	</update>
+	
+
+
+
+</mapper>
+
