@@ -1,27 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-<title>회원 탈퇴</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-Favicon icon
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-vendor css
-<link rel="stylesheet" href="resources/admin/css/style.css">
-
-</head> -->
 <body>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
@@ -59,6 +40,7 @@ vendor css
 												</tr>
 												
 												<tbody>
+													<c:if test="${fn:length(list) >=1 }">
 													<c:forEach items="${list }" var="list">
 														<tr  onclick="pQNAview('${list.pur_inq_no}')">
 															<td>${list.pur_inq_no }</td>
@@ -67,6 +49,12 @@ vendor css
 															<td>${list.pur_inq_check }</td>
 														</tr>
 													</c:forEach>
+													</c:if>
+													<c:if test="${fn:length(list) == 0 }">
+														<tr>
+															<td colspan="4">문의하신 내용이 없습니다.</td>
+														</tr>
+													</c:if> 
 												</tbody>
 	
 											</table>

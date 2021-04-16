@@ -71,7 +71,34 @@
 						</div>
 					</div>
 				</div>
-				
+				<c:if test="${user_auth =='user' }">
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-hasmenu">
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
+					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
+                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
+					    </ul>
+					</li>
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="#">장바구니</a></li>
+					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
+					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
+					    </ul>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
+                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
+                            </ul>
+                        </li>
+				</ul>
+				</c:if>
+				<c:if test="${user_auth =='farmer' }">
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item">
 					    <a href="fDiaryCalendar" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
@@ -81,9 +108,8 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
-					        <li><a href="getFarmsList">나의농지</a></li>
-                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
-					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>
+					        <li><a href="getFarmsList">나의 농지</a></li>
+					        <li><a href="getpuchasInqofFarmer">문의 답변 관리</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
@@ -97,17 +123,18 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
-					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
+					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
                                 <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
                                 <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
-                                <li><a href="getintoFarmInqList">체험 관련 문의</a></li>
+                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
                             </ul>
                         </li>
 				</ul>
+				</c:if>
 			</div>
 		</div>
 	</nav>

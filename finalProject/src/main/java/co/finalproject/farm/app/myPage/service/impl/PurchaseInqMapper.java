@@ -17,6 +17,9 @@ public interface PurchaseInqMapper {
 	
 	public int deletepuchasInq(puchasInqVO vo);
 	
+	public List<puchasInqVO> getpuchasInqofUser(String user_id);
+	
+	public List<puchasInqVO> getpuchasInqofFarmer(String user_id);
 	
 	//댓글
 	public List<puchasReplyVO> getpuchasReplyList(puchasReplyVO vo);

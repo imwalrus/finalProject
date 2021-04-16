@@ -1,9 +1,7 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 
 <!DOCTYPE html>
 <html lang="ko">
@@ -59,16 +57,20 @@ vendor css
 												</tr>
 
 												<tbody>
+													<c:if test="${fn:length(list) >=1}">
 													<c:forEach items="${list }" var="list">
-														<c:if test="${list.user_id eq user_id}">	
-												
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
 															<td>${list.into_inq_title }</td>
 															<td>${list.into_inq_check }</td>
 														</tr>
-														</c:if>
 													</c:forEach>
+													</c:if>
+													<c:if test="${fn:length(list) >=0}">
+														<tr>
+															<td colspan="3"> 문의하신 내용이 없습니다. </td>
+														</tr>
+													</c:if>
 												</tbody>
 											</table>
 										</div>

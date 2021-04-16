@@ -9,7 +9,36 @@
 		SELECT *
 		FROM PURCHASE_INQURIY
 	</select>
+
+<!-- 전제조회(id별) -->
+	<select id="getpuchasInqofUser" resultType="puchasInqVO">
+		SELECT  PUR_INQ_NO,
+				PUR_INQ_DATE,
+				PUR_INQ_TITLE,
+				PUR_INQ_CONTENT,
+				PUR_INQ_CHECK,
+				PRO_NO,
+				PUR_INQ_FILENAME,
+				USER_ID
+		FROM PURCHASE_INQURIY
+		where user_id = #{user_id}
+	</select>
 	
+<!-- 판매자에게 들어온 문의리스트 -->
+	<select id="getpuchasInqofFarmer" resultType="puchasInqVO">
+		select  	i.PUR_INQ_NO,
+		            i.PUR_INQ_DATE,
+		           	i.PUR_INQ_TITLE,
+		            i.PUR_INQ_CONTENT,
+		            i.PUR_INQ_CHECK,
+		            p.PRO_NO,
+		            i.PUR_INQ_FILENAME,
+		            i.USER_ID
+		from product p inner join purchase_inquriy i
+		on(p.pro_no = i.pro_no)
+		where p.user_id = #{user_id}
+	
+	</select>	
 <!-- 단건조회 -->	
 	<select id="getpuchasInq"   parameterType="puchasInqVO"
 								resultType="puchasInqVO">	
