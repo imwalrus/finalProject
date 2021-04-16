@@ -80,34 +80,37 @@
 									</div>
 									<div class="table-responsive">
 										<!-- 테이블 START -->
-										<table class="table">
+										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th>No.</th>
-													<th>ID</th>
-													<th>체험이름</th>
-													<th>지역</th>
-													<th>일정</th>
-													<th>모집인원수</th>
-													<th>진행여부</th>
+													<th width="5%">No.</th>
+													<th width="10%">ID</th>
+													<th width="15%">체험이름</th>
+													<th width="5%">지역</th>
+													<th width="30%">일정</th>
+													<th width="10%">모집인원수</th>
+													<th width="10%">진행여부</th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty intoFarm}">
+													<td colspan="8">내용이 존재하지 않습니다.</td>
+												</c:if>
 												<c:forEach items="${intoFarm}" var="intoFarm">
 													<tr>
-														<td>${intoFarm.into_no}</td>
-														<td>${intoFarm.user_id}</td>
-														<td>${intoFarm.into_title}</td>
-														<td>${intoFarm.into_city}</td>
-														<td>${intoFarm.into_date}</td>
-														<td>${intoFarm.into_entry}명</td>
+														<td width="5%">${intoFarm.into_no}</td>
+														<td width="10%" class="text-truncate">${intoFarm.user_id}</td>
+														<td width="15%">${intoFarm.into_title}</td>
+														<td width="5%">${intoFarm.into_city}</td>
+														<td width="30%" class="text-truncate">${intoFarm.into_date}</td>
+														<td width="10%">${intoFarm.into_entry}명</td>
 														<c:choose>
 															<c:when test="${intoFarm.into_progress eq 0}">
-																<td>진행중</td>
+																<td width="10%">진행중</td>
 															</c:when>
 															<c:when test="${intoFarm.into_progress eq 1}">
-																<td>종료</td>
+																<td width="10%">종료</td>
 															</c:when>
 														</c:choose>
 														<td>

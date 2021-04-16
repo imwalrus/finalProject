@@ -297,7 +297,7 @@
 	</insert>
 	
 	<!-- 주문 현황 -->
-	<select id="adminShop" parameterType="OrderVO" resultType="OrderVO">
+	<select id="adminOrder" parameterType="OrderVO" resultType="OrderVO">
 		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
 		SELECT O.ORDER_NO
 			 , O.ORDER_DATE
@@ -317,12 +317,14 @@
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
-	<!-- 일별 매출 건수 -->
+	<!-- 요일별 판매량 -->
 	<select id="weekChart" resultType="map">
 		SELECT TO_CHAR(B.DT, 'DY') AS ORDER_DATE
-     		 , NVL(SUM(A.CNT), 0) AS CNT
+     		 , NVL(SUM(A.ORDER_COUNT), 0) AS ORDER_COUNT
+     		 , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
   		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
-             , COUNT(*) AS CNT
+             , COUNT(*) AS ORDER_COUNT
+             , SUM(ORDER_TOTALPRICE) AS ORDER_TOTALPRICE
           FROM ORDERS
          WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
                               AND TRUNC(SYSDATE, 'D') + 8
@@ -339,8 +341,8 @@
   			   ORDER BY B.DT
 	 		]]>
 	</select>
-	
-	<!-- 월별 매출 건수 -->
+			
+	<!-- 월별 판매량 -->
 	<select id="monthChart" resultType="map">
 		SELECT TO_CHAR(B.DT, 'MM') AS ORDER_DATE
      		 , NVL(SUM(A.CNT), 0) CNT
@@ -363,9 +365,26 @@
 	 		]]>
 	</select>
 	
-	<!-- 총 판매액 -->
-	<select id="getSumOrders" resultType="int">
-		SELECT SUM(ORDER_TOTALPRICE)
-		  FROM ORDERS
+	<!-- 월별 매출액 -->
+	<select id="monthSumChart" resultType="map">
+		SELECT TO_CHAR(B.DT, 'MM') AS ORDER_DATE
+     		 , NVL(SUM(A.CNT), 0) CNT
+  		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
+             , COUNT(*) CNT
+          FROM ORDERS
+         WHERE ORDER_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01')
+                              AND TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
+      GROUP BY ORDER_DATE
+               ) A
+      		 , (SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01') + LEVEL - 1 AS DT
+                  FROM DUAL 
+     		<![CDATA[
+            CONNECT BY LEVEL <= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
+                               - TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01'))
+                ) B
+	  		     WHERE B.DT = A.ORDER_DATE(+)
+	  		  GROUP BY TO_CHAR(B.DT, 'MM')
+	  		  ORDER BY TO_CHAR(B.DT, 'MM')
+	 		]]>
 	</select>
 </mapper>

@@ -85,7 +85,7 @@
 														<input type="hidden" name="pro_no" value="${shop.pro_no }">
 														<a href="product?pro_no=${shop.pro_no}" class="img-prod">
 															<!-- 이미지 -->
-															<img class="img-fluid" src="resources/main/images/${shop.pro_filename}" alt="Colorlib Template">
+															<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" alt="Colorlib Template">
 														</a>
 														<div class="text py-3 pb-4 px-3 text-center">
 															<h3>

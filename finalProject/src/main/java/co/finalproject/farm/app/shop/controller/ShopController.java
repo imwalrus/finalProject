@@ -99,39 +99,35 @@ public class ShopController {
 
 	// 상품 등록
 	@PostMapping("/insertProduct")
-	public String insertProduct(ShopVO vo, HttpServletRequest req) throws IOException {
+	public String insertProduct(ShopVO vo, HttpServletRequest req) throws Exception, IOException {
 		// 첨부 파일 처리
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
-		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
-
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
-			// 파일명 중복체크 -> rename
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			pro_filename += rename.getName();
-			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
-		} else if (uploadFile.getOriginalFilename() == null && uploadFile.getOriginalFilename() == "") {
-			vo.setPro_filename(req.getParameter("pro_filename"));
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			pro_filename += '@' + rename.getName();
+			vo.setPro_filename(rename.getName());
 		}
-		vo.setPro_filename(pro_filename); // vo 업로드된 파일명 담아서 DB에 저장
 		shopMapper.insertProduct(vo);
 		return "redirect:/prodManage";
 	}
 
 	// 상품 수정
 	@PostMapping("/updateProduct")
-	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws IOException {
+	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws Exception, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
-		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			pro_filename += rename.getName();
-			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			pro_filename += '@' + rename.getName();
+			vo.setPro_filename(rename.getName());
 		}
-		vo.setPro_filename(pro_filename); // vo 업로드된 파일명 담아서 DB에 저장
 		model.addAttribute("modal", shopMapper.updateProduct(vo));
 		return "redirect:/prodManage";
 	}

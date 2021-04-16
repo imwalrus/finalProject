@@ -8,6 +8,7 @@
 		SELECT COUNT(*)
 		FROM USERS
 		<where>
+			    USER_ACTIVE = 1
 			<if test="user_auth != null and user_auth != ''">
 				AND UPPER(USER_AUTH) LIKE '%' || UPPER(#{user_auth}) || '%'
 			</if>

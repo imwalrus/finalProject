@@ -14,9 +14,6 @@ public interface ShopMapper {
 	// 페이징 건수(주문)
 	public int getCountAdmin(OrderVO vo);
 	
-	// 전체 건수(관리자 페이지서 활용)
-	public Object getCount();
-	
 	// 리스트 · 검색 · 페이징
 	public List<ShopVO> getListShop(ShopVO vo);
 
@@ -66,14 +63,12 @@ public interface ShopMapper {
 	public void insertOrderlist(OrderVO vo);
 	
 	// 주문 현황
-	public List<OrderVO> adminShop(OrderVO vo);
+	public List<OrderVO> adminOrder(OrderVO vo);
 
-	// 일별 판매건수(차트)
+	// 요일별 차트
 	public List<Map<String, Object>> weekChart();
 
-	// 월별 판매건수(차트)
+	// 월별 판매량(차트)
 	public List<Map<String, Object>> monthChart();
 	
-	// 총 판매액
-	public int getSumOrders();
 }

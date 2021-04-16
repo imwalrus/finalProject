@@ -10,6 +10,7 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
@@ -58,29 +59,37 @@
 			<input type="hidden" name="pro_no" value="${prod.pro_no}">
 			<input type="hidden" name="user_id" value="${user_id}">
 			<div class="container">
+			
+				<div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+					<a href="shop">
+						<!-- '<- 쇼핑 계속하기' -->
+						<i class="material-icons arrow_back">&#xe5c4;<strong> 상품 리스트</strong></i>
+					</a>
+				</div>
 				<div class="row">
 					<div class="col-lg-6 mb-5 ftco-animate">
 						<!-- 이미지 -->
-						<a href="resources/main/images/${prod.pro_filename}" class="image-popup">
-							<img src="resources/main/images/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
+						<a href="resources/images/shop/${prod.pro_filename}" class="image-popup">
+							<img src="resources/images/shop/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
 						</a>
 					</div>
 					<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 						<!-- 상품 이름 -->
-						<h3>${prod.pro_name}</h3>
-						<p class="text-left mr-4">
+						<h2>${prod.pro_name}</h2>
+						<p class="text-left mr-3">
 							<a class="mr-2" style="color: #000;">
 								판매자 <span style="color: #bbb;">${prod.user_id}</span>
 							</a>
-							<!-- ★문의하기 url 넣기★ -->
-							<a href="#" class="mr-2">문의하기</a>
+							<c:if test="${prod.user_id ne user_id}">
+								<a href="insertpuchasInq" class="mr-2">문의하기</a>
+							</c:if>
 						<div class="rating d-flex">
-							<p class="text-left mr-4">
+							<p class="text-left mr-3">
 								<a class="mr-2" style="color: #000;">
 									카테고리 <span style="color: #bbb;">${prod.pro_category}</span>
 								</a>
 							</p>
-							<p class="text-left">
+							<p class="text-left mr-3">
 								<a class="mr-2" style="color: #000;">
 									재고 <span style="color: #bbb;">${prod.pro_quantity}개</span>
 								</a>
@@ -98,7 +107,7 @@
 							<span style="color: #000;">배송비 :</span> ￦ 2,500
 						</p>
 						<!-- 내용 -->
-						<p>${prod.pro_content}</p>
+						<strong>${prod.pro_content}</strong>
 						<div class="row mt-4">
 							<div class="input-group col-md-6 d-flex mb-3">
 								<span class="input-group-btn ml-2">

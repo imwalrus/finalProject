@@ -65,30 +65,33 @@
 									</div>
 									<div class="table-responsive">
 										<!-- 테이블 START -->
-										<table class="table">
+										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th>No.</th>
-													<th>상품명</th>
-													<th>주문일자</th>
-													<th>결제수단</th>
-													<th>금액</th>
-													<th>상태</th>
-													<th>판매자</th>
-													<th>구매자</th>
+													<th width="20%">No.</th>
+													<th width="20%">상품명</th>
+													<th width="20%">주문일자</th>
+													<th width="10%">결제수단</th>
+													<th width="10%">금액</th>
+													<th width="10%">상태</th>
+													<th width="10%">판매자</th>
+													<th width="10%">구매자</th>
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty order}">
+													<td colspan="8">내용이 존재하지 않습니다.</td>
+												</c:if>
 												<c:forEach items="${order}" var="order">
 													<tr>
-														<td>${order.order_no}</td>
-														<td>${order.pro_name}</td>
-														<td>${order.order_date}</td>
-														<td>${order.order_payment}</td>
-														<td>${order.pro_price}원</td>
-														<td>${order.orderlist_condition}</td>
-														<td>${order.seller}</td>
-														<td>${order.buyer}</td>
+														<td width="20%" class="text-truncate">${order.order_no}</td>
+														<td width="20%" class="text-truncate">${order.pro_name}</td>
+														<td width="20%">${order.order_date}</td>
+														<td width="10%">${order.order_payment}</td>
+														<td width="10%">${order.pro_price}원</td>
+														<td width="10%">${order.orderlist_condition}</td>
+														<td width="10%">${order.seller}</td>
+														<td width="10%">${order.buyer}</td>
 													</tr>
 												</c:forEach>
 											</tbody>

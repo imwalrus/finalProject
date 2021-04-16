@@ -7,7 +7,6 @@ import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 public interface IntoTheFarmMapper {
 	// 건수
 	public int getCount(IntoTheFarmVO vo);
-	public int getCount(); // 전체 건수(관리자 페이지서 활용)
 	public List<IntoTheFarmVO> getFarmList(IntoTheFarmVO vo);
 	public IntoTheFarmVO getSearchFarm(IntoTheFarmVO vo);
 	public int insertFarm(IntoTheFarmVO vo);

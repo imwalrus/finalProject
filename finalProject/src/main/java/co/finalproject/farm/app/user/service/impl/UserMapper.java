@@ -5,9 +5,8 @@ import java.util.List;
 import co.finalproject.farm.app.user.service.UserVO;
 
 public interface UserMapper {
-	public int getCount(UserVO vo);					//페이징 건수(농산물 판매)
-	public int getCountFarmer(UserVO vo);			//페이징 건수
-	public int getCount();							//전체 건수(관리자 페이지서 활용)
+	public int getCount(UserVO vo);					//페이징 건수(관리자 - 회원 현황)
+	public int getCountFarmer(UserVO vo);			//페이징 건수(관리자 - 농업인 신청현황)
 	
 	public int idCheck(UserVO vo);    				//id 중복체크
 	public int emailCheck(UserVO vo); 				//이메일 중복체크

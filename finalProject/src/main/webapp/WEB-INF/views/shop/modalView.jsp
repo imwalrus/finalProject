@@ -12,7 +12,7 @@
 	</div>
 	<div class="modal-body">
 		<div class="col">
-			<img src="resources/main/images/${modal.pro_filename}" alt="teste" class="img-thumbnail">
+			<img src="resources/images/shop/${modal.pro_filename}" alt="teste" class="img-thumbnail">
 		</div>
 		<div class="clearfix"></div>
 		<div class="col">
