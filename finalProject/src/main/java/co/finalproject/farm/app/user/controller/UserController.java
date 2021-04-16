@@ -102,7 +102,7 @@ public class UserController {
 	@ResponseBody
 	public int pwFind(UserVO vo) {
 		int result = userService.pwFind(vo);
-		System.out.println("====================비밀번호 찾기 결과==============="+result);
+		log.info("====================비밀번호 찾기 결과==============="+result);
 		return result;
 	}
 	
@@ -148,6 +148,7 @@ public class UserController {
 		return "mypageTiles/mypage/memberOut";
 	}
 	
+	//회원탈퇴 시 아작스 패스워드 체크용
 	@RequestMapping("/pwCheck")
 	@ResponseBody
 	public int memberOutPwCheck(UserVO vo) {
@@ -158,19 +159,28 @@ public class UserController {
 		}
 		return result;
 	}
-		
+	
+	//회원탈퇴 처리
 	@PostMapping("/memberOut")
 	public String memberOutProc(UserVO vo , RedirectAttributes redirectAttr) {
 		UserVO resultVO = userService.loginCheck(vo);
 		log.info("회원탈퇴하려는 id ===========> "+ resultVO.getUser_id());
 		if(pwdEncoder.matches(vo.getUser_pwd(),resultVO.getUser_pwd())) {
 			userService.memberOut(vo);
-			return "redirect:/logout";
+			return "redirect:/memberOutSuccess";
 		} else {
 			redirectAttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			return "redirect:/";
 		}
 
+	}
+	
+	//회원탈퇴 성공 후 로그아웃 후 탈퇴 페이지로 이동
+	@GetMapping("/memberOutSuccess")
+	public String memberOutSuccess(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "mypage/memberOutSuccess";
 	}
 		
 	

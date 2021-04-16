@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,13 +15,13 @@
 <meta name="description" content="" />
 <meta name="keywords" content="">
 <meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
+Favicon icon
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-<!-- vendor css -->
+vendor css
 <link rel="stylesheet" href="resources/admin/css/style.css">
 
-</head>
+</head> -->
 <body>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
@@ -125,12 +125,7 @@
 		</div>
 	</section>
 
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	
 		function pQNAview(str) {
 			$('#pQNAview .modal-body').load("getpuchasInq?pur_inq_no=" + str);
@@ -145,6 +140,5 @@
 			$('#pQNAupdate').modal('show');
 			$('#pQNAview').modal('hide');
 		}
-	</script>
+</script>
 </body>
-</html>

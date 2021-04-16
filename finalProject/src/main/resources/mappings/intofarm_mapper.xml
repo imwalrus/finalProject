@@ -60,7 +60,7 @@
                     ,I.INTO_PHONE
 		FROM INTOFARM I JOIN INTOFARM_REQ Q
 		ON (I.INTO_NO = Q.INTO_NO)
-		WHERE Q.USER_ID = ${user_id}				
+		WHERE Q.USER_ID = #{user_id}				
 
 	</select>
 </mapper>
