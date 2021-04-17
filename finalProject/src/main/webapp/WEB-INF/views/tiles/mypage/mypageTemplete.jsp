@@ -17,9 +17,34 @@
 	
 	 <!-- 관리자 부트스트랩 css -->
  	<link rel="stylesheet" href="resources/admin/css/style.css">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="resources/admin/images/favicon.ico" type="image/x-icon">
     <script src="resources/main/js/jquery.min.js"></script>
 </head>
+<style>
+	.main-menu-header{
+		height:160px !important;
+	}
+	.chatBtn{
+		color: white !important;
+    	background-color: #ffd973 !important;
+    	border-color: #ffd973 !important;
+    	width: 170px;
+   		padding-bottom: 10px;
+    	border-radius: 5px;
+    	font-weight:bold;
+	}
+	.bg-primary{
+		background-color: #78c2ad !important;
+	}
+	body{
+		background-color: #78c2ad !important;
+	}
+</style>
+<script type="text/javascript">
+	function showChat(){
+		var pop = window.open("showChat","chat","width=1220,height=690px,resizable=no,scrollbars=no;");
+	}
+</script>
 <body class="">
 <tiles:insertAttribute name="header"/>
 
@@ -27,178 +52,93 @@
 	<nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
 			<div class="navbar-content scroll-div " >
-				
 				<div class="">
 					<div class="main-menu-header">
-						<div class="user-details">
-							<div id="more-details">내정보 보기? <i class="fa fa-caret-down"></i></div>
+						<div class="myMenu">
+							<%-- <p><strong style="font-size:25px;font-weight:bold;">${user_id}</strong>님 마이페이지</p> --%>
+							<h4>${user_id }</h4>
+							<c:if test="${user_auth == 'user'}">
+								<p><strong>일반 유저</strong> 권한 입니다.</p>
+							</c:if>
+							<c:if test="${user_auth == 'farmer'}">
+								<p><strong>농업인</strong> 권한 입니다.</p>
+							</c:if>
+ 							<a href="#" class="btn chatBtn" onclick="showChat()" >CHAT
+ 								<c:if test="${unreadNum != 0 }">
+								&nbsp;&nbsp;&nbsp;<span class="badge badge-danger">new</span>
+								</c:if> 
+							</a> 
 						</div>
 					</div>
-					<div class="collapse" id="nav-user-link">
-						<ul class="list-unstyled">
-							<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
-							<li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
-							<li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
-						</ul>
-					</div>
 				</div>
-				
+				<c:if test="${user_auth =='user' }">
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-hasmenu">
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
+					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
+                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
+					    </ul>
+					</li>
+                    <li class="nav-item pcoded-hasmenu">
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="#">장바구니</a></li>
+					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
+					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
+					    </ul>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
+                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
+                            </ul>
+                        </li>
+				</ul>
+				</c:if>
+				<c:if test="${user_auth =='farmer' }">
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item">
 					    <a href="fDiaryCalendar" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">영농일지</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
-					        <li><a href="getFarmsList">나의농지</a></li>
-                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
-					        <li><a href="getpuchasInqList">문의 답변 관리</a></li>
+					        <li><a href="getFarmsList">나의 농지</a></li>
+					        <li><a href="getpuchasInqofFarmer">문의 답변 관리</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="getSaleList?user_id=${user_id }">판매내역</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
-					        <li><a href="getpuchasInqList">구매 관련 문의</a></li>
+					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
-                            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
                                 <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
                                 <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
-                                <li><a href="getintoFarmInqList">체험 관련 문의</a></li>
+                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
                             </ul>
                         </li>
 				</ul>
+				</c:if>
 			</div>
 		</div>
 	</nav>
 	<!-- [ navigation menu ] end -->
-	
-	<!-- [ Header ] start -->
-	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
-		
-			
-				<div class="m-header">
-					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-					<a href="#!" class="b-brand">
-						<!-- ========   change your logo hear   ============ -->
-						<img src="assets/images/logo.png" alt="" class="logo">
-						<img src="assets/images/logo-icon.png" alt="" class="logo-thumb">
-					</a>
-					<a href="#!" class="mob-toggler">
-						<i class="feather icon-more-vertical"></i>
-					</a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item">
-							<a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
-							<div class="search-bar">
-								<input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
-								<button type="button" class="close" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-						</li>
-					</ul>
-					<ul class="navbar-nav ml-auto">
-						<li>
-							<div class="dropdown">
-								<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
-								<div class="dropdown-menu dropdown-menu-right notification">
-									<div class="noti-head">
-										<h6 class="d-inline-block m-b-0">Notifications</h6>
-										<div class="float-right">
-											<a href="#!" class="m-r-10">mark as read</a>
-											<a href="#!">clear all</a>
-										</div>
-									</div>
-									<ul class="noti-body">
-										<li class="n-title">
-											<p class="m-b-0">NEW</p>
-										</li>
-										<li class="notification">
-											<div class="media">
-												<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
-												<div class="media-body">
-													<p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
-													<p>New ticket Added</p>
-												</div>
-											</div>
-										</li>
-										<li class="n-title">
-											<p class="m-b-0">EARLIER</p>
-										</li>
-											<div class="media">
-												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
-												<div class="media-body">
-													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>10 min</span></p>
-													<p>Prchace New Theme and make payment</p>
-												</div>
-											</div>
-										</li>
-										<li class="notification">
-											<div class="media">
-												<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
-												<div class="media-body">
-													<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
-													<p>currently login</p>
-												</div>
-											</div>
-										</li>
-										<li class="notification">
-											<div class="media">
-												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
-												<div class="media-body">
-													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
-													<p>Prchace New Theme and make payment</p>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="noti-footer">
-										<a href="#!">show all</a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="dropdown drp-user">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="feather icon-user"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right profile-notification">
-									<div class="pro-head">
-										<img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-										<span>John Doe</span>
-										<a href="auth-signin.html" class="dud-logout" title="Logout">
-											<i class="feather icon-log-out"></i>
-										</a>
-									</div>
-									<ul class="pro-body">
-										<li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-										<li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-										<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
-									</ul>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				
-			
-	</header>
-	<!-- [ Header ] end -->
 	
 	<tiles:insertAttribute  name="content"/>
 
@@ -208,9 +148,6 @@
 	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
 	<script src="resources/admin/js/ripple.js"></script>
 	<script src="resources/admin/js/pcoded.min.js"></script>
-	
-
-	<script src="resources/main/js/jquery.min.js"></script>
 	<script src="resources/main/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/main/js/popper.min.js"></script>
 	<script src="resources/main/js/bootstrap.min.js"></script>

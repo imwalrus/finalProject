@@ -15,4 +15,5 @@ public interface ChatService {
 	public int deleteMessage(String chatroom_no);
 	public int deleteChatRoom(String chatroom_no);
 	public List<MessageVO> getUnreadMessage(String user_id);
+	public int getUnreadMessageAll(String user_id);
 }

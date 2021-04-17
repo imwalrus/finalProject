@@ -1,10 +1,8 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- 
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -17,12 +15,12 @@
 <meta name="description" content="" />
 <meta name="keywords" content="">
 <meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
+Favicon icon
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-<!-- vendor css -->
+vendor css
 <link rel="stylesheet" href="resources/admin/css/style.css">
-</head>
+</head> -->
 <body>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
@@ -59,16 +57,20 @@
 												</tr>
 
 												<tbody>
+													<c:if test="${fn:length(list) >=1}">
 													<c:forEach items="${list }" var="list">
-														<c:if test="${list.user_id eq user_id}">	
-												
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
 															<td>${list.into_inq_title }</td>
 															<td>${list.into_inq_check }</td>
 														</tr>
-														</c:if>
 													</c:forEach>
+													</c:if>
+													<c:if test="${fn:length(list) >=0}">
+														<tr>
+															<td colspan="3"> 문의하신 내용이 없습니다. </td>
+														</tr>
+													</c:if>
 												</tbody>
 											</table>
 										</div>
@@ -125,12 +127,6 @@
 
 		</div>
 	</section>
-
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
 	<script type="text/javascript">
 	
 		function iQNAview(str) {

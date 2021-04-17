@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-<title>회원 탈퇴</title>
+<title>구매리스트</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -14,13 +14,13 @@
 <meta name="description" content="" />
 <meta name="keywords" content="">
 <meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
+Favicon icon
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-<!-- vendor css -->
+vendor css
 <link rel="stylesheet" href="resources/admin/css/style.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-</head>
+</head> -->
 <body>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
@@ -96,8 +96,7 @@
 		</div>
 	</section>
 
-	<script type="text/javascript">
-
+<script type="text/javascript">
 /* 모달불러오기 */
 		function getOrder(str) {
 			$('#getOrder .modal-body').load("getOrder?order_no=" + str);
@@ -118,13 +117,10 @@
 						+ data[i].order_date + "</td></tr>"
 				); 
 			} 
-			
-		
-		
-	}
+		}
  			
 	});
 	
-	</script>
+</script>
 </body>
 </html>

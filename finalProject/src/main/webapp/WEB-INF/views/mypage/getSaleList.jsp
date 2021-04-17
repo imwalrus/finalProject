@@ -122,13 +122,12 @@ $.ajax({
 					+ data[i].buyer + "</td><td>"
 					+ data[i].orderlist_condition +"<br>"
 					+ "(" + data[i].pro_dcompany + ")" +"<br>"
-					+ data[i].orderlist_invoice + "</td><td>"
+					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+data[i].orderlist_invoice+"','_blank','width=800,height=600');" + " return false;>"
+					+ data[i].orderlist_invoice + "</a></td><td>"
 					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호등록"+ "</button>"
 					+"</td></tr>"
 	
 					);
-			
-			
 		}
 		
 		

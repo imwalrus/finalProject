@@ -2,6 +2,8 @@ package co.finalproject.farm.app.myPage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,14 @@ public class IntoFarmInqController {
 	@RequestMapping("/getintoFarmInqList")
 	public String getintoFarmInqList(Model model) {
 		model.addAttribute("list", ifiMapper.getIntoFarmInqList());
+		return "mypageTiles/mypage/getintoFarmInqList";
+	}
+	
+	//전체조회(세션 아이디값으로 조회)
+	@RequestMapping("/getIntoFarmInqOfUser")
+	public String getIntoFarmInqOfUser(Model model, HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("list", ifiMapper.getIntoFarmInqOfUser(user_id));
 		return "mypageTiles/mypage/getintoFarmInqList";
 	}
 	

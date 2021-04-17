@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -13,13 +13,13 @@
 <meta name="description" content="" />
 <meta name="keywords" content="">
 <meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
+Favicon icon
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-<!-- vendor css -->
+vendor css
 <link rel="stylesheet" href="resources/admin/css/style.css">
 
-</head>
+</head> -->
 <body>
 	    <div class="pcoded-main-container">
         <div class="pcoded-content">
@@ -103,4 +103,3 @@
         </div>
     </div>
 </body>
-</html>
