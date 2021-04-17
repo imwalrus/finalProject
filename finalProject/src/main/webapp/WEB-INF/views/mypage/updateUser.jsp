@@ -13,8 +13,8 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     <style>
 	body {
@@ -100,18 +100,11 @@
 		width:120px !important;
 	}
 	.inputControl{
-		width:170px !important;
+		width:200px !important;
+		margin-right:20px;
 	}
 	.inputControl2{
 		width:120px !important;
-	}
-	#emailCheck{
-		font-size:13px;
-		width:90px !important;
-		height:41px;
-	}
-	#btnControl{
-		float:right;
 	}
 
 </style>
@@ -159,10 +152,12 @@
 </script>
 </head>
 <body>
+<section class="pcoded-main-container">
+	<div class="pcoded-main-container">
 		<div class="signup-form">
 			 <form onsubmit="return pwCheck();" action="updateUser" method="post" class="form-horizontal" name="form">
 				<div class="col-xs-8 col-xs-offset-4">
-					<h2>회원가입</h2>
+					<h2>회원 정보 수정</h2>
 				</div>	
 				<div class="form-group">
 					<label class="control-label col-xs-4 divcountrol" >아이디</label>
@@ -211,11 +206,11 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-4 divcountrol">주 소</label>
-					<div class="col-xs-8 inputControl">
-						<input type="text" class="form-control" name="user_zip" placeholder="우편번호" value="${list.user_zip }">
+					<div class="inputControl">
+						<input type="text" class="form-control" name="user_zip" placeholder="우편번호" value="${list.user_zip }" style="float:left;">
 					</div>
-					<div>
-						<button type="button" class="btn btn-primary" id="searchAddr" onclick="goPopup()" >주소 검색</button>
+					<div class="btnControl">
+						<button type="button" class="btn btn-primary" id="searchAddr" onclick="goPopup()" style="float:right;">주소 검색</button>
 					</div> 
 					<br> 
 					<label class="control-label col-xs-4 divcountrol"></label>
@@ -225,12 +220,26 @@
 					</div>
 				</div>         	
 			
-				<div class="form-group">
-					<div class="col-xs-8 col-xs-offset-4">
+				<div class="form-group" align="center !important">
+					<div class="col-xs-8 col-xs-offset-4" >
 						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn" >수정</button>
 					</div>  
 				</div>			      
 			</form>
 		</div>
+	</div>	
+</section>		
+<script type="text/javascript">
+/*도로명주소 API*/
+	function goPopup(){
+		var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+	
+	function jusoCallBack(roadAddrPart1,addrDetail,roadAddrPart2, zipNo){
+		 document.form.user_zip.value = zipNo;
+		 document.form.user_adr.value = roadAddrPart1;
+		 document.form.user_detailadr.value = addrDetail+" "+roadAddrPart2;
+	}
+</script>
 </body>
 </html>

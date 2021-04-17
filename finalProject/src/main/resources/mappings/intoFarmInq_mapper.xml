@@ -23,6 +23,18 @@
 			WHERE USER_ID = #{user_id}
 	</select>	
 
+	<select id="getFarmInqofFarmer" resultType="IntoFarmInqVO">
+			select  i.INTO_INQ_NO,
+					i.INTO_NO,
+					i.INTO_INQ_DATE,
+					i.INTO_INQ_TITLE,
+					i.INTO_INQ_CHECK,
+					i.INTO_INQ_CONTENT,
+					i.USER_ID 
+					from intofarm_inquiry i inner join intofarm f
+					on(i.into_no = f.into_no)
+					where f.user_id = #{user_id}
+	</select>
 <!-- 단건조회 -->
 	<select id="getIntoFarmInq" resultType="IntoFarmInqVO">
 			SELECT * 
