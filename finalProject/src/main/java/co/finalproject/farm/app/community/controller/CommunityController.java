@@ -3,6 +3,9 @@ package co.finalproject.farm.app.community.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.finalproject.farm.app.community.service.CommPagingVO;
+import co.finalproject.farm.app.community.service.CommunityReplyVO;
 import co.finalproject.farm.app.community.service.CommunityService;
 import co.finalproject.farm.app.community.service.CommunityVO;
 import co.finalproject.farm.app.notice.controller.NoticeController;
@@ -52,12 +56,16 @@ public class CommunityController {
     
     //단건 조회 ( + 조회수 증가 )
     @RequestMapping("/getSchComm")
+    @ResponseBody
     public ModelAndView getSchComm(HttpSession session, Model model, CommunityVO vo, CommPagingVO pagingvo) {
     	communityService.updatereviewcnt(vo, session);
+    	CommunityReplyVO replyvo = new CommunityReplyVO();  
+    	replyvo.setComm_no(vo.getComm_no()); //CommunityReplyVO COMM_NO에 CommunityVO의 COMM_NO를 담아준다. (이래야 같은 게시글의 댓글 가져올 수 있음)
         ModelAndView mav = new ModelAndView();
         mav.setViewName("community/selectComm");
         // 뷰에 전달할 데이터
         mav.addObject("communityVO", communityService.getSchComm(vo));
+        mav.addObject("reply", communityService.getReplyList(replyvo)); //단건 조회 할 때 댓글도 가져가도록
         return mav;
     }
 
@@ -118,5 +126,33 @@ public class CommunityController {
     	communityService.deleteComm(vo);
 		return "redirect:getComm?page="+pagingvo.getPage();	
     }
+    
+      	
+    //댓글등록
+  	@RequestMapping("/insertReply")
+  	@ResponseBody
+  	public CommunityReplyVO insertReply(CommunityReplyVO vo) {
+  		vo.setComm_rep_date(new Date(System.currentTimeMillis())); //현재 시간을 가지고 와서 Comm_rep_date에 지정해준다 (같은 데이트 타입이니 형변환은 필요 없다)
+  		communityService.insertReply(vo); // 만약 스트링 타입을 데이트 타입으로 넣으려면 형변환 데이터포맷이 필요하다
+  		return vo;
+  	}
+  	
+  	//댓글수정
+  	@RequestMapping("/updateReply")
+  	@ResponseBody
+  	public int updateReply(CommunityReplyVO vo) {
+  		int result = communityService.updateReply(vo);
+  		return result;
+  	}
+  	
+    //댓글삭제
+  	@RequestMapping("/deleteReply")
+  	@ResponseBody
+  	public CommunityReplyVO deleteReply(CommunityReplyVO vo) {
+  		communityService.deleteReply(vo);
+  		return vo;
+  	}
 
+    
 }
+
