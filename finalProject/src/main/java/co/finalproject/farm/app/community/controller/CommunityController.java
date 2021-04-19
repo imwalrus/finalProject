@@ -89,7 +89,7 @@ public class CommunityController {
     @ResponseBody
     public String uploadImg(CommunityVO vo, HttpServletRequest req) throws IllegalStateException, IOException {
     	// 첨부 파일 처리
-    	        String path = "/resources/main/images/";
+    	        String path = "/resources/images/community/";
     	 		String realPath = req.getSession().getServletContext().getRealPath(path);
     	 		MultipartFile uploadFile = vo.getUploadFile();
     	 		String comm_filename = "";

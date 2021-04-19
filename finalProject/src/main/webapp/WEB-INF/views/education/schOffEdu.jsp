@@ -118,7 +118,7 @@ $(function() {
     <td align="center" style="height:400px;" colspan="4">
     <input type="file" class="form-control after" id="gdsImg" name="uploadFile" style="width:400px; padding-left:120px; padding-top:10px" >
 	<input type="hidden" name="edu_filename">
-	<div class="select_img"><img id="beforeImg" width="900px" src="resources/main/images/${edu.edu_filename}"></div>
+	<div class="select_img"><img id="beforeImg" width="900px" src="resources/images/education/${edu.edu_filename}"></div>
     </td>
     </tr>
     <tr>
