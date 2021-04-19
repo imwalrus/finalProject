@@ -65,7 +65,7 @@
 												<c:forEach items="${applicationScope.banner}" var="banner">
 													<tr>
 														<td width="10%">${banner.banner_title}</td>
-														<td width="45%" class="text-truncate">${banner.banner_link}</td>
+														<td width="45%" class="text-truncate"><a href="${banner.banner_link}">${banner.banner_link}</a></td>
 														<td width="35%">
 															<img src="resources/images/banner/${banner.banner_filename}">
 														</td>

@@ -110,11 +110,13 @@
 				USER_ADR,
 				USER_DETAILADR,
                 USER_AUTH,
+                USER_ACTIVE,
 				CASE USER_AUTH WHEN 'farmer' THEN 'O'
                                              ELSE 'X' END AS FARMER_CHECK
 		   FROM USERS
      	<where>
-     	    NOT USER_AUTH IN 'admin'
+           		NOT USER_ACTIVE IN 0
+        	AND NOT USER_AUTH IN 'admin'
 		<if test="user_auth != null and user_auth !=''">
 		    AND USER_AUTH = #{user_auth}
 		</if>
