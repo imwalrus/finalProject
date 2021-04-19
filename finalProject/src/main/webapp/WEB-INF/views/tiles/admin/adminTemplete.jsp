@@ -26,24 +26,16 @@
 			<div class="navbar-content scroll-div ">
 				<div class="">
 					<div class="main-menu-header">
-						<div class="user-details">
-							<div id="more-details">
-								<i class="fa fa-caret-down"></i>내정보 보기?
-							</div>
+						<div class="myMenu">
+							<%-- <p><strong style="font-size:25px;font-weight:bold;">${user_id}</strong>님 마이페이지</p> --%>
+							<h4>${user_id}</h4>
+								<p><strong>관리자</strong> 권한 입니다.</p>
+ 							<a href="#" class="btn chatBtn" onclick="showChat()" >CHAT
+ 								<c:if test="${unreadNum >= 1}">
+								&nbsp;&nbsp;&nbsp;<span class="badge badge-danger">new</span>
+								</c:if> 
+							</a> 
 						</div>
-					</div>
-					<div class="collapse" id="nav-user-link">
-						<ul class="list-unstyled">
-							<li class="list-group-item"><a href="user-profile.html">
-									<i class="feather icon-user m-r-5"></i>View Profile
-								</a></li>
-							<li class="list-group-item"><a href="#!">
-									<i class="feather icon-settings m-r-5"></i>Settings
-								</a></li>
-							<li class="list-group-item"><a href="auth-normal-sign-in.html">
-									<i class="feather icon-log-out m-r-5"></i>Logout
-								</a></li>
-						</ul>
 					</div>
 				</div>
 
@@ -62,7 +54,7 @@
 							<span class="pcoded-micon"><i class="material-icons dashboard">&#xe871;</i></span><span class="pcoded-mtext">게시판 관리</span>
 						</a>
 						<ul class="pcoded-submenu">
-							<li><a href="#">배너 관리</a></li>
+							<li><a href="adminBanner">배너 관리</a></li>
 							<li><a href="adminIntoFarm">농촌속으로 관리</a></li>
 							<li><a href="adminOrder">판매 현황</a></li>
 							<li><a href="adminCommunity">커뮤니티 관리</a></li>

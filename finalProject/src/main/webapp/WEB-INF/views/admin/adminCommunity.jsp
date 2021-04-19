@@ -85,27 +85,30 @@
 									</div>
 									<div class="table-responsive">
 										<!-- 테이블 START -->
-										<table class="table">
+										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th>No.</th>
-													<th>말머리</th>
-													<th>제목</th>
-													<th>지역</th>
-													<th>작성일자</th>
-													<th>작성자</th>
+													<th width="10%">No.</th>
+													<th width="10%">말머리</th>
+													<th width="25%">제목</th>
+													<th width="15%">지역</th>
+													<th width="20%">작성일자</th>
+													<th width="10%">작성자</th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty community}">
+													<td colspan="7">내용이 존재하지 않습니다.</td>
+												</c:if>
 												<c:forEach items="${community}" var="community">
 													<tr>
-														<td>${community.comm_no}</td>
-														<td>${community.comm_subject}</td>
-														<td>${community.comm_title}</td>
-														<td>${community.comm_adr}</td>
-														<td>${community.comm_date}</td>
-														<td>${community.user_id}</td>
+														<td width="10%">${community.comm_no}</td>
+														<td width="10%">${community.comm_subject}</td>
+														<td width="25%" class="text-truncate">${community.comm_title}</td>
+														<td width="30%">${community.comm_adr}</td>
+														<td width="15%">${community.comm_date}</td>
+														<td width="10%">${community.user_id}</td>
 														<td>
 															<!-- 보기 Modal -->
 															<a href="javascript:;" class="view" onclick="communitySel('${community.comm_no}')">

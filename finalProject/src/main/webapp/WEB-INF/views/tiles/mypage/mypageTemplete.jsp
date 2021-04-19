@@ -20,26 +20,6 @@
     <link rel="icon" href="resources/admin/images/favicon.ico" type="image/x-icon">
     <script src="resources/main/js/jquery.min.js"></script>
 </head>
-<style>
-	.main-menu-header{
-		height:160px !important;
-	}
-	.chatBtn{
-		color: white !important;
-    	background-color: #ffd973 !important;
-    	border-color: #ffd973 !important;
-    	width: 170px;
-   		padding-bottom: 10px;
-    	border-radius: 5px;
-    	font-weight:bold;
-	}
-	.bg-primary{
-		background-color: #78c2ad !important;
-	}
-	body{
-		background-color: #78c2ad !important;
-	}
-</style>
 <script type="text/javascript">
 	function showChat(){
 		var pop = window.open("showChat","chat","width=1220,height=690px,resizable=no,scrollbars=no;");

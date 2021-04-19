@@ -296,34 +296,34 @@ File: style.css
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #ff7851;
-  --orange: #fd7e14;
-  --yellow: #ffce67;
-  --green: #56cc9d;
-  --teal: #20c997;
-  --cyan: #6cc3d5;
-  --white: #fff;
-  --gray: #888;
-  --gray-dark: #343a40;
-  --primary: #78c2ad;
-  --secondary: #f3969a;
-  --success: #56cc9d;
-  --info: #6cc3d5;
-  --warning: #ffce67;
-  --danger: #ff7851;
-  --light: #f8f9fa;
-  --dark: #343a40;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --blue: #4680ff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #ff5252;
+    --orange: #fd7e14;
+    --yellow: #ffba57;
+    --green: #9ccc65;
+    --teal: #20c997;
+    --cyan: #00acc1;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #4680ff;
+    --secondary: #6c757d;
+    --success: #9ccc65;
+    --info: #00acc1;
+    --warning: #ffba57;
+    --danger: #ff5252;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Open Sans", sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 *,
@@ -24216,6 +24216,23 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
 .aut-bg-img .auth-content {
     padding: 70px 40px;
 }
-
+.main-menu-header{
+	height:160px !important;
+}
+.chatBtn{
+	color: white !important;
+   	background-color: #ffd973 !important;
+   	border-color: #ffd973 !important;
+   	width: 170px;
+	padding-bottom: 10px;
+   	border-radius: 5px;
+   	font-weight:bold;
+}
+.bg-primary{
+	background-color: #78c2ad !important;
+}
+body{
+	background-color: #78c2ad !important;
+}
 /* image varient End */
 /**====== Authentication css end ======**/

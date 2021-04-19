@@ -31,9 +31,7 @@
 			</div>
 		</div>
 		<strong>내용</strong>
-		<p>
-			<textarea cols="62" rows="10">${community.comm_content}</textarea>
-		</p>
+		<p>${community.comm_content}</p>
 	</div>
 	<div class="modal-footer">
 		<input type="button" class="btn btn-info" data-dismiss="modal" value="닫기">

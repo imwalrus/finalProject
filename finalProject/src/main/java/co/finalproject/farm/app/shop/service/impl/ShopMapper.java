@@ -14,9 +14,6 @@ public interface ShopMapper {
 	// 페이징 건수(주문)
 	public int getCountAdmin(OrderVO vo);
 	
-	// 전체 건수(관리자 페이지서 활용)
-	public Object getCount();
-	
 	// 리스트 · 검색 · 페이징
 	public List<ShopVO> getListShop(ShopVO vo);
 
@@ -58,7 +55,13 @@ public interface ShopMapper {
 
 	// 동일한 상품 체크
 	public int cartCheck(CartVO vo);
-
+	
+	// 주문시 수량 변경
+	public int productEditCount(OrderVO vo);
+	
+	// 재고 0일 경우 상태 품절 변경
+	public int productEditCondition(ShopVO vo);
+	
 	// 주문 등록
 	public void insertOrder(OrderVO vo);
 
@@ -66,14 +69,12 @@ public interface ShopMapper {
 	public void insertOrderlist(OrderVO vo);
 	
 	// 주문 현황
-	public List<OrderVO> adminShop(OrderVO vo);
+	public List<OrderVO> adminOrder(OrderVO vo);
 
-	// 일별 판매건수(차트)
+	// 요일별 차트
 	public List<Map<String, Object>> weekChart();
 
-	// 월별 판매건수(차트)
+	// 월별 판매량(차트)
 	public List<Map<String, Object>> monthChart();
 	
-	// 총 판매액
-	public int getSumOrders();
 }

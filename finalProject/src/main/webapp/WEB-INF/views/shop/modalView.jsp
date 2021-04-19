@@ -12,7 +12,7 @@
 	</div>
 	<div class="modal-body">
 		<div class="col">
-			<img src="resources/main/images/${modal.pro_filename}" alt="teste" class="img-thumbnail">
+			<img src="resources/images/shop/${modal.pro_filename}" alt="teste" class="img-thumbnail">
 		</div>
 		<div class="clearfix"></div>
 		<div class="col">
@@ -24,6 +24,13 @@
 						</td>
 						<td></td>
 						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.user_id}</td>
+					</tr>
+					<tr>
+						<td class="h5">
+							<strong>상태</strong>
+						</td>
+						<td></td>
+						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_condition}</td>
 					</tr>
 					<tr>
 						<td class="h5">
@@ -63,13 +70,6 @@
 						</td>
 						<td></td>
 						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_quantity}</td>
-					</tr>
-					<tr>
-						<td class="h5">
-							<strong>상태</strong>
-						</td>
-						<td></td>
-						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_condition}</td>
 					</tr>
 					<tr>
 						<td class="h5">
