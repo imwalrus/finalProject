@@ -7,7 +7,7 @@
 <html lang="ko">
 
 <head>
-    <title>마이페이지_메뉴</title>
+    <title>청년농장</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -64,7 +64,7 @@
 								<p><strong>농업인</strong> 권한 입니다.</p>
 							</c:if>
  							<a href="#" class="btn chatBtn" onclick="showChat()" >CHAT
- 								<c:if test="${unreadNum != 0 }">
+ 								<c:if test="${unreadNum >= 1 }">
 								&nbsp;&nbsp;&nbsp;<span class="badge badge-danger">new</span>
 								</c:if> 
 							</a> 
@@ -109,7 +109,8 @@
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
 					        <li><a href="getFarmsList">나의 농지</a></li>
-					        <li><a href="getpuchasInqofFarmer">문의 답변 관리</a></li>
+					        <li><a href="getpuchasInqofFarmer">판매상품 문의 관리</a></li>
+					        <li><a href="getFarmInqofFarmer">농촌속으로 문의 관리</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">

@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>청년농장</title>
-
  	<!-- 상단 메뉴바 css -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+ 	<link rel="stylesheet" href="resources/main/css/style.css">
+	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
 	<link rel="stylesheet" href="resources/main/css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="resources/main/css/animate.css">
 	<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
@@ -22,8 +23,6 @@
 	<link rel="stylesheet" href="resources/main/css/jquery.timepicker.css">
 	<link rel="stylesheet" href="resources/main/css/flaticon.css">
 	<link rel="stylesheet" href="resources/main/css/icomoon.css">
- 	<link rel="stylesheet" href="resources/main/css/style.css">
-	<link rel="stylesheet" href="resources/main/css/bootstrap.css">
 	
 </head>
 <body>
