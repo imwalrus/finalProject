@@ -27,6 +27,13 @@
 					</tr>
 					<tr>
 						<td class="h5">
+							<strong>상태</strong>
+						</td>
+						<td></td>
+						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_condition}</td>
+					</tr>
+					<tr>
+						<td class="h5">
 							<strong>종류</strong>
 						</td>
 						<td></td>
@@ -63,13 +70,6 @@
 						</td>
 						<td></td>
 						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_quantity}</td>
-					</tr>
-					<tr>
-						<td class="h5">
-							<strong>상태</strong>
-						</td>
-						<td></td>
-						<td class="h6">&nbsp;&nbsp;&nbsp;${modal.pro_condition}</td>
 					</tr>
 					<tr>
 						<td class="h5">

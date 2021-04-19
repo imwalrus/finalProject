@@ -108,25 +108,28 @@
 			</div>
 			<!-- 월별 차트 -->
 			<div class="row" id="report3">
-				<div class="col-md-6">
+				<div class="col">
 					<div class="card card-c1">
 						<div class="card-header card-chart">
 							<h4 class="title" align="center">월별 판매량</h4>
 							<h6>(현재 월 기준)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
-							<div class="ct-chart" id="monthChart" align="center"></div>
+							<div class="ct-chart" id="monthChart"></div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+			</div>
+			<!-- 월별 차트 -->
+			<div class="row" id="report4">
+				<div class="col">
 					<div class="card card-c1">
 						<div class="card-header card-chart">
 							<h4 class="title" align="center">월별 매출액</h4>
-							<h6>(현재 년 기준)</h6>
+							<h6>(현재 월 기준)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
-							<div class="ct-chart" id="" align="center"></div>
+							<div class="ct-chart" id="monthSumChart"></div>
 						</div>
 					</div>
 				</div>

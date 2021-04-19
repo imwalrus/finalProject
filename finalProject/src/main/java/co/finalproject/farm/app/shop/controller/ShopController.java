@@ -195,11 +195,13 @@ public class ShopController {
 
 	// 주문 · 상세주문 등록
 	@RequestMapping("/insertOrder")
-	public String insertOrder(OrderVO vo, HttpServletRequest request) {
+	public String insertOrder(ShopVO svo, OrderVO ovo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
-		shopMapper.insertOrder(vo); // 주문 등록
-		shopMapper.insertOrderlist(vo); // 상세 주문 등록
+		shopMapper.productEditCount(ovo);
+		shopMapper.productEditCondition(svo);
+		shopMapper.insertOrder(ovo); // 주문 등록
+		shopMapper.insertOrderlist(ovo); // 상세 주문 등록
 		return "redirect:/deleteAllCart?user_id=" + user_id; // 주문 완료 후 장바구니 비우기
 	}
 

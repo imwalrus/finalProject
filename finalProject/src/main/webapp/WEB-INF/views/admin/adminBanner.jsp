@@ -23,7 +23,11 @@
 		// 툴팁 활성화
 		$('[data-toggle="tooltip"]').tooltip();
 	});
-
+	
+	// modal-수정 폼 불러오기
+	function modalUpdate(str) {
+		$('#modal .modal-content').load("adminBannerModal?banner_no=" + str);
+		$('#modal').modal();
 	}
 </script>
 </head>
@@ -59,28 +63,27 @@
 											</thead>
 											<tbody>
 												<c:forEach items="${applicationScope.banner}" var="banner">
-												
-										<form action="adminBannerUpt" name="bannerUpt">
 													<tr>
-															<input type="text" name="banner_no" value="${banner.banner_no}">
 														<td width="10%">${banner.banner_title}</td>
-														<td width="45%" class="text-truncate">
-															<input type="text" name="banner_link" size="40" value="${banner.banner_link}">
-														</td>
-														<td width="35%" class="text-truncate">
+														<td width="45%" class="text-truncate">${banner.banner_link}</td>
+														<td width="35%">
 															<img src="resources/images/banner/${banner.banner_filename}">
-															<div class="file_input_div">
-																<input type="file" class="form-control-sm" name="uploadFile" onchange="javascript: document.getElementById('fileName').value = this.value" />
-															</div>
-															<input type="hidden" id="fileName" name="banner_fileName" class="form-control-sm" readonly="readonly" value="${banner.banner_filename}">
 														</td>
-														<td width="10%">${banner.banner_check}</td>
+														<c:choose>
+															<c:when test="${banner.banner_check eq 0}">
+																<td width="10%">표시
+															</c:when>
+															<c:when test="${banner.banner_check eq 1}">
+																<td width="10%">숨기기
+															</c:when>
+														</c:choose>
 														<td width="5%">
-															<!-- 보기 Modal -->
-															<button class="material-icons btn-outline-warning" data-toggle="tooltip" title="수정">&#xE254;</button>
+															<!-- 수정 Modal -->
+															<a href="javascript:;" class="edit" onclick="modalUpdate('${banner.banner_no}')">
+																<i class="material-icons btn-outline-warning" data-toggle="tooltip" title="수정">&#xE254;</i>
+															</a>
 														</td>
 													</tr>
-										</form>
 												</c:forEach>
 											</tbody>
 										</table>
@@ -89,6 +92,12 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<!-- 단건 보기 · 등록 · 수정 Modal -->
+				<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content"></div>
 					</div>
 				</div>
 			</div>

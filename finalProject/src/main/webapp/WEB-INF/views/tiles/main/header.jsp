@@ -12,10 +12,12 @@
 		<div class="row">
 			<!-- 배너(상단) -->
 			<c:forEach items="${applicationScope.banner}" var="banner" end="0" varStatus="status">
+			<c:if test="${banner.banner_check eq 0}" >
 			<div class="banner1 col-md-4">
 				<a href="${banner.banner_link}">
 				<img src="resources/images/banner/${banner.banner_filename}"></a>
 			</div>
+			</c:if>
 			</c:forEach>
 		</div>
 		<div class="container">

@@ -137,9 +137,16 @@ public class AdminController {
 		return "adminTiles/admin/adminBanner";
 	}
 	
+	// 배너 관리 - 수정 모달
+	@GetMapping("/adminBannerModal")
+	public String adminBannerModal(BannerVO vo, Model model) {
+		model.addAttribute("banner", bannerMapper.getBanner(vo));
+		return "notiles/admin/adminBannerUpdate";
+	}
+	
 	// 배너 관리 - 배너 수정
-	@RequestMapping("/adminBannerUpt")
-	public String adminBannerUpt(BannerVO vo, HttpServletRequest req) throws Exception, IOException {
+	@PostMapping("/adminBannerUpt")
+	public String adminBannerUpt(BannerVO vo, Model model, HttpServletRequest req) throws Exception, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String banner_filename = "";
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
@@ -150,7 +157,7 @@ public class AdminController {
 			banner_filename += '@' + rename.getName();
 			vo.setBanner_filename(rename.getName());
 		}
-		bannerMapper.updateBanner(vo);
+		model.addAttribute("banner", bannerMapper.updateBanner(vo));
 		return "redirect:/adminBanner";
 	}
 	

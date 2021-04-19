@@ -5,6 +5,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <body>
+	<script>
+		//이미지 불러오기
+		function readInputFile(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#imagePriview').attr("src", e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		// 이미지 불러오기
+		$('#uploadFile').change(function() {
+			readInputFile(this);
+		});
+	</script>
 	<form action="insertProduct" enctype="multipart/form-data" method="post">
 		<div class="modal-header">
 			<h4 class="modal-title" id="myModalLabel">
@@ -12,7 +29,9 @@
 			</h4>
 		</div>
 		<div class="modal-body">
-			<div class="col"></div>
+			<div class="col">
+				<img id="imagePriview" src="resources/images/shop/noimage.jpg" alt="teste" class="img-thumbnail">
+			</div>
 			<div class="clearfix"></div>
 			<div class="col">
 				<table>
@@ -28,16 +47,27 @@
 						</tr>
 						<tr>
 							<td class="h6">
+								<strong>상태</strong>
+							</td>
+							<td></td>
+							<td class="h6">
+								<select class="form-control-sm" name="pro_condition" style="width:278px;">
+									<option value="준비중">준비중</option>
+									<option value="판매중">판매중</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="h6">
 								<strong>종류</strong>
 							</td>
 							<td></td>
 							<td class="h6">
-								<input list="menu" class="form-control-sm" name="pro_category" size="33" autocomplete="off">
-								<datalist id="menu">
+								<select class="form-control-sm" name="pro_category" style="width:278px;">
 									<option value="작물">작물</option>
 									<option value="야채">야채</option>
 									<option value="과일">과일</option>
-								</datalist>
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -73,7 +103,7 @@
 							</td>
 							<td></td>
 							<td class="h6">
-								<input type="file" class="form-control-sm" name="uploadFile">
+								<input type="file" class="form-control-sm" id="uploadFile" name="uploadFile">
 								<input type="hidden" name="pro_filename">
 							</td>
 						</tr>

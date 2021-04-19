@@ -11,7 +11,18 @@
 			 , BANNER_CHECK
 		  FROM BANNER
 	</select>
-		
+	
+	<!-- 개별 -->
+	<select id="getBanner" parameterType="BannerVO" resultType="BannerVO">
+		SELECT BANNER_NO
+			 , BANNER_TITLE
+			 , BANNER_LINK
+			 , BANNER_FILENAME
+			 , BANNER_CHECK
+		  FROM BANNER
+		 WHERE BANNER_NO = #{banner_no}
+	</select>
+	
 	<!-- 상품 수정 -->
 	<update id="updateBanner" parameterType="BannerVO">
 		UPDATE BANNER

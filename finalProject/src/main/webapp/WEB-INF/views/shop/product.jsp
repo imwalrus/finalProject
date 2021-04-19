@@ -39,14 +39,22 @@
 				}
 			});
 			
-			// 장바구니 버튼 클릭시 로그인 되어있지 않으면 경고창
+			// 장바구니 버튼 클릭시 : 로그인 되어있지 않으면 경고창 & 수량이 0일 경우 경고창 & 수량이 재고보다 많을 경우 경고창
 			$('.cart').click(function(){
 				var id = $('input[name=user_id]').val();
+				var quan = $('input[name=pro_quantity]').val();
+				var cnt = $('input[name=cart_count]').val();
 				console.log(id);
 		        if (id == '') {
 		            alert("로그인이 필요합니다.");
 		            return false;
-		        } 
+		        } else if (cnt == 0) {
+		            alert("수량을 입력해주세요.");
+		            return false;
+		        } else if (quan - cnt < 0) {
+		            alert("재고가 부족합니다.");
+		            return false;
+		        }
 			});
 		});
 	});
@@ -57,6 +65,7 @@
 	<section class="ftco-section">
 		<form action="insertCart" id="addCart" name="addCart" method="post">
 			<input type="hidden" name="pro_no" value="${prod.pro_no}">
+			<input type="hidden" name="pro_quantity" value="${prod.pro_quantity}">
 			<input type="hidden" name="user_id" value="${user_id}">
 			<div class="container">
 			
@@ -128,7 +137,16 @@
 							<c:if test="${prod.user_id eq user_id}">
 								<a href="prodManage?user_id=${user_id}" class="btn btn-success py-3 px-5">상품수정</a>
 							</c:if>
-							<c:if test="${prod.user_id ne user_id}">
+							<!-- 품절시 버튼 변경 -->
+							<c:if test="${prod.pro_quantity eq 0}">
+								<a href="javascript:;" class="btn btn-dark py-3 px-5">품절</a>
+							</c:if>
+							<!-- 품절시 버튼 변경 -->
+							<c:if test="${prod.pro_condition eq '준비중'}">
+								<a href="javascript:;" class="btn btn-warning py-3 px-5">상품준비중</a>
+							</c:if>
+							<!-- 장바구니 담기 버튼 -->
+							<c:if test="${prod.user_id ne user_id and prod.pro_quantity ne 0 and prod.pro_condition eq '판매중'}">
 								<a href="#modalAlert" class="cart btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
 							</c:if>
 						</p>

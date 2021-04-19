@@ -55,7 +55,13 @@ public interface ShopMapper {
 
 	// 동일한 상품 체크
 	public int cartCheck(CartVO vo);
-
+	
+	// 주문시 수량 변경
+	public int productEditCount(OrderVO vo);
+	
+	// 재고 0일 경우 상태 품절 변경
+	public int productEditCondition(ShopVO vo);
+	
 	// 주문 등록
 	public void insertOrder(OrderVO vo);
 
