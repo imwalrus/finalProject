@@ -2,9 +2,8 @@ package co.finalproject.farm.app.community.service.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import co.finalproject.farm.app.community.service.CommPagingVO;
+import co.finalproject.farm.app.community.service.CommunityReplyVO;
 import co.finalproject.farm.app.community.service.CommunityVO;
 public interface CommunityMapper {
 	
@@ -28,5 +27,16 @@ public interface CommunityMapper {
   	
     // 조회 증가
     public void updatereviewcnt(CommunityVO vo);
-	
+    
+    //댓글 전체조회
+    public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo); 
+    
+    //댓글 등록
+    public void insertReply(CommunityReplyVO vo);
+    
+    //댓글 수정
+    public int updateReply(CommunityReplyVO vo);
+    
+    //댓글 삭제
+    public void deleteReply(CommunityReplyVO vo);
 }

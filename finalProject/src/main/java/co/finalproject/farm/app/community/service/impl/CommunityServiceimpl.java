@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.finalproject.farm.app.community.service.CommPagingVO;
+import co.finalproject.farm.app.community.service.CommunityReplyVO;
 import co.finalproject.farm.app.community.service.CommunityService;
 import co.finalproject.farm.app.community.service.CommunityVO;
 
@@ -64,6 +65,30 @@ public class CommunityServiceimpl implements CommunityService {
             session.setAttribute("update_time_"+vo.getComm_no(), current_time);
             
         }
+	}
+
+	@Override
+	public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo) {
+		
+		return dao.getReplyList(vo);
+	}
+
+	@Override
+	public void insertReply(CommunityReplyVO vo) {
+		dao.insertReply(vo);
+		
+	}
+
+	@Override
+	public int updateReply(CommunityReplyVO vo) {
+		return dao.updateReply(vo);
+		
+	}
+
+	@Override
+	public void deleteReply(CommunityReplyVO vo) {
+		dao.deleteReply(vo);
+		
 	}
 
 }
