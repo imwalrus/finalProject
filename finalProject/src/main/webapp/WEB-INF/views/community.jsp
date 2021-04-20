@@ -126,10 +126,10 @@ function selectAll(allChk)  {
 					<td align="center" width="100">조회수</td>
 				</tr>
 		<c:forEach items="${list}" var="comm">
-		<tr onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">
+		<tr>
          <td align="center">${comm.comm_no}</td>
          <td align="center">${comm.comm_subject}</td>
-         <td>&nbsp; ${comm.comm_title}</td>
+         <td onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">&nbsp; ${comm.comm_title}</td>
          <td align="center">${comm.user_id}</td>
          <td align="center">${comm.comm_adr}</td>
          <td align="center">${comm.comm_date}</td>

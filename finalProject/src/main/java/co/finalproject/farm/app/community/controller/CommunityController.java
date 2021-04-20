@@ -123,6 +123,10 @@ public class CommunityController {
     @RequestMapping("/deleteComm") //원래 get으로 처리하는 게 정석인데 삭제 버튼이 post 폼 안에 묶여있어서 request로 바꿈.
     public String deleteCommProc(CommunityVO vo, CommPagingVO pagingvo) {
     	logger.debug(vo.toString());
+    	//글 삭제 전에 글 번호 받아와서 그 글번호에 있는 댓글들 전체 삭제
+    	CommunityReplyVO replyvo = new CommunityReplyVO();
+    	replyvo.setComm_no(vo.getComm_no());
+    	communityService.deleteReplyAll(replyvo);
     	communityService.deleteComm(vo);
 		return "redirect:getComm?page="+pagingvo.getPage();	
     }

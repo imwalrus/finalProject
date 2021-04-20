@@ -91,4 +91,10 @@ public class CommunityServiceimpl implements CommunityService {
 		
 	}
 
+	@Override
+	public int deleteReplyAll(CommunityReplyVO vo) {
+		
+		return dao.deleteReplyAll(vo);
+	}
+
 }

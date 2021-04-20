@@ -38,5 +38,8 @@ public interface CommunityService {
     
     //댓글 삭제
     public void deleteReply(CommunityReplyVO vo);
+    
+    //댓글 전체 삭제
+    public int deleteReplyAll(CommunityReplyVO vo);
 
 }

@@ -30,12 +30,13 @@ $(document).ready(function() {
 		success:function(response){
 			$(".replyItem").append(
 			$('<div class="reply" style="float:left; width:1000px; margin-left:56px; margin-right:70px;">'
-			+'<hr style="margin-bottom:4px; margin-top:4px;">'
+			+'<hr style="margin-bottom:5px; margin-top:4px;">'
 			+'<input type="hidden" id="comm_rep_no" name="comm_rep_no" value='+response.comm_rep_no+'>'
-			+'<span class="reply-user_id" style="font-size:18px; color: #00cc99;"><strong>${user_id}　</strong></span>'
-			+'<span class="reply-comm_rep_content before" style="padding-left:4px;">'+response.comm_rep_content+'</span>'
-			+'<input class="after" type="text" name="content" value='+response.comm_rep_content+' style="width:700px;">'
-			+'<div class="before" style="float:right;">'
+			+'<span class="reply-user_id" style="float:left; width:100px; margin-left:40px; font-size:18px; color: #00cc99;">'
+			+'<strong>${user_id}</strong></span>'
+			+'<span class="reply-comm_rep_content before" style="padding-left:7px; display:inline-block; width:650px;">'+response.comm_rep_content+'</span>'
+			+'<input class="after" type="text" name="content" value="'+response.comm_rep_content+'" style="width:700px; margin-left:1px;">' 
+			+'<div class="before" style="float:right;">' /*컨텐트 내용에 공백이 있으면 앞단락만 인식하는 오류는 밸류를 ""로 묶어주면서 해결*/
 			+'<button type="button" id="update" class="btn btn btn-outline-info btn-sm" onclick="btnChg1()" style="margin-right:4px;">수정</button>'
 			+'<button type="button" id="delete" class="btn btn-outline-danger btn-sm" onclick="deleteReply('+response.comm_rep_no+')">x</button>'
 			+'</div>'
@@ -109,7 +110,6 @@ function btnChg1() {
 	 //펑션 내에서는 this 쓰면 윈도우꺼가 되어버려서 쓰면 안된다 타겟 써야된다.
 	 target.find(".before").hide();
 	 target.find(".after").show(); 
-	 event.stoppropagation();
 }
 </script>
 <style type="text/css">
@@ -161,7 +161,7 @@ function btnChg1() {
 				<thead>
 				<tr> 
 					<td align="center" width="70">작성자</td>
-					<td align="center" width="100">${communityVO.user_id}</td>
+					<td align="center" width="100" style="font-size:18px; color: #00cc99;"><strong>${communityVO.user_id}</strong></td>
 					<td align="center" width="80">지역</td>
 					<td align="center" width="100">
 					<select name="comm_adr" id="comm_adr">
@@ -216,7 +216,7 @@ function btnChg1() {
 				</tr>
 				<tr>
 					<td align="center" width="70">내용</td>
-					<td colspan="5">${communityVO.comm_content}</td>
+					<td colspan="5" align="left">${communityVO.comm_content}</td>
 				</tr>
 				</thead>
 			</table></div>
@@ -226,10 +226,11 @@ function btnChg1() {
 	<div class="replyItem">
 		<c:forEach items="${reply}" var="reply">
 		<div class="reply" style="float:left; width:1000px; margin-left:56px; margin-right:70px;">
-		<hr style="margin-bottom:4px; margin-top:4px;">
+		<hr style="margin-bottom:5px; margin-top:4px;">
 			<input type="hidden" id="comm_rep_no" name="comm_rep_no" value="${reply.comm_rep_no}">
-			<span class="reply-user_id" style="font-size:18px; color: #00cc99;"><strong>${reply.user_id}　</strong></span>
-			<span class="reply-comm_rep_content before">${reply.comm_rep_content}</span>
+			<span class="reply-user_id" style="float:left; width:100px; margin-left:40px; font-size:18px; color: #00cc99;">
+			<strong>${reply.user_id}</strong></span>
+			<span class="reply-comm_rep_content before" style="padding-left:7px; display:inline-block; width:650px;">${reply.comm_rep_content}</span>
 			<input class="after" type="text" name="content" value="${reply.comm_rep_content}" style="width:700px;">
 			<div class="before" style="float:right;">
 				<button type='button' id="update" class='btn btn btn-outline-info btn-sm' onclick="btnChg1()">수정</button>
@@ -248,7 +249,7 @@ function btnChg1() {
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width:1000px" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea style="width:1000px" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요 (166자까지 가능합니다.)"></textarea>
                             <br>
                                <div class="form-group">
 				               <button type="button" id="btnAdd" class="btn btn-outline-primary">등록</button>

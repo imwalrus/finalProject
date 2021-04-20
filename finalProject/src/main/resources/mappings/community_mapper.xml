@@ -148,4 +148,10 @@
 		DELETE FROM COMMUNITY_REPLY
 		WHERE COMM_REP_NO = #{comm_rep_no}
 	</delete>  
+	
+	<!-- 댓글 전체삭제 -->
+	<delete id="deleteReplyAll" parameterType="CommunityReplyVO">
+	DELETE FROM COMMUNITY_REPLY
+	WHERE COMM_NO = #{comm_no}
+	</delete>
 </mapper>
