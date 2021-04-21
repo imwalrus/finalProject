@@ -12,12 +12,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script>
-// modal-등록 폼 불러오기
-	function modalInsertInq(str) {
-		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
-		$('#modal').modal();
-	}
-	
 	$(function() {
 		// 장바구니 클릭시 확인창(모달)
 		$("#addCart").submit(function(event) {
@@ -58,8 +52,23 @@
 		            return false;
 		        }
 			});
+			// 문의하기 버튼 클릭시 : 로그인 되어있지 않으면 경고창
+			var id = $('input[name=user_id]').val();
+			if (id == '') {
+				$('#req').on('click', function() {
+		            alert("로그인이 필요합니다.")
+				});
+			} else {
+				$("#req").attr('onclick', "modalInsertInq('${prod.pro_no}');")
+			}
 		});
 	});
+
+	// modal-등록 폼 불러오기
+	function modalInsertInq(str) {
+		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
+		$('#modal').modal();
+	}
 </script>
 </head>
 <body class="goto-here">
@@ -92,7 +101,7 @@
 								판매자 <span style="color: #bbb;">${prod.user_id}</span>
 							</a>
 							<c:if test="${prod.user_id ne user_id}">
-								<a href="javascript:;" class="mr-2" id="req" onclick="modalInsertInq('${prod.pro_no}');">문의하기</a>
+								<a href="javascript:;" class="mr-2" id="req">문의하기</a>
 							</c:if>
 						<div class="rating d-flex">
 							<p class="text-left mr-3">

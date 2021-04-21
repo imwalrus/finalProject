@@ -14,14 +14,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import co.finalproject.farm.app.admin.service.BannerVO;
 import co.finalproject.farm.app.admin.service.impl.BannerMapper;
+import co.finalproject.farm.app.community.service.CommPagingVO;
+import co.finalproject.farm.app.community.service.impl.CommunityMapper;
+import co.finalproject.farm.app.notice.service.NoticePagingVO;
+import co.finalproject.farm.app.notice.service.impl.NoticeMapper;
 
 @Controller
 public class HomeController {
-	@Autowired BannerMapper bannerMapper;
+	@Autowired BannerMapper 	 bannerMapper;
+	@Autowired CommunityMapper   communityMapper;
+	@Autowired NoticeMapper 	 noticeMapper;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, BannerVO vo, Model model) {
+	public String home(Locale locale, NoticePagingVO nvo, CommPagingVO cvo, BannerVO bvo, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();
@@ -30,7 +37,9 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("banner", bannerMapper.getListBanner(vo));
+    	model.addAttribute("notice", noticeMapper.getNotices(nvo) );
+    	model.addAttribute("community", communityMapper.getComm(cvo));
+		model.addAttribute("banner", bannerMapper.getListBanner(bvo));
 
 		return "home";
 	}
