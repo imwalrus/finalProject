@@ -134,7 +134,7 @@ public class PurchaseInqController {
 	public String deletepuchasInq(puchasInqVO vo) {
 		pciMapper.deletepuchasInq(vo);
 		
-		return "redirect:getpuchasInqList";
+		return "redirect:getpuchasInqofUser";
 	}
 	
 //댓글

@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-.table {
-	width: 100%;
-	border: 1px solid #444444;
-	 min-width: 500px !important;
-	
-}
+<link rel="stylesheet" href="resources/main/css/style.css">
 
-.table td, .table th {
-	border-top: 0px;
-	white-space: nowrap;
-	padding: 1.05rem 0.75rem;
+<style>
+.table th{
+background-color: #e3f1d4 !important;
+font-weight: bold !important;
 }
 </style>
+
 <!-- 모달바디 시작 -->
 <form action="updatepuchasInq" method="post">
 	<div class="row" align="center">
@@ -26,12 +21,12 @@
 				<th class="table-success" colspan="1">비밀</th>
 					<c:if test="${plist.pur_inq_check eq '1'}">
        					<td colspan="2">
-       						<img src="resources/images/mypage/secrete.JPG">
+       						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
        					</td>
        				</c:if>		
        				<c:if test="${plist.pur_inq_check eq '0'}">
        					<td colspan="2">
-       						<img src="/resources/images/mypage/nosecrete.JPG">
+       						<img src="/resources/images/mypage/nosecrete.JPG" width="30" height="40">
        					</td>
        				</c:if>				
 			</tr>
@@ -43,7 +38,7 @@
 			</tr>
 			<tr>
 				<td colspan="9">
-					<img class="img-fluid card-img-top" alt="Card image cap">${plist.pur_inq_filename}
+					<img class="img-fluid card-img-top" src="./resources/images/mypage/${plist.pur_inq_filename}" alt="Card image cap">
 				</td>
 			</tr>
 			<tr>

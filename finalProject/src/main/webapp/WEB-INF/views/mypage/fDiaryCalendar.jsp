@@ -1,24 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
+<link rel="stylesheet" href="resources/main/css/style.css">
 <style type="text/css">
 .custom_calendar_table tr td {
 	text-align: center;
@@ -64,16 +47,11 @@
 p {
 	font-size: 30px;
 }
+
 </style>
-
-
-</head>
-<body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -81,20 +59,15 @@ p {
 						</div>
 					</div>
 				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-8">
 						<div class="card">
 							<div class="card-body" align="center">
-
 								<div class="col-md-12">
-									<!-- 달력내용 -->
 									<div id="calendarForm"></div>
 									<br> <br>
 								</div>
-								<div class="col-md-10" align="center">
+								<div class="col-md-12" align="center">
 
 									<button type='submit' class='btn  btn-outline-success'
 										onclick="location.href='insertFdiary'">일기작성</button>
@@ -296,4 +269,3 @@ p {
 	</script>
 
 </body>
-</html>

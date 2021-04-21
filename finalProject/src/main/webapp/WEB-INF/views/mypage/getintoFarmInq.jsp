@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
 
+<style>
+.table th{
+background-color: #e3f1d4 !important;
+font-weight: bold !important;
+}
+</style>
 <!-- 모달바디 시작 -->
 <form action="updateintoFarmInq" method="post">
 	<div class="row" align="center">
@@ -15,8 +22,20 @@
 				<th class="table-success">작성일</th>
 				<td>${ilist.into_inq_date }</td>
 				<td class="table-success">비밀글</td>
-				<td><input class="form-check-input" type="radio"
-					id="into_inq_check">사용</td>
+				<td>
+					<c:if test="${ilist.pur_inq_check eq '1'}">
+       					<td colspan="2">
+       						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
+       					</td>
+       				</c:if>		
+       				<c:if test="${ilist.pur_inq_check eq '0'}">
+       					<td colspan="2">
+       						<img src="/resources/images/mypage/nosecrete.JPG" width="30" height="40">
+       					</td>
+       				</c:if>	
+				
+				
+				</td>
 				<th class="table-success">작성자</th>
 				<th>${ilist.user_id}</th>
 			</tr>

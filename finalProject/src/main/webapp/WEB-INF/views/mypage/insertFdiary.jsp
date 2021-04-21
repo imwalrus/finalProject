@@ -1,48 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
-<style>
-.table {
-	width: 100%;
-
-}
-
- .table th {
- 		font-weight: bolder;
- 		
- }
-
-.table td, .table th {
-	border-top: 0px;
-	white-space: nowrap;
-	padding: 1.05rem 0.75rem;
-}
-
-.btn-warning{
-  padding: 5px 10px;}
-  
-
-</style>
-
-</head>
+<link rel="stylesheet" href="resources/main/css/style.css">
 <body>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
@@ -58,19 +17,17 @@
 				</div>
 				<div class="row">
 					<div class="col-md-10">
-						<form action="insertFdiary" enctype="multipart/form-data" method="post">
+						<form name="frm" action="insertFdiary" enctype="multipart/form-data" method="post" onsubmit="return check_submit()">
 							<div class="card">
 								<div class="card-header">
 									<h3>영농일지 등록</h3>
 								</div>
-								<div class="card-body" align="center">
-									<div class="col-md-10">
-
+								<div class="card-body">
 										<div class="row" id="addTable">
-											<table class="table">
+											<table class="table" align="center">
 												<tr>
 													<th colspan="6">작업일자&nbsp;&nbsp;&nbsp;&nbsp;
-														<input type="date" id="fdiary_day" name="fdiary_day" value="sysdate">
+														<input type="date" id="fdiary_day" name="fdiary_day" required="required">
 													</th>											
 												</tr>
 												<tr text-align="center">
@@ -79,8 +36,8 @@
 									<!-- 작물추가 --><br>	<button type="button" class="btn btn-warning" onclick="openCrop()">+</button>
 													</th>
 													<td>
-														<select class="form-control" name="crop_no">
-															<option value="none">=== 선택 ===</option>
+														<select class="form-control" id="crop_no" name="crop_no">
+															<option value="none">===== 선택 =====</option>
 															<c:forEach var="i" items="${croplist}" >
 																<option value="${i.crop_no}">${i.crop_name}</options>
 															</c:forEach>
@@ -94,18 +51,17 @@
 														<td><input type="time" class="form-control" name="fdiary_etime"></td>
 												</tr>
 												<tr>
-													<th>인력</th>
-														<td><input type="text" class="form-control" name="fdiary_worker"></td>
+													<th>인력(명)</th>
+														<td><input type="number" class="form-control" name="fdiary_worker"></td>
 													<th>날씨</th>
 														<td><input type="text" class="form-control" name="fdiary_weather"></td>
 													<th>사진첨부</th>
 														<td><input multiple="multiple" type="file" name="uploadFile"> 
-														<input type="text" name="fdiary_filename"></td>
+														<input type="hidden" name="fdiary_filename"></td>
 												</tr>
 												<tr>
 													<th>내용</th>
-													<td colspan="5"><textarea class="form-control"
-															rows="3" name="fdiary_content"></textarea></td>
+													<td colspan="5"><textarea class="form-control" rows="3" name="fdiary_content"></textarea></td>
 												</tr>
 											</table>
 										</div>
@@ -113,7 +69,6 @@
 											<button type="submit" class="btn  btn-outline-success">등록</button>
 											<button type="reset" class="btn  btn-outline-danger">입력취소</button>
 										</div>
-									</div>
 								</div>
 							</div>
 						</form>
@@ -127,7 +82,7 @@
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4>일지보기</h4>
+							<h4>작물 등록</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -152,6 +107,10 @@
 		$('#insertCrop').modal('show');
 
 	}
+	
+	//오늘 날짜로 기본셋팅
+	  	document.getElementById('fdiary_day').value = new Date().toISOString().substring(0, 10);;
 	</script>
+
 </body>
 </html>

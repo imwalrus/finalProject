@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <title>회원 탈퇴</title>
-    <meta charset="utf-8">
-</head>
+<link rel="stylesheet" href="resources/main/css/style.css">
 <script>
 $(document).ready(function(){
 	outForm.checkButton.disabled=true;
@@ -41,11 +36,8 @@ $(document).ready(function(){
 		}
 	});	
 })
-<<<<<<< HEAD
 
 
-=======
->>>>>>> refs/heads/김현정1
 </script>
 <body>
 <section class="pcoded-main-container">
@@ -92,7 +84,6 @@ $(document).ready(function(){
 	                                                        <label class="col-sm-4 col-form-label"><h6>ID</h6></label>
 	                                                        <div class="col-sm-5">
 	                                                            <input type="text" class="form-control" name="user_id" value="${user_id }" readonly="readonly" >
-
 	                                                        </div>
 	                                                    </div>
 	                                                    <div class="form-group row">
@@ -126,5 +117,3 @@ $(document).ready(function(){
                </div>
            </div>
 </section>         
-</body>
-</html>

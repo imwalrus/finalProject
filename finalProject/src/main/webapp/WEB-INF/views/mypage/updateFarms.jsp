@@ -1,24 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Favicon icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
+<link rel="stylesheet" href="resources/main/css/style.css">
 <style>
-.table {
-    width: 100%;
-  }
-.table td, .table th {
-	border-top: 0px;
-	white-space: nowrap;
-	padding: 1.05rem 0.75rem;
-}
-th{
-background-color: #e3f1d4;
-}
-.modal-body {
-    padding: 0px !important;
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
 }
 </style>
 	<div class="modal-body">
@@ -31,21 +18,15 @@ background-color: #e3f1d4;
 				<!-- 숨겨진 유저 ID -->
 			
 					<table class="table">
-							<tr class="table-success">
-								<th class="table-success">농장명</th>
+							<tr>
+								<th>농장명</th>
 								<td colspan="1">   
                                         <input type="text" class="form-control" id="farm_name" name="farm_name" value="${ufarm.farm_name}"placeholder="${ufarm.farm_name}">							
+										<input type="hidden" id="farm_no" name="farm_no" value="${ufarm.farm_no }">
 								</td>																
 							</tr>
 							<tr>
-								<th class="table-success">농장번호</th>
-								<td>
-								<input type="hidden" id="farm_no" name="farm_no" value="${ufarm.farm_no }">
-								</td>								
-								
-							</tr>
-							<tr>
-								<th class="table-success">주소</th>
+								<th>주소</th>
 								<td>
 									<div class="form-group">     
                                         <input type="text" class="form-control" id="farm_adr" name="farm_adr" value="${ufarm.farm_adr }" placeholder="${ufarm.farm_adr }">
@@ -53,7 +34,7 @@ background-color: #e3f1d4;
 								</td>								
 							</tr>
 							<tr>
-								<th class="table-success">면적</th>
+								<th>면적</th>
 								<td>
 									<div class="form-group">     
                                         <input type="text" class="form-control" id="farm_area" name="farm_area" value="${ufarm.farm_area }" placeholder="${ufarm.farm_area }">
@@ -61,7 +42,7 @@ background-color: #e3f1d4;
 								</td>								
 							</tr>
 							<tr>
-								<th class="table-success">내용</th>
+								<th>내용</th>
 								<td>
 									<div class="form-group">
 										<textarea class="form-control" id="farm_content" name="farm_content" rows="5">${ufarm.farm_content }</textarea> 

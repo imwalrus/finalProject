@@ -47,18 +47,15 @@ background-color: #e3f1d4;
                                             <th colspan="1">사진첨부</th>
 											<td colspan="3">
 													<input multiple="multiple" type="file" name="uploadFile"> 
-													<input type="text" name="farm_filename">
+													<input type="hidden" name="farm_filename">
 						</td>
                                         </tr>
                                         <tr>
                                         	 <th colspan="1">
                                                 주소
                                             </th>
-                                            <td colspan="4">
+                                            <td colspan="5">
                                                 <input type="text" class="form-control" id="farm_adr"  name="farm_adr" placeholder="주소입력">
-                                            </td>
-                                            <td colspan="1">
-                                            	<button type="button" class="btn btn-primary" id="searchAddr" onclick="goPopup()" >주소 검색</button>    
                                             </td>
                                         </tr>
                                         <tr>

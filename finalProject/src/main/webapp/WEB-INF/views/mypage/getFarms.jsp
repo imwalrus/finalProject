@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Favicon icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
-</head>
+<link rel="stylesheet" href="resources/main/css/style.css">
+
 <style>
 .table {
     width: 100%;
   }
 
-th{
-background-color: #e3f1d4;
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
 }
 .modal-body {
-    padding: 0px !important;
+    padding: 0px 0px!important;
 }
 .form-control:disabled, .form-control[readonly] {
     background-color: #FFFFFF !important;
@@ -29,7 +27,7 @@ background-color: #e3f1d4;
 			<div class="card-body">
 					<table class="table">
 							<tr class="table-success">
-								<td colspan="2" id="name"><h4>${farm.farm_name}</h4></td>								
+								<th colspan="2" id="name"><h4>${farm.farm_name}</h4></th>								
 								
 							</tr>
 							<tr>

@@ -1,20 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <title>회원 탈퇴</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded" />
-    <!-- Favicon icon -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     <style>
 	body {
@@ -106,55 +94,8 @@
 	.inputControl2{
 		width:120px !important;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/김현정1
 </style>
-<script>
-		/*
-		 * form 태그 안의 버튼은 type을 정의하지 않으면 submit 으로 간주하여 post로 넘어가기 때문에 button 타입 정의 해주어야함
-		 */
-		var pwCk=0;
 
-		$(document).ready(function(){
-			
-		//비밀번호 확인
-		$(function(){
-				$('[name=user_pwd]').keyup(function(){
-					$('#pwCkNotice').html('');
-				});
-				$('[name=confirm_pwd]').keyup(function(){
-					if($('[name=user_pwd]').val() != $('[name=confirm_pwd]').val()){
-						$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
-						$('#pwCkNotice').attr('color', '#f82a2aa3');
-					} else if($('[name=user_pwd]').val() == $('[name=confirm_pwd]').val()){
-						pwCk=1;
-						$('#pwCkNotice').html('비밀번호 일치함<br>');
-						$('#pwCkNotice').attr('color', '#51ad95');
-					}
-				});
-			});
-			
-		});//end 
-
-		function pwCheck(){
-			var pw = $('[name=user_pwd]').val();
-			console.log(pw);
-			if(pw != null && pw != ""){
-				if(pwCk == 0){
-					alert("변경하실 비밀번호를 확인해주세요.");
-					return false;
-				} else {
-					return true;
-				}
-			} else {
-				return true;
-			} 
-		}
-</script>
-</head>
-<body>
 <section class="pcoded-main-container">
 	<div class="pcoded-main-container">
 		<div class="signup-form">
@@ -225,7 +166,7 @@
 			
 				<div class="form-group" align="center !important">
 					<div class="col-xs-8 col-xs-offset-4" >
-						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn" >수정</button>
+						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn">수정</button>
 					</div>  
 				</div>			      
 			</form>
@@ -242,6 +183,49 @@
 		 document.form.user_zip.value = zipNo;
 		 document.form.user_adr.value = roadAddrPart1;
 		 document.form.user_detailadr.value = addrDetail+" "+roadAddrPart2;
+	}
+	
+	
+	
+	/*
+	 * form 태그 안의 버튼은 type을 정의하지 않으면 submit 으로 간주하여 post로 넘어가기 때문에 button 타입 정의 해주어야함
+	 */
+	var pwCk=0;
+
+	$(document).ready(function(){
+		
+	//비밀번호 확인
+	$(function(){
+			$('[name=user_pwd]').keyup(function(){
+				$('#pwCkNotice').html('');
+			});
+			$('[name=confirm_pwd]').keyup(function(){
+				if($('[name=user_pwd]').val() != $('[name=confirm_pwd]').val()){
+					$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
+					$('#pwCkNotice').attr('color', '#f82a2aa3');
+				} else if($('[name=user_pwd]').val() == $('[name=confirm_pwd]').val()){
+					pwCk=1;
+					$('#pwCkNotice').html('비밀번호 일치함<br>');
+					$('#pwCkNotice').attr('color', '#51ad95');
+				}
+			});
+		});
+		
+	});//end 
+
+	function pwCheck(){
+		var pw = $('[name=user_pwd]').val();
+		console.log(pw);
+		if(pw != null && pw != ""){
+			if(pwCk == 0){
+				alert("변경하실 비밀번호를 확인해주세요.");
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		} 
 	}
 </script>
 </body>

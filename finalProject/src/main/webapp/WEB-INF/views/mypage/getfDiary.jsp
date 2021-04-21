@@ -1,28 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-.table {
-    width: 100%;
-    border: 2px solid #b1bfa3;
-  }
-
-th{
-background-color: #e3f1d4;
-}
-div .row{
-	text-align: center;
-}
-</style>
+<link rel="stylesheet" href="resources/main/css/style.css">
 <div class="card-body">
-	<div class="row" id="diaryList"  align="center">
+<div class="row" id="diaryList"  align="center">
 		
 	</div>
 </div>
-<script src="resources/admin/js/vendor-all.min.js"></script>
-<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-<script src="resources/admin/js/ripple.js"></script>
-<script src="resources/admin/js/pcoded.min.js"></script>
+<style>
+.table th {
+    font-weight: bolder;
+    background-color: #78c2ad !important;
+    text-align: center !important;
+}
+.card-image{
+    border-top-left-radius: calc(0.25rem - 0px);
+    border-top-right-radius: calc(0.25rem - 0px);
+    flex-shrink: 0;
+    width: 50%;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border-style: none;
+    }
+h6{
+font-weight: bolder;
+
+}
+</style>
 <script type="text/javascript">
 $.ajax({
 	url:"ajaxgetfDiary",
@@ -39,8 +44,10 @@ $.ajax({
 			
 		}else{
 		for(i=0; i<data.length; i++){ //data값 있을 경우
+			var nbsp = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 		$("#diaryList").append(
-						"<h5>" + data[i].crop_name + "</h5>"
+						"<span class='badge badge-warning'><h6>"+ data[i].crop_name +"</h6></span>"+nbsp+nbsp+nbsp+nbsp+nbsp+nbsp
+						+"<span><button type='button' class='btn  btn-outline-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
 						+ "<table class='table' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
 						+ data[i].fdiary_day.substring(0,10) + "</td><th>"
 						+ "시작시간" + "</th><td>"
@@ -51,15 +58,11 @@ $.ajax({
 						+ data[i].fdiary_weather + "</td><th>"
 						+ "작업인력" + "</th><td>"
 						+ data[i].fdiary_worker	+ "명</td></tr>"
-					+"<tr><td colspan='6'><img class='img-fluid d-block w-100' src='./resources/images/mypage/" + data[i].fdiary_filename  + "'\></td></tr>"
+					+"<tr><td colspan='6'><img align='center' class='card-image' width='500px' height='320px' src='./resources/images/mypage/" + data[i].fdiary_filename  + "'\></td></tr>"
 					+"<tr><th>" + "내용" + "</th><td colspan='5'>"
-						+ data[i].fdiary_content
-					+ "<input type='hidden' value='"+ data[i].fdiary_no +"'></td></tr>"						
-					+"<tr><td colspan='6'>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp"	
-					+ "<button type='button' class='btn  btn-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button>" +"</td></td>"						
-	
-					+"</table>"
+					+"<textarea class='form-control' rows='5' readonly='readonly'>" + data[i].fdiary_content
+					+ "</textarea><input type='hidden' value='"+ data[i].fdiary_no +"'></td></tr>"						
+					+"</table><br><hr>"
 				);
 			}
 		}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" href="resources/main/css/style.css">
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -14,23 +14,7 @@
 <meta name="description" content="" />
 <meta name="keywords" content="">
 <meta name="author" content="Phoenixcoded" />
-<!-- Favicon icon -->
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
-<style>
-.table {
-	width: 100%;
-	border: 1px solid #444444;
-}
-
-.table td, .table th {
-	border-top: 0px;
-	white-space: nowrap;
-	padding: 1.05rem 0.75rem;
-}
-</style>
 
 </head>
 <body>
@@ -38,7 +22,6 @@
 		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">

@@ -98,7 +98,7 @@ public class IntoFarmInqController {
 			@GetMapping("/deleteintoFarmInq")
 			public String intoFarmInqVO(IntoFarmInqVO vo) {
 				ifiMapper.deleteIntoFarmInq(vo);
-				return "redirect:getintoFarmInqList";
+				return "redirect:getIntoFarmInqOfUser";
 			}
 
 			//댓글

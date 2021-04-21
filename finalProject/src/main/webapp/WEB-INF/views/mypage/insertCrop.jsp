@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
 
+.table th {
+    font-weight: bolder;
+}
+
+</style>
 <form action="insertCrop" method="post">
 	<div class="row" align="center">
-		<h4>작물 등록</h4>
 		<!-- 숨겨진 유저 ID -->
 					<input type="hidden" id="orderlist_no" name="user_id" value="${user_id }">
 		<!-- 숨겨진 유저 ID -->
