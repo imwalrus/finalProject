@@ -58,7 +58,6 @@ function selectAll(allChk)  {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-
 <body class="goto-here">
     <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
       <div class="container">
@@ -114,26 +113,29 @@ function selectAll(allChk)  {
 		</div>
 		<hr style="margin:8px;"><br/>
 		<div align="center">
-		<table class="table table-bordered">
+		<table class="table table-bordered" style="table-layout: fixed">
 		 <thead>
 				<tr>
-					<td align="center" width="100">글번호</td>
-					<td align="center" width="100">말머리</td>
-					<td align="center" width="350">제 목</td>
-					<td align="center" width="150">아이디</td>
-					<td align="center" width="200">지역</td>
-					<td align="center" width="200">작성일자</td>
-					<td align="center" width="100">조회수</td>
+					<td align="center" width="10%">글번호</td>
+					<td align="center" width="10%">말머리</td>
+					<td align="center" width="35%">제 목</td>
+					<td align="center" width="15%">아이디</td>
+					<td align="center" width="20%">지역</td>
+					<td align="center" width="20%">작성일자</td>
+					<td align="center" width="10%">조회수</td>
 				</tr>
 		<c:forEach items="${list}" var="comm">
 		<tr>
-         <td align="center">${comm.comm_no}</td>
-         <td align="center">${comm.comm_subject}</td>
-         <td onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">&nbsp; ${comm.comm_title}</td>
-         <td align="center">${comm.user_id}</td>
-         <td align="center">${comm.comm_adr}</td>
-         <td align="center">${comm.comm_date}</td>
-         <td align="center">${comm.comm_hit}</td>
+         <td align="center" width="10%">${comm.comm_no}</td>
+         <td align="center" width="10%">${comm.comm_subject}</td>
+         <td align="left" width="35%" class="text-truncate" 
+         onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'"
+         style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
+         >&nbsp; ${comm.comm_title}</td>
+         <td align="center" width="15%">${comm.user_id}</td>
+         <td align="center" width="20%">${comm.comm_adr}</td>
+         <td align="center" width="20%">${comm.comm_date}</td>
+         <td align="center" width="10%">${comm.comm_hit}</td>
         </tr>
         </c:forEach>
         </thead>
@@ -143,7 +145,7 @@ function selectAll(allChk)  {
     
     <div class="row justify-content-around" style="margin-left:385px; margin-right:385px;">
     <div class="col-auto mr-auto">
-    <c:if test="${user_auth == 'admin' }">  
+    <c:if test="${user_auth == 'user' || user_auth == 'admin' }">  
     <button type="button" class="btn btn-primary disabled" onclick="location.href='insertComm'">글쓰기</button>
     </c:if>
     </div>

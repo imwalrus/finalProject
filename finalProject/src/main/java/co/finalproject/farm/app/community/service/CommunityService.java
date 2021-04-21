@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+
 public interface CommunityService {
 
 	//등록
@@ -26,6 +29,12 @@ public interface CommunityService {
   	
     // 조회 증가
     public void updatereviewcnt(CommunityVO vo, HttpSession session);
+    
+ 	//이전글
+  	public CommunityVO getPreDocNum(CommunityVO vo);
+  	
+  	//다음글
+  	public CommunityVO getNextDocNum(CommunityVO vo);
     
     //댓글 전체조회
     public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo); 

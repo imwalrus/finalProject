@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import co.finalproject.farm.app.community.service.CommPagingVO;
 import co.finalproject.farm.app.community.service.CommunityReplyVO;
 import co.finalproject.farm.app.community.service.CommunityService;
@@ -95,6 +96,18 @@ public class CommunityServiceimpl implements CommunityService {
 	public int deleteReplyAll(CommunityReplyVO vo) {
 		
 		return dao.deleteReplyAll(vo);
+	}
+
+	@Override
+	public CommunityVO getPreDocNum(CommunityVO vo) {
+		
+		return dao.getPreDocNum(vo);
+	}
+
+	@Override
+	public CommunityVO getNextDocNum(CommunityVO vo) {
+		
+		return dao.getNextDocNum(vo);
 	}
 
 }

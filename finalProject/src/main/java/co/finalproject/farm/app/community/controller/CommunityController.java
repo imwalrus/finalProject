@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,11 +38,15 @@ public class CommunityController {
 	//게시글 목록
     @GetMapping("/getComm")
     public String  getComm(CommPagingVO vo, Paging paging, Model model) {
-    	paging.setPageUnit(7); //한 페이지에 표시되는 레코드 건수
-		paging.setPageSize(4); //페이지 번호수
+    	paging.setPageUnit(10); //한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(5); //페이지 번호수
 		//페이징
 		if(vo.getPage() == null) {
-			vo.setPage(1);
+		   vo.setPage(1);
+		}
+		//단건조회 이전글 다음글 목록가기 페이징 계산
+		if (vo.getComm_no() > 0) {
+	        vo.setPage(vo.getComm_no());
 		}
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
@@ -56,7 +58,6 @@ public class CommunityController {
     
     //단건 조회 ( + 조회수 증가 )
     @RequestMapping("/getSchComm")
-    @ResponseBody
     public ModelAndView getSchComm(HttpSession session, Model model, CommunityVO vo, CommPagingVO pagingvo) {
     	communityService.updatereviewcnt(vo, session);
     	CommunityReplyVO replyvo = new CommunityReplyVO();  
@@ -64,11 +65,13 @@ public class CommunityController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("community/selectComm");
         // 뷰에 전달할 데이터
+        mav.addObject("pre", communityService.getPreDocNum(vo)); //이전글
+        mav.addObject("next", communityService.getNextDocNum(vo)); //다음글
         mav.addObject("communityVO", communityService.getSchComm(vo));
         mav.addObject("reply", communityService.getReplyList(replyvo)); //단건 조회 할 때 댓글도 가져가도록
         return mav;
     }
-
+    
     
 	//등록폼
     @RequestMapping("/insertComm")
@@ -131,7 +134,7 @@ public class CommunityController {
 		return "redirect:getComm?page="+pagingvo.getPage();	
     }
     
-      	
+   	
     //댓글등록
   	@RequestMapping("/insertReply")
   	@ResponseBody

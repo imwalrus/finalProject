@@ -4,7 +4,7 @@
 <mapper namespace="co.finalproject.farm.app.community.service.impl.CommunityMapper">
 <!-- 전체보기 -->
 	<select id="getComm" parameterType="CommPagingVO" resultType="CommunityVO">
-		select b.* from (select  rownum rn, a.* from (
+		select b.* from (select rownum rn, a.* from (
         select * from community
         <where>
          <if test="comm_adrs != null">
@@ -24,7 +24,7 @@
          order by comm_no desc
          ) a ) b where rn between #{start} and #{end} 
 	</select>
-
+	
 	<!-- 상세보기 -->
 	<select id="getSchComm" resultType="CommunityVO">
 		SELECT USER_ID
@@ -79,7 +79,6 @@
         WHERE COMM_NO = #{comm_no}
     </update>
 	
-
 	<!-- 글 삭제 -->
 	<delete id="deleteComm" parameterType="CommunityVO">
 		DELETE FROM COMMUNITY
@@ -105,6 +104,25 @@
 		 </if>
 	 </where>
     </select>
+    
+	  <!-- 게시물 이전글 -->
+	  <select id="getPreDocNum" parameterType="CommunityVO" resultType="CommunityVO">
+      SELECT COMM_NO FROM COMMUNITY
+	  WHERE 1=1 AND COMM_NO IN ( 
+	  SELECT MAX(COMM_NO) FROM COMMUNITY 
+	  WHERE 1=1 
+	  AND COMM_NO <![CDATA[<]]> #{comm_no}) <!-- <만 썼더니 인식을 못함 -->
+	  </select>
+	  
+	  <!--  게시물 다음글 -->
+	  <select id="getNextDocNum" parameterType="CommunityVO" resultType="CommunityVO">
+	  SELECT COMM_NO FROM COMMUNITY
+	  WHERE 1=1 AND COMM_NO IN ( 
+	  SELECT MIN(COMM_NO) FROM COMMUNITY 
+	  WHERE 1=1 
+	  AND COMM_NO > #{comm_no} )
+	  </select>
+    
     
      <!-- 게시글의 댓글 목록 -->
      <select id="getReplyList" resultType="CommunityReplyVO">
@@ -154,4 +172,5 @@
 	DELETE FROM COMMUNITY_REPLY
 	WHERE COMM_NO = #{comm_no}
 	</delete>
+	
 </mapper>

@@ -94,6 +94,21 @@ $(document).ready(function() {
      }
 </script>
 
+<script>
+$(function(){
+//이전글
+$("#preDoc").on("click",function(){
+	var Pre = $(this).data("pre");
+	location.href="getSchComm?comm_no="+Pre
+	});
+//다음글 
+	$("#nxtDoc").on("click",function(){
+		var Next = $(this).data("next");
+		location.href="getSchComm?comm_no="+Next
+		}); 
+	});
+</script>
+
 <script type="text/javascript">
 	function deleteAlert() {
 		var yn = confirm("정말 삭제할까요?");
@@ -114,13 +129,11 @@ function btnChg1() {
 </script>
 <style type="text/css">
 #comm_title {  width:836px;
-                 padding:5px;
-                 height:32px !important; }
-#title > h1 {
-       font-size: 35px;
-       color: #00cc99;
-       } 
-.after {display:none;}
+               padding:5px;
+               height:32px !important; }
+#title > h1 { font-size: 35px;
+              color: #00cc99; } 
+.after { display:none; }
 </style>
 
 <meta charset="utf-8">
@@ -143,24 +156,31 @@ function btnChg1() {
 			<h1>커뮤니티 상세보기</h1>
 		</div><br/>
 		<form id="frm" name="frm" action="updateComm" method="post">
-		
 		<input type="hidden" name="comm_no" value="${communityVO.comm_no}">
 		<input type="hidden" name="page" value="${commPagingVO.page}">
 		<div>
 		<div style="margin-left:50px; margin-bottom:20px; float:left;" >
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='getComm?page=${commPagingVO.page}'" style="float:left;">목록보기</button>
 		</div>
-	    <c:if test="${user_auth == 'admin' }">
-		<div style="margin-left:830px;">
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${commPagingVO.page}'">글 수정</button>
+	    <div style="float:left; padding-bottom:15px;">
+	    <c:if test="${pre.comm_no != null}">
+	    <button type='button' id="preDoc" class='col-auto mr-auto btn btn-outline-primary btn-sm' data-pre="${pre.comm_no}">이전글</button>&nbsp;&nbsp;
+	    </c:if>
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='getComm?page=${commPagingVO.page}'">글목록</button>&nbsp;&nbsp;
+		<c:if test="${next.comm_no != null}">
+		<button type='button' id="nxtDoc" class='col-auto btn btn-outline-primary btn-sm' data-next="${next.comm_no}">다음글</button>
+		</c:if>
+		</div>
+	    <c:if test="${user_id == communityVO.user_id}">
+		<div style="margin-left:850px;">
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${commPagingVO.page}'">글 수정</button>
 		&nbsp;&nbsp;
-		<button type="button" class="btn btn-outline-primary" onclick="deleteAlert()">글 삭제</button>
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="deleteAlert()">글 삭제</button>
 		</div>
 		</c:if>
-			<table class="table table-hover" style ="table-layout: auto; width: 80%; table-layout: fixed;">
+			<table class="table table-hover"  style ="table-layout: auto; width: 80%; table-layout: fixed;">
 				<thead>
 				<tr> 
-					<td align="center" width="70">작성자</td>
+					<td align="center" width="70" style="border-right:1px solid #dcdcdc; border-left:1px solid #dcdcdc;">작성자</td>
 					<td align="center" width="100" style="font-size:18px; color: #00cc99;"><strong>${communityVO.user_id}</strong></td>
 					<td align="center" width="80">지역</td>
 					<td align="center" width="100">
@@ -188,7 +208,7 @@ function btnChg1() {
 	                selected </c:if>>제주 </option>
 					</select></td>
 					<td align="center" width="70">말머리</td>
-					<td align="center" width="80">
+					<td align="center" width="80" style="border-right:1px solid #dcdcdc;">
 					<select name="comm_subject" id="comm_subject">
 					<option value="정보공유"
                     <c:if test ="${communityVO.comm_subject eq '정보공유'}">
@@ -205,18 +225,18 @@ function btnChg1() {
 					</select></td>
 				</tr>
 				<tr>
-				   <td align="center" width="70">작성일자</td>
+				   <td align="center" width="70" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc;">작성일자</td>
 				   <td align="center" colspan="2">${communityVO.comm_date}</td>
 				   <td align="center" width="70">조회수</td>
-				   <td align="center" colspan="2">${communityVO.comm_hit}</td>
+				   <td align="center" colspan="2" width="80" style="border-right:1px solid #dcdcdc;">${communityVO.comm_hit}</td>
 				</tr>
 				<tr>
-					<td align="center" width="80">제 목</td>
-					<td colspan="5" ><input class="form-control" type="text" id="comm_title" name="comm_title" value="${communityVO.comm_title}" size=97></td>   
+					<td align="center" width="80" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc;">제 목</td>
+					<td colspan="5" style="border-right:1px solid #dcdcdc;"><input class="form-control" type="text" id="comm_title" name="comm_title" value="${communityVO.comm_title}" size=97 ></td>   
 				</tr>
 				<tr>
-					<td align="center" width="70">내용</td>
-					<td colspan="5" align="left">${communityVO.comm_content}</td>
+					<td align="center" width="70" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc;">내용</td>
+					<td colspan="5" align="left" style="height:400px; border-bottom:1px solid #dcdcdc; border-right:1px solid #dcdcdc;" >${communityVO.comm_content}</td>
 				</tr>
 				</thead>
 			</table></div>
@@ -233,8 +253,10 @@ function btnChg1() {
 			<span class="reply-comm_rep_content before" style="padding-left:7px; display:inline-block; width:650px;">${reply.comm_rep_content}</span>
 			<input class="after" type="text" name="content" value="${reply.comm_rep_content}" style="width:700px;">
 			<div class="before" style="float:right;">
+			  <c:if test="${user_id == reply.user_id}">
 				<button type='button' id="update" class='btn btn btn-outline-info btn-sm' onclick="btnChg1()">수정</button>
 				<button type='button' id="delete" class='btn btn-outline-danger btn-sm' onclick='deleteReply(${reply.comm_rep_no})'>x</button>
+              </c:if>			
 			</div>
 			<div class="after" style="float:right;">
 				<button type="button" id="btnUp" class="btn btn btn-outline-info btn-sm">저장</button>
@@ -242,14 +264,14 @@ function btnChg1() {
 			<!-- 목록 뿌리는 건 제이슨으로 가져오는 게 아니고 단건 조회 할 때 댓글리스트까지 같이 가져오는 거기때문에 이렇게 형변환을 따로 시켜줘야한다. vo에 적은 데이터포맷은 여기서 적용이 안 됨 -->
 			<span class="reply-comm_rep_date" style="float:right;"><fmt:formatDate value="${reply.comm_rep_date}" pattern="yyyy-MM-dd"/>　</span>
 			</div>
-		
 		</c:forEach>
 		</div>  
+		   <c:if test="${user_id != null && user_id != ''}">
             <div style="margin-left:48px; margin-right:70px;">
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width:1000px" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요 (166자까지 가능합니다.)"></textarea>
+                            <textarea style="width:1000px; border-color:#bebebe;" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요 (166자까지 가능합니다.)"></textarea>
                             <br>
                                <div class="form-group">
 				               <button type="button" id="btnAdd" class="btn btn-outline-primary">등록</button>
@@ -257,7 +279,8 @@ function btnChg1() {
                         </td>
                     </tr>
                 </table>
-            </div>  
+            </div> 
+           </c:if> 
          </div>
 </section>
 </body>

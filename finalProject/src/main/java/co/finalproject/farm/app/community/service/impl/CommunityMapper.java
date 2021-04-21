@@ -2,6 +2,8 @@ package co.finalproject.farm.app.community.service.impl;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import co.finalproject.farm.app.community.service.CommPagingVO;
 import co.finalproject.farm.app.community.service.CommunityReplyVO;
 import co.finalproject.farm.app.community.service.CommunityVO;
@@ -30,7 +32,13 @@ public interface CommunityMapper {
     
     //전체 건수(관리자 페이지서 활용)--재일 추가
   	public int getCount();
-	
+  	
+  	//이전글
+  	public CommunityVO getPreDocNum(CommunityVO vo);
+  	
+  	//다음글
+  	public CommunityVO getNextDocNum(CommunityVO vo);
+
     //댓글 전체조회
     public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo); 
     
