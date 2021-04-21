@@ -59,23 +59,23 @@ $(function() {
     <tr>
     <th class="table-active" width="15%" align="center">주제</th>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_title" name="edu_title">
+    <input class="form-control" id="form-control1" type="text" id="edu_title" name="edu_title" required="required">
     </td>
     <th class="table-active" width="15%" align="center">강의일자</th>
     <td width="35%"align="left">
-    <input class="after" id="date" type="date" name="edu_startdate">
+    <input class="after" id="date" type="date" name="edu_startdate" required="required">
     -
-    <input class="after" id="date" type="date" name="edu_enddate">
+    <input class="after" id="date" type="date" name="edu_enddate" required="required">
     </td>
     </tr>
     <tr>
     <th class="table-active" width="15%" align="center">교육시간</th>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_time" name="edu_time" placeholder="　　　　　　ex)10:00 - 15:00">
+    <input class="form-control" id="form-control1" type="text" id="edu_time" name="edu_time" placeholder="　　　　　　ex)10:00 - 15:00" required="required">
     </td>
     <th class="table-active" width="15%" align="center">교육기관</th>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_organ" name="edu_organ">
+    <input class="form-control" id="form-control1" type="text" id="edu_organ" name="edu_organ" required="required">
     </td>
     </tr>
     <tr>
@@ -102,17 +102,17 @@ $(function() {
     <tr>
     <td class="table-active" width="100" align="center">교육 장소</td>
     <td colspan="3" align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_place" name="edu_place">
+    <input class="form-control" id="form-control1" type="text" id="edu_place" name="edu_place" required="required">
     </td>
     </tr>
     <tr>
     <td class="table-active" width="100" align="center">담당자 이름</td>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_person" name="edu_person">
+    <input class="form-control" id="form-control1" type="text" id="edu_person" name="edu_person" required="required">
     </td>
     <td class="table-active" width="100" align="center">담당자 연락처</td>
     <td width="35%"align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_phone" name="edu_phone">
+    <input class="form-control" id="form-control1" type="text" id="edu_phone" name="edu_phone" required="required">
     </td>
     </tr>
     <tr>
@@ -120,7 +120,7 @@ $(function() {
     </tr>
     <tr>
     <td align="center" style="height:400px;" colspan="4" align="center">
-    <input type="file" class="form-control-sm" id="gdsImg" name="uploadFile">
+    <input type="file" class="form-control-sm" id="gdsImg" name="uploadFile" required="required">
 	<input type="hidden" name="edu_filename">
 	<div class="select_img"><img src=""></div>
     </td>
@@ -130,7 +130,7 @@ $(function() {
     </tr>
     <tr>
     <td align="center" style="height:400px;" colspan="4">
-    <textarea class="form-control" rows="15" cols="133" id="edu_content" name="edu_content"></textarea>
+    <textarea class="form-control" rows="15" cols="133" id="edu_content" name="edu_content" required="required"></textarea>
     </td>
     </tr>
     </thead>

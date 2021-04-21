@@ -36,7 +36,7 @@
                 <thead>
 				<tr>
 				    <td align="center" width="15%">제목</td>
-					<td align="left" width="55%"><input class="form-control" type="text" id="faq_title" name="faq_title" size=70></td>
+					<td align="left" width="55%"><input class="form-control" type="text" id="faq_title" name="faq_title" size=70 required="required"></td>
 					<td align="center" width="15%">분류</td>
 					<td align="center" width="15%">
 					<select name="faq_category" id="faq_category">
@@ -49,7 +49,7 @@
 				</tr>			
 				<tr>
 					<td align="center" width="70">내용</td>
-					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="faq_content" name="faq_content"></textarea></td>
+					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="faq_content" name="faq_content" required="required"></textarea></td>
 				</tr>
 				<thead>
 			</table><br/>

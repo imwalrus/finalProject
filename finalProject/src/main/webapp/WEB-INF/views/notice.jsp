@@ -74,22 +74,23 @@ function categoryChange() {
         </select>
 		</div>
 		<div align="center">
-		<table class="table table-bordered">
+		<table class="table table-bordered" style="table-layout: fixed">
 		 <thead>
 				<tr>
-					<td align="center" width="100">글번호</td>
-					<td align="center" width="300">제 목</td>
-					<td align="center" width="150">분류</td>
-					<td align="center" width="200">작성일자</td>
-					<td align="center" width="150">조회수</td>
+					<td align="center" width="10%">글번호</td>
+					<td align="center" width="30%">제 목</td>
+					<td align="center" width="15%">분류</td>
+					<td align="center" width="20%">작성일자</td>
+					<td align="center" width="15%">조회수</td>
 				</tr>
 		<c:forEach items="${list}" var="ntc">
-		<tr onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}&page=${paging.page}'">
-         <td align="center">${ntc.notice_no}</td>
-         <td>&nbsp; ${ntc.notice_title}</td>
-         <td align="center">${ntc.notice_category}</td>
-         <td align="center">${ntc.notice_date}</td>
-         <td align="center">${ntc.notice_hit}</td>
+		<tr style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
+		onclick="location.href='getSearchNotices?notice_no=${ntc.notice_no}&page=${paging.page}'">
+         <td align="center" width="10%">${ntc.notice_no}</td>
+         <td align="left" width="30%" class="text-truncate">&nbsp;${ntc.notice_title}</td>
+         <td align="center" width="15%">${ntc.notice_category}</td>
+         <td align="center" width="20%">${ntc.notice_date}</td>
+         <td align="center" width="15%">${ntc.notice_hit}</td>
         </tr>
         </c:forEach>
         </thead>

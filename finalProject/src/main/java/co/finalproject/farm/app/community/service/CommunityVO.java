@@ -16,6 +16,7 @@ public class CommunityVO {
 	private String comm_date;
 	private String comm_filename;
 	private MultipartFile uploadFile;
+	private String flag;
 	
 	
 }

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,11 +38,15 @@ public class CommunityController {
 	//게시글 목록
     @GetMapping("/getComm")
     public String  getComm(CommPagingVO vo, Paging paging, Model model) {
-    	paging.setPageUnit(7); //한 페이지에 표시되는 레코드 건수
-		paging.setPageSize(4); //페이지 번호수
+    	paging.setPageUnit(10); //한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(5); //페이지 번호수
 		//페이징
 		if(vo.getPage() == null) {
-			vo.setPage(1);
+		   vo.setPage(1);
+		}
+		//단건조회 이전글 다음글 목록가기 페이징 계산
+		if (vo.getComm_no() > 0) {
+	        vo.setPage(vo.getComm_no());
 		}
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
@@ -56,7 +58,6 @@ public class CommunityController {
     
     //단건 조회 ( + 조회수 증가 )
     @RequestMapping("/getSchComm")
-    @ResponseBody
     public ModelAndView getSchComm(HttpSession session, Model model, CommunityVO vo, CommPagingVO pagingvo) {
     	communityService.updatereviewcnt(vo, session);
     	CommunityReplyVO replyvo = new CommunityReplyVO();  
@@ -64,11 +65,13 @@ public class CommunityController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("community/selectComm");
         // 뷰에 전달할 데이터
+        mav.addObject("pre", communityService.getPreDocNum(vo)); //이전글
+        mav.addObject("next", communityService.getNextDocNum(vo)); //다음글
         mav.addObject("communityVO", communityService.getSchComm(vo));
         mav.addObject("reply", communityService.getReplyList(replyvo)); //단건 조회 할 때 댓글도 가져가도록
         return mav;
     }
-
+    
     
 	//등록폼
     @RequestMapping("/insertComm")
@@ -89,7 +92,7 @@ public class CommunityController {
     @ResponseBody
     public String uploadImg(CommunityVO vo, HttpServletRequest req) throws IllegalStateException, IOException {
     	// 첨부 파일 처리
-    	        String path = "/resources/main/images/";
+    	        String path = "/resources/images/community/";
     	 		String realPath = req.getSession().getServletContext().getRealPath(path);
     	 		MultipartFile uploadFile = vo.getUploadFile();
     	 		String comm_filename = "";
@@ -123,11 +126,15 @@ public class CommunityController {
     @RequestMapping("/deleteComm") //원래 get으로 처리하는 게 정석인데 삭제 버튼이 post 폼 안에 묶여있어서 request로 바꿈.
     public String deleteCommProc(CommunityVO vo, CommPagingVO pagingvo) {
     	logger.debug(vo.toString());
+    	//글 삭제 전에 글 번호 받아와서 그 글번호에 있는 댓글들 전체 삭제
+    	CommunityReplyVO replyvo = new CommunityReplyVO();
+    	replyvo.setComm_no(vo.getComm_no());
+    	communityService.deleteReplyAll(replyvo);
     	communityService.deleteComm(vo);
 		return "redirect:getComm?page="+pagingvo.getPage();	
     }
     
-      	
+   	
     //댓글등록
   	@RequestMapping("/insertReply")
   	@ResponseBody

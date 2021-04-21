@@ -76,20 +76,21 @@ function categoryChange() {
         </select>
 		</div>
 		<div align="center">
-		<table class="table table-bordered">
+		<table class="table table-bordered" style="table-layout: fixed">
 		 <thead>
 				<tr>
-					<td align="center" width="100">글번호</td>
-					<td align="center" width="300">제 목</td>
-					<td align="center" width="150">분류</td>
-					<td align="center" width="200">작성일자</td>
+					<td align="center" width="10%">글번호</td>
+					<td align="center" width="30%">제 목</td>
+					<td align="center" width="15%">분류</td>
+					<td align="center" width="20%">작성일자</td>
 				</tr>
 		<c:forEach items="${list}" var="faq">
-		<tr onclick="location.href='getSearchFaq?faq_no=${faq.faq_no}&page=${paging.page}'">
-         <td align="center">${faq.faq_no}</td>
-         <td>&nbsp; ${faq.faq_title}</td>
-         <td align="center">${faq.faq_category}</td>
-         <td align="center">${faq.faq_date}</td>
+		<tr style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
+		onclick="location.href='getSearchFaq?faq_no=${faq.faq_no}&page=${paging.page}'">
+         <td align="center" width="10%">${faq.faq_no}</td>
+         <td align="left" width="30%" class="text-truncate">&nbsp; ${faq.faq_title}</td>
+         <td align="center"  width="15%">${faq.faq_category}</td>
+         <td align="center"  width="20%">${faq.faq_date}</td>
         </tr>
         </c:forEach>
         </thead>

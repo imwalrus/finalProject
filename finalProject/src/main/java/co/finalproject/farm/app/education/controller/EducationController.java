@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,8 +66,8 @@ public class EducationController {
 	
 	@GetMapping("/getOffEdu")
 	 public String getFaq(EduPagingVO vo, Paging paging, Model model ) {
-		paging.setPageUnit(7); //한 페이지에 표시되는 레코드 건수
-		paging.setPageSize(4); //페이지 번호수
+		paging.setPageUnit(10); //한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(5); //페이지 번호수
 		//페이징
 		if(vo.getPage() == null) {
 			vo.setPage(1);
@@ -97,7 +98,7 @@ public class EducationController {
  	@PostMapping("/insertEdu")
  	public String insertEduImg(EducationVO vo, HttpServletRequest req) throws IOException {
  		// 첨부 파일 처리
- 		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
+ 		String path = req.getSession().getServletContext().getRealPath("/resources/images/education");
  		MultipartFile uploadFile = vo.getUploadFile();
  		String edu_filename = "";
 
@@ -122,7 +123,7 @@ public class EducationController {
  	@RequestMapping("/updateEdu")
     public String updateFaqProc(EducationVO vo, EduPagingVO pagingvo, HttpServletRequest req) throws IllegalStateException, IOException {
  	        // 첨부 파일 처리
- 	 		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
+ 	 		String path = req.getSession().getServletContext().getRealPath("/resources/images/education");
  	 		MultipartFile uploadFile = vo.getUploadFile();
  	 		String edu_filename = "";
 

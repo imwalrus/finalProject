@@ -83,11 +83,11 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td align="center" width="80">제 목</td>
-					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97></td>   
+					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97 required="required"></td>   
 				</tr>
 				<tr>
 					<td align="center" width="70">내용</td>
-					<td colspan="5"><textarea class="form-control" rows="7" cols="100" id="notice_content" name="notice_content">${NoticeVO.notice_content}</textarea></td>
+					<td colspan="5"><textarea class="form-control" rows="7" cols="100" id="notice_content" name="notice_content" required="required">${NoticeVO.notice_content}</textarea></td>
 				</tr>
 				</thead>
 			</table>

@@ -6,7 +6,11 @@
 <html lang="ko">
 <head>
 <title>청년농장</title>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(this).scrollTop(0);
+});
+</script>
 <script>
 //모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
    function fnModuleInfo(str) {
@@ -54,7 +58,18 @@
 	function Update() {
 		 var form = $('#edu_update')[0]; //schOffedu의 폼 아이디
 		 var formData = new FormData(form);
-		//수정 버튼 클릭
+		 //아작스 보내기 전에 required 체크해줘야 함 제외할 부분은 저렇게 제외시켜줌
+          var form1 = document.edu_update;
+          for(var i =0 ; i < form1.elements.length ; i++){
+        	  if(form1.elements[i].value=="" && form1.elements[i].id != "date" 
+        		  && form1.elements[i].id != "edu_adr" && form1.elements[i].id != "edu_check" 
+        		  && form1.elements[i].name != "uploadFile" && form1.elements[i].name != "edu_filename"){
+                  alert(form1.elements[i].title+" 부분을 입력하여 주십시오" );
+                  form1.elements[i].focus();
+                  return false;
+               }
+          }
+         //수정 버튼 클릭
 		   	$.ajax({
 				url : "updateEdu",
 				method : "post",
@@ -115,7 +130,6 @@ schOffEdu에서 스타일 줬던 #edu_place를
        } 
 </style>
 </head>
-<body class="goto-here">
     <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -155,25 +169,25 @@ schOffEdu에서 스타일 줬던 #edu_place를
 
      
      <hr style="margin:8px;"><br/>
-    <table class="table table-bordered" >
+    <table class="table table-bordered" style="table-layout: fixed">
          <thead>
                 <tr>
-					<td align="center" width="150">번호</td>
-					<td align="center" width="300">지역</td>
-					<td align="center" width="500">주제</td>
-					<td align="center" width="400">교육기간</td>
-					<td align="center" width="250">교육시간</td>
-					<td align="center" width="150">신청현황</td>
-					<td align="center" width="150">상세보기</td>
+					<td align="center" width="15%">번호</td>
+					<td align="center" width="25%">지역</td>
+					<td align="center" width="50%">주제</td>
+					<td align="center" width="35%">교육기간</td>
+					<td align="center" width="20%">교육시간</td>
+					<td align="center" width="15%">신청현황</td>
+					<td align="center" width="15%">상세보기</td>
 				</tr>
 		<c:forEach items="${list}" var="edu">
 		<tr>
-         <td align="center">${edu.edu_no}</td>
-         <td>&nbsp; ${edu.edu_adr}</td>
-         <td align="center">${edu.edu_title}</td>
-         <td align="center">${edu.edu_startdate} - ${edu.edu_enddate}</td>
-         <td align="center">${edu.edu_time}</td>
-         <td align="center">${edu.edu_check}</td>
+         <td align="center" width="15%">${edu.edu_no}</td>
+         <td width="25%">&nbsp; ${edu.edu_adr}</td>
+         <td align="left" width="50%" class="text-truncate">${edu.edu_title}</td>
+         <td align="center" width="35%">${edu.edu_startdate} - ${edu.edu_enddate}</td>
+         <td align="center" width="20%">${edu.edu_time}</td>
+         <td align="center" width="15%">${edu.edu_check}</td>
          <td>
          <button 
          type="button" 
