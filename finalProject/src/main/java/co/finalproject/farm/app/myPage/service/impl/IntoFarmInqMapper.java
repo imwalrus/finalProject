@@ -18,6 +18,9 @@ public interface IntoFarmInqMapper {
 	
 	public int deleteIntoFarmInq(IntoFarmInqVO vo);
 	
+	public List<IntoFarmInqVO> getIntoFarmInqOfUser(String user_id);
+	
+	public List<IntoFarmInqVO> getFarmInqofFarmer(String user_id);
 	
 	//댓글
 	public List<IntoFarmReplyVO> getintoFarmReplyList(IntoFarmReplyVO vo);

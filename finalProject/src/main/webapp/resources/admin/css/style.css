@@ -24216,6 +24216,23 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
 .aut-bg-img .auth-content {
     padding: 70px 40px;
 }
-
+.main-menu-header{
+	height:160px !important;
+}
+.chatBtn{
+	color: white !important;
+   	background-color: #ffd973 !important;
+   	border-color: #ffd973 !important;
+   	width: 170px;
+	padding-bottom: 10px;
+   	border-radius: 5px;
+   	font-weight:bold;
+}
+.bg-primary{
+	background-color: #78c2ad !important;
+}
+body{
+	background-color: #78c2ad !important;
+}
 /* image varient End */
 /**====== Authentication css end ======**/

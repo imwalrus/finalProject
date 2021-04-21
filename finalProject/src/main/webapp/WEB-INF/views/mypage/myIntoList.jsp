@@ -2,26 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <title>회원 탈퇴</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded" />
-    <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-    <!-- vendor css -->
-    <link rel="stylesheet" href="resources/admin/css/style.css">
-    
-    
-
-</head>
 <body>
 	<section class="pcoded-main-container">
     <!-- [ Main Content ] start -->
@@ -76,12 +56,6 @@
         </div>
 </div>
 </section>
-
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
 	<script type="text/javascript">
 		$.ajax ({
 			url:"ajaxmyIntoList",
@@ -100,14 +74,9 @@
 					
 					);
 				}
-			
-				
 			}
-			
-			
-			
 		});
-	
 	</script>
 </body>
 </html>
+	

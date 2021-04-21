@@ -27,7 +27,7 @@
         ,L.ORDERLIST_CONDITION
         ,O.ORDER_PAYMENT
         ,O.USER_ID as BUYER
-        ,L.ORDERLIST_INVOICE
+        ,NVL(L.ORDERLIST_INVOICE,'-') "orderlist_invoice"
 	FROM ORDERS O INNER JOIN ORDERLIST L 
             ON O.ORDER_NO = L.ORDER_NO
     INNER JOIN PRODUCT P
@@ -50,7 +50,7 @@ SELECT O.ORDER_NO
             ,L.ORDERLIST_NO
             ,P.USER_ID as SELLER
             ,P.PRO_DCOMPANY
-            ,L.ORDERLIST_INVOICE          
+            ,NVL(L.ORDERLIST_INVOICE,'-') "orderlist_invoice"         
 FROM ORDERLIST L
 INNER JOIN PRODUCT P
             ON P.PRO_NO = L.PRO_NO

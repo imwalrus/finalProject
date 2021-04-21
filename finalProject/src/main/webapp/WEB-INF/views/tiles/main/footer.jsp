@@ -14,14 +14,15 @@
 			<div class="row justify-content-around">
 				<!-- 배너(하단 1, 2, 3) -->
 				<c:forEach items="${applicationScope.banner}" var="banner1" begin="1" end="3" varStatus="status">
-				<c:if test="${banner1.banner_check eq 0}" >
-				<div class="col-4">
-					<div align="center">
-						<a href="${banner1.banner_link}">
-							<img src="resources/images/banner/${banner1.banner_filename}"></a>
-					</div>
-				</div>
-				</c:if>
+					<c:if test="${banner1.banner_check eq 0}">
+						<div class="col-4">
+							<div align="center">
+								<a href="${banner1.banner_link}">
+									<img class="img-fluid" src="resources/images/banner/${banner1.banner_filename}" >
+								</a>
+							</div>
+						</div>
+					</c:if>
 				</c:forEach>
 			</div>
 		</div>

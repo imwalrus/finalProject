@@ -17,8 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.finalproject.farm.app.user.service.UserService;
 import co.finalproject.farm.app.user.service.UserVO;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Controller
 public class UserController {
 	
@@ -73,16 +74,13 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(UserVO vo , HttpServletRequest request, RedirectAttributes redirectAttr) {
 		//입력한 비밀번호와 db에 저장된 비밀번호 확인
-		
 		UserVO resultVO = userService.loginCheck(vo);
 		HttpSession session = request.getSession();		
-		if(resultVO != null && pwdEncoder.matches(vo.getUser_pwd(), resultVO.getUser_pwd())) {
+		if(resultVO != null && pwdEncoder.matches(vo.getUser_pwd(), resultVO.getUser_pwd()) && (resultVO.getUser_active()).equals("1")) {
 			/* session.setAttribute("user", resultVO); */
 			//로그인 체크에 성공하면 세션에 user_id, user_auth 담아두기
 			session.setAttribute("user_id", resultVO.getUser_id());
 			session.setAttribute("user_auth", resultVO.getUser_auth());
-			
-			
 		} else {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
 			return "redirect:login";
@@ -104,7 +102,7 @@ public class UserController {
 	@ResponseBody
 	public int pwFind(UserVO vo) {
 		int result = userService.pwFind(vo);
-		System.out.println("====================비밀번호 찾기 결과==============="+result);
+		log.info("====================비밀번호 찾기 결과==============="+result);
 		return result;
 	}
 	
@@ -116,6 +114,13 @@ public class UserController {
 		return result;
 	}
 	
+	//회원정보 수정 폼
+	@GetMapping("/updateUser")
+	public String updateUser(Model model, UserVO vo) {
+		model.addAttribute("list", userService.getUser(vo));
+		return "mypageTiles/mypage/updateUser";
+	}
+	
 	//회원정보 수정
 	@PostMapping("/updateUser")
 	public String updateUser(UserVO vo){
@@ -123,8 +128,8 @@ public class UserController {
 		if(vo.getUser_pwd() != null) {
 			vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));			
 		}
-		userService.insertUser(vo);
-		return "mypageTiles/myPage";
+		userService.updateUser(vo);
+		return "redirect:/myPage";
 	}
 	
 	
@@ -137,17 +142,46 @@ public class UserController {
 	}
 	
 	//회원탈퇴폼
-	@RequestMapping("/memberOut")
+	@GetMapping("/memberOut")
 	public String memberOut(Model model, UserVO vo) {
 		model.addAttribute("out", userService.getUser(vo));
 		return "mypageTiles/mypage/memberOut";
 	}
-		
-		@PostMapping("/memberOut")
-		public String memberOutProc(UserVO vo) {
-			userService.memberOut(vo);
-			return "redirect:/logout";
+	
+	//회원탈퇴 시 아작스 패스워드 체크용
+	@RequestMapping("/pwCheck")
+	@ResponseBody
+	public int memberOutPwCheck(UserVO vo) {
+		int result = 0;
+		UserVO resultVO = userService.loginCheck(vo);
+		if(pwdEncoder.matches(vo.getUser_pwd(),resultVO.getUser_pwd())==true) {
+			result = 1;
 		}
+		return result;
+	}
+	
+	//회원탈퇴 처리
+	@PostMapping("/memberOut")
+	public String memberOutProc(UserVO vo , RedirectAttributes redirectAttr) {
+		UserVO resultVO = userService.loginCheck(vo);
+		log.info("회원탈퇴하려는 id ===========> "+ resultVO.getUser_id());
+		if(pwdEncoder.matches(vo.getUser_pwd(),resultVO.getUser_pwd())) {
+			userService.memberOut(vo);
+			return "redirect:/memberOutSuccess";
+		} else {
+			redirectAttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			return "redirect:/";
+		}
+
+	}
+	
+	//회원탈퇴 성공 후 로그아웃 후 탈퇴 페이지로 이동
+	@GetMapping("/memberOutSuccess")
+	public String memberOutSuccess(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "mypage/memberOutSuccess";
+	}
 		
 	
 }

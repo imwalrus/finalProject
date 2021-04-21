@@ -270,8 +270,8 @@
 	<!-- 주문 등록 -->
 	<insert id="insertOrder" parameterType="OrderVO">
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
-		SELECT TO_NUMBER(TO_CHAR(sysdate,'YYYYMMDDHH24MI') || NVL(TO_CHAR(MAX(SUBSTR(order_no, 7))),'00')) + 1
-          FROM ORDERS
+		SELECT NVL(MAX(ORDER_NO),TO_CHAR(SYSDATE,'YYYYMMDD')||'0000') + 1
+		  FROM ORDERS
 		</selectKey>
 		INSERT INTO ORDERS (ORDER_NO
 					 	  , ORDER_DATE
@@ -303,13 +303,14 @@
 							, PRO_NO
 							, CART_COUNT)
     				   SELECT ORDERLIST_SEQ.NEXTVAL
-    				   		, O.ORDER_NO
+    				   		, #{order_no}
     				   		, '결제완료'
     				   		, C.PRO_NO
     				   		, C.CART_COUNT
     					 FROM CART C, ORDERS O
     					WHERE C.USER_ID = #{user_id}
     					  AND O.USER_ID = #{user_id}
+    					  AND O.ORDER_NO = #{order_no}
 	</insert>
 	
 	<!-- 주문 현황 -->

@@ -20,8 +20,6 @@
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
 <style type="text/css">
-
-
 .custom_calendar_table tr td {
 	text-align: center;
 	font-size: 20px;
@@ -62,6 +60,9 @@
 	background-color: #E3F1D4;
 	color: #000;
 }
+p {
+    font-size: 30px;
+   }
 </style>
 
 
@@ -89,18 +90,15 @@
 
 								<div class="col-md-12">
 									<!-- 달력내용 -->
-									<div id="calendarForm">
-									
-									</div>
-									<br>
-									<div class="col-md-10" align="center">
-										<button type='submit' class='btn  btn-outline-success' onclick="fnInsert()">일기작성</button>
-									</div>
-									
-
-									<br>
+									<div id="calendarForm"></div>
+									<br> <br>
 								</div>
+															<div class="col-md-10" align="center">
+								<button type='submit' class='btn  btn-outline-success'
+									onclick="location.href='insertFdiary'">일기작성</button>
 							</div>
+							</div>
+
 
 						</div>
 
@@ -111,7 +109,7 @@
 
 				</div>
 			</div>
-<!-- 일기보기시작 -->
+			<!-- 일기보기시작 -->
 			<div class="modal fade bd-example-modal-lg" id="diaryModal"
 				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 				aria-hidden="true">
@@ -127,26 +125,8 @@
 					</div>
 				</div>
 			</div>
-<!-- 모달끝 -->
-			
-			
-<!-- 등록시작 -->
-			<div class="modal fade bd-example-modal-lg" id="insertF"
-				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-				aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button class="close" type="button" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">x</span>
-							</button>
-						</div>
-						<div class="modal-body"></div>
-					</div>
-				</div>
-			</div>
-<!-- 모달끝 -->
+			<!-- 모달끝 -->
+
 		</div>
 	</section>
 
@@ -189,12 +169,22 @@
 				if (cnt % 7 == 0) {
 					tag += "<tr>";
 				}
+				//월, 일 한자리 수 일 경우 앞에 0이 붙도록 함
+				var thisYear = $('#years').text();
+				var thisMonth = $('#months').text();
+				thisMonth = thisMonth.length < 2 ? '0' + thisMonth : thisYear;
+				var thisDay = i < 10 ? '0' + i : i;
 
-				tag += "<td id='days' onclick='selectDay("  + i  + ")' >" + i + "</td>";			//daySelect[i] -> 날짜 클릭 이벤트
+				thisDates = thisYear + thisMonth + thisDay;
+
+				tag += "<td onclick='javascript:selectDay(" + thisDates
+						+ ")' >" + i + "</td>"; //daySelect[i] -> 날짜 클릭 이벤트
 				cnt++;
+
 				if (cnt % 7 == 0) {
 					tag += "</tr>";
 				}
+
 			}
 			$(target).find("#custom_set_date").append(tag);
 			calMoveEvtFn();
@@ -213,9 +203,9 @@
 						+ "<thead class='cal_date'>"
 						+ "<th><button type='button' class='prev'><</button></th>"
 						+ "<th colspan='5'><p><span id='years'>"
-						+  year
+						+ year
 						+ "</span>년 <span id='months'>"
-						+  month
+						+ month
 						+ "</span>월</p></th>"
 						+ "<th><button type='button' class='next'>></button></th>"
 						+ "</thead>"
@@ -223,7 +213,7 @@
 						+ "<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>"
 						+ "</thead>"
 						+ "<tbody id='custom_set_date'>"
-						+ "</tbody>" + "</table>"						
+						+ "</tbody>" + "</table>"
 				return calendar_html_code;
 			}
 
@@ -256,23 +246,18 @@
 									"select_day");
 						});
 			}
-			
 
 		}
 
-		//날짜 클릭시 일기 상세조회
-		function selectDay(){			
-		$('#diaryModal .modal-body').load("getfDiary?user_id="+ '${user_id}' + "&fdiary_day=" + "2021-04-14");
-		$('#diaryModal').modal('show');
-	}
+		//날짜 클릭시 일기 상세조회			getfDiary?user_id=hgd&fdiary_day=20210415 
+		function selectDay(str) {
+			$('#diaryModal .modal-body').load(
+					"getfDiary?user_id=${user_id}&fdiary_day=" + str);
+			$('#diaryModal').modal('show');
 
-		
+		}
 
-		//등록 버튼 클릭시 입력 화면
-			function fnInsert(){
-				$('#insertF .modal-body').load("insertFdiary");
-				$('#insertF').modal('show');
-			}
 	</script>
+
 </body>
 </html>

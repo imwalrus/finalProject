@@ -12,12 +12,13 @@
 		<div class="row">
 			<!-- 배너(상단) -->
 			<c:forEach items="${applicationScope.banner}" var="banner" end="0" varStatus="status">
-			<c:if test="${banner.banner_check eq 0}" >
-			<div class="banner1 col-md-4">
-				<a href="${banner.banner_link}">
-				<img src="resources/images/banner/${banner.banner_filename}"></a>
-			</div>
-			</c:if>
+				<c:if test="${banner.banner_check eq 0}">
+					<div class="banner1 col-md-4">
+						<a href="${banner.banner_link}">
+							<img src="resources/images/banner/${banner.banner_filename}" width="190">
+						</a>
+					</div>
+				</c:if>
 			</c:forEach>
 		</div>
 		<div class="container">
@@ -25,7 +26,6 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="./" class="nav-link">Home</a></li>
@@ -49,7 +49,7 @@
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="#"></a>
-							<a class="dropdown-item" href="shop">상품 리스트</a>
+							<a class="dropdown-item" href="shop">판매리스트</a>
 							<c:if test="${user_auth eq 'farmer'}">
 								<!-- session 내 아이디 값 없을시 -->
 								<a class="dropdown-item" href="prodManage?user_id=${user_id}">판매 관리</a>
@@ -61,9 +61,8 @@
 							<a class="dropdown-item" href="infoShop">판매 소개</a>
 						</div></li>
 					<li class="nav-item"><a href="getComm" class="nav-link">커뮤니티</a></li>
-					<c:if test="${user_auth ne 'admin'}">
+					<c:if test="${user_auth ne 'admin' and user_id ne null}">
 						<!-- session 내 아이디 값 있을시 마이페이지 표시 -->
-
 						<li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
 					</c:if>
 					<c:if test="${ user_auth eq 'admin' }">

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,23 @@ public class PurchaseInqController {
 		model.addAttribute("list", pciMapper.getpuchasInqList());
 		return "mypageTiles/mypage/getpuchasInqList";
 		
+	}
+	
+	//전체조회(id별)
+	@RequestMapping("/getpuchasInqofUser")
+	public String getpuchasInqofUser(Model model,HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("list", pciMapper.getpuchasInqofUser(user_id));
+		return "mypageTiles/mypage/getpuchasInqList";
+		
+	}
+	
+	//판매자에게 들어온 문의리스트 전체조회
+	@RequestMapping("/getpuchasInqofFarmer")
+	public String getpuchasInqofFarmer(Model model,HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("list", pciMapper.getpuchasInqofFarmer(user_id));
+		return "mypageTiles/mypage/getpuchasInqofFarmer";
 	}
 	
 	//단건조회

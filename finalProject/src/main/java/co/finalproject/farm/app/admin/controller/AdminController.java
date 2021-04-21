@@ -91,10 +91,10 @@ public class AdminController {
 		return "notiles/admin/adminUserSel";
 	}
 	
-	// 회원 관리 - 회원 삭제
+	// 회원 관리 - 회원 탈퇴
 	@PostMapping("/adminUserDel")
 	public String adminUserDel(UserVO vo) {
-		userMapper.deleteUser(vo);
+		userMapper.memberOut(vo);
 		return "redirect:/adminUser";
 	}
 	
@@ -125,7 +125,7 @@ public class AdminController {
 	// 농업인 신청 현황 - 권한 수정
 	@PostMapping("/adminFarmerUpt")
 	public String adminFarmerUpt(UserVO vo) {
-		userMapper.updateFarmer(vo);
+		userMapper.updateUserToFarmer(vo);
 		userMapper.updateFarmerCheck(vo);
 		return "redirect:/adminFarmer";
 	}

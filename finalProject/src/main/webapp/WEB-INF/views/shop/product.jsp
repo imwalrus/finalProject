@@ -11,14 +11,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+// modal-등록 폼 불러오기
+	function modalInsertInq(str) {
+		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
+		$('#modal').modal();
+	}
+	
 	$(function() {
 		// 장바구니 클릭시 확인창(모달)
 		$("#addCart").submit(function(event) {
 			$('#modalAlert').modal();
 		});
-
 		$(document).ready(function() {
 			var quantitiy = 0;
 			// 수량 + 버튼
@@ -29,7 +33,6 @@
 				var quantity = parseInt($('.input-number').val());
 				$('.input-number').val(quantity + 1);
 			});
-
 			// 수량 - 버튼
 			$('.quantity-left-minus').click(function(e) {
 				e.preventDefault();
@@ -38,7 +41,6 @@
 					$('.input-number').val(quantity - 1);
 				}
 			});
-			
 			// 장바구니 버튼 클릭시 : 로그인 되어있지 않으면 경고창 & 수량이 0일 경우 경고창 & 수량이 재고보다 많을 경우 경고창
 			$('.cart').click(function(){
 				var id = $('input[name=user_id]').val();
@@ -90,7 +92,7 @@
 								판매자 <span style="color: #bbb;">${prod.user_id}</span>
 							</a>
 							<c:if test="${prod.user_id ne user_id}">
-								<a href="insertpuchasInq" class="mr-2">문의하기</a>
+								<a href="javascript:;" class="mr-2" id="req" onclick="modalInsertInq('${prod.pro_no}');">문의하기</a>
 							</c:if>
 						<div class="rating d-flex">
 							<p class="text-left mr-3">
@@ -171,6 +173,12 @@
 			</div>
 		</div>
 		<!-- 장바구니 모달 END -->
+		<!-- 단건 보기 · 등록 · 수정 Modal -->
+		<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 	</section>
 	<!-- 상품 페이지 END -->
 </body>

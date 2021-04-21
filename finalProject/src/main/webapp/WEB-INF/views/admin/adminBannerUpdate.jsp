@@ -35,7 +35,7 @@
 							<td class="h5"></td>
 							<td></td>
 							<td class="h6">
-								<img id="imagePriview" src="resources/images/banner/${banner.banner_filename}">
+								<img class="img-fluid" id="imagePriview" src="resources/images/banner/${banner.banner_filename}">
 							</td>
 						</tr>
 						<tr>

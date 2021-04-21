@@ -18,17 +18,31 @@
 			$("#pro_name").on('keyup', function() {
 				$("#pro_content").val($(this).val())
 			});
-		});
 
 		// 장바구니 버튼 클릭시 로그인 되어있지 않으면 경고창
-		$('.buy-now').click(function() {
+		$('.buy-now').click(function(e) {
 			var id = $('input[name=user_id]').val();
+			var quan = $(e.target).closest("div").children().val();
 			console.log(id);
+			console.log(quan);
 			if (id == '') {
 				alert("로그인이 필요합니다.");
 				return false;
+			} else if (quan == 0) {
+				alert("재고가 없습니다.");
+				return false;
+			} else if (quan - 1 < 0) {
+				alert("재고가 없습니다.");
+				return false;
 			}
 		});
+
+		// 화면 전환 후 가격 슬라이더 고정
+		<c:if test="${!empty param.pro_price}">
+		$("#slider_value_view").html('${param.pro_price}');
+		$(".custom-range").val('${param.pro_price}');
+		</c:if>
+	});
 
 		// 화면 전환 후 가격 슬라이더 고정
 		<c:if test="${!empty param.pro_price}">
@@ -82,7 +96,7 @@
 											<c:forEach items="${list}" var="shop">
 												<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 													<div class="product">
-														<input type="hidden" name="pro_no" value="${shop.pro_no }">
+														<input type="hidden" name="pro_no" value="${shop.pro_no}">
 														<a href="product?pro_no=${shop.pro_no}" class="img-prod">
 															<!-- 이미지 -->
 															<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" alt="Colorlib Template">
@@ -102,12 +116,13 @@
 															</div>
 															<div class="bottom-area d-flex px-3">
 																<div class="m-auto d-flex">
+																	<input type="hidden" id="pro_quantity" name="pro_quantity" value="${shop.pro_quantity}">
 																	<!-- 상세 페이지 이동 -->
 																	<a href="product?pro_no=${shop.pro_no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 																		<span><i class="ion-ios-menu"></i></span>
 																	</a>
 																	<!-- 장바구니 이동(본인 상품일시 표시 X) -->
-																	<c:if test="${shop.user_id ne user_id}">
+																	<c:if test="${shop.user_id ne user_id and shop.pro_condition eq '판매중'}">
 																		<a href="insertCart?pro_no=${shop.pro_no}&cart_count=1&user_id=${user_id}" class="buy-now d-flex justify-content-center align-items-center mx-1">
 																			<span><i class="ion-ios-cart"></i></span>
 																		</a>

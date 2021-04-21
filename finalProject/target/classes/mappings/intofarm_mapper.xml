@@ -8,13 +8,13 @@
 	<select id="farmerIntoList" parameterType="IntoTheFarmVO" 
 								resultType="IntoTheFarmVO">
 	
-		SELECT INTO_NO
-				,INTO_TITLE
-				,INTO_PRODUCT
-				,INTO_CITY
-				,TO_CHAR(INTO_DATE, 'YYYY-MM-DD') as INTO_DATES
-		FROM INTOFARM
-		WHERE USER_ID=#{user_id}
+      SELECT INTO_NO
+            ,INTO_TITLE
+            ,INTO_PRODUCT
+            ,INTO_CITY
+            ,INTO_DATE
+      FROM INTOFARM
+      WHERE USER_ID=#{user_id}
 			
 	</select>
 	
@@ -60,7 +60,7 @@
                     ,I.INTO_PHONE
 		FROM INTOFARM I JOIN INTOFARM_REQ Q
 		ON (I.INTO_NO = Q.INTO_NO)
-		WHERE Q.USER_ID = ${user_id}				
+		WHERE Q.USER_ID = #{user_id}				
 
 	</select>
 </mapper>

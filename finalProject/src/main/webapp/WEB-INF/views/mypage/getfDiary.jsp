@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.table {
+    width: 100%;
+    border: 2px solid #444444;
+  }
 
+th{
+
+background-color: #e3f1d4;
+}
+
+</style>
 <div class="card-body">
 
 	<div class="row" id="diaryList">
@@ -20,8 +31,8 @@ $.ajax({
 	success: function(data) {
 		for(i=0; i<data.length; i++){								
 			$("#diaryList").append(
-				"<table border='1'><tr><th>" + "날짜" + "</th><td>"
-					+ data[i].fdiary_day + "</td><th>"
+					"<table class='table'><tr><th>" + "작물" + "</th><td>"
+					+ data[i].crop_no + "</td><th>"
 					+ "시작시간" + "</th><td>"
 					+ data[i].fdiary_stime + "</td><th>"
 					+ "종료시간" + "</th><td>"
@@ -41,7 +52,7 @@ $.ajax({
 	
 });
 
-/* http://localhost:8666/temp/getfDiary?user_id=hgd&fdiary_day=2021-04-14 */
+/* http://localhost:8666/temp/getfDiary?user_id=hgd&fdiary_day=2021-04-15 */
 
 
 

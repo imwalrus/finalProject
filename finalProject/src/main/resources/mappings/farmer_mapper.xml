@@ -26,7 +26,7 @@
 				(select nvl(max(farmer_no),0)+1 from farmer)
 				,#{farmer_filename}
 				,#{user_id}
-				,'sysdate'
+				,sysdate
 				)
 	
 	</insert>

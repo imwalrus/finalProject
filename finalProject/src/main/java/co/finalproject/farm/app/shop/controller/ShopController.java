@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import co.finalproject.farm.app.myPage.service.puchasInqVO;
+import co.finalproject.farm.app.myPage.service.impl.PurchaseInqMapper;
 import co.finalproject.farm.app.shop.service.CartVO;
 import co.finalproject.farm.app.shop.service.CrawlingVO;
 import co.finalproject.farm.app.shop.service.OrderVO;
@@ -34,6 +37,7 @@ import co.finalproject.farm.common.Paging;
 public class ShopController {
 	@Autowired ShopMapper shopMapper;
 	@Autowired UserMapper userMapper;
+	@Autowired PurchaseInqMapper purchaseInqMapper;
 
 	// 전체 리스트 · 검색 · 카테고리 · 페이징
 	@GetMapping("/shop")
@@ -97,6 +101,31 @@ public class ShopController {
 		return "notiles/shop/modalUpdate";
 	}
 
+	// 문의 등록 - 모달
+	@GetMapping("/modalInsertInq")
+	public String modalInsertInq(ShopVO vo, Model model) {
+		model.addAttribute("modal", shopMapper.getProduct(vo));
+		return "notiles/shop/modalInsertInq";
+	}
+	
+	// 문의 등록
+	@PostMapping("/insertInq")
+	public String insertpuchasInqProc(puchasInqVO vo,MultipartHttpServletRequest req) throws Exception,IOException{
+		//파일 업로드
+		MultipartFile uploadFile = vo.getInqfile();
+		String inq_filename = "";
+		if(uploadFile != null && !uploadFile.isEmpty() &&  uploadFile.getSize() > 0) {
+			String filename = uploadFile.getOriginalFilename();
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			inq_filename += '@' + rename.getName();
+			vo.setPur_inq_filename(rename.getName());
+		}
+		purchaseInqMapper.insertpuchasInq(vo);
+		return "redirect:/getpuchasInqList";
+	}
+	
 	// 상품 등록
 	@PostMapping("/insertProduct")
 	public String insertProduct(ShopVO vo, HttpServletRequest req) throws Exception, IOException {

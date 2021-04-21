@@ -93,7 +93,7 @@
 
 <!-- 읽지않은 전체 메세지 갯수 -->
 <select id="getUnreadMessageAll" resultType="int" parameterType="String">
-	SELECT COUNT(*) "msg_num" FROM MESSAGE WHERE MSG_RECEIVER = ${user_id} AND MSG_READTIME IS NULL 
+	SELECT count(*) FROM MESSAGE WHERE MSG_RECEIVER = #{user_id} AND MSG_READTIME IS NULL 
 </select>
 
 <!-- 검색기능 -->

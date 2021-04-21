@@ -60,4 +60,9 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.getUnreadMessage(user_id);
 	}
 
+	@Override
+	public int getUnreadMessageAll(String user_id) {
+		return chatDAO.getUnreadMessageAll(user_id);
+	}
+
 }
