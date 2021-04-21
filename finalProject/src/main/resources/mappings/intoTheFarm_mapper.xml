@@ -45,6 +45,7 @@
              , INTO_INFO
              , USER_ID
              , INTO_CITY
+             , INTO_PROGRESS
 		FROM INTOFARM
 		<where>
 		 <!-- 관리자에서 사용 START(부팀장이 추가) -->

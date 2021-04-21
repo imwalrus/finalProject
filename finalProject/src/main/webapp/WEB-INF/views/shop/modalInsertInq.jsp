@@ -4,8 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <body>
+	<script>
+		$('.btn btn-outline-success').submit(function(){
+			var id = $('input[name=user_id]').val();
+			if (id == '') {
+				alert('로그인이 필요합니다');
+				return false;
+			}
+		});
+	</script>
 	<section class="pcoded-main-container">
 		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
@@ -70,8 +78,8 @@
 									</div>
 									<div class="form-group row" align="center">
 										<div class="col-sm-10">
-											<button type="submit" class="btn  btn-outline-success">등록</button>
-											<button type="reset" class="btn  btn-outline-danger">취소</button>
+											<button type="submit" class="btn btn-outline-success">등록</button>
+											<button type="reset" class="btn btn-outline-danger">취소</button>
 										</div>
 									</div>
 								</form>

@@ -12,18 +12,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script>
-// modal-등록 폼 불러오기
-	function modalInsertInq(str) {
-		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
-		$('#modal').modal();
-	}
-
 	$(function() {
 		// 장바구니 클릭시 확인창(모달)
 		$("#addCart").submit(function(event) {
 			$('#modalAlert').modal();
 		});
-
 		$(document).ready(function() {
 			var quantitiy = 0;
 			// 수량 + 버튼
@@ -34,7 +27,6 @@
 				var quantity = parseInt($('.input-number').val());
 				$('.input-number').val(quantity + 1);
 			});
-
 			// 수량 - 버튼
 			$('.quantity-left-minus').click(function(e) {
 				e.preventDefault();
@@ -43,7 +35,6 @@
 					$('.input-number').val(quantity - 1);
 				}
 			});
-			
 			// 장바구니 버튼 클릭시 : 로그인 되어있지 않으면 경고창 & 수량이 0일 경우 경고창 & 수량이 재고보다 많을 경우 경고창
 			$('.cart').click(function(){
 				var id = $('input[name=user_id]').val();
@@ -61,8 +52,23 @@
 		            return false;
 		        }
 			});
+			// 문의하기 버튼 클릭시 : 로그인 되어있지 않으면 경고창
+			var id = $('input[name=user_id]').val();
+			if (id == '') {
+				$('#req').on('click', function() {
+		            alert("로그인이 필요합니다.")
+				});
+			} else {
+				$("#req").attr('onclick', "modalInsertInq('${prod.pro_no}');")
+			}
 		});
 	});
+
+	// modal-등록 폼 불러오기
+	function modalInsertInq(str) {
+		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
+		$('#modal').modal();
+	}
 </script>
 </head>
 <body class="goto-here">
@@ -95,7 +101,7 @@
 								판매자 <span style="color: #bbb;">${prod.user_id}</span>
 							</a>
 							<c:if test="${prod.user_id ne user_id}">
-								<a href="javascript:;" class="mr-2" onclick="modalInsertInq('${prod.pro_no}')">문의하기</a>
+								<a href="javascript:;" class="mr-2" id="req">문의하기</a>
 							</c:if>
 						<div class="rating d-flex">
 							<p class="text-left mr-3">
