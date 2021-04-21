@@ -125,12 +125,10 @@ $(document).ready(function(){
 	    <div style="margin-left:550px;">
 		<button type="button" class="btn btn-outline-primary" onclick="location.href='getComm?page=${commPagingVO.page}'" style="float:left;">목록보기</button>
 		</div>
-		<c:if test="${user_auth == 'admin' }">
-		<div style="margin-left:272px; float:left;">
+	   <div style="margin-left:272px; float:left;">
 	   <button class="btn btn-outline-primary" type="submit">저장</button>&nbsp;&nbsp;
        <button class="btn btn-outline-primary" type="reset">취소</button>
 		</div>
-		</c:if>
 		   <script>
 	        $('#summernote')
 	        .summernote({

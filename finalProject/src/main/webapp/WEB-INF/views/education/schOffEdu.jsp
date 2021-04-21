@@ -43,7 +43,7 @@ $(function() {
     <tr>
     <th class="table-active" width="15%" align="center">주제</th>
     <td width="35%"align="center"><span class="before">${edu.edu_title}</span>
-    <input class="form-control after" id="form-control1" type="text" id="edu_title1" name="edu_title" value="${edu.edu_title}"></td>
+    <input class="form-control after" id="form-control1" type="text" id="edu_title1" name="edu_title" value="${edu.edu_title}" title="주제"></td>
     <th class="table-active" width="15%" align="center">강의일자</th>
     <td width="35%"align="center"><span class="before">${edu.edu_startdate}</span>
     <input class="after" id="date" type="date" name="edu_startdate" value="${edu.edu_startdate}"> 
@@ -55,11 +55,12 @@ $(function() {
     <tr>
     <th class="table-active" width="15%" align="center">교육시간</th>
     <td width="35%" align="center"><span class="before">${edu.edu_time}</span>
-    <input class="form-control after" id="form-control1" type="text" id="edu_time" name="edu_time" value="${edu.edu_time}" placeholder="　　　　　　ex)10:00 - 15:00">
+    <input class="form-control after" id="form-control1" type="text" id="edu_time" 
+    name="edu_time" value="${edu.edu_time}" placeholder="　　　　　　ex)10:00 - 15:00" title="교육시간">
     </td>
     <th class="table-active" width="15%" align="center">교육기관</th>
     <td width="35%" align="center"><span class="before">${edu.edu_organ}</span>
-    <input class="form-control after" id="form-control1" type="text" id="edu_organ" name="edu_organ" value="${edu.edu_organ}"></td>
+    <input class="form-control after" id="form-control1" type="text" id="edu_organ" name="edu_organ" value="${edu.edu_organ}" title="교육기관"></td>
     </tr>
     <tr>
     <td class="table-active" width="100" align="center">지역</td>
@@ -101,15 +102,15 @@ $(function() {
     <tr>
     <td class="table-active" width="100" align="center">교육 장소</td>
     <td colspan="3" align="center"><span class="before">${edu.edu_place}</span>
-    <input class="form-control after" id="edu_place1" type="text"  name="edu_place" value="${edu.edu_place}"></td>
+    <input class="form-control after" id="edu_place1" type="text"  name="edu_place" value="${edu.edu_place}" title="교육 장소"></td>
     </tr>
     <tr>
     <td class="table-active" width="100" align="center">담당자 이름</td>
     <td align="center"><span class="before">${edu.edu_person}</span>
-    <input class="form-control after" id="form-control1" type="text" id="edu_person" name="edu_person" value="${edu.edu_person}"></td>
+    <input class="form-control after" id="form-control1" type="text" id="edu_person" name="edu_person" value="${edu.edu_person}" title="담당자 이름"></td>
     <td class="table-active" width="100" align="center">담당자 연락처</td>
     <td align="center"><span class="before">${edu.edu_phone}</span>
-    <input class="form-control after" id="form-control1" type="text" id="edu_phone" name="edu_phone" value="${edu.edu_phone}"></td>
+    <input class="form-control after" id="form-control1" type="text" id="edu_phone" name="edu_phone" value="${edu.edu_phone}" title="담당자 연락처"></td>
     </tr>
     <tr>
     <td class="table-active" align="center" colspan="4">교육이미지</td>
@@ -118,7 +119,7 @@ $(function() {
     <td align="center" style="height:400px;" colspan="4">
     <input type="file" class="form-control after" id="gdsImg" name="uploadFile" style="width:400px; padding-left:120px; padding-top:10px" >
 	<input type="hidden" name="edu_filename">
-	<div class="select_img"><img id="beforeImg" width="900px" src="resources/main/images/${edu.edu_filename}"></div>
+	<div class="select_img"><img id="beforeImg" width="900px" src="resources/images/education/${edu.edu_filename}"></div>
     </td>
     </tr>
     <tr>
@@ -126,7 +127,7 @@ $(function() {
     </tr>
     <tr>
     <td align="center" style="height:400px;" colspan="4" align="center"><span class="before">${edu.edu_content}</span>
-    <textarea class="form-control after" rows="15" cols="133" id="edu_content" name="edu_content">${edu.edu_content}</textarea></td>
+    <textarea class="form-control after" rows="15" cols="133" id="edu_content" name="edu_content" title="교육소개">${edu.edu_content}</textarea></td>
     </tr>
     </thead>
     </table>

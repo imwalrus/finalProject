@@ -28,8 +28,8 @@ public class NoticeController {
 	//게시글 목록
     @RequestMapping("/getNotices")
     public String  getNotices(NoticePagingVO vo, Paging paging, Model model) {
-    	paging.setPageUnit(7); //한 페이지에 표시되는 레코드 건수
-		paging.setPageSize(4); //페이지 번호수
+    	paging.setPageUnit(10); //한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(5); //페이지 번호수
 		//페이징
 		if(vo.getPage() == null) {
 			vo.setPage(1);
