@@ -36,12 +36,12 @@ function categoryChange() {
 
 </head>
 <body class="goto-here">
-    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/main_image2.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About us</span></p>
-            <h1 class="mb-0 bread">About us</h1>
+          	<p class="breadcrumbs"><span class="mr-2"></span> <span>YOUTH FARM</span></p>
+            <h1 class="mb-0 bread" style="font-size:50px !important;">공지사항</h1>
           </div>
         </div>
       </div>

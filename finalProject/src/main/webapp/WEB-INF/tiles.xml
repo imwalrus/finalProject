@@ -68,12 +68,22 @@
 			<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 
-
+	<!-- intofarmtiles -->
+	<definition name="intofarmTiles/*/*" template="/WEB-INF/views/tiles/intofarm/intofarmTemplete.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/main/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/tiles/intofarm/left.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="intofarmTiles/*" template="/WEB-INF/views/tiles/admin/adminTemplete.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/main/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/tiles/intofarm/left.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
 	<definition name="*/*" extends="mainTemplete">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
  		<put-attribute name="footer" value="/WEB-INF/views/tiles/main/footer.jsp"/> 
 	</definition>
-
 	<definition name="*" extends="mainTemplete">
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
  		<put-attribute name="footer" value="/WEB-INF/views/tiles/main/footer.jsp"/> 

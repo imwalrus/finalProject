@@ -13,6 +13,7 @@
 
 <!-- include summernote-ko-KR -->
 <script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
 	/*  */
 function insertFarm() {
