@@ -39,7 +39,7 @@ public class IntoFarmReqController {
 	public String getSearchReqFarm(IntoFarmReqVO vo, Model model) {
 		
 		model.addAttribute("reqSearchList", intoFarmReqMapper.getSearchReqFarm(vo));
-		return "intoFarm/intoTheFarm";
+		return "intofarmTiles/intoFarm/intoTheFarm";
 		
 	}
 	 
@@ -52,7 +52,7 @@ public class IntoFarmReqController {
 		vo.setUser_id(id);
 		uservo.setUser_id(id);
 		model.addAttribute("uservo",userService.loginCheck(uservo));
-		return "intoFarm/intoTheFarm";
+		return "intofarmTiles/intoFarm/intoTheFarm";
 	}
 	
 	//체험 신청

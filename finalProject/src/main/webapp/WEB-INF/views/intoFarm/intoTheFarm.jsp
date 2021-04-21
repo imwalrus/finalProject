@@ -8,15 +8,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <!-- include summernote-ko-KR -->
 <script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
 
 <!--이미지 슬라이드-->
- <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
- <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
  function cgsummernote(){
 	 $('#summernote')
@@ -47,12 +47,13 @@
 		
 </script>  
 <script>
-			/*페이징 값 넣기*/
-			$(document).ready(function(){
-				$("#into_city").val($(this).val());
-				$("#into_product").val($(this).val());
-				$("#into_date").val($(this).val());
-			});	
+/*페이징 값 넣기*/
+$(document).ready(function(){
+	$("#into_city").val($(this).val());
+	$("#into_product").val($(this).val());
+	$("#into_date").val($(this).val());
+	
+});	
 			
 			/*페이징*/
 	         function goPage(p) {
@@ -197,83 +198,6 @@
 .modal.modal-center {
   text-align: center;
 }
-
-/*이미지 슬라이드  */
-.slider{
-    width: 340px;
-    height: 509px;
-    position: relative;
-    margin: 0 auto;
-}
-.slider input[type=radio]{
-    display: none;
-}
-ul.imgs{
-    padding: 0;
-    margin: 0;
-}
-ul.imgs li{
-    position: absolute; /* 슬라이드가 겹쳐서 모여야 하므로 absolute 속성으로 배치 */
-    opacity: 0; /* 체크한 라디오박스 순서의 슬라이드만 표시되도록 기본 투명도 설정 */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.bullets{
-    position: absolute;
-    left: 50%; /* 가로로 가운데 정렬 */
-    transform: translateX(-50%);
-    bottom: 20px; /* 슬라이드 밑에서 20px 간격 띄움 */
-    z-index: 2; /* 슬라이드 위에 보이도록 레이어 순위를 높임 */
-}
-.bullets label{
-    display: inline-block; /* 한 줄로 불릿 나열*/
-    border-radius: 50%; /* 원형 불릿으로 처리 */
-    background-color: rgba(0,0,0,0.55);
-    width: 20px; /* 불릿 너비 */
-    height: 20px; /* 불릿 높이 */
-    cursor: pointer;
-}
-.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
-    background-color: #fff;
-}
-.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
-    background-color: #fff;
-}
-.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
-    background-color: #fff;
-}
-.slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
-    background-color: #fff;
-}
-.slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){
-    opacity: 1;
-    transition: 1s;
-    z-index: 1;
-}
-.slider input[type=radio]:nth-child(2):checked~ul.imgs>li:nth-child(2){
-    opacity: 1;
-    transition: 1s;
-    z-index: 1;
-}
-.slider input[type=radio]:nth-child(3):checked~ul.imgs>li:nth-child(3){
-    opacity: 1;
-    transition: 1s;
-    z-index: 1;
-}
-.slider input[type=radio]:nth-child(4):checked~ul.imgs>li:nth-child(4){
-    opacity: 1;
-    transition: 1s;
-    z-index: 1;
-}
-ul.imgs li{
-    position: absolute;
-    opacity: 0;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
-}
 /*모달  */
 .modal-dialog.modal-fullsize {
   width: 100%;
@@ -286,8 +210,62 @@ ul.imgs li{
   min-height: 100%;
   border-radius: 0; 
 }
-
-
+ 	#info{
+ 		display: block; 
+ 		margin: 0px auto;
+ 	}
+ 	#header{
+ 		width:200px;
+ 	}
+ 	.leftMenu {
+	    list-style-type: none;
+	    margin: 0;
+		width: 230px !important;
+	    background-color: #fff;
+	    padding: 0;
+	}
+	.leftMenuBar{
+		height:60px !important;
+		width: 225px !important;
+	}
+	.leftMenuBar a {
+		height:60px;
+	    display: block;
+	    color: #000;
+	    padding: 15px 16px;
+	    text-decoration: none;
+	}
+	.leftMenuBar a.active {
+	    background-color: #78c2ad;
+	    color: white;
+	}
+	.leftMenuBar a:hover:not(.active) {
+	    background-color: #78c2ad59;
+	    color: white;
+	}
+	.leftMenuDiv{
+	    display: block;
+	    z-index: 1028;
+	    position: fixed;
+	    box-shadow: 0 2px 10px -1px rgb(69 90 100 / 30%);
+	    transition: all 0.3s ease-in-out;
+	    width: 230px;
+	    height: calc(100%);
+	    margin-top: 50px;
+	    border-radius: 0 6px 0 0;
+	    top: 50px;
+	    background: #fff;
+	    color: #97a7c1;
+	}
+	.leftMenuDiv .leftMenuHeader{
+		position: relative;
+	    padding-top: 20px;
+	    height: 116px;
+	    text-align: center;
+	}
+	.material-icons{
+		
+	}
 </style>
 </head>
 <body class="goto-here">
@@ -470,27 +448,6 @@ ul.imgs li{
 		</div>
 	</div>
 
-         
- <!--이미지 슬라이드 -->
-	<div class="slider">
-	    <input type="radio" name="slide" id="slide1" checked>
-	    <input type="radio" name="slide" id="slide2">
-	    <input type="radio" name="slide" id="slide3">
-	    <input type="radio" name="slide" id="slide4">
-	    <ul id="imgholder" class="imgs">
-	        <li><img src="images/"></li>
-	        <li><img src="image/a.jpg"></li>
-	        <li><img src="image/b.jpg"></li>
-	        <li><img src="image/b.jpg"></li>
-	    </ul>
-	    <div class="bullets">
-	        <label for="slide1">&nbsp;</label>
-	        <label for="slide2">&nbsp;</label>
-	        <label for="slide3">&nbsp;</label>
-	        <label for="slide4">&nbsp;</label>
-	    </div>
-	</div>
- <!--end of 이미지  -->
- 		
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 		
 </body>
 </html>

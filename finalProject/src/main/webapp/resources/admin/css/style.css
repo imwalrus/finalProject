@@ -6927,13 +6927,13 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #4680ff !important;
+    background-color: #78c2ad !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-    background-color: #135dff !important;
+    background-color: #78c2ad !important;
 }
 
 .bg-secondary {
@@ -20709,7 +20709,7 @@ pre[class*=language-]:before {
     height: calc(100% - 50px);
     margin-top: 50px;
     border-radius: 0 6px 0 0;
-    top: 0;
+    top: 50px;
     background: #101b33;
     color: #97a7c1;
 }

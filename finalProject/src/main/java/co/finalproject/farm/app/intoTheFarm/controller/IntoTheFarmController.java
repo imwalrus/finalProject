@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -76,35 +78,51 @@ public class IntoTheFarmController {
 	  model.addAttribute("uservo", userService.loginCheck(uservo));
 	  model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
 	  
-	  return "intoFarm/intoTheFarm"; 
+	  return "intofarmTiles/intoFarm/intoTheFarm"; 
 	  }
 	 
 	
 	// 단건조회
 	@RequestMapping("/getSearchFarm")
-	public String getSearchFarm(IntoTheFarmVO vo, Model model) {
-
-		model.addAttribute("getlist", intoTheFarmMapper.getSearchFarm(vo));
-		return "notiles/intoFarm/applyModal";
+	public String getSearchFarm(IntoTheFarmVO vo, Model model) {	  
+		  model.addAttribute("getlist", intoTheFarmMapper.getSearchFarm(vo));
+		  
+		  IntoTheFarmVO newVO = new IntoTheFarmVO();
+		  newVO = intoTheFarmMapper.getSearchFarm(vo);
+		  
+		  String filename = newVO.getInto_filename();
+		  List<String> images = new ArrayList<>();
+		  String[] filenameSplit = filename.split("@");
+		  for(int i=0; i<filenameSplit.length; i++) {
+			  images.add(filenameSplit[i]);
+		  }
+		  model.addAttribute("images", images); //image리스트 따로 받아서 @로 자르고 foreach문 돌리기 위해 list로 넘기기
+		  return "notiles/intoFarm/applyModal";
 	}
 
 	// 등록
 	@GetMapping("/insertFarm") // 등록 페이지
 	public String insertFarm(IntoTheFarmVO vo, Model model) {
-		return "intoFarm/insertIntoFarm";
+		return "intofarmTiles/intoFarm/insertIntoFarm";
 	}
 
-	//date null값 허용
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(java.util.Date.class,	
-                new CustomDateEditor(dateFormat, false));
-    }
+	/*
+	 * //date null값 허용
+	 * 
+	 * @InitBinder public void initBinder(WebDataBinder binder) { SimpleDateFormat
+	 * dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	 * binder.registerCustomEditor(java.util.Date.class, new
+	 * CustomDateEditor(dateFormat, false)); }
+	 */
 
 		
 	@PostMapping("/insertFarm") // 등록
-	public String insertFarmProc(IntoTheFarmVO vo, HttpServletRequest req) throws Exception, IOException {
+	public String insertFarmProc(IntoTheFarmVO vo, HttpServletRequest req, UserVO uservo, HttpSession session) throws Exception, IOException {
+		//로그인 아이디 가져오기
+		String id = (String)session.getAttribute("user_id");
+		vo.setUser_id(id);
+		uservo.setUser_id(id);
+		
 		// 파일 업로드
 		MultipartFile[] files = vo.getUploadFile();
 		String file1="";
@@ -116,8 +134,8 @@ public class IntoTheFarmController {
 
 				File rename = FileRenamePolicy.rename(new File(path, orgFile));
 				file.transferTo(new File(path, rename.getName()));
-				file1 += '@'+rename.getName();
-				vo.setInto_filename(rename.getName());
+				file1 += rename.getName()+'@';
+				vo.setInto_filename(file1);
 
 			}
 		}
@@ -163,7 +181,7 @@ public class IntoTheFarmController {
 	//농촌속으로 설명 보는 뷰페이지로 이동
 	@GetMapping("/getFarmInfo")
 	public String getFarmInfo(IntoTheFarmVO vo) {
-		return "intoFarm/getFarmInfo";
+		return "intofarmTiles/intoFarm/getFarmInfo";
 	}
 	
 	//농촌속으로 문의 뷰페이지(모달)

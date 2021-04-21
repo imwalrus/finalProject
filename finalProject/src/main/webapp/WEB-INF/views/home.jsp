@@ -14,7 +14,7 @@
 <body class="goto-here">
 	<section id="home-section" class="hero">
 		<div class="home-slider owl-carousel">
-			<div class="slider-item" style="background-image: url(resources/main/images/bg_1.jpg);">
+			<div class="slider-item" style="background-image: url(resources/main/images/main_image.jpg);">
 				<div class="overlay"></div>
 				<div class="container">
 					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
