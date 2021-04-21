@@ -13,8 +13,19 @@
          #{adr}
          </foreach>
 		 </if>
+		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
+		 <if test="comm_adr != null and comm_adr != ''">
+			    COMM_ADR=#{comm_adr}
+		 </if>
+		 <if test="comm_title != null and comm_title != ''">
+			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+		 </if>
+		 <if test="comm_content != null and comm_content != ''">
+			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 </if>
+		 <!-- 관리자에서 사용 END -->
 		 <if test="comm_subject != null and comm_subject != ''">
-			    AND COMM_SUBJECT=#{comm_subject}
+			    AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
@@ -96,8 +107,19 @@
          #{adr}
          </foreach>
 		 </if>
+		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
+		 <if test="comm_adr != null and comm_adr != ''">
+			    COMM_ADR=#{comm_adr}
+		 </if>
+		 <if test="comm_title != null and comm_title != ''">
+			    AND UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
+		 </if>
+		 <if test="comm_content != null and comm_content != ''">
+			    AND UPPER(COMM_CONTENT) LIKE '%' || UPPER(#{comm_content}) || '%'
+		 </if>
+		 <!-- 관리자에서 사용 END -->
 		 <if test="comm_subject != null and comm_subject != ''">
-			    AND COMM_SUBJECT=#{comm_subject}
+			     AND UPPER(COMM_SUBJECT) LIKE '%' || UPPER(#{comm_subject}) || '%'
 		 </if>
          <if test="comm_title != null and comm_title != ''">
 			    AND ( UPPER(COMM_TITLE) LIKE '%' || UPPER(#{comm_title}) || '%'
@@ -105,4 +127,47 @@
 		 </if>
 	 </where>
     </select>
+    
+     <!-- 게시글의 댓글 목록 -->
+     <select id="getReplyList" resultType="CommunityReplyVO">
+     SELECT *
+     FROM COMMUNITY_REPLY
+     WHERE COMM_NO=#{comm_no} 
+     order by 1
+     </select>
+     
+     <!-- 게시글 댓글 등록 -->
+     <insert id="insertReply" parameterType="CommunityReplyVO"> 
+     <!-- 댓글 등록하고 나서 바로 시간이 안 뜨고 null로 떴었음
+     그걸 고치기 위해 미리 rep_nof를 인식 시키고 등록을 하면 시간 인식이 된다(?) -->
+      <selectKey resultType="int" keyProperty="comm_rep_no" order="BEFORE">
+        		(select nvl(max(comm_rep_no),0)+1 from community_reply)      
+     </selectKey>  
+     INSERT INTO COMMUNITY_REPLY
+     (COMM_REP_NO,
+     USER_ID,
+     COMM_NO,
+     COMM_REP_CONTENT,
+     COMM_REP_DATE)
+     VALUES ( #{comm_rep_no},
+              #{user_id},
+              #{comm_no},
+              #{comm_rep_content},
+              #{comm_rep_date})
+     </insert>
+     
+     <!-- 게시글 댓글 수정 -->
+     <update id="updateReply" parameterType="CommunityReplyVO">
+		UPDATE COMMUNITY_REPLY
+		<set>
+<if test="comm_rep_content !=null and comm_rep_content !=''"> COMM_REP_CONTENT=#{comm_rep_content}</if>
+		</set>
+		WHERE COMM_REP_NO = #{comm_rep_no}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="CommunityReplyVO">
+		DELETE FROM COMMUNITY_REPLY
+		WHERE COMM_REP_NO = #{comm_rep_no}
+	</delete>  
 </mapper>

@@ -125,9 +125,9 @@
 								<div class="cart-detail cart-total p-3 p-md-4">
 									<h3 class="billing-heading mb-4">장바구니</h3>
 									<c:set var="price" value="0" />
-									<c:forEach items="${order}" var="order" varStatus="status">
-										<input type="hidden" name="pro_no" value="${order.pro_no }">
-										<input type="hidden" name="cart_count" value="${order.cart_count }">
+									<c:forEach items="${order}" var="order">
+										<input type="hidden" name="pro_no" value="${order.pro_no}">
+										<input type="hidden" name="cart_count" value="${order.cart_count}">
 										<p class="d-flex">
 											<c:set var="name" value="${order.pro_name}" />
 											<c:set var="com" value="${order.cart_price}" />
@@ -157,7 +157,8 @@
 										</div>
 									</div>
 									<p>
-										<a href="#" class="btn btn-primary py-3 px-4" onclick="payment()">결제하기</a>
+										<!-- <a href="#" class="btn btn-primary py-3 px-4" onclick="payment()">결제하기</a> -->
+										<button type="submit" class="btn btn-primary py-3 px-4">결제하기</button>
 									</p>
 								</div>
 							</div>

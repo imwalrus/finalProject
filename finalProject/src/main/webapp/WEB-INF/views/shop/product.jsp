@@ -10,8 +10,14 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script>
+// modal-등록 폼 불러오기
+	function modalInsertInq(str) {
+		$('#modal .modal-content').load("modalInsertInq?pro_no=" + str);
+		$('#modal').modal();
+	}
+
 	$(function() {
 		// 장바구니 클릭시 확인창(모달)
 		$("#addCart").submit(function(event) {
@@ -38,14 +44,22 @@
 				}
 			});
 			
-			// 장바구니 버튼 클릭시 로그인 되어있지 않으면 경고창
+			// 장바구니 버튼 클릭시 : 로그인 되어있지 않으면 경고창 & 수량이 0일 경우 경고창 & 수량이 재고보다 많을 경우 경고창
 			$('.cart').click(function(){
 				var id = $('input[name=user_id]').val();
+				var quan = $('input[name=pro_quantity]').val();
+				var cnt = $('input[name=cart_count]').val();
 				console.log(id);
 		        if (id == '') {
 		            alert("로그인이 필요합니다.");
 		            return false;
-		        } 
+		        } else if (cnt == 0) {
+		            alert("수량을 입력해주세요.");
+		            return false;
+		        } else if (quan - cnt < 0) {
+		            alert("재고가 부족합니다.");
+		            return false;
+		        }
 			});
 		});
 	});
@@ -56,31 +70,40 @@
 	<section class="ftco-section">
 		<form action="insertCart" id="addCart" name="addCart" method="post">
 			<input type="hidden" name="pro_no" value="${prod.pro_no}">
+			<input type="hidden" name="pro_quantity" value="${prod.pro_quantity}">
 			<input type="hidden" name="user_id" value="${user_id}">
 			<div class="container">
+			
+				<div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+					<a href="shop">
+						<!-- '<- 쇼핑 계속하기' -->
+						<i class="material-icons arrow_back">&#xe5c4;<strong> 상품 리스트</strong></i>
+					</a>
+				</div>
 				<div class="row">
 					<div class="col-lg-6 mb-5 ftco-animate">
 						<!-- 이미지 -->
-						<a href="resources/main/images/${prod.pro_filename}" class="image-popup">
-							<img src="resources/main/images/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
+						<a href="resources/images/shop/${prod.pro_filename}" class="image-popup">
+							<img src="resources/images/shop/${prod.pro_filename}" class="img-fluid" alt="Colorlib Template">
 						</a>
 					</div>
 					<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 						<!-- 상품 이름 -->
-						<h3>${prod.pro_name}</h3>
-						<p class="text-left mr-4">
+						<h2>${prod.pro_name}</h2>
+						<p class="text-left mr-3">
 							<a class="mr-2" style="color: #000;">
 								판매자 <span style="color: #bbb;">${prod.user_id}</span>
 							</a>
-							<!-- ★문의하기 url 넣기★ -->
-							<a href="#" class="mr-2">문의하기</a>
+							<c:if test="${prod.user_id ne user_id}">
+								<a href="javascript:;" class="mr-2" onclick="modalInsertInq('${prod.pro_no}')">문의하기</a>
+							</c:if>
 						<div class="rating d-flex">
-							<p class="text-left mr-4">
+							<p class="text-left mr-3">
 								<a class="mr-2" style="color: #000;">
 									카테고리 <span style="color: #bbb;">${prod.pro_category}</span>
 								</a>
 							</p>
-							<p class="text-left">
+							<p class="text-left mr-3">
 								<a class="mr-2" style="color: #000;">
 									재고 <span style="color: #bbb;">${prod.pro_quantity}개</span>
 								</a>
@@ -98,7 +121,7 @@
 							<span style="color: #000;">배송비 :</span> ￦ 2,500
 						</p>
 						<!-- 내용 -->
-						<p>${prod.pro_content}</p>
+						<strong>${prod.pro_content}</strong>
 						<div class="row mt-4">
 							<div class="input-group col-md-6 d-flex mb-3">
 								<span class="input-group-btn ml-2">
@@ -119,7 +142,16 @@
 							<c:if test="${prod.user_id eq user_id}">
 								<a href="prodManage?user_id=${user_id}" class="btn btn-success py-3 px-5">상품수정</a>
 							</c:if>
-							<c:if test="${prod.user_id ne user_id}">
+							<!-- 품절시 버튼 변경 -->
+							<c:if test="${prod.pro_quantity eq 0}">
+								<a href="javascript:;" class="btn btn-dark py-3 px-5">품절</a>
+							</c:if>
+							<!-- 품절시 버튼 변경 -->
+							<c:if test="${prod.pro_condition eq '준비중'}">
+								<a href="javascript:;" class="btn btn-warning py-3 px-5">상품준비중</a>
+							</c:if>
+							<!-- 장바구니 담기 버튼 -->
+							<c:if test="${prod.user_id ne user_id and prod.pro_quantity ne 0 and prod.pro_condition eq '판매중'}">
 								<a href="#modalAlert" class="cart btn btn-primary py-3 px-5" data-toggle="modal">장바구니 담기</a>
 							</c:if>
 						</p>
@@ -144,6 +176,12 @@
 			</div>
 		</div>
 		<!-- 장바구니 모달 END -->
+		<!-- 단건 보기 · 등록 · 수정 Modal -->
+		<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 	</section>
 	<!-- 상품 페이지 END -->
 </body>

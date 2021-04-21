@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.finalproject.farm.app.admin.service.impl.BannerMapper">
+	<!-- 전체 리스트 -->
+	<select id="getListBanner" parameterType="BannerVO" resultType="BannerVO">
+		SELECT BANNER_NO
+			 , BANNER_TITLE
+			 , BANNER_LINK
+			 , BANNER_FILENAME
+			 , BANNER_CHECK
+		  FROM BANNER
+	</select>
+	
+	<!-- 개별 -->
+	<select id="getBanner" parameterType="BannerVO" resultType="BannerVO">
+		SELECT BANNER_NO
+			 , BANNER_TITLE
+			 , BANNER_LINK
+			 , BANNER_FILENAME
+			 , BANNER_CHECK
+		  FROM BANNER
+		 WHERE BANNER_NO = #{banner_no}
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id="updateBanner" parameterType="BannerVO">
+		UPDATE BANNER
+		<set>
+			<if test="banner_link != null and banner_link != ''">
+			   BANNER_LINK = #{banner_link}
+			</if>
+			<if test="banner_filename != null and banner_filename != ''">
+			 , BANNER_FILENAME = #{banner_filename}
+			</if>
+			<if test="banner_check != null and banner_check != ''">
+			 , BANNER_CHECK = #{banner_check}
+			</if>
+		</set>
+		 WHERE BANNER_NO = #{banner_no}
+	</update>
+</mapper>

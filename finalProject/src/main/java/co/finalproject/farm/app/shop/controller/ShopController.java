@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import co.finalproject.farm.app.myPage.service.puchasInqVO;
+import co.finalproject.farm.app.myPage.service.impl.PurchaseInqMapper;
 import co.finalproject.farm.app.shop.service.CartVO;
 import co.finalproject.farm.app.shop.service.CrawlingVO;
 import co.finalproject.farm.app.shop.service.OrderVO;
@@ -34,6 +37,7 @@ import co.finalproject.farm.common.Paging;
 public class ShopController {
 	@Autowired ShopMapper shopMapper;
 	@Autowired UserMapper userMapper;
+	@Autowired PurchaseInqMapper purchaseInqMapper;
 
 	// 전체 리스트 · 검색 · 카테고리 · 페이징
 	@GetMapping("/shop")
@@ -97,41 +101,62 @@ public class ShopController {
 		return "notiles/shop/modalUpdate";
 	}
 
+	// 문의 등록 - 모달
+	@GetMapping("/modalInsertInq")
+	public String modalInsertInq(ShopVO vo, Model model) {
+		model.addAttribute("modal", shopMapper.getProduct(vo));
+		return "notiles/shop/modalInsertInq";
+	}
+	
+	// 문의 등록
+	@PostMapping("/insertInq")
+	public String insertpuchasInqProc(puchasInqVO vo,MultipartHttpServletRequest req) throws Exception,IOException{
+		//파일 업로드
+		MultipartFile uploadFile = vo.getInqfile();
+		String inq_filename = "";
+		if(uploadFile != null && !uploadFile.isEmpty() &&  uploadFile.getSize() > 0) {
+			String filename = uploadFile.getOriginalFilename();
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			inq_filename += '@' + rename.getName();
+			vo.setPur_inq_filename(rename.getName());
+		}
+		purchaseInqMapper.insertpuchasInq(vo);
+		return "redirect:/getpuchasInqList";
+	}
+	
 	// 상품 등록
 	@PostMapping("/insertProduct")
-	public String insertProduct(ShopVO vo, HttpServletRequest req) throws IOException {
+	public String insertProduct(ShopVO vo, HttpServletRequest req) throws Exception, IOException {
 		// 첨부 파일 처리
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
-		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
-
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
-			// 파일명 중복체크 -> rename
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			pro_filename += rename.getName();
-			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
-		} else if (uploadFile.getOriginalFilename() == null && uploadFile.getOriginalFilename() == "") {
-			vo.setPro_filename(req.getParameter("pro_filename"));
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			pro_filename += '@' + rename.getName();
+			vo.setPro_filename(rename.getName());
 		}
-		vo.setPro_filename(pro_filename); // vo 업로드된 파일명 담아서 DB에 저장
 		shopMapper.insertProduct(vo);
 		return "redirect:/prodManage";
 	}
 
 	// 상품 수정
 	@PostMapping("/updateProduct")
-	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws IOException {
+	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws Exception, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
-		String path = req.getSession().getServletContext().getRealPath("/resources/main/images");
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			pro_filename += rename.getName();
-			uploadFile.transferTo(rename); // 임시폴더에서 업로드 폴더로 이동
+			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
+			pro_filename += '@' + rename.getName();
+			vo.setPro_filename(rename.getName());
 		}
-		vo.setPro_filename(pro_filename); // vo 업로드된 파일명 담아서 DB에 저장
 		model.addAttribute("modal", shopMapper.updateProduct(vo));
 		return "redirect:/prodManage";
 	}
@@ -199,11 +224,13 @@ public class ShopController {
 
 	// 주문 · 상세주문 등록
 	@RequestMapping("/insertOrder")
-	public String insertOrder(OrderVO vo, HttpServletRequest request) {
+	public String insertOrder(ShopVO svo, OrderVO ovo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
-		shopMapper.insertOrder(vo); // 주문 등록
-		shopMapper.insertOrderlist(vo); // 상세 주문 등록
+		shopMapper.productEditCount(ovo);
+		shopMapper.productEditCondition(svo);
+		shopMapper.insertOrder(ovo); // 주문 등록
+		shopMapper.insertOrderlist(ovo); // 상세 주문 등록
 		return "redirect:/deleteAllCart?user_id=" + user_id; // 주문 완료 후 장바구니 비우기
 	}
 

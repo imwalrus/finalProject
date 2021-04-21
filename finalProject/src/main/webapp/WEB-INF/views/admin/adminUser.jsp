@@ -78,27 +78,33 @@
 									</div>
 									<div class="table-responsive">
 										<!-- 테이블 START -->
-										<table class="table">
+										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th>ID</th>
-													<th>이름</th>
-													<th>생년월일</th>
-													<th>연락처</th>
-													<th>지역</th>
-													<th>농업인</th>
+													<th width="10%">ID</th>
+													<th width="10%">이름</th>
+													<th width="15%">생년월일</th>
+													<th width="15%">연락처</th>
+													<th width="30%">지역</th>
+													<th width="10%">농업인</th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty user}">
+													<td colspan="7">내용이 존재하지 않습니다.</td>
+												</c:if>
 												<c:forEach items="${user}" var="user">
 													<tr>
-														<td>${user.user_id}</td>
-														<td>${user.user_name}</td>
-														<td>${user.user_birth}</td>
-														<td>${user.user_phone}</td>
-														<td>${user.user_adr}</td>
-														<td>${user.farmer_check}</td>
+														<td width="10%">${user.user_id}</td>
+														<td width="10%">${user.user_name}</td>
+														<td width="15%">
+															<fmt:parseDate value="${user.user_birth}" var="birth" pattern="yyyy-MM-dd"/>
+															<fmt:formatDate value="${birth}" pattern="yyyy-MM-dd"/>
+														</td>
+														<td width="15%">${user.user_phone}</td>
+														<td width="30%" class="text-truncate">${user.user_adr}</td>
+														<td width="10%">${user.farmer_check}</td>
 														<td>
 															<!-- 단건 보기 Modal -->
 															<a href="javascript:;" class="view" onclick="adminUserSel('${user.user_id}')">

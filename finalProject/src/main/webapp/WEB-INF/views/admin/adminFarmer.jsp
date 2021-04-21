@@ -80,28 +80,31 @@
 										</select>
 									</div>
 									<div class="table-responsive">
-										<table class="table">
+										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th>No.</th>
-													<th>ID</th>
-													<th>이름</th>
-													<th>날짜</th>
-													<th>결과</th>
+													<th width="10%">No.</th>
+													<th width="15%">ID</th>
+													<th width="15%">이름</th>
+													<th width="20%">날짜</th>
+													<th width="15%">결과</th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty farmer}">
+													<td colspan="6">내용이 존재하지 않습니다.</td>
+												</c:if>
 												<c:forEach items="${farmer}" var="farmer">
 													<tr>
-														<td>${farmer.farmer_no}</td>
-														<td>${farmer.user_id}</td>
-														<td>${farmer.user_name}</td>
-														<td>${farmer.farmer_date}</td>
+														<td width="10%">${farmer.farmer_no}</td>
+														<td width="15%">${farmer.user_id}</td>
+														<td width="15%">${farmer.user_name}</td>
+														<td width="20%">${farmer.farmer_date}</td>
 														<c:choose>
-															<c:when test="${farmer.farmer_check eq 0}"><td>진행중</td></c:when>
-															<c:when test="${farmer.farmer_check eq 1}"><td>승인</td></c:when>
-															<c:when test="${farmer.farmer_check eq 2}"><td>취소</td></c:when>
+															<c:when test="${farmer.farmer_check eq 0}"><td width="15%">진행중</td></c:when>
+															<c:when test="${farmer.farmer_check eq 1}"><td width="15%">승인</td></c:when>
+															<c:when test="${farmer.farmer_check eq 2}"><td width="15%">취소</td></c:when>
 														</c:choose>
 														<td>
 															<!-- 보기 Modal -->

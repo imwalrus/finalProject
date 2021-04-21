@@ -8,6 +8,14 @@
 		SELECT COUNT(*)
 		FROM INTOFARM
 		<where>
+		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
+		 <if test="into_title != null and into_title !=''">
+				UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+		 </if>
+		 <if test="into_progress != null and into_progress !=''">
+				AND  INTO_PROGRESS = #{into_progress}
+		 </if>
+		 <!-- 관리자에서 사용 END -->
          <if test="into_city != null and into_city != ''">
 			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
 		 </if>
@@ -39,6 +47,11 @@
              , INTO_CITY
 		FROM INTOFARM
 		<where>
+		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
+		 <if test="into_progress != null and into_progress != ''">
+		 		AND	 INTO_PROGRESS = #{into_progress}
+		 </if>
+		 <!-- 관리자에서 사용 END -->
 		 <if test="into_title != null and into_title != ''">
 			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>

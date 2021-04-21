@@ -40,14 +40,12 @@
 				<input type="text" class="form-control" value="${intoFarm.into_product}" readonly="readonly">
 			</div>
 			<div class="col-md-6">
-				<strong>기간</strong>
+				<strong>일정</strong>
 				<input type="text" class="form-control" value="${intoFarm.into_date}" readonly="readonly">
 			</div>
 		</div>
 		<strong>내용</strong>
-		<p>
-			<textarea cols="62" rows="10">${intoFarm.into_info}</textarea>
-		</p>
+		<p>${intoFarm.into_info}</p>
 	</div>
 	<div class="modal-footer">
 		<input type="button" class="btn btn-info" data-dismiss="modal" value="닫기">

@@ -139,7 +139,7 @@
 					  VALUES(#{pro_no}
 						   , #{pro_name}
 						   , #{pro_price}
-						   , #{pro_dcompany}
+						   , '대한통운'
 						   , #{pro_quantity}
 						   , #{pro_condition}
 						   , #{pro_content}
@@ -251,11 +251,27 @@
 		   AND PRO_NO = #{pro_no}
 	</select>
 	
+	<!-- 주문시 수량 변경 -->
+	<update id="productEditCount" parameterType="OrderVO">
+		MERGE INTO PRODUCT P
+			 USING CART C
+ 			    ON (P.PRO_NO = C.PRO_NO)
+			  WHEN MATCHED THEN UPDATE SET P.PRO_QUANTITY = P.PRO_QUANTITY - C.CART_COUNT
+			 WHERE C.USER_ID = #{user_id}
+	</update>
+	
+	<!-- 재고 0일 경우 상태 품절 변경 -->
+	<update id="productEditCondition" parameterType="ShopVO">
+		UPDATE PRODUCT
+		SET PRO_CONDITION = '품절'
+		WHERE PRO_QUANTITY = 0
+	</update>
+	
 	<!-- 주문 등록 -->
 	<insert id="insertOrder" parameterType="OrderVO">
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
-		SELECT TO_NUMBER(TO_CHAR(sysdate,'YYYYMMDDHH24MI') || NVL(TO_CHAR(MAX(SUBSTR(order_no, 7))),'00')) + 1
-          FROM ORDERS
+		SELECT NVL(MAX(ORDER_NO),TO_CHAR(SYSDATE,'YYYYMMDD')||'0000') + 1
+		  FROM ORDERS
 		</selectKey>
 		INSERT INTO ORDERS (ORDER_NO
 					 	  , ORDER_DATE
@@ -287,15 +303,18 @@
 							, PRO_NO
 							, CART_COUNT)
     				   SELECT ORDERLIST_SEQ.NEXTVAL
-    				   		, O.ORDER_NO
+    				   		, #{order_no}
     				   		, '결제완료'
     				   		, C.PRO_NO
     				   		, C.CART_COUNT
     					 FROM CART C, ORDERS O
+    					WHERE C.USER_ID = #{user_id}
+    					  AND O.USER_ID = #{user_id}
+    					  AND O.ORDER_NO = #{order_no}
 	</insert>
 	
 	<!-- 주문 현황 -->
-	<select id="adminShop" parameterType="OrderVO" resultType="OrderVO">
+	<select id="adminOrder" parameterType="OrderVO" resultType="OrderVO">
 		SELECT B.* FROM (SELECT ROWNUM RN, A.* FROM (
 		SELECT O.ORDER_NO
 			 , O.ORDER_DATE
@@ -315,44 +334,53 @@
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
-	<!-- 일별 매출 건수 -->
+	<!-- 요일별 차트 -->
 	<select id="weekChart" resultType="map">
-		SELECT TO_CHAR(ORDER_DATE, 'MM-DD') AS ORDER_DATE
-	 		 , TO_CHAR(ORDER_DATE, 'DY') AS ORDER_DAY
-	 		 , COUNT(*) CNT
-		  FROM ORDERS
-		 WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
-                     		  AND TRUNC(SYSDATE, 'D') + 7
-	  GROUP BY ORDER_DATE
-	  ORDER BY ORDER_DATE
-	</select>
-	
-	<!-- 월별 매출 건수 -->
-	<select id="monthChart" resultType="map">
-		SELECT TO_CHAR(B.DT, 'MM') AS ORDER_DATE
-     		 , NVL(SUM(A.CNT), 0) CNT
+		SELECT TO_CHAR(B.DT, 'DY') AS ORDER_DATE
+     		 , NVL(SUM(A.ORDER_COUNT), 0) AS ORDER_COUNT
+     		 , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
   		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
-             , COUNT(*) CNT
+             , COUNT(*) AS ORDER_COUNT
+             , SUM(ORDER_TOTALPRICE) AS ORDER_TOTALPRICE
           FROM ORDERS
-         WHERE ORDER_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01')
-                              AND TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
+         WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
+                              AND TRUNC(SYSDATE, 'D') + 8
+      GROUP BY ORDER_DATE
+        		) A
+      		  , (SELECT TRUNC(SYSDATE, 'D') + 1 + LEVEL - 1 AS DT
+            	   FROM DUAL 
+     		<![CDATA[
+             CONNECT BY LEVEL <= ((TRUNC(SYSDATE, 'D') + 8 )
+                                - (TRUNC(SYSDATE, 'D') + 1))
+                ) B
+  			      WHERE B.DT = A.ORDER_DATE(+)
+  			   GROUP BY B.DT
+  			   ORDER BY B.DT
+	 		]]>
+	</select>
+			
+	<!-- 월별 차트 -->
+	<select id="monthChart" resultType="map">
+		SELECT TO_CHAR(B.DT, 'DD') AS ORDER_DATE
+     		 , NVL(SUM(A.ORDER_COUNT), 0) ORDER_COUNT
+     		 , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
+  		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
+             , COUNT(*) ORDER_COUNT
+             , SUM(ORDER_TOTALPRICE) AS ORDER_TOTALPRICE
+          FROM ORDERS
+         WHERE ORDER_DATE BETWEEN TO_DATE(TRUNC(sysdate,'MM'))
+                              AND TO_DATE(LAST_DAY(sysdate))
       GROUP BY ORDER_DATE
                ) A
-      		 , (SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01') + LEVEL - 1 AS DT
-           FROM DUAL 
-     <![CDATA[
-     CONNECT BY LEVEL <= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-12-31')
-                                - TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '-01-01'))
+      		 , (SELECT TO_DATE(TRUNC(sysdate,'MM')) + LEVEL - 1 AS DT
+                  FROM DUAL
+     		<![CDATA[ 
+            CONNECT BY LEVEL <= (TO_DATE(LAST_DAY(sysdate))
+                               - TO_DATE(TRUNC(sysdate,'MM')) + 1)
                 ) B
-  		  WHERE B.DT = A.ORDER_DATE(+)
-  		 GROUP BY TO_CHAR(B.DT, 'MM')
-  		 ORDER BY TO_CHAR(B.DT, 'MM')
-	 ]]>
-	</select>
-	
-	<!-- 총 판매액 -->
-	<select id="getSumOrders" resultType="int">
-		SELECT SUM(ORDER_TOTALPRICE)
-		  FROM ORDERS
+	  		     WHERE B.DT = A.ORDER_DATE(+)
+	  		  GROUP BY TO_CHAR(B.DT, 'DD')
+	  		  ORDER BY TO_CHAR(B.DT, 'DD')
+	 		]]>
 	</select>
 </mapper>
