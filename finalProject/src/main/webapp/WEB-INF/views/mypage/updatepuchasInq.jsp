@@ -21,7 +21,20 @@
 							<th class="table-success">작성일</th>
 							<td>${pupdate.pur_inq_date }</td>
 							<th class="table-success">비밀글</th>
-							<td>${pupdate.pur_inq_check}</td>
+							<td>
+							<c:if test="${pupdate.pur_inq_check eq '1'}">
+								<input type="hidden" value="${pupdate.pur_inq_check}">
+								<input class="form-check-input" type="radio" name="into_inq_check" value="1" checked="checked" onclick="return(false);">사용
+								<br>
+								<input class="form-check-input" type="radio" name="into_inq_check" value="0" onclick="return(false);">사용안함
+							</c:if>
+							<c:if test="${pupdate.pur_inq_check eq '0'}">
+								<input type="hidden" value="${pupdate.pur_inq_check}">
+								<input class="form-check-input" type="radio" name="into_inq_check" value="1" onclick="return(false);">사용
+								<br>
+								<input class="form-check-input" type="radio" name="into_inq_check" value="0"  checked="checked" onclick="return(false);">사용안함
+							</c:if>
+							</td>
 							<th class="table-success">작성자</th>
 							<th>${pupdate.user_id}</th>
 						</tr>
@@ -50,8 +63,3 @@
 </form>
 <!-- 모달바디 끝 -->
 
-<!-- Required Js -->
-<script src="resources/admin/js/vendor-all.min.js"></script>
-<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-<script src="resources/admin/js/ripple.js"></script>
-<script src="resources/admin/js/pcoded.min.js"></script>

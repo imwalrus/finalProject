@@ -41,8 +41,11 @@ $(document).ready(function(){
 		}
 	});	
 })
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/heads/김현정1
 </script>
 <body>
 <section class="pcoded-main-container">
@@ -89,6 +92,7 @@ $(document).ready(function(){
 	                                                        <label class="col-sm-4 col-form-label"><h6>ID</h6></label>
 	                                                        <div class="col-sm-5">
 	                                                            <input type="text" class="form-control" name="user_id" value="${user_id }" readonly="readonly" >
+
 	                                                        </div>
 	                                                    </div>
 	                                                    <div class="form-group row">
@@ -118,20 +122,9 @@ $(document).ready(function(){
                                    </div>
                                 </div>
                            </div>
-                        <!-- [ static-layout ] end -->
                     </div>
                </div>
            </div>
 </section>         
-<script>
-/*     //체크박스 버튼 활성화
-    function agreeCheck(frm){
-		  if (frm.checkButton.disabled==true){
-			  frm.checkButton.disabled=false;
-		  } else{
-			  frm.checkButton.disabled=true;
-		  }
-	} */
-</script>
 </body>
 </html>

@@ -25,21 +25,25 @@
 
 								<!-- [ Contextual-table ] start -->
 								<div class="col-md-9">
-									<div class="card-header">
+									<div class="card-header"  >
 										<h2>농업인 권한 신청</h2>
 									</div>
 									<div class="alert alert-success mb-0" role="alert">
-										<div class="col-md-9">
-											<h5>
-												영농인 권한을 부여받을시 아래와 같은 기능들이 추가됩니다. 
-												<br> 
+										<div class="col-md-12">
+											<h4>
+												영농인 권한을 부여받을시 아래와 같은 기능들이 추가됩니다.
+											</h4>
+										</div>
+										<div class="col-md-4" style="text-align:left">
+											<h5> 
 												<br>1. 영농일지 작성 
-												<br>2. 소개페이지 (농지 및 농작물 등록) 
+												<br>2. 소개페이지 
+												<br>　(농지 및 농작물 등록) 
 												<br>3. 농작물 판매 
 												<br>4. 영농일지 작성 
 												<br>5. 커뮤니티 게시판 사용
-											</h5>
-											<br>
+												${farmer.farmer_check }
+											</h5>	
 										</div>
 									</div>
 									<br>
@@ -50,8 +54,9 @@
 												<label for="inputEmail3" class="col-sm-4 col-form-label">
 													<h6>ID</h6>
 												</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" id="user_id" name="user_id" value="${user_id }">${user_id }
+												<div class="col-sm-5" id="userId">
+													<input type="text" class="form-control" id="user_id" name="user_id" value="${user_id }" readonly="readonly">
+													<input type="text" id="check" name="check" >
 												</div>
 											</div>
 											<div class="form-group row">
@@ -71,8 +76,10 @@
 											<div class="form-group row">
 												<div class="col-sm-10">
 													<button type="submit" class="btn  btn-outline-success">신청</button>
+													
 												</div>
 											</div>
+					
 											</form>
 										</div>
 									</div>
@@ -80,17 +87,35 @@
 							</div>
 						</div>
 					</div>
-					<!-- [ static-layout ] end -->
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-	<script>
-		function farmAlert(str) {
-			var yn = confirm("신청완료 되었습니다. 승인에는 1~3일간의 기간이 소요 될 수 있습니다.");
-			location.href = "insertFarmer?user_id";
+	<script type="text/javascript">
+		
+	$.ajax({
+		url:'ajaxgetFarmerlist',
+		data: "user_id=" + '${user_id}',
+		dataType: "json",
+		success: function(data){
+			for(i=0; i<data.length; i++){
+				$('#check').val(data[i].farmer_check);
+			}
+			
+			
 		}
+		
+		
+		
+	});
+	
+	
+	
 	</script>
+
+	<!-- Required Js -->
+	<script src="resources/admin/js/vendor-all.min.js"></script>
+	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
+	<script src="resources/admin/js/ripple.js"></script>
+	<script src="resources/admin/js/pcoded.min.js"></script>
 </body>

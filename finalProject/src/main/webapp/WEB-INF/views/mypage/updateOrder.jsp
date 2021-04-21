@@ -10,13 +10,13 @@
 		<!-- 숨겨진 유저 ID -->
 		<table class="table">
 			<tr>
-				<th>송장번호 입력 ${list }</th>
-				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice"></td>
+				<th>송장번호 입력</th>
+				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice" required></td>
 			</tr>
 			<tr>
 				<th>주문상태 선택</th>
-				<td><label> <input type="text" list="orderlist_condition"
-						name="orderlist_condition"> <datalist id="orderlist_condition">
+				<td><label> <input type="text" list="orderlist_condition" name="orderlist_condition" required> 
+						<datalist id="orderlist_condition" required="required">
 							<option value="결제완료"></option>
 							<option value="배송중"></option>
 							<option value="배송완료"></option>

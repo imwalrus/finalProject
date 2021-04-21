@@ -1,70 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.table {
+	width: 100%;
+	border: 1px solid #444444;
+	 min-width: 500px !important;
+	
+}
 
+.table td, .table th {
+	border-top: 0px;
+	white-space: nowrap;
+	padding: 1.05rem 0.75rem;
+}
+</style>
 <!-- 모달바디 시작 -->
 <form action="updatepuchasInq" method="post">
 	<div class="row" align="center">
-		<h4>구매 문의 내용</h4>
-		<table class="table">
+
+		<table class="table">			
 			<tr>
-				<th class="table-success">제목</th>
+				<th class="table-success" colspan="1">제목</th>
 				<td colspan="5">${plist.pur_inq_title }</td>
+				<th class="table-success" colspan="1">비밀</th>
+					<c:if test="${plist.pur_inq_check eq '1'}">
+       					<td colspan="2">
+       						<img src="resources/images/mypage/secrete.JPG">
+       					</td>
+       				</c:if>		
+       				<c:if test="${plist.pur_inq_check eq '0'}">
+       					<td colspan="2">
+       						<img src="/resources/images/mypage/nosecrete.JPG">
+       					</td>
+       				</c:if>				
 			</tr>
 			<tr>
-				<th class="table-success">작성일</th>
-				<td>${plist.pur_inq_date }</td>
-				<td class="table-success">비밀글</td>
-				<td>${plist.pur_inq_check}</td>
-				<th class="table-success">작성자</th>
-				<th>${plist.user_id}</th>
+				<th class="table-success" colspan="1">작성일</th>
+				<td colspan="5">${plist.pur_inq_date }</td>
+				<th class="table-success" colspan="1"> 작성자</th>
+				<th colspan="2">${plist.user_id}</th>
 			</tr>
 			<tr>
-				<td colspan="7"><img class="img-fluid card-img-top"
-					alt="Card image cap">${plist.pur_inq_filename}</td>
+				<td colspan="9">
+					<img class="img-fluid card-img-top" alt="Card image cap">${plist.pur_inq_filename}
+				</td>
 			</tr>
 			<tr>
-				<th class="table-success">내용</th>
-				<td colspan="7">${pupdate.pur_inq_content}</td>
+				<th class="table-success" colspan="1">내용</th>
+				<td colspan="8">${pupdate.pur_inq_content}</td>
+			</tr>
+			<tr>
+				<td  colspan="9">
+					<button class="btn  btn-outline-warning" onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
+					<button type="button" class="btn  btn-outline-danger" onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+				</td>
 			</tr>
 		</table>
 	</div>
-	<div align="center">
-		<button class="btn  btn-outline-warning"
-			onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-		<button type="button" class="btn  btn-outline-danger"
-			onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
-	</div>
 </form>
-<hr>
+
 <br>
 
-<form>
-	<div class="row">
-		<div class="col-sm-8">
-			<div class="form-group">
-				<label class="floating-label">댓글입력</label> <input type="text"
-					class="form-control" name="pur_inq_rep_content">
-			</div>
-		</div>
-		<div class="col-sm-2">
-			<div class="form-group">
-				<label class="floating-label">아이디입력</label> <input type="text"
-					class="form-control" name="user_id">
-			</div>
-		</div>
-		<div class="col-sm-2">
-			<div class="form-group">
-				<button type="button" id="btnAdd"
-					class="btn  btn-outline-success btn-sm">등록</button>
-			</div>
-		</div>
-	</div>
-</form>
 
 <div class="row" align="center">
 	<h4>댓글</h4>
-	<table class="table" id="reply">
+	<table class="table" id="reply" >
+
 		<tr>
 			<th class="table-success">No</th>
 			<th class="table-success">댓글내용</th>
@@ -73,8 +75,22 @@
 			<th class="table-success">삭제</th>
 		</tr>
 	</table>
-
 </div>
+<form>
+      <div class="input-group mb-3">
+              <input type="text" class="form-control" name="pur_inq_rep_content" placeholder="댓글을 입력하세요" aria-describedby="basic-addon2">
+           <input type="hidden" name="user_id" value="${user_id }">
+            <div class="input-group-append">
+               <button type="button" id="btnAdd" class="btn  btn-outline-success btn-sm">등록</button>
+          </div>
+       </div>
+		
+		
+
+		
+
+</form>
+
 
 
 

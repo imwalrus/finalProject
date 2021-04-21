@@ -60,9 +60,10 @@
 	background-color: #E3F1D4;
 	color: #000;
 }
+
 p {
-    font-size: 30px;
-   }
+	font-size: 30px;
+}
 </style>
 
 
@@ -93,10 +94,13 @@ p {
 									<div id="calendarForm"></div>
 									<br> <br>
 								</div>
-															<div class="col-md-10" align="center">
-								<button type='submit' class='btn  btn-outline-success'
-									onclick="location.href='insertFdiary'">일기작성</button>
-							</div>
+								<div class="col-md-10" align="center">
+
+									<button type='submit' class='btn  btn-outline-success'
+										onclick="location.href='insertFdiary'">일기작성</button>
+								</div>
+								<div id="test"></div>
+
 							</div>
 
 
@@ -116,6 +120,7 @@ p {
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
+							<h4>일지보기</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -126,7 +131,6 @@ p {
 				</div>
 			</div>
 			<!-- 모달끝 -->
-
 		</div>
 	</section>
 
@@ -177,8 +181,9 @@ p {
 
 				thisDates = thisYear + thisMonth + thisDay;
 
-				tag += "<td onclick='javascript:selectDay(" + thisDates
-						+ ")' >" + i + "</td>"; //daySelect[i] -> 날짜 클릭 이벤트
+				tag += "<td id='tdDay' onclick='javascript:selectDay("+ thisDates+ ")' >"
+						+ i + "<input id='hiddenDay"+ i +"'name='hiddenDay["+ i +"]' type='hidden' value='" + thisDates + "'><br><span class='badge badge-warning' id='countDay"+ i +"' name='countDay' type='text' /></span></td>"; //daySelect[i] -> 날짜 클릭 이벤트
+
 				cnt++;
 
 				if (cnt % 7 == 0) {
@@ -229,6 +234,7 @@ p {
 						});
 				//다음날 클릭
 				$(".custom_calendar_table").on(
+						"click",
 						".next",
 						function() {
 							nowDate = new Date(nowDate.getFullYear(), nowDate
@@ -247,6 +253,37 @@ p {
 						});
 			}
 
+			//날짜별 일지 갯수
+			$.ajax({
+				url : "countDiary",
+				data : "user_id=" + '${user_id}',
+				dataType : "json",
+				success : function(data) {
+
+					var list = new Array();
+					for (y = 1; y < 32; y++) {
+						var hiddenDays = $('#hiddenDay' + y).val(); //날짜
+						list.push(hiddenDays);
+					}
+					
+
+					for (j = 0; j < data.length; j++) {
+
+						var days = data[j].f_year + data[j].f_month
+								+ data[j].f_day; // 일지가 있는 날짜 형태 : 20210401 .. 
+
+						for (x = 0; x <= list.length; x++) {
+
+							if (days == list[x]) {
+								$('#countDay' + (x + 1)).text(data[j].dcount);
+							}
+						}
+					}
+
+				} // end for
+
+			});
+
 		}
 
 		//날짜 클릭시 일기 상세조회			getfDiary?user_id=hgd&fdiary_day=20210415 
@@ -256,7 +293,6 @@ p {
 			$('#diaryModal').modal('show');
 
 		}
-
 	</script>
 
 </body>

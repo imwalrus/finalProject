@@ -51,27 +51,48 @@ vendor css
 										<div class="table-responsive">
 											<table class="table">
 												<tr class="table-success">
-													<th>No</th>
-													<th>Title</th>
-													<th>Secrete</th>
+													<th>번호</th>
+													<th>제목</th>
+													<th>작성자</th>
+													<th>비밀여부</th>
 												</tr>
-
+											<c:if test="${ilist.user_id eq user_id}">
 												<tbody>
 													<c:if test="${fn:length(list) >=1}">
 													<c:forEach items="${list }" var="list">
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
 															<td>${list.into_inq_title }</td>
-															<td>${list.into_inq_check }</td>
+															<td>${list.user_id }</td>
+														<c:if test="${list.into_inq_check eq '1'}">
+       														<td>
+       															<img src="resources/img/secrete.jpg">
+       														</td>
+       													</c:if>		
+       														<c:if test="${list.into_inq_check eq '0'}">
+       															<td>
+       																<img src="resources/img/nosecrete.jpg">
+       															</td>
+       														</c:if>	
 														</tr>
 													</c:forEach>
 													</c:if>
-													<c:if test="${fn:length(list) == 0}">
+													<c:if test="${fn:length(list) >=0}">
 														<tr>
 															<td colspan="3"> 문의하신 내용이 없습니다. </td>
 														</tr>
 													</c:if>
 												</tbody>
+											</c:if>
+									<c:if test="${ilist.user_id ne user_id}">
+										<tbody>
+											<tr>
+												<th colspan="4">
+													작성된 문의글이 없습니다.
+												</th>
+											</tr>
+										</tbody>
+									</c:if>
 											</table>
 										</div>
 									</div>

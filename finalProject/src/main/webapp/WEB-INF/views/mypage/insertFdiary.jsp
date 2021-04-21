@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -21,16 +20,26 @@
 <!-- vendor css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
 <style>
-
 .table {
-    width: 100%;
-    border: 1px solid #444444;
-  }
-.table td, .table th {
-    border-top: 0px;
-    white-space: nowrap;
-    padding: 1.05rem 0.75rem;
+	width: 100%;
+
 }
+
+ .table th {
+ 		font-weight: bolder;
+ 		
+ }
+
+.table td, .table th {
+	border-top: 0px;
+	white-space: nowrap;
+	padding: 1.05rem 0.75rem;
+}
+
+.btn-warning{
+  padding: 5px 10px;}
+  
+
 </style>
 
 </head>
@@ -47,49 +56,51 @@
 						</div>
 					</div>
 				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
-						<div class="card">
-							<div class="card-header">
-									<label  style="float: left">
-												<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												날짜선택</h5></label>
-									<!-- <input type="date" id="fdiary_day" name="fdiary_day" class="col-sm-2" style="float: left"> -->
-                                   <button type="button" name="add" class="btn btn-warning" style="float: right">일지추가</button>                                            
-							</div>
-							<div class="card-body" align="center">
-								<div class="col-md-10">
-									<form action="insertFdiary" enctype="multipart/form-data" method="post">
+						<form action="insertFdiary" enctype="multipart/form-data" method="post">
+							<div class="card">
+								<div class="card-header">
+									<h3>영농일지 등록</h3>
+								</div>
+								<div class="card-body" align="center">
+									<div class="col-md-10">
+
 										<div class="row" id="addTable">
 											<table class="table">
-												<tr>												
-													<th><input type="hidden" name="user_id" value="${user_id}">농작물</th>
-													<td>													
-														<input type="select" class="form-control" name="crop_no">
-														<input type="date" id="fdiary_day" name="fdiary_day">	
+												<tr>
+													<th colspan="6">작업일자&nbsp;&nbsp;&nbsp;&nbsp;
+														<input type="date" id="fdiary_day" name="fdiary_day" value="sysdate">
+													</th>											
+												</tr>
+												<tr text-align="center">
+													<th><input type="hidden" name="user_id" value="${user_id}"><!-- 아이디값 hidden --> 
+														농작물
+									<!-- 작물추가 --><br>	<button type="button" class="btn btn-warning" onclick="openCrop()">+</button>
+													</th>
+													<td>
+														<select class="form-control" name="crop_no">
+															<option value="none">=== 선택 ===</option>
+															<c:forEach var="i" items="${croplist}" >
+																<option value="${i.crop_no}">${i.crop_name}</options>
+															</c:forEach>
+														</select> 
+														
+														<br>
 													</td>
 													<th>시작시간</th>
-													<td><input type="time" class="form-control"
-														name="fdiary_stime"></td>
+														<td><input type="time" class="form-control" name="fdiary_stime"></td>
 													<th>종료시간</th>
-													<td><input type="time" class="form-control"
-														name="fdiary_etime"></td>
+														<td><input type="time" class="form-control" name="fdiary_etime"></td>
 												</tr>
 												<tr>
 													<th>인력</th>
-													<td><input type="text" class="form-control"
-														name="fdiary_worker"></td>
+														<td><input type="text" class="form-control" name="fdiary_worker"></td>
 													<th>날씨</th>
-													<td><input type="text" class="form-control"
-														name="fdiary_weather"></td>
+														<td><input type="text" class="form-control" name="fdiary_weather"></td>
 													<th>사진첨부</th>
-													<td><input multiple="multiple" type="file"
-														name="uploadFile"> <input type="hidden"
-														name="fdiary_filename"></td>
+														<td><input multiple="multiple" type="file" name="uploadFile"> 
+														<input type="text" name="fdiary_filename"></td>
 												</tr>
 												<tr>
 													<th>내용</th>
@@ -97,58 +108,50 @@
 															rows="3" name="fdiary_content"></textarea></td>
 												</tr>
 											</table>
-											<hr>
 										</div>
 										<div class="col-md-12" align="center">
-												<button type="submit" class="btn  btn-outline-success">등록</button>
-												<button type="reset" class="btn  btn-outline-danger">입력취소</button>
+											<button type="submit" class="btn  btn-outline-success">등록</button>
+											<button type="reset" class="btn  btn-outline-danger">입력취소</button>
 										</div>
-									</form>
+									</div>
 								</div>
-
 							</div>
-
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
+			<!-- 작물 추가 모달시작 -->
+			<div class="modal fade" id="insertCrop"
+				tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4>일지보기</h4>
+							<button class="close" type="button" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+					</div>
+				</div>
+			</div>
+			<!-- 모달끝 -->
 		</div>
 	</section>
-
 	<!-- Required Js -->
 	<script src="resources/admin/js/vendor-all.min.js"></script>
 	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
 	<script src="resources/admin/js/ripple.js"></script>
 	<script src="resources/admin/js/pcoded.min.js"></script>
 	<script type="text/javascript">
-	
-	//일지 추가
-		$(document).ready(function() {
-			$(document).on("click", "button[name='add']", function() {
-				$("#addTable").append(
-					"<table class='table'><tr><th><input type='hidden' name='user_id' value='${user_id}'>농작물</th><td>"
-					+"<input type='date' class='form-control' name='crop_no'><input type='date' id='fdiary_day' name='fdiary_day'></td>"
-					+"<th>시작시간</th><td>"
-					+"<input type='time' class='form-control' name='fdiary_stime'></td>"
-					+"<th>종료시간</th><td>"
-					+"<input type='time' class='form-control' name='fdiary_etime'></td></tr>"
-					+"<tr><th>인력</th><td>"
-					+"<input type='text' class='form-control' name='fdiary_worker'></td>"
-					+"<th>날씨</th><td>"	
-					+"<input type='text' class='form-control' name='fdiary_weather'></td>"
-					+"<th>사진첨부</th><td>"
-					+"<input multiple='multiple' type='file' name='uploadFile'><input type='hidden' name='fdiary_filename'></td></tr>"
-					+"<tr><th>내용</th>"
-					+"<td colspan='5'><textarea class='form-control' rows='3' name='fdiary_content'></textarea></td></tr>"
-					+"</table>"
-				
-				
-				);
-			});//end addTable
-			
-		});
-		
+	//작물 추가 모달	
+	function openCrop() {
+		$('#insertCrop .modal-body').load( "insertCrop");
+		$('#insertCrop').modal('show');
 
+	}
 	</script>
 </body>
 </html>

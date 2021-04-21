@@ -106,7 +106,10 @@
 	.inputControl2{
 		width:120px !important;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/김현정1
 </style>
 <script>
 		/*

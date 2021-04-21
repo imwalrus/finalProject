@@ -60,7 +60,7 @@ vendor css
 													<tr class="table-success">
 														<th>주문번호</th>
 														<th>결제수단</th>
-														<th>총금액</th>
+														<th>총 금액(원)</th>
 														<th>주문일자</th>
 													</tr>
 												</thead>
@@ -111,7 +111,7 @@ vendor css
 			 	for(i=0; i<data.length; i++){ 
 					$("#order").append(
 						"<tr><td>"  
-						+ "<button type='button' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
+						+ "<button type='button' class='btn btn-success btn-sm' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
 						+ data[i].order_payment + "</td><td>"
 						+ data[i].order_totalprice + "</td><td>"
 						+ data[i].order_date + "</td></tr>"

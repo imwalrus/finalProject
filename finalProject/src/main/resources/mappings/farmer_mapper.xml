@@ -4,12 +4,13 @@
 
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmerMapper">
 
-<!-- 전체조회 -->
-	<select id="listFarmer" resultType="FarmerVO">
+<!-- 단건조회 -->
+	<select id="getFarmerlist" resultType="FarmerVO">
 	
 		SELECT *
 		FROM FARMER
-	
+		WHERE USER_ID=${user_id}
+		
 	</select>
 
 <!-- 등록 -->

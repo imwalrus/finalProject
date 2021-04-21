@@ -4,16 +4,29 @@
 
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmDiaryMapper">
 
-<!--달력조회  -->
+<!-- 작물조회 -->
 	<select id="fDiaryCalendar" resultType="FarmDiaryVO">
 			SELECT *
-			FROM FARMDIARY
+			FROM CROP
+			ORDER BY CROP_NAME
 	</select>
+	
+	<!-- 작물추가 -->
+	 <insert id="insertCrop" parameterType="FarmDiaryVO">
+	 		INSERT INTO CROP
+	 		VALUES (
+	 				( select nvl(max(crop_no),0)+1 from crop )
+	 				,#{user_id}
+	 				,#{crop_name}	 		
+	 		)
+
+	 </insert>
 
  <!-- 작물, 아이디 별 조회 -->
 	<select id="getfDiary" resultType="FarmDiaryVO">
 		SELECT F.FDIARY_NO
 				,F.FDIARY_DAY
+				,TO_CHAR(F.FDIARY_DAY, 'YYYYMMDD') as FDAY
         		,F.FDIARY_STIME
         		,F.FDIARY_ETIME
         		,F.FDIARY_WORKER
@@ -26,44 +39,98 @@
 		FROM FARMDIARY F JOIN CROP C
 		ON (F.CROP_NO = C.CROP_NO)
 		WHERE F.USER_ID = #{user_id}		
-		AND F.FDIARY_DAY =  TO_DATE( #{fdiary_day} ,'YYYYMMDD')
+		AND F.FDIARY_DAY = TO_DATE( #{fdiary_day} ,'YYYYMMDD')
 		 
 	</select> 
-	
-	
-	
-
-	
+			
 <!-- 일기등록 -->
 	<insert id="insertFdiary" parameterType="FarmDiaryVO">
-		<foreach item="item" index="index" collection="java.util.List" separator=" " open="INSERT ALL">		
+		<selectKey resultType="string" keyProperty="fdiary_no" order="BEFORE">
+        		select nvl(max(fdiary_no),0)+1 from farmdiary     
+    	</selectKey>  
 			INSERT INTO FARMDIARY
-									(
-									FDIARY_NO
-									,FDIARY_DAY
-									,FDIARY_STIME
-									,FDIARY_ETIME
-									,FDIARY_WORKER
-									,FDIARY_WEATHER
-									,FDIARY_CONTENT
-									,FDIARY_FILENAME
-									,USER_ID
-									,CROP_NO
-									)
+							(
+								 FDIARY_NO
+								,FDIARY_DAY
+								,FDIARY_STIME
+								,FDIARY_ETIME
+								,FDIARY_WORKER
+								,FDIARY_WEATHER
+								,FDIARY_CONTENT
+								,FDIARY_FILENAME
+								,USER_ID
+								,CROP_NO
+							)						  
 			VALUES (
-					( SELECT NVL(MAX(FDIARY_NO),0)+1 FROM FARMDIARY )
-					,#{fdiary_day}
+					#{fdiary_no}
+					,#{fdiary_day} 
 					,#{fdiary_stime}
 					,#{fdiary_etime}
 					,#{fdiary_worker}
-					,#{fdiary_weather}
+					,#{fdiary_weather} 
 					,#{fdiary_content}
 					,#{fdiary_filename}
 					,#{user_id}
-					,#{crop_no}		
+					,#{crop_no}
 					)
-		</foreach>
 	</insert>
+<!-- fdiary_no 조회 -->
+	<select id="diarySelect" parameterType="FarmDiaryVO"
+							 resultType="FarmDiaryVO">
 	
+			SELECT F.FDIARY_NO
+				,F.FDIARY_DAY
+				,TO_CHAR(F.FDIARY_DAY, 'YYYYMMDD') as FDAY
+        		,F.FDIARY_STIME
+        		,F.FDIARY_ETIME
+        		,F.FDIARY_WORKER
+        		,F.FDIARY_WEATHER
+        		,F.FDIARY_CONTENT
+        		,F.USER_ID
+        		,F.CROP_NO
+        		,F.FDIARY_FILENAME
+        		,C.CROP_NAME
+		FROM FARMDIARY F JOIN CROP C
+			ON (F.CROP_NO = C.CROP_NO)
+		WHERE FDIARY_NO = #{fdiary_no}
+
+	</select>
+
+
+<!--  일기수정 -->	
+	<update id="updateFdiary" parameterType="FarmDiaryVO">
+			UPDATE FARMDIARY
+							SET 
+							FDIARY_STIME = #{fdiary_stime}
+							,FDIARY_ETIME = #{fdiary_etime}
+							,FDIARY_WORKER = #{fdiary_worker}
+							,FDIARY_WEATHER = #{fdiary_weather}
+							,FDIARY_CONTENT = #{fdiary_content}
+							,FDIARY_FILENAME = #{fdiary_filename}
+			WHERE fdiary_no = #{fdiary_no}
+	</update>
+	
+<!-- 일기삭제 -->
+	<delete id="deleteFdiary" parameterType="FarmDiaryVO">
+	
+	DELETE FROM FARMDIARY
+	WHERE FDIARY_NO = #{fdiary_no}
+	
+		
+	</delete>	
+
+<!-- 날짜별 일지작성 갯수 -->	
+	<select id="countDiary" parameterType="FarmDiaryVO"
+							resultType="FarmDiaryVO">
+		SELECT FDIARY_DAY, COUNT(*) AS DCOUNT
+             ,TO_CHAR(FDIARY_DAY,'YYYY') AS  F_YEAR
+             ,TO_CHAR(FDIARY_DAY,'MM') AS F_MONTH
+             ,TO_CHAR(FDIARY_DAY,'DD') AS F_DAY
+		FROM FARMDIARY
+		WHERE USER_ID=#{user_id}
+		GROUP BY FDIARY_DAY
+		ORDER BY FDIARY_DAY
+		
+	</select>
 	
 </mapper>

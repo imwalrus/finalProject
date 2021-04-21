@@ -84,11 +84,12 @@ public class PurchaseInqController {
 			//파일 업로드
 			MultipartFile file = vo.getInqfile();
 			String pur_inq_filename="";
+			String path = request.getSession().getServletContext().getRealPath("/resources/images/mypage/");
 			
 			if(file != null && !file.isEmpty() &&  file.getSize() > 0) {
 				String filename = file.getOriginalFilename();
 			
-				File rename = FileRenamePolicy.rename(new File("C:\\upload", filename));
+				File rename = FileRenamePolicy.rename(new File(path, filename));
 				pur_inq_filename += rename.getName();
 				file.transferTo(rename);//임시폴더에서 업로드 폴더로 이동
 			}

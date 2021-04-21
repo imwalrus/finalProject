@@ -24,120 +24,49 @@
     background: #e3f1d4 !important;
     text-transform: uppercase;
 }
+.card table-card{
+	width: 100% !important;
 
+}
 </style>
 </head>
 
 <body>
-	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
-		<div class="pcoded-main-container">
-			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12">
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
-				<div class="row">
-					<!-- [ vertically-modal ] start -->
-					<div class="col-md-10">
-						<div class="card" >
-							<div class="card-body" align="center">
+	<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Dashboard Analytics</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- prject ,team member start -->
+            <div class="col-xl-6 col-md-12">
+                <div class="card table-card">
+                        	<jsp:include page="getpuchasInqList.jsp"></jsp:include>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12">
 
-								<!-- [ Contextual-table ] start -->
-								<div class="col-md-9">
-									<div class="card-header">
-										<h2>나의 농지 List</h2>
-									</div>
-									<div class="table-responsive">
-										<table class="table">
-											<thead>
-												<tr class="table-success">
-													<th>No</th>
-													<th>농장이름</th>
-													<th>주소</th>
-													<th>면적</th>
-													<th>상세보기</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${farmlist }" var="fa">
-													<tr>
-														<th>${fa.farm_no }</th>
-														<th>${fa.farm_name }</th>
-														<th>${fa.farm_adr }</th>
-														<th>${fa.farm_area }</th>
-														<th><button type="button" id="btnFarm"
-																class="btn  btn-outline-success"
-																onclick="fnfarmView('${fa.farm_no}')">보기</button>
-															<button class="btn  btn-outline-warning" 
-															onclick="fnfarmUpdate('${fa.farm_no}')">수정</button>
-															<button type="button" class="btn  btn-outline-danger"
-																onclick="deleteAlert('${fa.farm_no }')">삭제</button>
-														</th>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-									<div class="col-md-10" align="center">
-										<button type="submit" class="btn  btn-outline-success"
-											onclick="location.href='insertFarm'">등록</button>
-									</div>
-								</div>
-								<!-- [ Contextual-table ] end -->
-							</div>
-						</div>
-						<!-- [ vertically-modal ] end -->
-					</div>
+            </div>
 
-
-				</div>
-
-
-
-			</div>
-
-			<!-- 모달시작 -->
-			<div class="modal fade" id="farmCenter" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content"></div>
-				</div>
-			</div>
-			<!-- 끝 -->
-		</div>
-	</section>
-
-	<script type="text/javascript">
-		function deleteAlert(str) {
-			var yn = confirm("정말 삭제할까요?");
-			if (yn) {
-				location.href = "deleteFarm?farm_no=" + str;
-			} else {
-				alert("삭제하지 못하였습니다.  ");
-			}
-		}
-
-		function fnfarmView(str) {
-			$('#farmCenter .modal-content').load("getFarm?farm_no=" + str);
-			$('#farmCenter').modal();
-
-		}
-		
-		function fnfarmUpdate(str) {
-			$('#farmCenter .modal-content').load("updateFarm?farm_no=" + str);
-			$('#farmCenter').modal();
-
-		}
-	</script>
-
-
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
 </body>
 </html>

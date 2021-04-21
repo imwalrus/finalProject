@@ -24,17 +24,27 @@ $.ajax({
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
-				$("#orderview").append(
+				if(response[i].orderlist_invoice!= '-'){
+					$("#orderview").append(
 						"<tr><td>" + response[i].orderlist_no  + "</td><td>"
 						+ response[i].pro_name + "</td><td>"
 						+ response[i].cart_count + "</td><td>"
 						+ response[i].account +"원"+ "</td><td>"
 						+ response[i].orderlist_condition + "</td><td>"
 						+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ response[i].orderlist_invoice +"','_blank','width=800,height=600');" + " return false;>"
-						+ response[i].orderlist_invoice + "</a>"
-						+ "</td></tr>"
+						+ response[i].orderlist_invoice + "</a></td></tr>"
 						);
+				}else{
+					$("#orderview").append(
+							"<tr><td>" + response[i].orderlist_no  + "</td><td>"
+							+ response[i].pro_name + "</td><td>"
+							+ response[i].cart_count + "</td><td>"
+							+ response[i].account +"원"+ "</td><td>"
+							+ response[i].orderlist_condition + "</td><td>"
+							+ response[i].orderlist_invoice + "</td></tr>"
+							);
+					
+				}
 			}
 		}
-})
 </script>
