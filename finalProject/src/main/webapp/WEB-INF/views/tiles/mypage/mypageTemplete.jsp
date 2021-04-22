@@ -71,7 +71,6 @@
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
-                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
                                 <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
                                 <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
                             </ul>

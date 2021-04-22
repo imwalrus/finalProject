@@ -56,7 +56,9 @@
 						<div class="dropdown-menu" aria-labelledby="dropdown02">
 							<a class="dropdown-item" href="getFarmInfo">농촌속으로 소개</a>
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
+							<c:if test="${user_auth == 'farmer' }">
 							<a class="dropdown-item" href="insertFarm">체험등록</a>
+							</c:if>
 						</div>
 					</li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
