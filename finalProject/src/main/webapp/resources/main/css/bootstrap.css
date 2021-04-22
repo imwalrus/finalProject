@@ -3407,13 +3407,13 @@ input[type="button"].btn-block {
 .dropdown-item:hover, .dropdown-item:focus {
   color: #fff;
   text-decoration: none;
-  background-color: #f3969a;
+  background-color: #c0c0c0;
 }
 
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #78c2ad;
+  background-color: #c0c0c0;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
