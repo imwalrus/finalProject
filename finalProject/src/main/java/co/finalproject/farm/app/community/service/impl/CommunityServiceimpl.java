@@ -110,4 +110,11 @@ public class CommunityServiceimpl implements CommunityService {
 		return dao.getNextDocNum(vo);
 	}
 
+	@Override
+	public int getPageNum(CommunityVO vo) {
+		
+		return dao.getPageNum(vo);
+		
+	}
+
 }

@@ -27,7 +27,7 @@ public interface CommunityService {
     //건수
   	public int getCount(CommPagingVO vo);
   	
-    // 조회 증가
+    //조회 증가
     public void updatereviewcnt(CommunityVO vo, HttpSession session);
     
  	//이전글
@@ -35,6 +35,9 @@ public interface CommunityService {
   	
   	//다음글
   	public CommunityVO getNextDocNum(CommunityVO vo);
+  	
+    //페이징 계산
+  	public int getPageNum(CommunityVO vo); 
     
     //댓글 전체조회
     public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo); 

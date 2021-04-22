@@ -17,8 +17,6 @@ $(document).ready(function(){
 	$("input:checkbox[name='comm_adrs']").val([${commPagingVO.getComm_adrs1()}])
 });
 </script>
-
-
 <script>
 function subjectChange() {
 	comm_sch.submit();
@@ -27,7 +25,6 @@ function adrChange() {
 	comm_sch.submit();
     }
 </script>
-
 <script>
 function selectAll(allChk)  {
 	  const checkboxes 
@@ -130,8 +127,7 @@ function selectAll(allChk)  {
          <td align="center" width="10%">${comm.comm_subject}</td>
          <td align="left" width="35%" class="text-truncate" 
          onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'"
-         style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
-         >&nbsp; ${comm.comm_title}</td>
+         style='cursor:pointer;'>&nbsp; ${comm.comm_title}</td>
          <td align="center" width="15%">${comm.user_id}</td>
          <td align="center" width="20%">${comm.comm_adr}</td>
          <td align="center" width="20%">${comm.comm_date}</td>

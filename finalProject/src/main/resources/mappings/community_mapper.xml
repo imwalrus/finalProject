@@ -145,6 +145,14 @@
 	  AND COMM_NO > #{comm_no} )
 	  </select>
     
+    <!-- 게시물 이전글 다음글 누른 후 목록가기 눌렀을 때 페이징 계산 -->
+    <select id="getPageNum" parameterType="CommunityVO" resultType="int">
+	SELECT TRUNC((rn-1)/10)+1 FROM (SELECT ROWNUM rn, a.* FROM (
+	        SELECT COMM_NO FROM COMMUNITY
+	          ORDER BY COMM_NO DESC
+	         ) a ) b
+	   WHERE COMM_NO = #{comm_no}
+    </select>
     
      <!-- 게시글의 댓글 목록 -->
      <select id="getReplyList" resultType="CommunityReplyVO">
