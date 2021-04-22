@@ -263,9 +263,15 @@ $(document).ready(function(){
 	    height: 116px;
 	    text-align: center;
 	}
-	.material-icons{
-		
+	label{
+		font-weight:border;
 	}
+	.searchInfoFarmDiv{
+		border: 3px solid #dee2e6;
+		padding:30px;
+		border-radius:20px;
+		width:900px;
+}
 </style>
 </head>
 <body class="goto-here">
@@ -273,19 +279,31 @@ $(document).ready(function(){
 	<!--농촌속으로 리스트  -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 	
+	<div style="width: 60%; margin: auto;">
 		<!--검색바  -->
-		
-		<div style="width: 60%; margin: auto;">
+		<div class="searchInfoFarmDiv" style="margin-left:2%">
 		  <form id="getSearchFm" name="getSearchFm" action="getFarmList">
 			<input type="hidden" name="page" value="1">
-			지역 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="into_city" id="into_city" value="${intoTheFarmVO.into_city}" style="margin-top: 1%;"><br>
-			농작물 종류 &nbsp; <input name="into_product" id="into_product" value="${intoTheFarmVO.into_product}" style="margin-top: 1%;"><br>
-			기간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<input type="date" name="s_date" id="s_date" value="${intoTheFarmVO.into_date}" style="margin-top: 1%;"> ~ 
-				<input type="date" name="e_date" id="e_date" value="${intoTheFarmVO.into_date}" style="margin-top: 1%;">
-				<br>
-			<button>검색</button>
-		   </form>	
+			  <legend style="font-weight: bold;">Search</legend>
+			  <div class="form-group" style="display: inline-block;">
+			      <label for="into_city">지역</label>
+			      <input type="text" class="form-control" name="into_city" id="into_city" value="${intoTheFarmVO.into_city}" style="width:400px; !important;">
+			  </div>
+			  <div class="form-group" style="display: inline-block;">
+			      <label for="into_city">농작물 종류</label>
+			      <input type="text" class="form-control" name="into_product"  id="into_product" value="${intoTheFarmVO.into_product}" style="width:400px !important;">
+			  </div>
+			  <div class="form-group">
+				    <label for="into_city">검색 기간</label>
+				    <br>
+				    <input type="date" class="form-control" name="s_date" id="s_date" value="${intoTheFarmVO.into_date}" style="width:400px !important; display: inline-block;"> - 
+					<input type="date" class="form-control" name="e_date" id="e_date" value="${intoTheFarmVO.into_date}" style="width:400px !important; display: inline-block;">
+			  </div>
+			<button class="btn btn-warning" style="margin-left: 45%">검색</button>
+		   </form>
+		 </div> 
+		 <!--검색바 끝-->	
+		 <br><br>
 	<form id="doExit" name="doExit" action="updateFarmExit">		
 	 <div class="container">
 		<div class="row">
@@ -322,7 +340,7 @@ $(document).ready(function(){
 	</form>   	
 		
 	</div>
-	
+</section> 	
 		
 	<!--모달 상세보기 -->
 	

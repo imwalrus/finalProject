@@ -41,7 +41,7 @@
      <section class="ftco-section testimony-section">
     <div align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title" style="margin-left:100px;">
-			<h1>커뮤니티 글 작성하기</h1>
+			<h1 style="font-weight: bolder;">커뮤니티 글 작성하기</h1>
 		</div><br/>
 		<div>
 			<form id="frm" name="frm" action="insertComm" method="post">
