@@ -5,11 +5,16 @@
 
 <style>
 .table thead th{
-background-color: #e3f1d4;
+background-color: #c3e6cb;
 font-weight: bold;
 }
+h2{
+	font-weight: bold;
+}
+h3{
+	font-weight: bold;
+}
 </style>
-
 	<section class="pcoded-main-container">
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
@@ -119,8 +124,8 @@ font-weight: bold;
 	
 	//수정
 		function fnfarmUpdate(str1) {
-		$('#farmCenter').modal('hide');
 		$('#farmUpdate .modal-body').load("updateFarms?farm_no=" + str1);
+		$('#farmCenter').modal('hide');		
 		$('#farmUpdate').modal('show');
 		
 

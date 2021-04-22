@@ -74,7 +74,7 @@ public class IntoFarmInqController {
 			public String insertintoFarmInqProc(IntoFarmInqVO vo){		
 				logger.debug(vo.toString());
 				ifiMapper.insertIntoFarmInq(vo);
-				return "redirect:getintoFarmInqList";
+				return "mypageTiles/mypage/getIntoFarmInqOfUser";
 			}
 			
 			//수정
@@ -91,7 +91,7 @@ public class IntoFarmInqController {
 			public String updateintoFarmInqProc(IntoFarmInqVO vo) {
 				logger.debug(vo.toString());
 				ifiMapper.updateIntoFarmInq(vo);
-				return "redirect:getintoFarmInqList";
+				return "redirect:getIntoFarmInqOfUser";
 			}
 
 		//삭제

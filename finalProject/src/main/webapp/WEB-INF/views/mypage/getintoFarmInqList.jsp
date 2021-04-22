@@ -1,89 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!-- 
-<!DOCTYPE html>
-<html lang="ko">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
 
-<head>
-<title>회원 탈퇴</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-Favicon icon
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+<style>
+.table thead th {
+	background-color: #c3e6cb;
+	font-weight: bold;
+}
 
-vendor css
-<link rel="stylesheet" href="resources/admin/css/style.css">
-</head> -->
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
+</style>
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12"></div>
-						</div>
-					</div>
-				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body" align="center">
-
-								<!-- [ Contextual-table ] start -->
-								<div class="col-md-9">
+								<div class="col-md-12">
 									<div class="card-header">
 										<h2>농촌속으로 문의</h2>
 									</div>
-									<div class="card-body table-border-style">
-										<div class="table-responsive">
-											<table class="table">
-												<tr class="table-success">
-													<th>No</th>
-													<th>Title</th>
-													<th>Secrete</th>
-												</tr>
 
-												<tbody>
-													<c:if test="${fn:length(list) >=1}">
-													<c:forEach items="${list }" var="list">
-														<tr  onclick="iQNAview('${list.into_inq_no}')">
-															<td>${list.into_inq_no }</td>
-															<td>${list.into_inq_title }</td>
-															<td>${list.into_inq_check }</td>
-														</tr>
-													</c:forEach>
-													</c:if>
-													<c:if test="${fn:length(list) == 0}">
-														<tr>
-															<td colspan="3"> 문의하신 내용이 없습니다. </td>
-														</tr>
-													</c:if>
-												</tbody>
-											</table>
-										</div>
-									</div>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>제목</th>
+												<th>작성자</th>
+												<th>작성일자</th>
+												<th>비밀여부</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<c:if test="${fn:length(list) >=1}">
+												<c:forEach items="${list }" var="list">
+													<tr onclick="iQNAview('${list.into_inq_no}')">
+														<td>${list.into_inq_title }</td>
+														<td>${list.user_id}</td>
+														<td>${list.into_inq_date}</td>
+														<c:if test="${list.into_inq_check eq '1'}">
+															<td style="width: 20%"><img src="resources/images/mypage/secrete.JPG" width="20" height="30"></td>
+														</c:if>
+														<c:if test="${list.into_inq_check eq '0'}">
+															<td style="width: 20%"><img src="resources/images/mypage/nosecrete.JPG" width="20" height="30"></td>
+														</c:if>
+													</tr>
+												</c:forEach>
+											</c:if>
+											<c:if test="${fn:length(list) == 0}">
+												<tr>
+													<td colspan="3">문의하신 내용이 없습니다.</td>
+												</tr>
+											</c:if>
+										</tbody>
+									</table>
+
 								</div>
 							</div>
-							<!-- [ Contextual-table ] end -->
-						</div>
-						<div align="center">
-							<button type="button" class="btn  btn-outline-success" onclick="location.href='insertintoFarmInq'">등록</button>
 						</div>
 					</div>
-					<!-- [ vertically-modal ] end -->
 				</div>
 
 
@@ -95,7 +80,7 @@ vendor css
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header"><h4>문의 상세 내용</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -106,14 +91,14 @@ vendor css
 				</div>
 			</div>
 			<!-- 모달끝 -->
-			
+
 			<!-- 수정모달시작 -->
 			<div class="modal fade bd-example-modal-lg" id="iQNAupdate"
 				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header"><h4>문의 내용 수정</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -128,9 +113,9 @@ vendor css
 		</div>
 	</section>
 	<script type="text/javascript">
-	
 		function iQNAview(str) {
-			$('#iQNAview .modal-body').load("getintoFarmInq?into_inq_no=" + str);
+			$('#iQNAview .modal-body')
+					.load("getintoFarmInq?into_inq_no=" + str);
 			$('#iQNAview').modal('show');
 			$('#iQNAupdate').modal('hide'); //수정모달 숨김
 
@@ -138,7 +123,8 @@ vendor css
 
 		function iQNAupdate(strr) {
 			$('#iQNAview').remove();
-			$('#iQNAupdate .modal-body').load("updateintoFarmInq?into_inq_no=" + strr);
+			$('#iQNAupdate .modal-body').load(
+					"updateintoFarmInq?into_inq_no=" + strr);
 			$('#iQNAupdate').modal('show');
 			$('#iQNAview').modal('hide');
 		}

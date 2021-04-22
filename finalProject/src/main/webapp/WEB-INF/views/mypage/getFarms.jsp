@@ -4,13 +4,15 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 
 <style>
-.table {
-    width: 100%;
-  }
-
 .table th{
 background-color: #c3e6cb;
 font-weight: bold;
+}
+h2 {
+	font-weight: bold;
+}
+h3{
+	font-weight: bold;
 }
 .modal-body {
     padding: 0px 0px!important;

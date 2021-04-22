@@ -1,31 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+#progress{
+font-weight: bold;
+}
+</style>
 <body>
 	<section class="pcoded-main-container">
-    <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
         <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- [ breadcrumb ] end -->
-            <!-- [ Main Content ] start -->
+
             <div class="row">
-                <!-- [ vertically-modal ] start -->
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-body" align="center">
-
-                            <!-- [ Contextual-table ] start -->
-                            <div class="col-md-9">
+					<form id="doExit" name="doExit" action="updateFarmExit">
+                            <div class="col-md-12">
                                 <div class="card-header">
                                     <h2>농촌속으로 관리 List</h2>
                                 </div>
@@ -38,19 +34,18 @@
                                 <div class="table-responsive">							       
 									<table class="table" id="list">
 										<tr class="table-success">
-											<th>제험번호</th>
-											<th>체험명</th>
-											<th>지역</th>
-											<th>농작물</th>
-											<th>기간</th>
-											<th>신청명단</th>										
+											<th width="5%">No</th>
+											<th width="60%">체험명</th>
+											<th width="5%">지역</th>
+											<th width="5%">농작물</th>
+											<th width="5">완료여부</th>
+											<th	width="10%">신청명단</th>										
 										</tr>																	
 									</table>
                                 </div>
-                                <!-- [ Contextual-table ] end -->
                             </div>
+                            </form>
                         </div>
-                        <!-- [ vertically-modal ] end -->
                     </div>
 
 
@@ -70,7 +65,7 @@
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
-							</button>
+{							</button>
 						</div>
 						<div class="modal-body"></div>
 					
@@ -119,28 +114,61 @@
 		dataType: "json",
 		success: function(data){
 			for(i=0; i<data.length; i++){
+				if(data[i].into_progress == 0){
+			
 				$("#list").append(
 					"<tr><td>" + data[i].into_no + "</td><td>" 
 					+ data[i].into_title + "</td><td>"
 					+ data[i].into_city + "</td><td>"
-					+ data[i].into_product + "</td><td>"
-					+ data[i].into_dates + "</td><td>"					
+					+ data[i].into_product + "</td><td id='progress" + i + "'>"
+					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>완료</button>" + "</td><td>"					
 					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button>"			
-					+"</td></tr>" 
-					
-				
-				);
-				
-				
-				
+					+"</td></tr>" 	
+					);
+				}else{
+					$("#list").append(
+							"<tr><td>" + data[i].into_no + "</td><td>" 
+							+ data[i].into_title + "</td><td>"
+							+ data[i].into_city + "</td><td>"
+							+ data[i].into_product + "</td><td id='progress" + i + "'>"
+							+ "체험종료</td><td>"					
+							+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button>"			
+							+"</td></tr>" 
+							);
+				}
+				}
 			}
-			
-			
-		}
-		
-		
-	});
+
+				});
 	
+	/*완료버튼 */ 
+	function fndoexit(str){
+		var yn = confirm("체험을 종료하시겠습니까? 종료 할 경우 재접수가 불가능합니다. ");
+		var $target = event.target;		//클릭시 button 
+		var tarId = $target.id			//버튼있는 줄의 Td id값 
+		var num = tarId.slice(6) 		//id값에서 숫자만 추출
+ 		if (yn) {
+			$.ajax({
+				url:"updateFarmExit?into_no="+str,
+				type:"post",
+				data: str, //체험번호
+				success:function(response){
+					console.log("result:"+response);
+					
+					
+						//$('#progress'+ j).text("체험종료");
+						$target.remove();
+						$('#progress'+num).text("체험종료");
+						console.log( $('#progress'+num) );
+	
+					
+					}  
+				})
+			
+		} else {
+			alert("취소 되었습니다.");
+		} 
+	}
 	
 	</script>
 </body>

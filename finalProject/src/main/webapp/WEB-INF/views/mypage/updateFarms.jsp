@@ -2,10 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/main/css/style.css">
+<link rel="stylesheet" href="resources/main/css/style.css">
+
 <style>
 .table th{
 background-color: #c3e6cb;
 font-weight: bold;
+}
+h2 {
+	font-weight: bold;
+}
+h3{
+	font-weight: bold;
 }
 </style>
 	<div class="modal-body">
@@ -16,7 +24,7 @@ font-weight: bold;
 				<!-- 숨겨진 유저 ID -->
 				<input type="hidden" name="userId" value="${ufarm.user_id } ">
 				<!-- 숨겨진 유저 ID -->
-			
+					
 					<table class="table">
 							<tr>
 								<th>농장명</th>

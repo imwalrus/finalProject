@@ -1,48 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table thead th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+h2{
+font-weight: bold;
+}
+</style>
 
-<!-- <!DOCTYPE html>
-<html lang="ko">
-
-<head>
-<title>구매리스트</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-Favicon icon
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-vendor css
-<link rel="stylesheet" href="resources/admin/css/style.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-</head> -->
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12"></div>
-						</div>
-					</div>
-				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body" align="center">
 
-								<!-- [ Contextual-table ] start -->
 								<div class="col-md-9">
 									<div class="card-header">
 										<h2>구매 내역</h2>
@@ -112,8 +90,8 @@ vendor css
 					$("#order").append(
 						"<tr><td>"  
 						+ "<button type='button' class='btn btn-success btn-sm' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
-						+ data[i].order_payment + "</td><td>"
-						+ data[i].order_totalprice + "</td><td>"
+						+ data[i].order_payment + "</td><td style='font-weight: bold'>"
+						+ data[i].order_totalprice + "원</td><td>"
 						+ data[i].order_date + "</td></tr>"
 				); 
 			} 
@@ -122,5 +100,4 @@ vendor css
 	});
 	
 </script>
-</body>
-</html>
+

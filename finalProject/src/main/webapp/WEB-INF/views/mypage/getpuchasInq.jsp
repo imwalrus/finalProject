@@ -4,51 +4,79 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 
 <style>
-.table th{
-background-color: #e3f1d4 !important;
-font-weight: bold !important;
+.table th {
+	background-color: #c3e6cb;
+	font-weight: bold;
+}
+
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
 }
 </style>
 
 <!-- 모달바디 시작 -->
 <form action="updatepuchasInq" method="post">
-	<div class="row" align="center">
+	<div class="row">
 
-		<table class="table">			
+		<table class="table">
 			<tr>
-				<th class="table-success" colspan="1">제목</th>
-				<td colspan="5">${plist.pur_inq_title }</td>
-				<th class="table-success" colspan="1">비밀</th>
-					<c:if test="${plist.pur_inq_check eq '1'}">
-       					<td colspan="2">
-       						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
-       					</td>
-       				</c:if>		
-       				<c:if test="${plist.pur_inq_check eq '0'}">
-       					<td colspan="2">
-       						<img src="/resources/images/mypage/nosecrete.JPG" width="30" height="40">
-       					</td>
-       				</c:if>				
+				<th colspan="1">제목</th>
+				<td colspan="7">${plist.pur_inq_title }</td>
+				<c:if test="${plist.pur_inq_check eq '1'}">
+					<td colspan="1" align="rigth"><img
+						src="resources/images/mypage/secrete.JPG" width="30" height="40">
+					</td>
+					<td colspan="1">
+						<button class="btn  btn-outline-warning"
+							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
+						<button type="button" class="btn  btn-outline-danger"
+							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+					</td>
+				</c:if>
+				<c:if test="${plist.pur_inq_check eq '0'}">
+					<td colspan="1"><img
+						src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
+					</td>
+					<td colspan="1">
+				<c:if test="${plist.user_id eq user_id }">
+						<button class="btn  btn-outline-warning"
+							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
+						<button type="button" class="btn  btn-outline-danger"
+							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+				</c:if>
+				<c:if test="${plist.user_id ne user_id }">
+				</c:if>
+					</td>
+				</c:if>
 			</tr>
 			<tr>
-				<th class="table-success" colspan="1">작성일</th>
-				<td colspan="5">${plist.pur_inq_date }</td>
-				<th class="table-success" colspan="1"> 작성자</th>
+				<th colspan="1">작성일</th>
+				<td colspan="7">${plist.pur_inq_date }</td>
+				<th colspan="1">작성자</th>
 				<th colspan="2">${plist.user_id}</th>
 			</tr>
 			<tr>
-				<td colspan="9">
-					<img class="img-fluid card-img-top" src="./resources/images/mypage/${plist.pur_inq_filename}" alt="Card image cap">
+			<c:if test="${plist.pur_inq_filename eq null }">
+				<td>
+					입력한 사진이 없습니다.
 				</td>
+			</c:if>
+			<c:if test="${plist.pur_inq_filename ne null }">
+				<td colspan="10"><img class="img-fluid card-img-top"
+					src="resources/images/mypage/${plist.pur_inq_filename}"
+					style="width: 50%; max-width: 100%; height: auto;"
+					alt="Card image cap">
+				</td>
+			</c:if>
 			</tr>
 			<tr>
-				<th class="table-success" colspan="1">내용</th>
-				<td colspan="8">${pupdate.pur_inq_content}</td>
-			</tr>
-			<tr>
-				<td  colspan="9">
-					<button class="btn  btn-outline-warning" onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-					<button type="button" class="btn  btn-outline-danger" onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+				<th colspan="1">내용</th>
+				<td colspan="9"><textarea class="form-control"
+						name="pur_inq_content" rows="6" readonly="readonly">${plist.pur_inq_content}</textarea>
 				</td>
 			</tr>
 		</table>
@@ -58,31 +86,32 @@ font-weight: bold !important;
 <br>
 
 
-<div class="row" align="center">
+<div class="row">
 	<h4>댓글</h4>
-	<table class="table" id="reply" >
+	<table class="table" id="reply">
 
 		<tr>
-			<th class="table-success">No</th>
-			<th class="table-success">댓글내용</th>
-			<th class="table-success">작성자</th>
-			<th class="table-success">날짜</th>
-			<th class="table-success">삭제</th>
+			<th class="table-success" width='70%'>댓글내용</th>
+			<th class="table-success" width='5%'>작성자</th>
+			<th class="table-success" width='15%'>날짜</th>
+			<th class="table-success" width='15%'>삭제</th>
 		</tr>
 	</table>
 </div>
 <form>
-      <div class="input-group mb-3">
-              <input type="text" class="form-control" name="pur_inq_rep_content" placeholder="댓글을 입력하세요" aria-describedby="basic-addon2">
-           <input type="hidden" name="user_id" value="${user_id }">
-            <div class="input-group-append">
-               <button type="button" id="btnAdd" class="btn  btn-outline-success btn-sm">등록</button>
-          </div>
-       </div>
-		
-		
+	<div class="input-group mb-3">
+		<input type="text" class="form-control" name="pur_inq_rep_content"
+			placeholder="댓글을 입력하세요" aria-describedby="basic-addon2"> <input
+			type="hidden" name="user_id" value="${user_id }">
+		<div class="input-group-append">
+			<button type="button" id="btnAdd"
+				class="btn  btn-outline-success btn-sm">등록</button>
+		</div>
+	</div>
 
-		
+
+
+
 
 </form>
 
@@ -100,13 +129,12 @@ font-weight: bold !important;
 <script src="resources/admin/js/pcoded.min.js"></script>
 <script type="text/javascript">
 
-//문의글삭제
+//문의글삭제 (댓글 있는 경우 삭제 안됨)
 	function deleteAlert(str) {
-		var yn = confirm("정말 삭제할까요?");
-		if (yn) {
-			location.href = "deletepuchasInq?pur_inq_no=" + str;
+ 		if (  $("#replyDate").val() != null ) {
+ 				confirm("댓글이 있는글은 삭제 할 수 없습니다.")			
 		} else {
-			alert("삭제하지 못하였습니다.  ");
+			location.href = "deletepuchasInq?pur_inq_no=" + str;
 		}
 	}
 	
@@ -136,10 +164,9 @@ $.ajax({
 		success: function(response) {
 			for(i=0; i<response.length; i++){
 				$("#reply").append(						
-						"<tr id='replyItem'><td>" + response[i].pur_inq_rep_no + "</td><td>"
-						+ response[i].pur_inq_rep_content + "</td><td>"
-						+ response[i].user_id + "</td><td>"
-						+ response[i].pur_inq_rep_date + "</td><td>"
+						"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+						+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
+						+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
 						+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"
 						+ "</td></tr>"						
 						);
@@ -160,13 +187,15 @@ $("#btnAdd").on("click", function(){
 		success:function(response){
 			/* $("#reply").append(response.content + "<br>"); */
 			$("#reply").append(
-					"<tr><td>" + response.pur_inq_rep_no + "</td><td>"
-					+ response.pur_inq_rep_content + "</td><td>"
+					"<tr><td>" +response.pur_inq_rep_content + "</td><td>"
 					+ response.user_id + "</td><td>"
-					+ response.pur_inq_rep_date + "</td></tr>"						
+					+ response.pur_inq_rep_date + "</td></td>"
+					+ response.pur_inq_rep_content + "</td><tr>"
 					);
 		}
 
 	});		
 });
+
+
 	</script>

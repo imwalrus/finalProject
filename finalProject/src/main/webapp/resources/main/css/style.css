@@ -8932,7 +8932,7 @@ h1, h2, h3, h4, h5,
       color: #fff !important;
       border: 1px solid transparent !important; }
   .table tbody tr td {
-    text-align: center !important;
+    text-align: center;
     vertical-align: middle;
     padding: 40px 10px;
     border: 1px solid transparent !important;

@@ -21,7 +21,7 @@
 				PUR_INQ_FILENAME,
 				USER_ID
 		FROM PURCHASE_INQURIY
-		where user_id = #{user_id}
+		WHERE USER_ID = #{user_id}
 	</select>
 	
 <!-- 판매자에게 들어온 문의리스트 -->
@@ -34,9 +34,9 @@
 		            p.PRO_NO,
 		            i.PUR_INQ_FILENAME,
 		            i.USER_ID
-		from product p inner join purchase_inquriy i
-		on(p.pro_no = i.pro_no)
-		where p.user_id = #{user_id}
+		FROM PRODUCT P INNER JOIN PURCHASE_INQURIY I
+		ON(P.PRO_NO = I.PRO_NO)
+		WHERE P.USER_ID = #{user_id}
 	
 	</select>	
 <!-- 단건조회 -->	
@@ -44,7 +44,7 @@
 								resultType="puchasInqVO">	
 		SELECT *
 		FROM PURCHASE_INQURIY
-		WHERE pur_inq_no=#{pur_inq_no}		
+		WHERE PUR_INQ_NO=#{pur_inq_no}		
 	</select>
 
 <!-- 등록 -->	
@@ -61,7 +61,7 @@
 									)
 				
 		VALUES(
-					(select nvl(max(pur_inq_no),0)+1 from PURCHASE_INQURIY)
+					(SELECT NVL(MAX(PUR_INQ_NO),0)+1 FROM PURCHASE_INQURIY)
 					,sysdate
 					,#{pur_inq_title}
 					,#{pur_inq_content}					
@@ -77,16 +77,18 @@
 	<update id="updatepuchasInq" parameterType="puchasInqVO">
 		UPDATE PURCHASE_INQURIY
 				SET
-						pur_inq_title = #{pur_inq_title}
-						,pur_inq_content = #{pur_inq_content}
-						,pur_inq_filename = #{pur_inq_filename}
-			WHERE pur_inq_no = #{pur_inq_no}
+						PUR_INQ_TITLE = #{pur_inq_title}
+						,PUR_INQ_CONTENT = #{pur_inq_content}
+				<if test="pur_inq_filename != null and pur_inq_filename != ''">
+						,PUR_INQ_FILENAME = #{pur_inq_filename}
+				</if>
+			WHERE PUR_INQ_NO = #{pur_inq_no}
 	</update>
 
 <!-- 삭제 -->	
 	<delete id="deletepuchasInq" parameterType="puchasInqVO">
 				DELETE FROM PURCHASE_INQURIY
-						WHERE pur_inq_no = #{pur_inq_no}
+						WHERE PUR_INQ_NO = #{pur_inq_no}
 	
 	</delete>
 
@@ -103,7 +105,7 @@
 <!-- 댓글 등록 -->
 	<insert id="insertpuchasReply" parameterType="puchasReplyVO">
 			<selectKey resultType="string" keyProperty="pur_inq_rep_no" order="BEFORE">
-        		select nvl(max(pur_inq_rep_no),0)+1 from PURCHASE_INQURIY_REPLY     
+        		SELECT NVL(MAX(PUR_INQ_REP_NO),0)+1 FROM PURCHASE_INQURIY_REPLY     
     		</selectKey>  
 		INSERT INTO PURCHASE_INQURIY_REPLY
 		VALUES (

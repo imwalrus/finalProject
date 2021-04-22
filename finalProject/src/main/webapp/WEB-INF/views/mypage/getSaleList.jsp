@@ -1,43 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+</style>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded" />
-    <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
 
-    <!-- vendor css -->
-    <link rel="stylesheet" href="resources/admin/css/style.css">
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
-
-</head>
-<body>
 	<section class="pcoded-main-container">
-    <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
         <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- [ breadcrumb ] end -->
-            <!-- [ Main Content ] start -->
             <div class="row">
-                <!-- [ vertically-modal ] start -->
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-body" align="center">
@@ -63,17 +40,10 @@
 									</table>
 								</form>
                                 </div>
-                                <!-- [ Contextual-table ] end -->
                             </div>
                         </div>
-                        <!-- [ vertically-modal ] end -->
                     </div>
-
-
                 </div>
-
-
-
             </div>
         </div>
         
@@ -121,7 +91,7 @@ $.ajax({
 					+ "(" + data[i].pro_dcompany + ")" +"<br>"
 					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
 					+ data[i].orderlist_invoice  + "</a></td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호등록"+ "</button>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 					+"</td></tr>"
 					);
 
@@ -136,7 +106,7 @@ $.ajax({
 						+ data[i].orderlist_condition +"<br>"
 						+ "(" + data[i].pro_dcompany + ")" +"<br>"
 						+ data[i].orderlist_invoice  + "</td><td>"
-						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호등록"+ "</button>"
+						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 						+"</td></tr>"
 						);
 				
@@ -152,5 +122,3 @@ $.ajax({
 	
 
 </script>
-</body>
-</html>

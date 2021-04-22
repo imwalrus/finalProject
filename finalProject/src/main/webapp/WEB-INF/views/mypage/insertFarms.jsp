@@ -10,8 +10,9 @@
 	white-space: nowrap;
 	padding: 1.05rem 0.75rem;
 }
-th{
-background-color: #e3f1d4;
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
 }
 .modal-body {
     padding: 0px !important;

@@ -93,7 +93,7 @@
 <!-- 댓글등록 -->	
 	<insert id="insertIntoFarmReply" parameterType="IntoFarmReplyVO">
 		  <selectKey resultType="string" keyProperty="into_inq_rep_no" order="BEFORE">
-        		select nvl(max(into_inq_rep_no),0)+1 from INTOFARM_INQUIRY_REPLY      
+        		SELECT NVL(MAX(INTO_INQ_REP_NO),0)+1 FROM INTOFARM_INQUIRY_REPLY      
     		</selectKey>  
 		INSERT INTO INTOFARM_INQUIRY_REPLY
 		VALUES (
