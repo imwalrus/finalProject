@@ -16,7 +16,7 @@
 	body {
 		color: #999;
 		background: #f3f3f3;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'InfinitySans-RegularA1','Roboto', sans-serif;
 	}
     .form-control {
 		border-color: #eee;
