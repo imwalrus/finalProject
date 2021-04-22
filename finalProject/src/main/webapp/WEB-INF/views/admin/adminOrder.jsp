@@ -68,9 +68,9 @@
 										<table class="table" style="table-layout: fixed">
 											<thead>
 												<tr class="table-success">
-													<th width="20%">No.</th>
+													<th width="17%">No.</th>
 													<th width="20%">상품명</th>
-													<th width="20%">주문일자</th>
+													<th width="25%">주문일자</th>
 													<th width="10%">결제수단</th>
 													<th width="10%">금액</th>
 													<th width="10%">상태</th>
@@ -84,14 +84,14 @@
 												</c:if>
 												<c:forEach items="${order}" var="order">
 													<tr>
-														<td width="20%" class="text-truncate">${order.order_no}</td>
+														<td width="17%" class="text-truncate">${order.order_no}</td>
 														<td width="20%" class="text-truncate">${order.pro_name}</td>
-														<td width="20%">${order.order_date}</td>
-														<td width="10%">${order.order_payment}</td>
-														<td width="10%">${order.pro_price}원</td>
-														<td width="10%">${order.orderlist_condition}</td>
-														<td width="10%">${order.seller}</td>
-														<td width="10%">${order.buyer}</td>
+														<td width="25%" class="text-truncate">${order.order_date}</td>
+														<td width="10%" class="text-truncate">${order.order_payment}</td>
+														<td width="10%" class="text-truncate">${order.pro_price}원</td>
+														<td width="10%" class="text-truncate">${order.orderlist_condition}</td>
+														<td width="10%" class="text-truncate">${order.seller}</td>
+														<td width="10%" class="text-truncate">${order.buyer}</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -99,6 +99,7 @@
 										<!-- 테이블 END -->
 										<!-- 페이징 START -->
 										<form action="adminOrder" name="searchFrm">
+											<input type="hidden" name="orderlist_condition" value="${orderVO.orderlist_condition}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>

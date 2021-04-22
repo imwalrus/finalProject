@@ -96,15 +96,15 @@
 												</c:if>
 												<c:forEach items="${user}" var="user">
 													<tr>
-														<td width="10%">${user.user_id}</td>
-														<td width="10%">${user.user_name}</td>
-														<td width="15%">
+														<td width="10%" class="text-truncate">${user.user_id}</td>
+														<td width="10%" class="text-truncate">${user.user_name}</td>
+														<td width="15%" class="text-truncate">
 															<fmt:parseDate value="${user.user_birth}" var="birth" pattern="yyyy-MM-dd"/>
 															<fmt:formatDate value="${birth}" pattern="yyyy-MM-dd"/>
 														</td>
-														<td width="15%">${user.user_phone}</td>
+														<td width="15%" class="text-truncate">${user.user_phone}</td>
 														<td width="30%" class="text-truncate">${user.user_adr}</td>
-														<td width="10%">${user.farmer_check}</td>
+														<td width="10%" class="text-truncate">${user.farmer_check}</td>
 														<td>
 															<!-- 단건 보기 Modal -->
 															<a href="javascript:;" class="view" onclick="adminUserSel('${user.user_id}')">

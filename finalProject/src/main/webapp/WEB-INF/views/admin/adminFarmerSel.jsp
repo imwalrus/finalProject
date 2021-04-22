@@ -25,7 +25,7 @@
 		<!-- 파일 다운 -->
 		<div class="form-group">
 			<strong>업로드 파일 : </strong>
-			<a href="resources/main/files/${farmer.farmer_filename}">${farmer.farmer_filename}</a>
+			<a href="resources/images/mypage/${farmer.farmer_filename}">${farmer.farmer_filename}</a>
 		</div>
 	</div>
 	<div class="modal-footer">

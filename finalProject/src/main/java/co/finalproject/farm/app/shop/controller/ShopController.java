@@ -123,7 +123,7 @@ public class ShopController {
 			vo.setPur_inq_filename(rename.getName());
 		}
 		purchaseInqMapper.insertpuchasInq(vo);
-		return "redirect:/getpuchasInqList";
+		return "redirect:/getpuchasInqofUser";
 	}
 	
 	// 상품 등록

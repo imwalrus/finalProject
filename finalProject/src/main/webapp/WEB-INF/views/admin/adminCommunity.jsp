@@ -103,12 +103,12 @@
 												</c:if>
 												<c:forEach items="${community}" var="community">
 													<tr>
-														<td width="10%">${community.comm_no}</td>
-														<td width="10%">${community.comm_subject}</td>
+														<td width="10%" class="text-truncate">${community.comm_no}</td>
+														<td width="10%" class="text-truncate">${community.comm_subject}</td>
 														<td width="25%" class="text-truncate">${community.comm_title}</td>
-														<td width="30%">${community.comm_adr}</td>
-														<td width="15%">${community.comm_date}</td>
-														<td width="10%">${community.user_id}</td>
+														<td width="30%" class="text-truncate">${community.comm_adr}</td>
+														<td width="15%" class="text-truncate">${community.comm_date}</td>
+														<td width="10%" class="text-truncate">${community.user_id}</td>
 														<td>
 															<!-- 보기 Modal -->
 															<a href="javascript:;" class="view" onclick="communitySel('${community.comm_no}')">
@@ -163,8 +163,8 @@
 				</div>
 			</div>
 			<!-- 단건 보기 Modal 이동 START -->
-			<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+			<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content"></div>
 				</div>
 			</div>

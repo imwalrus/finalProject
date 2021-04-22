@@ -110,9 +110,19 @@
 			<div class="row" id="report3">
 				<div class="col">
 					<div class="card card-c1">
+						<c:set var="today" value="<%=new java.util.Date()%>" />
+						<c:set var="month">
+							<fmt:formatDate value="${today}" pattern="MM" />
+						</c:set>
 						<div class="card-header card-chart">
-							<h4 class="title" align="center">월별 판매량</h4>
-							<h6>(현재 월 기준)</h6>
+							<h4 class="title" align="center">
+								<c:out value="${month}" />
+								월 판매량
+							</h4>
+							<c:set var="year">
+								<fmt:formatDate value="${today}" pattern="yyyy" />
+							</c:set> 
+							<h6>(<c:out value="${year}" />년)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
 							<div class="ct-chart" id="monthChart"></div>
@@ -125,8 +135,10 @@
 				<div class="col">
 					<div class="card card-c1">
 						<div class="card-header card-chart">
-							<h4 class="title" align="center">월별 매출액</h4>
-							<h6>(현재 월 기준)</h6>
+							<h4 class="title" align="center">
+								<c:out value="${month}" />월 매출액
+							</h4>
+							<h6>(<c:out value="${year}" />년)</h6>
 						</div>
 						<div class="card-content" data-background-color="green">
 							<div class="ct-chart" id="monthSumChart"></div>

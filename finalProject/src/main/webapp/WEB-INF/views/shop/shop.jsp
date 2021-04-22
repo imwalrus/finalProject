@@ -200,7 +200,7 @@
 										<div class="Container">
 											<font size=2 id="slider_value_view">10000</font>
 											<!-- 최소값:0 최대값:10000 단위:1000 -->
-											<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='0' max='20000' step="1000">
+											<input oninput='ShowSliderValue(this.value)' type="range" name="pro_price" class="custom-range" min='1' max='20000' step="1000">
 										</div>
 										<button type="submit" class="btn btn-primary">검색</button>
 									</form>

@@ -24,7 +24,7 @@
 				<c:if test="${banner.banner_check eq 0}">
 					<div class="banner1 col-md-4">
 						<a href="${banner.banner_link}">
-							<img src="resources/images/banner/${banner.banner_filename}">
+							<img src="resources/images/banner/${banner.banner_filename}" style="max-width:190px;">
 						</a>
 					</div>
 				</c:if>

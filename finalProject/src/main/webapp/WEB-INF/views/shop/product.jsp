@@ -149,7 +149,7 @@
 								<a href="prodManage?user_id=${user_id}" class="btn btn-success py-3 px-5">상품수정</a>
 							</c:if>
 							<!-- 품절시 버튼 변경 -->
-							<c:if test="${prod.pro_quantity eq 0}">
+							<c:if test="${prod.pro_quantity eq 0 or prod.pro_condition eq '품절'}">
 								<a href="javascript:;" class="btn btn-dark py-3 px-5">품절</a>
 							</c:if>
 							<!-- 품절시 버튼 변경 -->

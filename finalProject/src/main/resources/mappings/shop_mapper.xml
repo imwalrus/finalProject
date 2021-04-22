@@ -270,8 +270,9 @@
 	<!-- 주문 등록 -->
 	<insert id="insertOrder" parameterType="OrderVO">
 		<selectKey keyProperty="order_no" resultType="String" order="BEFORE">
-		SELECT NVL(MAX(ORDER_NO),TO_CHAR(SYSDATE,'YYYYMMDD')||'0000') + 1
-		  FROM ORDERS
+		SELECT TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD') || NVL(TO_CHAR(MAX(SUBSTR(ORDER_NO, 7))), '0000')) + 1
+          FROM ORDERS
+ 		 WHERE TO_CHAR(ORDER_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
 		</selectKey>
 		INSERT INTO ORDERS (ORDER_NO
 					 	  , ORDER_DATE

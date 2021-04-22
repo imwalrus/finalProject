@@ -11,7 +11,9 @@
 	</div>
 	<div class="modal-body">
 		<div class="col">
-			<img src="resources/main/images/${intoFarm.into_filename}" alt="teste" class="img-thumbnail">
+		<c:forEach items="${images}" var="image" end="0">
+			<img src="resources/images/intofarm/${image}" alt="teste" class="img-thumbnail">
+		</c:forEach>
 		</div>
 		<div class="clearfix"></div>
 		<div class="form-group row">

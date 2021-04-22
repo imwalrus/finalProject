@@ -86,7 +86,7 @@
 													<th width="5%">No.</th>
 													<th width="10%">ID</th>
 													<th width="15%">체험이름</th>
-													<th width="5%">지역</th>
+													<th width="10%">지역</th>
 													<th width="30%">일정</th>
 													<th width="10%">모집인원수</th>
 													<th width="10%">진행여부</th>
@@ -99,12 +99,12 @@
 												</c:if>
 												<c:forEach items="${intoFarm}" var="intoFarm">
 													<tr>
-														<td width="5%">${intoFarm.into_no}</td>
+														<td width="5%" class="text-truncate">${intoFarm.into_no}</td>
 														<td width="10%" class="text-truncate">${intoFarm.user_id}</td>
-														<td width="15%">${intoFarm.into_title}</td>
-														<td width="5%">${intoFarm.into_city}</td>
+														<td width="15%" class="text-truncate">${intoFarm.into_title}</td>
+														<td width="10%" class="text-truncate">${intoFarm.into_city}</td>
 														<td width="30%" class="text-truncate">${intoFarm.into_date}</td>
-														<td width="10%">${intoFarm.into_entry}명</td>
+														<td width="10%" class="text-truncate">${intoFarm.into_entry}명</td>
 														<c:choose>
 															<c:when test="${intoFarm.into_progress eq 0}">
 																<td width="10%">진행중</td>

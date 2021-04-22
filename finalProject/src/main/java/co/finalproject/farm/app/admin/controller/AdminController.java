@@ -2,6 +2,7 @@ package co.finalproject.farm.app.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -183,6 +184,15 @@ public class AdminController {
 	@GetMapping("/adminIntoFarmSel")
 	public String adminIntoFarmSel(IntoTheFarmVO vo, Model model) {
 		model.addAttribute("intoFarm", intoFarmMapper.getSearchFarm(vo));
+		  IntoTheFarmVO newVO = new IntoTheFarmVO();
+		  newVO = intoFarmMapper.getSearchFarm(vo);
+		  String filename = newVO.getInto_filename();
+		  List<String> images = new ArrayList<>();
+		  String[] filenameSplit = filename.split("@");
+		  for(int i=0; i<filenameSplit.length; i++) {
+			  images.add(filenameSplit[i]);
+		  }
+		  model.addAttribute("images", images); //image리스트 따로 받아서 @로 자르고 foreach문 돌리기 위해 list로 넘기기
 		return "notiles/admin/adminIntoFarmSel";
 	}
 	

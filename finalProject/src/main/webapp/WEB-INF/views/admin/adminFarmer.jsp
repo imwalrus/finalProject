@@ -127,6 +127,7 @@
 											</tbody>
 										</table>
 										<form action="adminFarmer" name="searchFrm">
+											<input type="hidden" name="farmer_check" value="${userVO.farmer_check}">
 											<input type="hidden" name="page" value="1">
 											<my:paging paging="${paging}" jsFunc="goPage" />
 										</form>

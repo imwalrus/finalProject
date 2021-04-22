@@ -157,8 +157,8 @@
 										</div>
 									</div>
 									<p>
-										<!-- <a href="#" class="btn btn-primary py-3 px-4" onclick="payment()">결제하기</a> -->
-										<button type="submit" class="btn btn-primary py-3 px-4">결제하기</button>
+										<a href="#" class="btn btn-primary py-3 px-4" onclick="payment()">결제하기</a>
+										<!-- <button type="submit" class="btn btn-primary py-3 px-4">결제하기</button> -->
 									</p>
 								</div>
 							</div>

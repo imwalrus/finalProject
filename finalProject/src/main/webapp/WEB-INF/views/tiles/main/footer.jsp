@@ -18,7 +18,7 @@
 						<div class="col-4">
 							<div align="center">
 								<a href="${banner1.banner_link}">
-									<img src="resources/images/banner/${banner1.banner_filename}">
+									<img src="resources/images/banner/${banner1.banner_filename}" style="max-width:190px;">
 								</a>
 							</div>
 						</div>

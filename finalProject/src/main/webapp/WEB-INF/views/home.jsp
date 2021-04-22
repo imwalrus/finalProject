@@ -14,16 +14,35 @@
 <body class="goto-here">
 	<section id="home-section" class="hero">
 		<div class="home-slider owl-carousel">
-			<div class="slider-item" style="background-image: url(resources/main/images/main_image.jpg);">
+			<div class="slider-item" style="background-image: url(resources/images/home/main_image.jpg);">
 				<div class="overlay"></div>
 				<div class="container">
 					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 						<div class="col-md-12 ftco-animate text-center">
-							<h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-							<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-							<p>
-								<button type="button" class="btn btn-primary" onclick="#">#</button>
-							</p>
+							<h1 class="mb-2">자연이 좋은 <br> 사람들</h1>
+							<h2 class="subheading mb-4">청년농장</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slider-item" style="background-image: url(resources/images/home/main_image2.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+						<div class="col-md-12 ftco-animate text-center">
+							<h1 class="mb-2">자연속에서 찾는 <br> 행복한 삶</h1>
+							<h2 class="subheading mb-4">청년농장</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slider-item" style="background-image: url(resources/images/home/main_image3.png);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+						<div class="col-md-12 ftco-animate text-center">
+							<h1 class="mb-2">도시에서 <br> 농촌으로</h1>
+							<h2 class="subheading mb-4">청년농장</h2>
 						</div>
 					</div>
 				</div>
@@ -43,7 +62,7 @@
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="hvr-grow">
-							<a href="getFarmList" class="btn hvr-hover hvr-grow">
+							<a href="getFarmInfo" class="btn hvr-hover hvr-grow">
 								<img class="img-fluid" src="resources/images/home/categories_img_02.png" />
 							</a>
 						</div>
