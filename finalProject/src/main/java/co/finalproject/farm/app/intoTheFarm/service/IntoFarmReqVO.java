@@ -14,8 +14,11 @@ public class IntoFarmReqVO {
 	private String into_req_num;
 	private String user_id;
 	private String into_req_phone;
-	private int into_req_entry;
+	private String into_entry; //모집인원수
+	private String into_req_register; //신청인원수
 	private String into_req_reward;
 	private String into_req_date;
-	private int into_no;
+	private String into_no;
+	private String farm_id;
+	private String title;
 }

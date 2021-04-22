@@ -75,26 +75,180 @@ $(document).ready(function(){
 						$('#myUpdate').modal('show');
 				}
 	
-	   /*모달-신청하기 모달열기 */	
-		function fndoapply(){
-			$('#myReqModal .nav nav-tabs').on('show.bs.tab',function (e) {
-				 e.target // newly activated tab
-				 e.relatedTarget // previous active tab
-				 $('#myTab a:first ').tab('show') // Select first tab
-				});
+		/*모달-신청하기 모달열기 */	
+		function fndoapply(intoNo,remain,into_date){
+			$("#into_req_remain").val(remain);
+			$("#into_no").val(intoNo);
+			var apply_into_req_date=$("#into_req_date").val(into_date);
+			var apply_into_req_date2=$("#into_req_date1").val(into_date);
+			
+			if(remain == 0){
+				alert("신청인원이 초과되었습니다.")
+			}else{
+				$('#myReqModal').modal('show');
+				$('#myReqModal .nav nav-tabs').on('show.bs.tab',function (e) {
+					 e.target // newly activated tab
+					 e.relatedTarget // previous active tab
+					 $('#myTab a:first ').tab('show') // Select first tab
+					});
+				
+				//개인신청 시 날짜 input:radio생성
+				var a=$("#into_req_date").val()
+				var b=a.split(",")
+				for(i=0; i<b.length; i++){ 
+				var c= $("th#dateTh").append(
+						"<input type='radio' name='selectdate' value='"+b[i]+"'></input>"+b[i]+"&nbsp;&nbsp;&nbsp;")
+						$("#dateTr").append(c)
+
+				}
+				
+				//그룹신청 시 날짜 input:radio생성
+				var d=$("#into_req_date1").val()
+				var e=d.split(",")
+				for(i=0; i<e.length; i++){ 
+				var f= $("th#dateTh1").append(
+						"<input type='radio' name='selectdate1' value='"+e[i]+"'></input>"+e[i]+"&nbsp;&nbsp;&nbsp;")
+						$("#dateTr1").append(f)
+
+				}
+				
+			}
 		}
 	   /*모달-개인신청*/
-	    function fnpersonalapply(str5){
-	    	var yn = confirm("신청하시겠니까?");
+	    function fnpersonalapply(){
+	    	var frm=document.getElementById("applyPersonFrm");
+	    	var into_req_date=frm.into_req_date.value;
+	    		
+	    	if (into_req_date.trim() == ''){
+	    		alert("날짜를 선택해주세요");
+	    		return false;
+	    	}
+	    	var yn = confirm("신청하시겠습니까?");
 	    	if(yn) {
-	    		applyReqFrm.action = "insertReqFarm";
-	    		applyReqFrm.submit();
+	    		$.ajax({
+					url:"insertReqFarm",
+					type:"post",
+					data: {user_id:$("input[name=user_id]").val(),
+					       user_name:$("input[name=user_name]").val(),
+					       into_req_phone:$("input[name=into_req_phone]").val(),
+					       into_req_reward:$('input[name="into_req_reward"]:checked').val(),
+					       into_req_date:$('input[name="selectdate"]:checked').val(),
+					       into_no:$("#into_no").val()
+					},
+					success:function(response){
+						console.log("result:"+response);
+						/* location.href="ajaxmyIntoList"; */
+						
+						}  
+					})
 			} else {
 				alert("취소 되었습니다.");
 			}
-	    		
-	    	}
+	    	$('#myReqModal').modal('hide');
+	    }
+	   
+	    /*단체신청-항목추가버튼 */
+	    $(document).ready(function(){
+	    	$("#groupForm").on("click",".addReq",function(){
+	 		    var add = $("#groupForm tr:last").attr("class");
+	 		    var new_user_name = $("#groupForm tr:eq(2)").clone();
+	 		    new_user_name.find("input#user_name").attr("readonly",false);
+	 		    new_user_name.find("input#user_name").attr("value",'');
+	 		    new_user_name.find("input#user_name").attr("id","new_user_name");
+	 		    new_user_name.find("input#user_name").attr("name","new_user_name");
+	 		    new_user_name.find("input#user_name").attr("required",true);
+	 		    /* new_user_name.find("td:eq(0)").attr("rowspan","1");
+	 		    new_user_name.addClass("div"); */
+	 		    $("#groupForm").append(new_user_name);
+	 		    
+	 		    var add1 = $("#groupForm tr:last").attr("class");
+	 		    var new_into_req_phone = $("#groupForm tr:eq(3)").clone();
+	 		    new_into_req_phone.find("input#into_req_phone").attr("readonly",false);
+	 		    new_into_req_phone.find("input#into_req_phone").attr("value",'');
+	 		    new_into_req_phone.find("input#into_req_phone").attr("id","new_into_req_phone");
+	 		    new_into_req_phone.find("input#into_req_phone").attr("name","new_into_req_phone");
+	 		    new_into_req_phone.find("input#into_req_phone").attr("required",true);
+	 		    /* new_into_req_phone.find("td:eq(0)").attr("rowspan","1");
+	 		    new_into_req_phone.addClass("div"); */
+	 		    $("#groupForm").append(new_into_req_phone);
+	 		    
+	 		    
+	 	   });	
+	    });
 		   
+	    /*모달-단체신청 */
+	    function fnGroupapply(){
+	    	var frm=document.getElementById("applyGroupFrm");
+	    	var into_req_date=frm.into_req_date1.value;
+	    	
+	    	var into_register=frm.into_register.value;
+	    	var new_user_name=$("input#new_user_name").val();
+	    	var new_into_req_phone=$("input#new_into_req_phone").val();
+	    	
+	    	if (into_req_date1== ''){
+	    		alert("날짜를 선택해주세요");
+	    		return false;
+	    	}
+	    	if (into_register == ''){
+	    		alert("인원수를 입력해주세요");
+	    		return false;
+	    	}
+	    	 if (new_user_name == ''){
+	    		alert("이름을 입력해주세요");
+	    		return false;
+	    	}
+	    	if (new_into_req_phone == ''){
+	    		alert("전화번호를 입력해주세요");
+	    		return false;
+	    	} 
+	    	
+	        var new_user_name1 = $('input[name=new_user_name]');
+	    	var value='';
+			
+	    	for(var i=1; i<new_user_name1.length; i++){
+	    	    value = $(new_user_name1[i]).val();
+	    	    if(value[i] == null){
+	    	      alert("이름을 입력하세요");
+	    	      return false;
+	    	    }
+	    	  }
+	    	
+	    	var new_into_req_phone1 = $('input[name=new_into_req_phone]');
+	    	var value1='';
+	    	
+	    	for(var i=1; i<new_into_req_phone1.length; i++){
+	    		value1 = $(new_into_req_phone1[i]).val();
+	    	    if(value1[i] == null){
+	    	      alert("전화번호를 입력하세요"); 
+	    	      return false;
+	    	    }
+	    	  } 
+	    	
+	    	var yn = confirm("신청하시겠습니까?");
+	    	if(yn) {
+	    		$.ajax({
+					url:"insertGroupFarm",
+					type:"post",
+					data: {user_id:$("input[name=user_id]").val(),
+					       user_name:$("input[name=user_name]").val(),
+					       into_req_phone:$("input[name=into_req_phone]").val(),
+					       into_req_reward:$('input[name="into_req_reward"]:checked').val(),
+					       into_req_date:$("input[name='selectdate1']:checked").val(),
+					       into_req_register:$("input[name=into_register]").val(),
+					       into_no:$("#into_no").val()
+					},
+					success:function(response){
+						console.log("result:"+response);
+						/* location.href="ajaxmyIntoList"; */
+						
+						}  
+					})
+	    	}else{
+	    		alert("취소 되었습니다.");
+	    	}
+	    	$('#myReqModal').modal('hide');
+	    }
+	    
 		/*모달-체험종료  */ 
 		function fndoexit(str4){
 			var yn = confirm("체험을 종료하시겠습니까?");
@@ -114,14 +268,17 @@ $(document).ready(function(){
 		 
 		/*모달-수정*/
 		function goupdate(str2){
+			$('#myLargeModal').modal('hide');
 		     var into_no = $("input[name=into_no]").val();
+		     /* var into_product = document.getElementById("into_product"); */
 		     var classDates = document.getElementsByName("classDates");
 		     var into_date = []; //빈 배열 선언
+		     var frm = document.getElementById("#updatefrm");
 			 	for(i=0; i<classDates.length; i++){
 			 		into_date.push(classDates[i].value); 
 			 	}
 			 	//배열을 string으로 묶어줌(join)
-			 	frm.into_date.value=into_date.join(',');
+			 	 into_date.value=into_date.join(','); 
 		 	
 			$.ajax({
 				url:"updateFarm?into_no="+into_no,
@@ -129,14 +286,13 @@ $(document).ready(function(){
 				data: {
 						  into_title:$("input[name=into_title]").val(),
 						  into_city:$("select[name=into_city]").val(),
-						  into_product:$("input[name=into_product]").val(),
-						  into_date:$("input[name=classDates]").val(),
+						  into_product:$("#myUpdate input[name=into_product]").val(), 
+						  into_date:into_date,
 						  into_entry:$("input[name=into_entry]").val(),
 						  into_info:$("textarea[name=into_info]").val(),
 						  into_phone:$("input[name=into_phone]").val(),
 						  into_filename:$("input[name=into_filename]").val()
 						 },
-
 				success:function(response){
 					console.log("result:"+response);
 					 if(response != null){
@@ -145,6 +301,7 @@ $(document).ready(function(){
 					} 
 				}
 			})
+			
 		 }
 		
 		/*모달-삭제*/
@@ -163,34 +320,14 @@ $(document).ready(function(){
 				}
 		})
 	} 
-		 /*이미지 슬라이드 */
-		 var slideIndex = 0;
-			 showSlides();
-			
-			function showSlides() {
-			    var i;
-			    var slides = document.getElementsByClassName("mySlides");
-			    var dots = document.getElementsByClassName("dot");
-			    for (i = 0; i < slides.length; i++) {
-			       slides[i].style.display = "none";  
-			    }
-			    slideIndex++;
-			    if (slideIndex > slides.length) {slideIndex = 1}    
-			    for (i = 0; i < dots.length; i++) {
-			        dots[i].className = dots[i].className.replace(" active", "");
-			    }
-			    /* slides[slideIndex-1].style.display = "block"; */  
-			    /* dots[slideIndex-1].className += " active"; */
-			    setTimeout(showSlides, 2000); // Change image every 2 seconds
-			}
 			
 		/* 모달 - 문의하기 */
 		function fnInquiry(no,title){
+			console.log(title);
 			$('#myInquiry .modal-body').load("insertFarmInq?into_no="+no+"&into_title="+title);
 			$('#myLargeModal').modal('hide');
 			$('#myInquiry').modal('show');
-		}
-					 
+		}		 
 </script>
 
 
@@ -272,6 +409,10 @@ $(document).ready(function(){
 		border-radius:20px;
 		width:900px;
 }
+/*input */
+input{
+ 	border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;  /* 테두리 없애기 */
+ }	
 </style>
 </head>
 <body class="goto-here">
@@ -319,16 +460,15 @@ $(document).ready(function(){
 					<div class="card">
 						<div class="card-header">${listt.into_title}</div>
 						<div class="card-body" id="allList">
-								<input type="hidden" id="into_progress" value="${intoTheFarmVO.into_progress}">
-								<span></span><span class="text" id="into_city">지역 : ${listt.into_city}</span><br>
-								<span></span><span class="text" id="into_product">농작물 : ${listt.into_product}</span><br>
-								<span></span><span class="text" id="into_date">기간 : ${listt.into_date}</span><br>
-								<span></span><span class="text" id="into_entry">모집 인원 수&남은 인원 수 : ${listt.into_entry}</span><br><br>
+								<input type="hidden" name="into_progress" value="${intoTheFarmVO.into_progress}">
+								<span>지역 :</span><span class="text" id="into_city"> ${listt.into_city}</span><br>
+								<span>농작물 :</span><span class="text" id="into_product"> ${listt.into_product}</span><br>
+								<span>체험 기간 :</span><span class="text" id="into_date"> ${listt.into_date}</span><br>
+								<span>모집 인원 수:</span><span class="text" id="into_entry"> ${listt.into_entry}</span><br>
+								<span>남은 인원 수:</span><span class="text" id="into_req_remain"> ${listt.into_req_remain}</span><br><br>
 								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
 								<span></span><span class="text">상세보기</span></a>
-								<a href="#" onclick="fndoexit('${listt.into_no}')" class="btn btn-primary">
-								<span></span><span class="text">종료</span></a>
-								<a href="#" onclick="fndoapply()" class="btn btn-primary" data-toggle="modal" data-target="#myReqModal">
+								<a href="#" onclick="fndoapply('${listt.into_no}','${listt.into_req_remain}','${listt.into_date}')" class="btn btn-primary">
 								<span></span><span class="text">신청하기</span></a>
 						</div>
 					</div>
@@ -370,64 +510,114 @@ $(document).ready(function(){
 						</button>
 					</div>
 					<div class="nav nav-tabs" role="tablist">
-						<a class="nav-item nav-link btn btn-danger active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">개인</a> 
-						<a class="nav-item nav-link btn btn-danger" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">단체</a>
+						<a class="nav-item nav-link btn btn-danger active" id="userApply" data-toggle="tab" href="#nav-userApply" role="tab" aria-controls="nav-userApply" aria-selected="true">개인</a> 
+						<a class="nav-item nav-link btn btn-danger" id="groupApply" data-toggle="tab" href="#nav-groupApply" role="tab" aria-controls="nav-groupApply" aria-selected="false">단체</a>
+						
 					</div>
 				</nav>
-
+				<!--개인 신청 -->
 				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+					<div class="tab-pane fade show active" id="nav-userApply" role="tabpanel" aria-labelledby="userApply">
 						<div class="row">
 							<div class="modal-body">
-								<form id="applyReqFrm" method="post" action="insertReqFarm" >
+								<form id="applyPersonFrm" method="post" action="insertReqFarm" >
 									<table class="table table-hover">
 										<thead class="text-center">
 											<tr class="content">
 												<th class="text-left">회원 아이디 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_id" name="user_id" value="${uservo.user_id}" readonly >
-												<input type="hidden" value="${reqSearchList.into_req_num}" name="into_req_num">
-												<input type="hidden" value="${reqSearchList.into_no}" name="into_no">
+												<input type="hidden" id="into_no" name="into_no"> 
 												</th>
 											</tr>
-											<tr class="content">
-												<th class="text-left">이름 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_name" name="user_name" value="${uservo.user_name}" readonly></th>
-											</tr>
-											<tr class="content">
-												<th class="text-left">연락처 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></th>
-											</tr>
-											<!--보상선택  -->
-											<tr class="content">  
-												<th class="text-left">
-												  보상선택:
-													  <input type="radio" id="product" name="req_reward" value="작물" checked>
-														  <label for="product">작물</label>
-													  <input type="radio" id="cash" name="req_reward" value="현금">
-														  <label for="cash">현금</label>
-													  <input type="radio" id="valtime" name="req_reward" value="봉사시간">
-														  <label for="valtime">봉사시간</label>
-												</th>		  
-											</tr>
-											<tr class="content">
-												<th class="text-left"><input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${reqSearchList.into_req_date}" readonly></th>
+												<tr class="content">
+													<th class="text-left">이름 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_name" name="user_name" value="${uservo.user_name}" readonly></th>
+												</tr>
+												<tr class="content">
+													<th class="text-left">연락처 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></th>
+												</tr>
+												<!--보상선택  -->
+												<tr class="content">  
+													<th class="text-left">
+													  보상선택:
+														  <input type="radio" id="product" name="into_req_reward" value="작물" checked>
+															  <label for="product">작물</label>
+														  <input type="radio" id="cash" name="into_req_reward" value="현금">
+															  <label for="cash">현금</label>
+														  <input type="radio" id="valtime" name="into_req_reward" value="봉사시간">
+															  <label for="valtime">봉사시간</label>
+													</th>		  
+												</tr>
+											<tr class="content" id="dateTr" >
+												<th class="text-left" id="dateTh" >날짜 선택: 
+														<input type="hidden" id="into_req_date" name="into_req_date" >
+												</th>
 											</tr>
 										</thead>
 										
 									</table>
 									<div class="modal-footer">
 										<button class="btn btn-primary" type="reset" data-dismiss="modal">취소</button>
-										<button class="btn btn-primary" type="button" onclick="fnpersonalapply('${intoFarmReqVO.into_req_num}')">신청</button>
+										<button class="btn btn-primary" type="button" onclick="fnpersonalapply()">신청</button>
 									</div>	
 									</form>
 							</div>
 						</div>	
 					</div>
-
-					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-						aria-labelledby="nav-profile-tab">
+					
+					
+					
+					<!--그룹 신청 -->
+					<div class="tab-pane fade" id="nav-groupApply" role="tabpanel" aria-labelledby="groupApply">
 						<div class="row">
 							<div class="modal-body">
-								<img width="100%"
-									src="https://media.wired.com/photos/5c1ae77ae91b067f6d57dec0/master/pass/Comparison-City-MAIN-ART.jpg"
-									alt="">
+								<form id="applyGroupFrm" method="post" action="insertGroupFarm" >
+									<table class="table table-hover" id="groupForm">
+										<thead class="text-center">
+											<tr class="content">
+													<td class="text-left">
+														신청인원 수: <input type="number" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_register" name="into_register">
+														<button class="addReq" type="button" style="float: right;" >
+															<span aria-hidden="true">+</span>
+														</button>
+													</td>
+											</tr>
+											<tr class="content">
+												<th class="text-left">회원 아이디 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_id" name="user_id" value="${uservo.user_id}" readonly >
+												<input type="hidden" id="into_no" name="into_no"> 
+												</th>
+											</tr>
+											
+												<tr class="content">
+													<td class="text-left">
+														이름 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_name" name="user_name" value="${uservo.user_name}" readonly></td>
+												</tr>
+												<tr class="content">
+													<td class="text-left">연락처 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></td>
+												</tr>
+												<!--보상선택  -->
+												<tr class="content">  
+													<td class="text-left">
+													  보상선택:
+														  <input type="radio" id="product" name="into_req_reward" value="작물" checked>
+															  <label for="product">작물</label>
+														  <input type="radio" id="cash" name="into_req_reward" value="현금">
+															  <label for="cash">현금</label>
+														  <input type="radio" id="valtime" name="into_req_reward" value="봉사시간">
+															  <label for="valtime">봉사시간</label>
+													</td>
+												</tr>
+											<tr class="content" id="dateTr1">
+												<th class="text-left" id="dateTh1" >날짜 선택: 
+														<input type="hidden" id="into_req_date1" name="into_req_date1" >
+												</th>
+											</tr>
+										</thead>
+										
+									</table>
+									<div class="modal-footer">
+										<button class="btn btn-primary" type="reset" data-dismiss="modal">취소</button>
+										<button class="btn btn-primary" type="button" onclick="fnGroupapply()">신청</button>
+									</div>	
+									</form>
 							</div>
 						</div>
 					</div>

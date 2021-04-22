@@ -3,34 +3,48 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.finalproject.farm.app.intoTheFarm.service.impl.IntoFarmReqMapper">
 	
-	<!--전체조회  -->
+	<!--전체조회 제목을 join걸어서 (농업인입장, 유저입장)-->
 	<select id="getReqFarmList" resultType="IntoFarmReqVO">
-		SELECT INTO_REQ_NUM
-			   ,USER_ID
-			   ,INTO_REQ_PHONE
-			   ,INTO_REQ_ENTRY
-			   ,INTO_REQ_REWARD
-			   ,INTO_REQ_DATE
-			   ,INTO_NO
-		FROM INTOFARM_REQ
-		ORDER BY INTO_REQ_NUM DESC
+		SELECT a.INTO_REQ_NUM
+			   ,a.USER_ID
+			   ,a.INTO_REQ_PHONE
+			   ,a.INTO_ENTRY
+			   ,a.INTO_REQ_REWARD
+			   ,a.INTO_REQ_DATE
+			   ,a.INTO_NO
+			   ,NVL(b.INTO_REQ_REMAIN,0) AS INTO_REQ_REMAIN
+               ,b.INTO_TITLE
+               ,b.USER_ID AS FARM_ID
+		FROM INTOFARM_REQ a join INTOFARM b on(a.into_no=b.into_no)
+		<where>
+			<if test="user_id != null and user_id != ''">
+			 a.user_id=#{user_id}
+			</if>
+			<if test="farm_id !=null and farm_id !=''">
+			 b.user_id=#{farm_id}
+			</if>
+		</where>
+		ORDER BY A.INTO_REQ_NUM DESC
 	</select>
+
+	
 	
    <!--단건조회  -->
    <select id="getSearchReqFarm" resultType="IntoFarmReqVO">
 	SELECT INTO_REQ_NUM
 			   ,USER_ID
 			   ,INTO_REQ_PHONE
-			   ,INTO_REQ_ENTRY
+			   ,INTO_ENTRY
 			   ,INTO_REQ_REWARD
 			   ,INTO_REQ_DATE
 			   ,INTO_NO
 	FROM INTOFARM_REQ
-	WHERE INTOFARM_REQ=#{intofarm_req}
+	WHERE INTO_REQ_NUM=#{into_req_num}
 	</select>
+
    
-   <!--등록 -->
-   <insert id="insertReqFarm" parameterType="IntoFarmReqVO">
+   <!--개인 등록 -->
+   <insert id="insertReqFarm" parameterType="IntoFarmReqVO"  useGeneratedKeys="true" keyProperty="into_req_num" >
    
    <selectKey keyProperty="into_req_num" resultType="string" order="BEFORE">
       SELECT NVL(MAX(INTO_REQ_NUM),1)+1 FROM INTOFARM_REQ
@@ -39,20 +53,57 @@
             ( INTO_REQ_NUM
 			  ,USER_ID
 			  ,INTO_REQ_PHONE
-			  ,INTO_REQ_ENTRY
-			   <if test="INTO_REQ_REWARD != null and INTO_REQ_REWARD != ''">	
+			  ,INTO_REQ_REGISTER
+			  ,INTO_ENTRY
+			   <if test="into_req_reward != null and into_req_reward != ''"> 	
 			  ,INTO_REQ_REWARD
-			  </if>
+			   </if> 
 			  ,INTO_REQ_DATE
 			  ,INTO_NO
              )
    VALUES ( #{into_req_num}
          	,#{user_id}
          	,#{into_req_phone}
-            ,#{into_req_entry}
-            <if test="INTO_REQ_REWARD != null and INTO_REQ_REWARD != ''">	
+         	<!-- <if test="into_entry > into_req_register"> -->
+            ,'1'
+            <!-- </if> -->
+            ,(select into_entry from intofarm where into_no=#{into_no})
+            <if test="into_req_reward != null and into_req_reward != ''">
             ,#{into_req_reward}
-             </if>
+            </if>
+            ,#{into_req_date}
+            ,#{into_no}
+            )
+   </insert>
+   
+   
+   
+   <!--단체등록 -->
+    <insert id="insertGroupFarm" parameterType="IntoFarmReqVO">
+   
+   <selectKey keyProperty="into_req_num" resultType="string" order="BEFORE">
+      SELECT NVL(MAX(INTO_REQ_NUM),1)+1 FROM INTOFARM_REQ
+   </selectKey>
+   INSERT INTO INTOFARM_REQ 
+            ( INTO_REQ_NUM
+			  ,USER_ID
+			  ,INTO_REQ_PHONE
+			  ,INTO_REQ_REGISTER
+			  ,INTO_ENTRY
+			   <if test="into_req_reward != null and into_req_reward != ''"> 	
+			  ,INTO_REQ_REWARD
+			   </if> 
+			  ,INTO_REQ_DATE
+			  ,INTO_NO
+             )
+   VALUES ( #{into_req_num}
+         	,#{user_id}
+         	,#{into_req_phone}
+            ,#{into_req_register}
+            ,(select into_entry from intofarm where into_no=#{into_no})
+            <if test="into_req_reward != null and into_req_reward != ''">
+            ,#{into_req_reward}
+            </if>
             ,#{into_req_date}
             ,#{into_no}
             )
@@ -62,16 +113,16 @@
    <update id="updateReqFarm" parameterType="IntoFarmReqVO">
    UPDATE INTOFARM_REQ
    	<set>
-   	<if test="INTO_REQ_REWARD != null and INTO_REQ_REWARD != ''">	
+   	<if test="into_req_reward != null and into_req_reward != ''">	
 		,INTO_REQ_REWARD=#{into_req_reward}
 	</if>
    	</set>
-   WHERE INTO_REQ_REWARD=#{into_req_num}
+   WHERE INTO_REQ_NUM=#{into_req_num}
    </update>
    
    <!--삭제 -->
    <delete id="deleteReqFarm" parameterType="IntoFarmReqVO">
 	DELETE FROM INTOFARM_REQ 
-	WHERE INTO_REQ_REWARD=#{into_req_num}
+	WHERE INTO_REQ_NUM=#{into_req_num}
 	</delete>
 </mapper>

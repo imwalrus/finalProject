@@ -15,7 +15,7 @@
 <script src="./resources/gotoFarm/js/summernote-ko-KR.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
-	/*  */
+/*체험등록 */
 function insertFarm() {
 	var into_city = frm.into_city.value;
 	var into_title = frm.into_title.value;
@@ -71,22 +71,6 @@ function insertFarm() {
 	}
 }
 
-/*  function showCal() { 
-	$('#showDate .modal-body').load();
-		
-}	 */
-
-
-/*이미지 실제 경로*/
-/*  $("#uploadFile").change(function(){
-	 if(this.files && this.files[0]){
-		 var reader = new FileReader;
-		 reader.onload = function(data) {
-			 $(".select_img img").attr("src",data.target)
-		 }
-		 reader.readAsDataURL(this.files[0]);
-	 }
- }); */
 </script>
 <style type="text/css">
 *, *:before, *:after {

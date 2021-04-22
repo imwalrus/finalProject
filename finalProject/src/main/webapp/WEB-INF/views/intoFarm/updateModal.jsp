@@ -138,18 +138,24 @@ right:70px;
 		<tr class="content">
 			<th class="text-left">
 				지역 :
-				<select name="into_city" id="city-select" style="margin-top: 1%;">
+				<select class="custom-select" name="into_city" id="city-select" style="width:93%;" required="required">
 					<option value="">${upFarm.into_city}</option>
-					<option value="광주">광주</option>
-					<option value="대구">대구</option>
-					<option value="대전">대전</option>
-					<option value="독도">독도</option>
-					<option value="부산">부산</option>
 					<option value="서울">서울</option>
-					<option value="울릉도">울릉도</option>
-					<option value="울산">울산</option>
+					<option value="경기">경기</option>
 					<option value="인천">인천</option>
-					<option value="제주도">제주도</option>
+					<option value="충남">충남</option>
+					<option value="충북">충북</option>
+					<option value="대전">대전</option>
+					<option value="전남">전남</option>
+					<option value="전북">전북</option>
+					<option value="광주">광주</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="대구">대구</option>
+					<option value="부산">부산</option>
+					<option value="울산">울산</option>
+					<option value="강원">강원</option>
+					<option value="제주">제주</option>
 				</select><br> 
 			</th>
 		</tr>
@@ -174,11 +180,6 @@ right:70px;
 		<tr class="content">
 			<th class="text-left">파일 :  <input multiple="multiple" name="into_filename" type="file" accept="image/png, image/jpeg, image/jpg"></th>
 		</tr>
-		<!-- <tr class="content">
-		<th> -->
-		
-		<!-- </th>
-		</tr> -->				
 	</thead>
 	
 </table>

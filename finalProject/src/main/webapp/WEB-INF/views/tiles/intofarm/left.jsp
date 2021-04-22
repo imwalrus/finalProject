@@ -72,7 +72,7 @@
 		    <ul class="leftMenu">
 		      <li class="leftMenuBar"><a class="active" href="getFarmInfo"><span class="material-icons">home</span>  농촌속으로 소개</a></li>
 		      <li class="leftMenuBar"><a href="getFarmList"><span class="material-icons">view_headline</span>  체험신청</a></li>
-		      <c:if test="${user_auth == 'farmer' }">
+		      <c:if test="${user_auth == 'farmer'|| user_auth =='admin' }">
 		      <li class="leftMenuBar"><a href="insertFarm"><span class="material-icons">view_headline</span>  체험등록</a></li>
 		      </c:if>
 		    </ul>

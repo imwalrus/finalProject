@@ -42,17 +42,12 @@
 			 , INTO_PRODUCT
              , INTO_DATE
              , INTO_ENTRY
+             , NVL(INTO_REQ_REMAIN,0) AS INTO_REQ_REMAIN
              , INTO_INFO
              , USER_ID
              , INTO_CITY
-             , INTO_PROGRESS
 		FROM INTOFARM
 		<where>
-		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
-		 <if test="into_progress != null and into_progress != ''">
-		 		AND	 INTO_PROGRESS = #{into_progress}
-		 </if>
-		 <!-- 관리자에서 사용 END -->
 		 <if test="into_title != null and into_title != ''">
 			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>
@@ -83,6 +78,7 @@
 		   INTO_PRODUCT,
 		   INTO_DATE,
 		   INTO_ENTRY,
+		   NVL(INTO_REQ_REMAIN,0) AS INTO_REQ_REMAIN,
 		   INTO_FILENAME,
 		   INTO_INFO,
 		   USER_ID,
@@ -100,10 +96,11 @@
    INSERT INTO INTOFARM <!--확인! -->
             ( INTO_NO
              ,INTO_TITLE
-               ,INTO_PHONE
-               ,INTO_PRODUCT
+             ,INTO_PHONE
+             ,INTO_PRODUCT
              ,INTO_DATE
              ,INTO_ENTRY
+             ,INTO_REQ_REMAIN
              ,INTO_INFO
              <if test="uploadFileName != null and uploadFileName != ''">
              ,INTO_FILENAME
@@ -119,6 +116,7 @@
             ,#{into_product}
              ,#{into_date}
             ,#{into_entry}
+            ,#{into_entry}
             ,#{into_info}
             <if test="uploadFileName != null and uploadFileName != ''">
             ,#{into_filename}
@@ -130,6 +128,17 @@
             
    </insert>
 	
+   <!--개인 or 단체 등록시 남은인원 update  -->	
+   <update id="togetEntry" parameterType="IntoTheFarmVO">
+   UPDATE INTOFARM
+   <set>
+   	<if test="into_entry >= into_req_remain">
+   	INTO_REQ_REMAIN=into_req_remain-(SELECT INTO_REQ_REGISTER FROM INTOFARM_REQ WHERE INTO_REQ_NUM=#{into_req_num})
+   	</if>
+   </set>
+    WHERE INTO_NO=#{into_no}
+   </update> 
+   	
 	 <!--수정 -->
    <update id="updateFarm" parameterType="IntoTheFarmVO">
    UPDATE INTOFARM
