@@ -31,6 +31,7 @@ public class IntoTheFarmVO {
 		private MultipartFile[] uploadFile;
 		private String into_progress;
 		private String into_dates; //마이페이지-신청내역관리에서 사용
+		private String into_detailadr; //상세주소
 		
 		public String getUploadFileName() {
 			return into_filename;

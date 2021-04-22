@@ -428,7 +428,7 @@ input{
 			  <legend style="font-weight: bold;">Search</legend>
 			  <div class="form-group" style="display: inline-block;">
 			      <label for="into_city">지역</label>
-			      <input type="text" class="form-control" name="into_city" id="into_city" value="${intoTheFarmVO.into_city}" style="width:400px; !important;">
+			      <input type="text" class="form-control" name="into_detailadr" id="into_detailadr" value="${intoTheFarmVO.into_detailadr}" style="width:400px; !important;">
 			  </div>
 			  <div class="form-group" style="display: inline-block;">
 			      <label for="into_city">농작물 종류</label>
@@ -462,6 +462,7 @@ input{
 						<div class="card-body" id="allList">
 								<input type="hidden" name="into_progress" value="${intoTheFarmVO.into_progress}">
 								<span>지역 :</span><span class="text" id="into_city"> ${listt.into_city}</span><br>
+								<span>상세주소 :</span><span class="text" id="into_city"> ${listt.into_detailadr}</span><br>
 								<span>농작물 :</span><span class="text" id="into_product"> ${listt.into_product}</span><br>
 								<span>체험 기간 :</span><span class="text" id="into_date"> ${listt.into_date}</span><br>
 								<span>모집 인원 수:</span><span class="text" id="into_entry"> ${listt.into_entry}</span><br>

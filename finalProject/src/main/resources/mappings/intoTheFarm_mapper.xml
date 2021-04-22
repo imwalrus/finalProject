@@ -16,8 +16,8 @@
 				AND  INTO_PROGRESS = #{into_progress}
 		 </if>
 		 <!-- 관리자에서 사용 END -->
-         <if test="into_city != null and into_city != ''">
-			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+         <if test="into_detailadr != null and into_detailadr != ''">
+			    UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
@@ -46,13 +46,14 @@
              , INTO_INFO
              , USER_ID
              , INTO_CITY
+             , INTO_DETAILADR
 		FROM INTOFARM
 		<where>
 		 <if test="into_title != null and into_title != ''">
 			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>
-         <if test="into_city != null and into_city != ''">
-			    UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
+         <if test="into_detailadr != null and into_detailadr != ''">
+			    UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
@@ -82,7 +83,8 @@
 		   INTO_FILENAME,
 		   INTO_INFO,
 		   USER_ID,
-		   INTO_CITY
+		   INTO_CITY,
+		   INTO_DETAILADR
 	FROM INTOFARM
 	WHERE INTO_NO=#{into_no}
 	</select>
@@ -107,6 +109,7 @@
              </if>
               ,USER_ID
               ,INTO_CITY
+              ,INTO_DETAILADR
               ,INTO_PROGRESS
              )
            
@@ -123,6 +126,7 @@
             </if>
             ,#{user_id}
             ,#{into_city}
+            ,#{into_detailadr}
             ,'0'
             )
             
@@ -166,6 +170,9 @@
           </if>
          <if test="into_city != null and into_city != ''">
          ,INTO_CITY=#{into_city}
+          </if>
+          <if test="into_detailadr != null and into_detailadr != ''">
+         ,INTO_DETAILADR=#{into_detailadr}
           </if>
       </set>
    WHERE INTO_NO=#{into_no}                
