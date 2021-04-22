@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
-import co.finalproject.farm.app.intoTheFarm.service.impl.IntoFarmReqMapper;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
 import co.finalproject.farm.app.myPage.service.IntoFarmInqVO;
 import co.finalproject.farm.app.myPage.service.impl.IntoFarmInqMapper;
@@ -43,7 +42,6 @@ public class IntoTheFarmController {
 	
 	@Autowired 
 	UserService userService;
-	@Autowired IntoFarmReqMapper intoFarmReqMapper;
 	
 	Logger logger = LoggerFactory.getLogger(IntoTheFarmController.class);
 	
@@ -80,21 +78,14 @@ public class IntoTheFarmController {
 	  uservo.setUser_id(id);
 	  model.addAttribute("uservo", userService.loginCheck(uservo));
 	  model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
-	  //model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(vo));
+	  
 	  return "intofarmTiles/intoFarm/intoTheFarm"; 
 	  }
 	 
-	  //test
-	 // @RequestMapping("/getSearchFarm")
-	//	public String getSearchFarm() {
-
-	//		return "intoFarm/this";
-	//	}
-	  
-	  
+	
 	// 단건조회
-		@RequestMapping("/getSearchFarm")
-		public String getSearchFarm(IntoTheFarmVO vo, Model model) {	  
+	@RequestMapping("/getSearchFarm")
+	public String getSearchFarm(IntoTheFarmVO vo, Model model) {	  
 		  model.addAttribute("getlist", intoTheFarmMapper.getSearchFarm(vo));
 		  
 		  IntoTheFarmVO newVO = new IntoTheFarmVO();
@@ -106,19 +97,19 @@ public class IntoTheFarmController {
 		  for(int i=0; i<filenameSplit.length; i++) {
 			  images.add(filenameSplit[i]);
 		  }
-		  System.out.println(images);
 		  model.addAttribute("images", images); //image리스트 따로 받아서 @로 자르고 foreach문 돌리기 위해 list로 넘기기
 		  return "notiles/intoFarm/applyModal";
-		}
-		
+	}
+
 	// 등록
 	@GetMapping("/insertFarm") // 등록 페이지
 	public String insertFarm(IntoTheFarmVO vo, Model model) {
 		return "intofarmTiles/intoFarm/insertIntoFarm";
 	}
 
-	//date null값 허용
 	/*
+	 * //date null값 허용
+	 * 
 	 * @InitBinder public void initBinder(WebDataBinder binder) { SimpleDateFormat
 	 * dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	 * binder.registerCustomEditor(java.util.Date.class, new
@@ -127,23 +118,23 @@ public class IntoTheFarmController {
 
 		
 	@PostMapping("/insertFarm") // 등록
-	public String insertFarmProc(IntoTheFarmVO vo, HttpServletRequest req, UserVO uservo,Model model, HttpSession session) throws Exception, IOException {
-		
+	public String insertFarmProc(IntoTheFarmVO vo, HttpServletRequest req, UserVO uservo, HttpSession session) throws Exception, IOException {
 		//로그인 아이디 가져오기
-				String id = (String)session.getAttribute("user_id");
-				vo.setUser_id(id);
-				uservo.setUser_id(id);
+		String id = (String)session.getAttribute("user_id");
+		vo.setUser_id(id);
+		uservo.setUser_id(id);
 		
-	    // 파일 업로드
+		// 파일 업로드
 		MultipartFile[] files = vo.getUploadFile();
 		String file1="";
 		for (MultipartFile file : files) {
 
 			if (file != null && !file.isEmpty() && file.getSize() > 0) {
 				String orgFile = file.getOriginalFilename();
-				String path = req.getSession().getServletContext().getRealPath("/resources/images/intofarm/");
+				String path = req.getSession().getServletContext().getRealPath("/resources/images/intofarm");
 
 				File rename = FileRenamePolicy.rename(new File(path, orgFile));
+				file.transferTo(new File(path, rename.getName()));
 				file1 += rename.getName()+'@';
 				vo.setInto_filename(file1);
 
@@ -159,7 +150,6 @@ public class IntoTheFarmController {
 
 	@GetMapping("/updateFarm") // 수정 페이지
 	public String updateFarm(IntoTheFarmVO vo, Model model) {
-		logger.debug(vo.toString());
 		model.addAttribute("upFarm", intoTheFarmMapper.getSearchFarm(vo));
 		return "notiles/intoFarm/updateModal";
 	}
@@ -167,10 +157,8 @@ public class IntoTheFarmController {
 	// ajax로 수정
 	@PostMapping("/updateFarm") // 수정
 	public @ResponseBody String updateFarmProc(IntoTheFarmVO vo) {
-		
 		logger.debug(vo.toString());
 		intoTheFarmMapper.updateFarm(vo);
-		System.out.println(vo);
 		return "redirect:/getFarmList";
 
 	}
@@ -207,7 +195,6 @@ public class IntoTheFarmController {
 	//농촌속으로 문의저장 
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
-		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
 		return "mypageTiles/mypage/getIntoFarmInqOfUser";
 	}

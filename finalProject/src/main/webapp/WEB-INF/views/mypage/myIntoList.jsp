@@ -22,6 +22,10 @@ font-weight: bold;
                                 <div class="card-header">
                                     <h2>농촌속으로<br>(나의 신청 목록)</h2>
                                 </div>
+                                 <div style="float: right">
+									<button type=button class="btn  btn-success btn-sm"
+											onclick="movePage()">농촌속으로 이동 > </button>
+							     </div>
                                 <div class="table-responsive">							       
 									<table class="table" id="mylist">
 										<tr class="table-success">
@@ -69,6 +73,12 @@ font-weight: bold;
 	function goPage(p) {
 		location.href="myIntoList?page=" + p + "&user_id=${user_id}";
     }
+	
+	/* 농촌속으로 이동 */
+	function movePage(){
+		location.href="getFarmList";
+		
+	}
 	</script>
 </body>
 </html>

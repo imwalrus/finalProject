@@ -8,11 +8,21 @@
 	<select id="getOrderList"  parameterType="OrderVO"
 								resultType="OrderVO">
 	
-		SELECT * FROM ORDERS
-		WHERE USER_ID = #{user_id}
+ SELECT B.* 
+ FROM (SELECT ROWNUM RN, A.* FROM 	( SELECT * FROM ORDERS
+		WHERE USER_ID = #{user_id} ) A ) B
+  WHERE RN BETWEEN #{start} and #{ends}
 	
 	</select>
-
+	
+<!-- 구매내역 전체리스트 총 건수 -->
+	<select id="getOrderListCount"  parameterType="OrderVO"
+									resultType="int">
+		SELECT COUNT(*) 
+		FROM ORDERS
+		WHERE USER_ID = #{user_id}
+	</select>
+	
  <!-- 구매내역 상세리스트-->
 <select id="getOrder" parameterType="OrderVO"
 							resultType="OrderVO">

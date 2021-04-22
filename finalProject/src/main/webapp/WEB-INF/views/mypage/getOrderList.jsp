@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <link rel="stylesheet" href="resources/main/css/style.css">
 <style>
 .table thead th{
@@ -48,6 +49,7 @@ font-weight: bold;
 								</div>
 							</div>
 						</div>
+						<my:paging paging="${paging}" jsFunc="goPage" />
 					</div>
 
 
@@ -98,6 +100,11 @@ font-weight: bold;
 		}
  			
 	});
+	
+	/* 페이징 값 넣기*/
+	function goPage(p) {
+		location.href="getOrderList?page=" + p + "&user_id=${user_id}";
+    }	
 	
 </script>
 

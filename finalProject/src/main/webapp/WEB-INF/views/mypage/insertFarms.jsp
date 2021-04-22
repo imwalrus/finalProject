@@ -47,7 +47,7 @@ font-weight: bold;
                                             </td>
                                             <th colspan="1">사진첨부</th>
 											<td colspan="3">
-													<input multiple="multiple" type="file" name="uploadFile"> 
+													<input multiple="multiple" type="file" name="uploadFile" required="required"> 
 													<input type="hidden" name="farm_filename">
 						</td>
                                         </tr>

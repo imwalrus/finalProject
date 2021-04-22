@@ -24,7 +24,7 @@
 
  <!-- 작물, 아이디 별 조회 -->
 	<select id="getfDiary" resultType="FarmDiaryVO">
-		SELECT F.FDIARY_NO
+SELECT F.FDIARY_NO
 				,F.FDIARY_DAY
 				,TO_CHAR(F.FDIARY_DAY, 'YYYYMMDD') as FDAY
         		,F.FDIARY_STIME
@@ -39,9 +39,9 @@
 		FROM FARMDIARY F JOIN CROP C
 		ON (F.CROP_NO = C.CROP_NO)
 		WHERE F.USER_ID = #{user_id}		
-		AND F.FDIARY_DAY = TO_DATE( #{fdiary_day} ,'YYYYMMDD')
-		 
-	</select> 
+		AND F.FDIARY_DAY = TO_DATE( #{fdiary_day} ,'YYYYMMDD') 
+
+</select> 
 			
 <!-- 일기등록 -->
 	<insert id="insertFdiary" parameterType="FarmDiaryVO">
@@ -106,7 +106,9 @@
 							,FDIARY_WORKER = #{fdiary_worker}
 							,FDIARY_WEATHER = #{fdiary_weather}
 							,FDIARY_CONTENT = #{fdiary_content}
+						<if test="fdiary_filename != null and fdiary_filename != ''">
 							,FDIARY_FILENAME = #{fdiary_filename}
+						</if>
 			WHERE fdiary_no = #{fdiary_no}
 	</update>
 	

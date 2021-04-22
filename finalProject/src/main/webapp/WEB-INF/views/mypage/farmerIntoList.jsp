@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link rel="stylesheet" href="resources/main/css/style.css">
 <style>
 .table th{
@@ -34,7 +35,7 @@ font-weight: bold;
                                 <div class="table-responsive">							       
 									<table class="table" id="list">
 										<tr class="table-success">
-											<th width="5%">No</th>
+											<th width="5%">NO</th>
 											<th width="60%">체험명</th>
 											<th width="5%">지역</th>
 											<th width="5%">농작물</th>
@@ -47,12 +48,7 @@ font-weight: bold;
                             </form>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
             </div>
         </div>
         
@@ -65,7 +61,7 @@ font-weight: bold;
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
-{							</button>
+							</button>
 						</div>
 						<div class="modal-body"></div>
 					
@@ -169,6 +165,5 @@ font-weight: bold;
 			alert("취소 되었습니다.");
 		} 
 	}
-	
 	</script>
 </body>

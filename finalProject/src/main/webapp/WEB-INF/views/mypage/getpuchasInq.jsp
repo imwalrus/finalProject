@@ -26,10 +26,17 @@ h2 {
 			<tr>
 				<th colspan="1">제목</th>
 				<td colspan="7">${plist.pur_inq_title }</td>
-				<c:if test="${plist.pur_inq_check eq '1'}">
-					<td colspan="1" align="rigth"><img
-						src="resources/images/mypage/secrete.JPG" width="30" height="40">
+				<c:if test="${plist.pur_inq_check eq '1'}">				<!-- 비밀글일경우 -->
+					<td>
+						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
 					</td>
+				</c:if>
+				<c:if test="${plist.pur_inq_check eq '0'}">				<!-- 비밀글 아닐경우 -->
+					<td colspan="1">
+						<img src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
+					</td>
+				</c:if>
+				<c:if test="${plist.user_id eq user_id }">			<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
 					<td colspan="1">
 						<button class="btn  btn-outline-warning"
 							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
@@ -37,20 +44,9 @@ h2 {
 							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
 					</td>
 				</c:if>
-				<c:if test="${plist.pur_inq_check eq '0'}">
-					<td colspan="1"><img
-						src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
-					</td>
-					<td colspan="1">
-				<c:if test="${plist.user_id eq user_id }">
-						<button class="btn  btn-outline-warning"
-							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-						<button type="button" class="btn  btn-outline-danger"
-							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
-				</c:if>
-				<c:if test="${plist.user_id ne user_id }">
-				</c:if>
-					</td>
+				<c:if test="${plist.user_id ne user_id}">
+							<td colspan="1">											<!-- id값 다르면 수정,삭제 버튼 안보임 -->
+							</td>
 				</c:if>
 			</tr>
 			<tr>
@@ -61,8 +57,8 @@ h2 {
 			</tr>
 			<tr>
 			<c:if test="${plist.pur_inq_filename eq null }">
-				<td>
-					입력한 사진이 없습니다.
+				<td colspan="10" text-align="center" >
+					등록된 사진이 없습니다.
 				</td>
 			</c:if>
 			<c:if test="${plist.pur_inq_filename ne null }">
@@ -163,13 +159,25 @@ $.ajax({
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
-				$("#reply").append(						
-						"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
-						+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
-						+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
-						+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"
-						+ "</td></tr>"						
-						);
+				if(response[i].user_id != '${user_id}' ){
+					$("#reply").append(						
+							"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
+							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
+							+ " "
+							+ "</td></tr>"						
+							);
+				}	
+				else{
+					$("#reply").append(						
+							"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
+							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
+							+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"
+							+ "</td></tr>"						
+							);
+
+				}
 			}
 		}
 		

@@ -2,33 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/main/css/style.css">
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="" />
-<meta name="keywords" content="">
-<meta name="author" content="Phoenixcoded" />
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-</head>
-<body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12"></div>
-						</div>
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-md-10">
 						<form action="updateFdiary" enctype="multipart/form-data" method="post">
@@ -101,5 +78,3 @@
 	);
 		
 	</script>
-</body>
-</html>
