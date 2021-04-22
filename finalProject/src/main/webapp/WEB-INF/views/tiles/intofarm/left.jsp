@@ -85,7 +85,7 @@
 		var pathname = window.location.pathname;
 		var splitPath = pathname.split('/');
 		var pathLength = splitPath.length;
-		var realPath = splitPath[2]; //현재 페이지 경로 찾음
+		var realPath = splitPath[pathLength-1]; //현재 페이지 경로 찾음
 		$(".leftMenu > .leftMenuBar > a ").each(function(){
 			var ehref = $(this).attr("href");
 			if(ehref.match(realPath)){
