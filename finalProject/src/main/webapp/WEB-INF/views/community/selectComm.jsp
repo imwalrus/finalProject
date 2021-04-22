@@ -92,6 +92,24 @@ $(document).ready(function() {
 				}
 		  });
      }
+/*커뮤니티 아이디 마우스 오버시 이벤트 - 20210422 송예솔 추가*/
+$(function(){
+	$('.chatId').on('mouseover',function(){
+		$(this).css('color','#78c2ad');
+		$('.chatId').css('cursor','pointer');
+	});
+	$('.chatId').on('mouseout',function(){
+		$(this).css('color','#888');
+		$('.chatId').css('cursor','pointer');
+	});
+})
+
+/*커뮤니티 채팅팝업 - 20210422 송예솔 추가*/
+function showChatinComu(memberId){
+	if(memberId != '${user_id}'){
+	   var pop = window.open("showChatinComu?member_id="+memberId,"chat","width=1220,height=690px,resizable=no,scrollbars=no;");
+	}
+}
 </script>
 
 <script>
@@ -153,7 +171,7 @@ function btnChg1() {
      <section class="ftco-section testimony-section">
      <div align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title" style="margin-left:100px;">
-			<h1>커뮤니티 상세보기</h1>
+			<h1 style="font-weight: bolder;">커뮤니티 상세보기</h1>
 		</div><br/>
 		<form id="frm" name="frm" action="updateComm" method="post">
 		<input type="hidden" name="comm_no" value="${communityVO.comm_no}">
@@ -181,7 +199,8 @@ function btnChg1() {
 				<thead>
 				<tr> 
 					<td align="center" width="70" style="border-right:1px solid #dcdcdc; border-left:1px solid #dcdcdc;">작성자</td>
-					<td align="center" width="100" style="font-size:18px; color: #00cc99;"><strong>${communityVO.user_id}</strong></td>
+					<!--  커뮤니티 채팅팝업 - 20210422 송예솔 추가 -->
+					<td align="center" width="100" style="font-size:18px; color: #00cc99;" class="chatId"><strong onclick="showChatinComu('${communityVO.user_id}')">${communityVO.user_id}</strong></td>
 					<td align="center" width="80">지역</td>
 					<td align="center" width="100">
 					<select name="comm_adr" id="comm_adr">

@@ -96,9 +96,6 @@
 		height:41px;
 		background-color:#78c2ad;
 	}
-	.divcountrol{
-		width:120px !important;
-	}
 	.inputControl{
 		width:200px !important;
 		margin-right:20px;
@@ -113,42 +110,97 @@
 		 * form 태그 안의 버튼은 type을 정의하지 않으면 submit 으로 간주하여 post로 넘어가기 때문에 button 타입 정의 해주어야함
 		 */
 		var pwCk=0;
-
+		var emailCk=0;
+		
 		$(document).ready(function(){
-			
-		//비밀번호 확인
-		$(function(){
-				$('[name=user_pwd]').keyup(function(){
-					$('#pwCkNotice').html('');
+			//비밀번호 확인
+			$(function(){
+					$('[name=user_pwd]').keyup(function(){
+						$('#pwCkNotice').html('');
+					});
+					$('[name=confirm_pwd]').keyup(function(){
+						if($('[name=user_pwd]').val() != $('[name=confirm_pwd]').val()){
+							$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
+							$('#pwCkNotice').attr('color', '#f82a2aa3');
+						} else if($('[name=user_pwd]').val() == $('[name=confirm_pwd]').val()){
+							pwCk=1;
+							$('#pwCkNotice').html('비밀번호 일치함<br>');
+							$('#pwCkNotice').attr('color', '#51ad95');
+						}
+					});
 				});
-				$('[name=confirm_pwd]').keyup(function(){
-					if($('[name=user_pwd]').val() != $('[name=confirm_pwd]').val()){
-						$('#pwCkNotice').html('비밀번호 일치하지 않음<br>');
-						$('#pwCkNotice').attr('color', '#f82a2aa3');
-					} else if($('[name=user_pwd]').val() == $('[name=confirm_pwd]').val()){
-						pwCk=1;
-						$('#pwCkNotice').html('비밀번호 일치함<br>');
-						$('#pwCkNotice').attr('color', '#51ad95');
+				
+			//이메일 인증번호 전송
+			$('#sendEmailJoinCode').on('click',function(){
+				var email = $('[name=user_email]').val();
+				console.log(email);
+				$.ajax({
+					url:"emailCheck",
+					data:{"user_email":email},
+					async:false,
+					method:"post",
+					dataType: "json",
+					success: function(data){
+						if(data==0){
+							alert('해당 주소로 인증메일이 발송되었습니다. 메일로 전송된 인증번호를 입력칸에 입력해주세요.')
+							$('[name=user_email]').css("background-color", "#EBF7FF");
+							$('[name=user_emailJoinCode]').focus();
+							emailCk=1;
+							if(emailCk == 1){
+								$.ajax({
+									url: "sendEmailJoinCode",
+									data: {"user_email":email},
+									success:function(response){
+										console.log(response);
+										if($('#emailJoinCode').val() == ""){
+											emailCk=0;
+											$('#emailJoinCodeNotice').html('인증코드를 입력하세요. <br>');
+											$('#emailJoinCodeNotice').attr('color', '#f82a2aa3');
+										}
+			 							$('#emailJoinCode').keyup(function(){
+												if($('#emailJoinCode').val() != response){
+													emailCk=0;
+													$('#emailJoinCodeNotice').html('인증코드가 일치하지 않습니다. <br>');
+													$('#emailJoinCodeNotice').attr('color', '#f82a2aa3');
+												} else if($('#emailJoinCode').val() === response){
+													emailCk=1;
+													$('#emailJoinCodeNotice').html('이메일 인증 성공! <br>');
+													$('#emailJoinCodeNotice').attr('color', '#51ad95');
+												}
+										}); 
+									}
+								});
+							} 
+						} else if(data == 1){
+							alert("이미 존재하는 이메일 입니다. 다른 이메일을 사용해주세요. ")
+							$('[name=signUpBtn]').prop("disabled",false);
+							$('[name=user_email]').focus();
+							emailCk=0;
+					   }
 					}
 				});
 			});
-			
-		});//end 
 
-		function pwCheck(){
-			var pw = $('[name=user_pwd]').val();
-			console.log(pw);
-			if(pw != null && pw != ""){
-				if(pwCk == 0){
-					alert("변경하실 비밀번호를 확인해주세요.");
-					return false;
-				} else {
+			});//end 
+
+			function updateCheck(){
+				var pw = $('[name=user_pwd]').val();
+				var em = $('[name=user_email]').val();
+				console.log(pw);
+				if(pw != null && pw != ""){
+					if(pwCk == 0){
+						alert("변경하실 비밀번호를 확인해주세요.");
+						return false;
+					} 
+				} else if(em != '${list.user_email}'){
+					if(emailCk === 0 ){
+						alert("이메일 인증코드를 확인해주세요.");
+						return false;
+					} 
+				} else{
 					return true;
 				}
-			} else {
-				return true;
-			} 
-		}
+			}
 </script>
 </head>
 <body>
@@ -191,7 +243,17 @@
 						<input type="email" class="form-control" name="user_email" value="${list.user_email }">
 					</div>
 				</div>
-				
+				<div class="form-group">
+					<label class="control-label col-xs-4 divcountrol" >이메일 인증번호</label>
+					<div class="col-xs-8 inputControl">
+		                <input type="text" class="form-control" name="emailJoinCode" id="emailJoinCode" placeholder="인증번호 입력" style="float:left;">
+		            	<font id="emailJoinCodeNotice" size=2 style="float:left;"></font>
+		            </div>
+		            <div >
+		               	<button type="button" class="btn btn-primary" id="sendEmailJoinCode" name="sendEmailJoinCode" style="margin-left: 100px;">이메일 인증</button>
+		            </div>
+		        </div>
+		        <br>
 				<div class="form-group">
 					<label class="control-label col-xs-4 divcountrol" >연락처</label>
 					<div class="col-xs-8">
@@ -220,7 +282,7 @@
 					</div>
 				</div>         	
 			
-				<div class="form-group" align="center !important">
+				<div class="form-group" align="center">
 					<div class="col-xs-8 col-xs-offset-4" >
 						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn" >수정</button>
 					</div>  

@@ -104,7 +104,7 @@ color: black;
 /* ======== Calendar ======== */
 .calendalcontainer {
 width: 698px;
-position: relative;
+margin:auto;
 right:70px;
 }
 .my-calendar {
@@ -113,6 +113,9 @@ right:70px;
   text-align: center;
   font-weight: 800;
   cursor: default;
+  border:3px solid #dee2e6;
+  border-radius:25px;
+  padding:30px;
 }
 .my-calendar .clicked-date {
   border-radius: 25px;
@@ -186,7 +189,7 @@ right:70px;
   cursor: pointer;
 }
 .cal-table td.today {
-  background: #ffd255;
+  background: #82ae46;
   border-radius: 50%;
   color: #fff;
 }
@@ -205,44 +208,87 @@ right:70px;
   height: 4px;
   background: #FFC107;
 }
+.form-control{
+	height: 30px !important;
+}
+.intoFarmDiv{
+	border:6px solid #78c2ad;
+	padding:40px;
+	border-radius: 20px;
+}
+label{
+	font-weight: bolder;
+	color:#5a5a5a;
+}
+
 </style>
 </head>
 <body>
-<div style="overflow: scroll;">
-<h2 style="text-align: center;">체험 등록</h2><br><br><br>
-
-	<div style="width: 60%; margin: auto;">
+<div style="margin-top:20px; margin-bottom: 40px;">
+<h2 style="text-align: center; font-weight:bold" >🌱 농촌으로 체험 등록 🌱</h2><br>
+	<div class="intoFarmDiv" style="	width: 1000px; 	margin: auto;">
 		<form id="frm" name="frm" method="post" action="insertFarm"
 			enctype="multipart/form-data">
 			<input type="hidden" name="into_date" id="into_date"> 
 			<input type="hidden" name="user_id" id="user_id" value="hw"> 
-			<select name="into_city" id="city-select" style="margin-top: 1%;">
-				<option value="">--지역을 선택 하여 주십시오--</option>
-				<option value="광주">광주</option>
-				<option value="대구">대구</option>
-				<option value="대전">대전</option>
-				<option value="독도">독도</option>
-				<option value="부산">부산</option>
-				<option value="서울">서울</option>
-				<option value="울릉도">울릉도</option>
-				<option value="울산">울산</option>
-				<option value="인천">인천</option>
-				<option value="제주도">제주도</option>
-			</select><br> 
-			<input type="text" name="into_title" style="width: 40%; margin-top: 1%;" placeholder="체험이름" /><br> 
-			<input type="text" name="into_product" style="width: 40%; margin-top: 1%;" placeholder="농작물 종류" /><br> 
-			<input type="text" name="into_phone" style="width: 40%; margin-top: 1%;" placeholder="연락처" /><br>
-			<input type="text" name="into_entry" style="width: 40%; margin-top: 1%;" placeholder="참여 가능 인원 수 " /><br> 
-			<input multiple="multiple" type="file" name="uploadFile" id="uploadFile" accept="image/png, image/jpeg, image/jpg">
-			<!-- <a href="#" onclick="showCal()" class="btn btn-primary" data-toggle="modal" data-target="#showDate">일정등록</a> -->
-			<br> 
 			<input type="hidden" name="uploadFile"><!-- <div class="select_img"><img src=""></div> -->
+			<div class="form-group">
+    		  <label for="exampleInputPassword1">⊚ 체험 지역</label>
+				<select class="custom-select" name="into_city" id="city-select" style="width:93%;" required="required">
+					<option value="">--지역을 선택 하여 주십시오--</option>
+					<option value="서울">서울</option>
+					<option value="경기">경기</option>
+					<option value="인천">인천</option>
+					<option value="충남">충남</option>
+					<option value="충북">충북</option>
+					<option value="대전">대전</option>
+					<option value="전남">전남</option>
+					<option value="전북">전북</option>
+					<option value="광주">광주</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="대구">대구</option>
+					<option value="부산">부산</option>
+					<option value="울산">울산</option>
+					<option value="강원">강원</option>
+					<option value="제주">제주</option>
+				</select> 
+			</div>
+			<div class="form-group">
+    		  	<label for="into_title" style="">⊚ 체험 상세주소</label>	
+				<input type="text" class="form-control" name="into_detailadr" style="width:95%;" placeholder="상세 주소를 입력해주세요. (상세한 지역명을 입력하셔야 합니다.)" required="required"/>
+			</div>
+			<div class="form-group">
+    		  	<label for="into_title" style="">⊚ 체험명</label>	
+				<input type="text" class="form-control" name="into_title" style="width:95%;" placeholder="체험명을 입력하세요." required="required"/>
+			</div>
+			<div class="form-group">
+    		 	<label for="into_product">⊚ 체험 농작물</label>
+				<input type="text" class="form-control" name="into_product" style="width:95%;" placeholder="농작물 종류를 입력하세요." required="required"/>
+			</div>
+			<div class="form-group" >
+    		  	<label for="into_phone">⊚ 연락처</label>	
+				<input type="text" class="form-control" name="into_phone" style="width:95%;" placeholder="연락처를 입력하세요 ex) 000-0000-0000" required="required"/><br>
+			</div>
+			<div class="form-group">
+    		  	<label for="into_entry">⊚ 체험 인원수</label>	
+				<input type="number" class="form-control" name="into_entry" style="width:95%;" placeholder="참여 가능 인원 수를 입력하세요. " required="required"/> 
+			</div>
+			<div class="form-group">
+    		  	<label for="uploadFile">⊚ 이미지 파일 첨부</label>				
+				<input multiple="multiple" type="file" class="form-control-file"  name="uploadFile" id="uploadFile" accept="image/png, image/jpeg, image/jpg">
+		      	<small id="fileHelp" class="form-text" style="color:red;">최소 3장 이상의 사진을 첨부해주시기 바랍니다.</small>
+			</div>	
 			<br> 
-			<br><br>
-			<textarea id="summernote" name="into_info"></textarea>
-			
-			<input type="text" style="width: 40%; margin-top: 1%;" placeholder="아래 체험 일정 등록 선택" /><br>
-			<div class="calendalcontainer">
+			<div class="form-group">
+				<label for="into_info">⊚ 농촌속으로 체험 상세설명</label>	
+				<textarea id="summernote" name="into_info" required="required"></textarea>
+			</div>
+			<br>
+			<br>
+			<div class="form-group">
+				<label for="">⊚ 등록할 체험 일정 선택</label>	
+				<div class="calendalcontainer">
 							<div class="my-calendar clearfix">
 								
 								<div class="calendar-box">
@@ -277,10 +323,11 @@ right:70px;
 							</div>
 							<!-- // .my-calendar -->
 						</div>
-				
-					<button type="button" id="save" onclick="insertFarm()">등록</button>
-					<button type="reset" onclick="getSearchFarm">취소</button>
-				
+				</div>
+				<div align="center">
+					<button type="button" class="btn btn-primary" id="save" onclick="insertFarm()">등록</button>
+					<button type="reset" class="btn btn-danger" onclick="getSearchFarm">취소</button>
+				</div>
 			
 		</form>
 		</div> 
@@ -336,7 +383,7 @@ right:70px;
 		plusdate++;
 		var calendarAdd = document.querySelector('.cal-plus');
 		var pd= 'date'+plusdate;
-		calendarAdd.innerHTML += "<tr id="+pd+" style='border:1px solid #f8f9fa;'><td><input name='classDates' type='date' value='"+init.activeDate.toISOString().slice(0,10)+"' style='text-align:right;'></td><td><button type='button' class='calendbutton' onclick='deleteDate("+'"'+pd+'"'+")'>삭제</button></td></tr>";
+		calendarAdd.innerHTML += "<tr id="+pd+" style='border:1px solid #f8f9fa;'><td><input name='classDates' type='date' value='"+init.activeDate.toISOString().slice(0,10)+"' style='text-align:right;' required='required'></td><td><button type='button' class='calendbutton btn btn-primary btn-sm' onclick='deleteDate("+'"'+pd+'"'+")'>삭제</button></td></tr>";
 	}
 	function deleteDate(id){
 		plusdate--;

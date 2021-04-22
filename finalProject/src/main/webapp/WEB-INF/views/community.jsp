@@ -16,6 +16,17 @@ $(document).ready(function() {
 $(document).ready(function(){
 	$("input:checkbox[name='comm_adrs']").val([${commPagingVO.getComm_adrs1()}])
 });
+/*커뮤니티 아이디 마우스 오버시 이벤트 - 20210422 송예솔 추가*/
+$(function(){
+	$('.chatId').on('mouseover',function(){
+		$(this).css('color','#78c2ad');
+		$('.chatId').css('cursor','pointer');
+	});
+	$('.chatId').on('mouseout',function(){
+		$(this).css('color','#888');
+		$('.chatId').css('cursor','pointer');
+	});
+})
 </script>
 
 
@@ -36,6 +47,12 @@ function selectAll(allChk)  {
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = allChk.checked;
      })
+}
+/*커뮤니티 채팅팝업 - 20210422 송예솔 추가*/
+function showChatinComu(memberId){
+	if(memberId != '${user_id}'){
+	   var pop = window.open("showChatinComu?member_id="+memberId,"chat","width=1220,height=690px,resizable=no,scrollbars=no;");
+	}
 }
 </script>
 <style type="text/css">
@@ -76,8 +93,13 @@ function selectAll(allChk)  {
        <input type="hidden" id="user_id" name="user_id" value="${user_id}">
 		<div class="area" align="center" style="margin-left:400px; margin-right:400px;">
 		<div id="title">
-			<h1>영농인 커뮤니티</h1>
+			<h1 style="font-weight: bolder;">영농인 커뮤니티</h1>
 		</div><br/>
+		<div class="alert alert-dismissible alert-light" style="height:120px; padding-top:30px;">
+			  <button type="button" class="close" data-dismiss="alert">&times;</button>
+			  <h3 class="alert-heading">1:1 대화 기능이 추가되었습니다 🔔 </h3>
+			  <p class="mb-0">커뮤니티 페이지에서 <strong>대화를 원하는 회원의 아이디를 클릭</strong>하시면 1:1 대화 기능을 사용하실 수 있습니다. 실시간 기능을 통해 소통해보세요!</p>
+		</div>
 		<hr style="margin:8px;"><br/>
 		 <div align="left" class="row" id="comm_adr">
 		 <div class="col-md-6" onchange="adrChange()">
@@ -132,7 +154,8 @@ function selectAll(allChk)  {
          onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'"
          style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
          >&nbsp; ${comm.comm_title}</td>
-         <td align="center" width="15%">${comm.user_id}</td>
+        <!--  커뮤니티 채팅팝업 - 20210422 송예솔 추가-->
+         <td align="center" width="15%" class="chatId" onclick="showChatinComu('${comm.user_id}')">${comm.user_id}</td>
          <td align="center" width="20%">${comm.comm_adr}</td>
          <td align="center" width="20%">${comm.comm_date}</td>
          <td align="center" width="10%">${comm.comm_hit}</td>

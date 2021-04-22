@@ -160,15 +160,22 @@ $(document).ready(function(){
 	     $('#container').load(location.href + '#container');
 	}
 	//방번호 값 받아서 해당하는 메세지 리스트 불러오기
-	function listClick(roomId){
+	function listClick(roomId,user_id_one,user_id_two){
+		if(user_id_one == '${user_id}'){
+			$('[name=room_member]').val(user_id_two);
+		} else {
+			$('[name=room_member]').val(user_id_one);
+		}
+		
 		 var member = $('[name=room_member]').val();
-		 $('[name=room_member]').val(roomId);
+		 $('[name=room_id]').val(roomId);
 		$.ajax({
 			url:'getMessageList',
 			data: {"chatroom_no":roomId , "msg_receiver":"${user_id}"},
 			async:false,
 			dataType: "json",
 			success:function(list){ //list안에 data로 넘어옴
+				console.log(list);
  				$('.firstPage').hide();
 				$('#listDiv').show(); 
  				$('.chatMiddle').empty();
@@ -257,7 +264,7 @@ $(document).ready(function(){
       <div class="chatList">
 	      <c:if test="${fn:length(chatList) >= 1}">	
 	      	<c:forEach items="${chatList }" var="list">
-		      	<div class='friend-drawer friend-drawer--onhover' onclick='listClick("${list.chatroom_no }")'>
+		      	<div class='friend-drawer friend-drawer--onhover' onclick='listClick("${list.chatroom_no }","${list.user_id_one }","${list.user_id_two }")'>
 					<img class='profile-image' src='resources/chat/images/person.jpg'>
 					<div class="text" style="padding-top:15px; color:grey;" >
 					<c:if test="${list.user_id_one eq user_id }"> <!-- 따옴표안에 공백이 있으면 안됀다... 공백있으면 인식못함... -->

@@ -34,11 +34,9 @@ public class ChatController {
 		
 		//커뮤니티에서 1:1대화하기 버튼 클릭시
 		@RequestMapping("/showChatinComu")
-		public String showChatPost(Model model,HttpSession session,@RequestParam String member_id,ChatRoomVO vo) {
-			
+		public String showChatPost(Model model,HttpSession session,@RequestParam String member_id) {
+			ChatRoomVO vo = new ChatRoomVO();
 			String user_id = (String) session.getAttribute("user_id");
-			model.addAttribute("user_id",user_id);
-			model.addAttribute("member_id", member_id);
 			vo.setUser_id_one(user_id);
 			vo.setUser_id_two(member_id);
 			ChatRoomVO resultVO = new ChatRoomVO();
@@ -47,12 +45,14 @@ public class ChatController {
 				resultVO.setUser_id_one(user_id);
 				resultVO.setUser_id_two(member_id);
 				chatService.insertChatRoom(resultVO);
-				model.addAttribute("newChat", "newChat");
+				vo = chatService.getChatRoom(resultVO);
+				System.out.println(vo);
+				model.addAttribute("unreadMessage", chatService.getUnreadMessage(user_id));
+				model.addAttribute("chatList", chatService.getChatRoomList(vo));
 			} else {
-				chatService.getChatRoom(vo);
+				model.addAttribute("unreadMessage", chatService.getUnreadMessage(user_id));
+				model.addAttribute("chatList", chatService.getChatRoomList(vo));
 			}
-			
-			model.addAttribute("chatList", chatService.getChatRoomList(vo));
 			return "chat/chat/showChat";
 		}
 

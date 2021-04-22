@@ -73,24 +73,24 @@
 		      <li class="leftMenuBar"><a class="active" href="getFarmInfo"><span class="material-icons">home</span>  농촌속으로 소개</a></li>
 		      <li class="leftMenuBar"><a href="getFarmList"><span class="material-icons">view_headline</span>  체험신청</a></li>
 		      <li class="leftMenuBar"><a href="insertFarm"><span class="material-icons">view_headline</span>  체험등록</a></li>
-		      <li class="leftMenuBar"><a href="#"><span class="material-icons">view_headline</span>  농촌속으로 문의</a></li>
 		    </ul>
 	    </div>
     </div>
 <script>
-	
-	$(".leftMenu > .leftMenuBar > a").on('click',function(){
-		$(".leftMenu > .leftMenuBar > a ").removeClass('active');
-		$(this).addClass("active"); 
-		localStorage.ClassName ="active";
-	});	
-	$(document).ready(function() {
-	    SetClass();
-	});
-
-	function SetClass() {
-	    $("#themecolors li a").addClass(localStorage.ClassName);
-	}
+	$(document).ready(function(){
+		//현재 경로명과 a 태그 href 경로가 같으면 class 추가! 
+		var pathname = window.location.pathname;
+		var splitPath = pathname.split('/');
+		var pathLength = splitPath.length;
+		var realPath = splitPath[2]; //현재 페이지 경로 찾음
+		$(".leftMenu > .leftMenuBar > a ").each(function(){
+			var ehref = $(this).attr("href");
+			if(ehref.match(realPath)){
+				$(".leftMenu > .leftMenuBar > a ").removeClass('active');
+				$(this).addClass("active");
+			}
+		});
+	})
 </script>
 </body>
 </html>
