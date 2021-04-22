@@ -1,5 +1,12 @@
+ @font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
-	font-family: sans-serif;
+	font-family: 'InfinitySans-RegularA1';
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%
 }
@@ -1338,7 +1345,7 @@ html {
 }
 
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'InfinitySans-RegularA1',"Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: #333;
@@ -1763,7 +1770,7 @@ address {
 }
 
 code, kbd, pre, samp {
-	font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+	font-family: 'InfinitySans-RegularA1',Menlo, Monaco, Consolas, "Courier New", monospace
 }
 
 code {
@@ -6577,7 +6584,7 @@ button.close {
 	position: absolute;
 	z-index: 1070;
 	display: block;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'InfinitySans-RegularA1',"Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 400;
@@ -6711,7 +6718,7 @@ button.close {
 	display: none;
 	max-width: 276px;
 	padding: 1px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'InfinitySans-RegularA1',"Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
@@ -7013,7 +7020,7 @@ button.close {
 .carousel-control .icon-next, .carousel-control .icon-prev {
 	width: 20px;
 	height: 20px;
-	font-family: serif;
+	font-family: 'InfinitySans-RegularA1',serif;
 	line-height: 1
 }
 
