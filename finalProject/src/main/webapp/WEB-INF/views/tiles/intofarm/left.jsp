@@ -74,6 +74,7 @@
 		      <li class="leftMenuBar"><a href="getFarmList"><span class="material-icons">view_headline</span>  체험신청</a></li>
 		      <c:if test="${user_auth == 'farmer'|| user_auth =='admin' }">
 		      <li class="leftMenuBar"><a href="insertFarm"><span class="material-icons">view_headline</span>  체험등록</a></li>
+
 		      </c:if>
 		    </ul>
 	    </div>

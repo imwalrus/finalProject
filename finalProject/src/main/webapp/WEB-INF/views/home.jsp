@@ -82,24 +82,17 @@
 					<div class="card col-8 col-sm-6">
 						<div class="row">
 							<div class="card-body ">
+								<a href="getNotices" style="color: black">
+									<strong>공지</strong>
+								</a>
 								<table class="card-table" style="table-layout: fixed">
-									<thead>
-										<tr>
-											<th><a href="getNotices" style="color: black">
-													<strong>공지</strong>
-												</a></th>
-											<td></td>
-											<td></td>
-										</tr>
-									</thead>
 									<tbody>
 										<c:forEach items="${notice}" begin="0" end="3" var="notice">
 											<tr>
-												<td class="stringcut" style="max-width: 410px;">
+												<td class="stringcut" style="max-width: 20%;">
 													<a href="getSearchNotices?notice_no=${notice.notice_no}">${notice.notice_title}</a>
 												</td>
-												<td></td>
-												<td>
+												<td class="stringcut" align="right" width="10%">
 													<fmt:parseDate value="${notice.notice_date}" var="notice_date" pattern="yyyy-MM-dd HH:mm:ss" />
 													<a href="getSearchNotices?notice_no=${notice.notice_no}">
 														<fmt:formatDate value="${notice_date}" pattern="yyyy-MM-dd" />
@@ -122,10 +115,10 @@
 									<tbody>
 										<c:forEach items="${community}" begin="0" end="3" var="community">
 											<tr>
-												<td align="left" width="30%" class="text-truncate">
+												<td class="stringcut" style="max-width: 20%;">
 													<a href="getSchComm?comm_no=${community.comm_no}">${community.comm_title}</a>
 												</td>
-												<td align="right" width=20%>
+												<td class="stringcut" align="right" width="10%">
 													<fmt:parseDate value="${community.comm_date}" var="comm_date" pattern="yyyy-MM-dd HH:mm:ss" />
 													<a href="getSchComm?comm_no=${community.comm_no}">
 														<fmt:formatDate value="${comm_date}" pattern="yyyy-MM-dd" />
