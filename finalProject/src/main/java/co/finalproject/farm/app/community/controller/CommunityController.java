@@ -44,10 +44,6 @@ public class CommunityController {
 		if(vo.getPage() == null) {
 		   vo.setPage(1);
 		}
-		//단건조회 이전글 다음글 목록가기 페이징 계산
-		if (vo.getComm_no() > 0) {
-	        vo.setPage(vo.getComm_no());
-		}
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
 		paging.setTotalRecord(communityService.getCount(vo)); 
@@ -58,17 +54,19 @@ public class CommunityController {
     
     //단건 조회 ( + 조회수 증가 )
     @RequestMapping("/getSchComm")
-    public ModelAndView getSchComm(HttpSession session, Model model, CommunityVO vo, CommPagingVO pagingvo) {
+    public ModelAndView getSchComm(HttpSession session, Model model, CommunityVO vo) {   
     	communityService.updatereviewcnt(vo, session);
     	CommunityReplyVO replyvo = new CommunityReplyVO();  
     	replyvo.setComm_no(vo.getComm_no()); //CommunityReplyVO COMM_NO에 CommunityVO의 COMM_NO를 담아준다. (이래야 같은 게시글의 댓글 가져올 수 있음)
         ModelAndView mav = new ModelAndView();
         mav.setViewName("community/selectComm");
         // 뷰에 전달할 데이터
-        mav.addObject("pre", communityService.getPreDocNum(vo)); //이전글
-        mav.addObject("next", communityService.getNextDocNum(vo)); //다음글
         mav.addObject("communityVO", communityService.getSchComm(vo));
         mav.addObject("reply", communityService.getReplyList(replyvo)); //단건 조회 할 때 댓글도 가져가도록
+        mav.addObject("pre", communityService.getPreDocNum(vo)); //이전글
+        mav.addObject("next", communityService.getNextDocNum(vo)); //다음글
+    	int page = communityService.getPageNum(vo); //이전글 다음글 후 목록가기
+        mav.addObject("pageNum", page);//단건조회 이전글 다음글 목록가기 페이징 계산
         return mav;
     }
     

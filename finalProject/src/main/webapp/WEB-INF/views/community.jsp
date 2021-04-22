@@ -28,8 +28,6 @@ $(function(){
 	});
 })
 </script>
-
-
 <script>
 function subjectChange() {
 	comm_sch.submit();
@@ -38,7 +36,6 @@ function adrChange() {
 	comm_sch.submit();
     }
 </script>
-
 <script>
 function selectAll(allChk)  {
 	  const checkboxes 
@@ -140,9 +137,9 @@ function showChatinComu(memberId){
 				<tr>
 					<td align="center" width="10%">글번호</td>
 					<td align="center" width="10%">말머리</td>
-					<td align="center" width="35%">제 목</td>
-					<td align="center" width="15%">아이디</td>
-					<td align="center" width="20%">지역</td>
+					<td align="center" width="25%">제 목</td>
+					<td align="center" width="10%">아이디</td>
+					<td align="center" width="15%">지역</td>
 					<td align="center" width="20%">작성일자</td>
 					<td align="center" width="10%">조회수</td>
 				</tr>
@@ -150,13 +147,11 @@ function showChatinComu(memberId){
 		<tr>
          <td align="center" width="10%">${comm.comm_no}</td>
          <td align="center" width="10%">${comm.comm_subject}</td>
-         <td align="left" width="35%" class="text-truncate" 
-         onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'"
-         style='cursor:pointer;' onmouseover='this.style.background=\"#fcecae\";' onmouseleave='this.style.background=\"#FFFFFF\";'
-         >&nbsp; ${comm.comm_title}</td>
+         <td align="left" width="25%" class="text-truncate" 
+         onclick="location.href='getSchComm?comm_no=${comm.comm_no}&page=${paging.page}'">&nbsp; ${comm.comm_title}</td>
         <!--  커뮤니티 채팅팝업 - 20210422 송예솔 추가-->
-         <td align="center" width="15%" class="chatId" onclick="showChatinComu('${comm.user_id}')">${comm.user_id}</td>
-         <td align="center" width="20%">${comm.comm_adr}</td>
+         <td align="center" width="10%" class="chatId" onclick="showChatinComu('${comm.user_id}')">${comm.user_id}</td>
+         <td align="center" width="15%">${comm.comm_adr}</td>
          <td align="center" width="20%">${comm.comm_date}</td>
          <td align="center" width="10%">${comm.comm_hit}</td>
         </tr>

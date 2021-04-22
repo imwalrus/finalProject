@@ -38,6 +38,9 @@ public interface CommunityMapper {
   	
   	//다음글
   	public CommunityVO getNextDocNum(CommunityVO vo);
+  	
+  	//페이징 계산
+  	public int getPageNum(CommunityVO vo); 
 
     //댓글 전체조회
     public List<CommunityReplyVO> getReplyList(CommunityReplyVO vo); 

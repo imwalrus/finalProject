@@ -68,8 +68,7 @@ $(document).ready(function() {
 						success: function(response) {
 							 target.find(".reply-comm_rep_content").html(comm_rep_content); //컨트롤러에서 인트로 넘어오니까 바뀐 내용자체를 보여주려면 변수로 담아둔 comm_rep_content를 이용한다.
 							 target.find(".before").show();
-							 target.find(".after").hide();
-							 
+							 target.find(".after").hide(); 
 				     }
 			      })
 	     
@@ -183,14 +182,14 @@ function btnChg1() {
 	    <c:if test="${pre.comm_no != null}">
 	    <button type='button' id="preDoc" class='col-auto mr-auto btn btn-outline-primary btn-sm' data-pre="${pre.comm_no}">이전글</button>&nbsp;&nbsp;
 	    </c:if>
-		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='getComm?page=${commPagingVO.page}'">글목록</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='getComm?comm_no=${communityVO.comm_no}&page=${pageNum}'">글목록</button>&nbsp;&nbsp;
 		<c:if test="${next.comm_no != null}">
 		<button type='button' id="nxtDoc" class='col-auto btn btn-outline-primary btn-sm' data-next="${next.comm_no}">다음글</button>
 		</c:if>
 		</div>
 	    <c:if test="${user_id == communityVO.user_id}">
 		<div style="margin-left:850px;">
-		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${commPagingVO.page}'">글 수정</button>
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${pageNum}'">글 수정</button>
 		&nbsp;&nbsp;
 		<button type="button" class="btn btn-outline-primary btn-sm" onclick="deleteAlert()">글 삭제</button>
 		</div>
