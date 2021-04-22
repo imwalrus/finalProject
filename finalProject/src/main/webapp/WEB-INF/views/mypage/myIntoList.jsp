@@ -1,31 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+</style>
 <body>
 	<section class="pcoded-main-container">
-    <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
         <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- [ breadcrumb ] end -->
-            <!-- [ Main Content ] start -->
             <div class="row">
-                <!-- [ vertically-modal ] start -->
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-body" align="center">
-
-                            <!-- [ Contextual-table ] start -->
-                            <div class="col-md-9">
+                         <form id="myListFrm" name="myListFrm" action="myIntoList">
+                            <div class="col-md-12">
                                 <div class="card-header">
                                     <h2>농촌속으로<br>(나의 신청 목록)</h2>
                                 </div>
@@ -41,17 +34,12 @@
 										</tr>																	
 									</table>
                                 </div>
-                                <!-- [ Contextual-table ] end -->
                             </div>
+                            </form>
                         </div>
-                        <!-- [ vertically-modal ] end -->
                     </div>
-
-
+                    <my:paging paging="${paging}" jsFunc="goPage" />  
                 </div>
-
-
-
             </div>
         </div>
 </div>
@@ -61,21 +49,26 @@
 			url:"ajaxmyIntoList",
 			data: "user_id=" + '${user_id}',
 			dataType:"json",
-			success: function(data){
-				
+			success: function(data){				
 				for(i=0; i<data.length; i++) {
-					$("#mysale").append(		
-					"<tr><td>" + data[i].INTO_REQ_NO + "</td><td>"
-					+ data[i].INTO_TITLE + "</td><td>"
-					+ data[i].INTO_REQ_DATES + "</td><td>"
-					+ data[i].INTO_REQ_ENTRY + "</td><td>"
-					+ data[i].INTO_REQ_REWARD + "</td><td>"
-					+ data[i].INTO_PHONE + "</td></tr>"
+					$("#mylist").append(		
+					"<tr><td>" + data[i].into_req_num + "</td><td>"
+					+ data[i].into_title + "</td><td>"
+					+ data[i].into_req_dates + "</td><td>"
+					+ data[i].into_entry + "</td><td>"
+					+ data[i].into_req_reward + "</td><td>"
+					+ data[i].into_req_phone + "</td></tr>"
 					
 					);
 				}
 			}
 		});
+		
+		
+	/* 페이징 값 넣기*/
+	function goPage(p) {
+		location.href="myIntoList?page=" + p + "&user_id=${user_id}";
+    }
 	</script>
 </body>
 </html>

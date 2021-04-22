@@ -88,9 +88,11 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
+
 					        <li><a href="getFarmsList">나의 농지</a></li>
 					        <li><a href="getpuchasInqofFarmer">판매상품 문의 관리</a></li>
 					        <li><a href="getFarmInqofFarmer">농촌속으로 문의 관리</a></li>
+
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">

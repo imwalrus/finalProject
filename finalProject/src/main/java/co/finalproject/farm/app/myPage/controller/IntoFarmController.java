@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.myPage.service.impl.IntoFarmMapper;
+import co.finalproject.farm.common.Paging;
 
 @Controller
 public class IntoFarmController {
@@ -62,7 +63,21 @@ public class IntoFarmController {
 ///////유저 권한/////////////
 //나의 신청내역 폼
 	@RequestMapping("/myIntoList")
-	public String myIntoList() {
+	public String myIntoList(Model model, IntoTheFarmVO vo, Paging paging) {
+		paging.setPageUnit(5);// 한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(10);// 페이지 번호수
+
+		// 페이징
+		if (vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+
+		paging.setTotalRecord(intoMapper.myIntoListCount(vo));
+
+		model.addAttribute("paging", paging);
+
 		return "mypageTiles/mypage/myIntoList";
 	}
 

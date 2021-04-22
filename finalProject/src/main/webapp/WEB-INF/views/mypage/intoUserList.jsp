@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table thead th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+</style>
 <div class="row" id="printme" align="center">
 	<h4>신청명단</h4>
 
@@ -24,7 +30,7 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="button" value="Print" class="btn  btn-success btn-sm"
 			onclick="javascript:printIt(document.getElementById('printme').innerHTML)">출력</button>
 </div>
@@ -45,15 +51,15 @@
 				url: "ajaxintoUserList",
 				data: "into_no=" + "<%= request.getAttribute("into_no") %>",
 				dataType: "json",
-				success: function(response) {
-					for(i=0; i<response.length; i++){	
+				success: function(data) {
+					for(i=0; i<data.length; i++){	
 					$("#user").append(
-						"<tr><td>" + response[i].user_name + "</td><td>"		
-						+ response[i].into_req_phone + "</td><td>"
-						+ response[i].into_req_dates + "</td><td>"	
-						+ response[i].into_req_reward + "</td><td>"	
-						+ response[i].into_req_entry+ "</td><td>"	
-						+ "<button type='button' class='btn  btn-danger btn-sm' onclick=\"deleteUser('" + response[i].into_req_num + "\')\">" + "신청취소"+ "</button>"
+						"<tr><td>" + data[i].user_name + "</td><td>"		
+						+ data[i].into_req_phone + "</td><td>"
+						+ data[i].into_req_dates + "</td><td>"	
+						+ data[i].into_req_reward + "</td><td>"	
+						+ data[i].into_entry+ "</td><td>"	
+						+ "<button type='button' class='btn  btn-danger btn-sm' onclick=\"deleteUser('" + data[i].into_req_num + "\')\">" + "신청취소"+ "</button>"
 						+"</td></tr>"
 					
 					);
@@ -76,4 +82,4 @@
     			win.close();
 		}
 </script>
-	</script>
+

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+</style>
 
 <form action="updateOrder" method="post">
 	<div class="row" align="center">
@@ -9,14 +15,10 @@
 					<input type="hidden" id="orderlist_no" name="orderlist_no" value="${orderVO.orderlist_no }">
 		<!-- 숨겨진 유저 ID -->
 		<table class="table">
-			<tr>
-				<th>송장번호 입력 ${list }</th>
-				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice"></td>
-			</tr>
-			<tr>
+		<tr>
 				<th>주문상태 선택</th>
-				<td><label> <input type="text" list="orderlist_condition"
-						name="orderlist_condition"> <datalist id="orderlist_condition">
+				<td><label> <input type="text" list="orderlist_condition" name="orderlist_condition" required> 
+						<datalist id="orderlist_condition" required="required">
 							<option value="결제완료"></option>
 							<option value="배송중"></option>
 							<option value="배송완료"></option>
@@ -24,6 +26,11 @@
 				</label>
 				<td>
 			</tr>
+			<tr>
+				<th>송장번호 입력</th>
+				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice" ></td>
+			</tr>
+			
 		</table>
 	</div>
 	<div align="center">

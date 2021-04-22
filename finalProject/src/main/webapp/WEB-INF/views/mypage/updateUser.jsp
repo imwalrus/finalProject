@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-   
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     <style>
@@ -93,7 +93,6 @@
 	.inputControl2{
 		width:120px !important;
 	}
-
 </style>
 <script>
 		/*
@@ -274,7 +273,7 @@
 			
 				<div class="form-group" align="center">
 					<div class="col-xs-8 col-xs-offset-4" >
-						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn" >수정</button>
+						<button type="submit" class="btn btn-primary btn-lg" name="updateBtn">수정</button>
 					</div>  
 				</div>			      
 			</form>

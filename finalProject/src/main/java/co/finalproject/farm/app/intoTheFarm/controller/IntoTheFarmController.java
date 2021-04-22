@@ -56,7 +56,8 @@ public class IntoTheFarmController {
 
 	// 전체조회
 	
-	  @RequestMapping("/getFarmList") public String getFarmList(IntoTheFarmVO vo,
+	  @RequestMapping("/getFarmList")
+	  public String getFarmList(IntoTheFarmVO vo,
 	  Paging paging, UserVO uservo, Model model, HttpSession session) {
 	  
 	  paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는
@@ -186,7 +187,7 @@ public class IntoTheFarmController {
 	@RequestMapping("/updateFarmExit")
 	public @ResponseBody String updateFarmExit(IntoTheFarmVO vo, Model model) {
 		intoTheFarmMapper.updateFarmExit(vo);
-		return "redirect:/getFarmList";
+		return "redirect:/farmerIntoList";
 	}
 	
 	
@@ -208,7 +209,7 @@ public class IntoTheFarmController {
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
-		return "redirect:/getintoFarmInqList";
+		return "mypageTiles/mypage/getIntoFarmInqOfUser";
 	}
 	
 	

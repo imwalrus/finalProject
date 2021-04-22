@@ -5,6 +5,8 @@ import java.io.IOError;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -29,24 +33,31 @@ public class FarmerController {
 	
 	Logger logger = LoggerFactory.getLogger(FarmerController.class);
 	
-
-//등록
-	
-	@GetMapping("/insertFarmer")
-	public String insertFarmer(FarmerVO vo,Model model) {
+	//농업인 권한신청 - 페이지 이동
+	@RequestMapping("/getFarmerlist")
+	public String getFarmerlist() {
 		return "mypageTiles/mypage/insertFarmer";
 	}
 	
+	//농업인 권한 신청 조회
+	@RequestMapping("/ajaxgetFarmerlist")
+	@ResponseBody
+	public List<FarmerVO> getFarmerlist(FarmerVO vo){
+		return farMapper.getFarmerlist(vo);
+	}
+		
+	//농업인 신청하기 (insert)
 	@PostMapping("insertFarmer")
 	public String insertFarmerProc(FarmerVO vo,MultipartHttpServletRequest request) throws Exception,IOException {
 		//파일 업로드
 		MultipartFile file = vo.getUploadFile();
 		String farmer_filename="";
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/mypage/");
 			
 			if(file != null && !file.isEmpty() &&  file.getSize() > 0) {
 				String filename = file.getOriginalFilename();
 
-				File rename = FileRenamePolicy.rename(new File("C:\\upload", filename));
+				File rename = FileRenamePolicy.rename(new File(path, filename));
 				farmer_filename += rename.getName();
 				file.transferTo(rename);//임시폴더에서 업로드 폴더로 이동
 			}

@@ -2,30 +2,31 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="resources/main/css/style.css">
 
+<style>
+.table th {
+	background-color: #c3e6cb;
+	font-weight: bold;
+}
+
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
+</style>
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12"></div>
-						</div>
-					</div>
-				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body" align="center">
-
-								<!-- [ Contextual-table ] start -->
-								<div class="col-md-9">
+								<div class="col-md-12">
 									<div class="card-header">
 										<h2>농촌속으로 문의 관리</h2>
 									</div>
@@ -59,13 +60,11 @@
 									</div>
 								</div>
 							</div>
-							<!-- [ Contextual-table ] end -->
 						</div>
 						<div align="center">
 							<button type="button" class="btn  btn-outline-success" onclick="location.href='insertintoFarmInq'">등록</button>
 						</div>
 					</div>
-					<!-- [ vertically-modal ] end -->
 				</div>
 
 
@@ -119,10 +118,10 @@
 		}
 
 		function iQNAupdate(strr) {
-			$('#iQNAview').remove();
 			$('#iQNAupdate .modal-body').load("updateintoFarmInq?into_inq_no=" + strr);
-			$('#iQNAupdate').modal('show');
 			$('#iQNAview').modal('hide');
+			$('#iQNAupdate').modal('show');
+			
 		}
 	</script>
 </body>

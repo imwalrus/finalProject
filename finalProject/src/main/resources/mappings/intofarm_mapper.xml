@@ -4,15 +4,12 @@
 
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.IntoFarmMapper">
 
+
 <!-- 농업인 농촌속으로 신청내역 관리 -->
 	<select id="farmerIntoList" parameterType="IntoTheFarmVO" 
 								resultType="IntoTheFarmVO">
 	
-      SELECT INTO_NO
-            ,INTO_TITLE
-            ,INTO_PRODUCT
-            ,INTO_CITY
-            ,INTO_DATE
+      SELECT *
       FROM INTOFARM
       WHERE USER_ID=#{user_id}
 			
@@ -28,7 +25,7 @@
        			,TO_CHAR(Q.INTO_REQ_DATE, 'YYYY-MM-DD') as INTO_REQ_DATES
         		,Q.INTO_REQ_DATE
         		,Q.INTO_REQ_REWARD
-       			,Q.INTO_REQ_ENTRY
+       			,Q.INTO_ENTRY
        			,Q.INTO_NO
 		FROM USERS U JOIN INTOFARM_REQ Q
 		ON (U.USER_ID = Q.USER_ID)
@@ -41,7 +38,7 @@
 
 	
 		DELETE FROM INTOFARM_REQ
-		WHERE INTO_REQ_NUM=${into_req_num}
+		WHERE INTO_REQ_NUM=#{into_req_num}
 	
 	</delete>
 
@@ -49,18 +46,30 @@
 	<select id="myIntoList" parameterType="IntoTheFarmVO"
 							resultType="IntoTheFarmVO" >
 							
-		SELECT	Q.INTO_REQ_NUM
+SELECT B.* 
+ FROM (SELECT ROWNUM RN, A.* FROM( SELECT	Q.INTO_REQ_NUM
                     ,Q.USER_ID
                     ,Q.INTO_REQ_PHONE
-                    ,Q.INTO_REQ_ENTRY
                     ,Q.INTO_REQ_REWARD
+                    ,Q.INTO_ENTRY
                     ,TO_CHAR(Q.INTO_REQ_DATE, 'YYYY-MM-DD') as INTO_REQ_DATES
                     ,I.INTO_NO
                     ,I.INTO_TITLE
                     ,I.INTO_PHONE
 		FROM INTOFARM I JOIN INTOFARM_REQ Q
 		ON (I.INTO_NO = Q.INTO_NO)
-		WHERE Q.USER_ID = #{user_id}				
-
+		WHERE Q.USER_ID = #{user_id}
+        ORDER BY Q.INTO_REQ_DATE DESC ) A ) B
+  WHERE RN BETWEEN #{start} and #{end}
 	</select>
+	
+<!-- 나의 신청 내역 조회 총 건수 -->	
+		<select id="myIntoListCount" resultType="int">
+	        	SELECT COUNT(*)
+				FROM INTOFARM I JOIN INTOFARM_REQ Q
+					ON (I.INTO_NO = Q.INTO_NO)
+				WHERE Q.USER_ID = #{user_id}
+        				ORDER BY Q.INTO_REQ_DATE DESC
+
+		</select>
 </mapper>

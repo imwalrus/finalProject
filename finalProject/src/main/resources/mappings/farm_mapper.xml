@@ -28,6 +28,7 @@
             ,FARM_ADR
             ,FARM_AREA
             ,FARM_CONTENT
+            ,FARM_FILENAME
             ,USER_ID
             )
     VALUES(
@@ -36,6 +37,7 @@
             ,#{farm_adr }
             ,#{farm_area }
             ,#{farm_content }
+            ,#{farm_filename}
             ,#{user_id }
             )	
 	</insert>

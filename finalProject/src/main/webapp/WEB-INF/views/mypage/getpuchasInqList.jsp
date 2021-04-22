@@ -2,51 +2,58 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="resources/main/css/style.css">
 
-<body>
+<style>
+.table thead th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h2{
+font-weight: bold;
+}
+</style>
+
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
-				<div class="page-header">
-					<div class="page-block">
-						<div class="row align-items-center">
-							<div class="col-md-12"></div>
-						</div>
-					</div>
-				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body" align="center">
-
-								<!-- [ Contextual-table ] start -->
-								<div class="col-md-9">
+								<div class="col-md-12">
 									<div class="card-header">
-										<h2>구매 문의</h2>
+										<h2>나의 구매 문의</h2>
 									</div>
-									<div class="card-body table-border-style">
-										<div class="table-responsive">
-											<table class="table">
-												<tr class="table-success">
-													<th>번호</th>
+											<table class="table table-hover">
+											<thead>
+												<tr>
 													<th>제목</th>
 													<th>작성자</th>
-													<th>비밀</th>
+													<th>작성일자</th>
+													<th>비밀여부</th>
 												</tr>
-												
+											</thead>
 												<tbody>
 													<c:if test="${fn:length(list) >=1 }">
 													<c:forEach items="${list }" var="list">
-														<tr  onclick="pQNAview('${list.pur_inq_no}')">
-															<td>${list.pur_inq_no }</td>
-															<td>${list.pur_inq_title }</td>
-															<td>${list.user_id }</td>
-															<td>${list.pur_inq_check }</td>
+														<tr onclick="pQNAview('${list.pur_inq_no}')">
+															<td style="width: 50%; align=left;" >${list.pur_inq_title }</td>
+															<td style="width: 10%">${list.user_id }</td>
+															<td style="width: 20%">${list.pur_inq_date }</td>
+														<c:if test="${list.pur_inq_check eq '1'}">
+       														<td  style="width: 20%">
+       																<img src="resources/images/mypage/secrete.JPG" width="20" height="30">
+       														</td>
+       													</c:if>		
+       													<c:if test="${list.pur_inq_check eq '0'}">
+       														<td  style="width: 20%">
+       																<img src="resources/images/mypage/nosecrete.JPG" width="20" height="30">
+       														</td>
+       													</c:if>	
 														</tr>
 													</c:forEach>
 													</c:if>
@@ -56,22 +63,13 @@
 														</tr>
 													</c:if> 
 												</tbody>
-	
 											</table>
-										</div>
 									</div>
 								</div>
 							</div>
-							<!-- [ Contextual-table ] end -->
-						</div>
-						<div align="center">
-							<button type="button" class="btn  btn-outline-success" onclick="location.href='insertpuchasInq'">등록</button>
 						</div>
 					</div>
-					<!-- [ vertically-modal ] end -->
 				</div>
-
-
 			</div>
 
 			<!-- 상세모달시작 -->
@@ -80,7 +78,7 @@
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header"><h4>구매문의 상세 내용</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -98,7 +96,7 @@
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header"><h4>구매문의 내용 수정</h4>
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
@@ -109,8 +107,6 @@
 				</div>
 			</div>
 			<!-- 모달끝 -->
-
-		</div>
 	</section>
 
 <script type="text/javascript">
@@ -126,7 +122,7 @@
 			$('#pQNAview').remove();
 			$('#pQNAupdate .modal-body').load("updatepuchasInq?pur_inq_no=" + strr);
 			$('#pQNAupdate').modal('show');
-			$('#pQNAview').modal('hide');
+			/* $('#pQNAview').remove(); */
 		}
 </script>
 </body>

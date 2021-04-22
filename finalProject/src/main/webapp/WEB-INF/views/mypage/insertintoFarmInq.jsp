@@ -51,7 +51,7 @@
 
 										<div class="col-md-6">
 											<br>
-											<input type="text" name="user_id"><!-- 사용자 이름 자동으로 들어오게 숨기기 -->
+											<input type="text" name="user_id" value="${user_id }"><!-- 사용자 이름 자동으로 들어오게 숨기기 -->
 											<div class="form-group row">
 												<label class="col-sm-3 col-form-label"><h5>제목</h5></label>
 												<div class="col-sm-9">

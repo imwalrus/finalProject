@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Favicon icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-<!-- vendor css -->
-<link rel="stylesheet" href="resources/admin/css/style.css">
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+</style>
 </head>
 
 

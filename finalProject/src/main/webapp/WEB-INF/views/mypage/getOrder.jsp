@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" href="resources/main/css/style.css">
+<style>
+.table th{
+background-color: #c3e6cb;
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+</style>
 <div class="row" align="center">
 	<h4>상세 주문</h4>
 	<table class="table" id="orderview">
@@ -24,17 +33,30 @@ $.ajax({
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
-				$("#orderview").append(
+				if(response[i].orderlist_invoice!= '-'){
+					$("#orderview").append(
 						"<tr><td>" + response[i].orderlist_no  + "</td><td>"
 						+ response[i].pro_name + "</td><td>"
-						+ response[i].cart_count + "</td><td>"
-						+ response[i].account +"원"+ "</td><td>"
+						+ response[i].cart_count + "</td><td style='font-weight: bold'>"
+						+ response[i].account +"원</td><td>"
 						+ response[i].orderlist_condition + "</td><td>"
 						+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ response[i].orderlist_invoice +"','_blank','width=800,height=600');" + " return false;>"
-						+ response[i].orderlist_invoice + "</a>"
-						+ "</td></tr>"
+						+ response[i].orderlist_invoice + "</a></td></tr>"
 						);
+				}else{
+					$("#orderview").append(
+							"<tr><td>" + response[i].orderlist_no  + "</td><td>"
+							+ response[i].pro_name + "</td><td>"
+							+ response[i].cart_count + "</td><td style='font-weight: bold'>"
+							+ response[i].account +"원</td><td>"
+							+ response[i].orderlist_condition + "</td><td>"
+							+ response[i].orderlist_invoice + "</td></tr>"
+							);
+					
+				}
+				
+				
 			}
 		}
-})
+});
 </script>

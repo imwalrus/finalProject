@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <title>회원 탈퇴</title>
-    <meta charset="utf-8">
-</head>
+<link rel="stylesheet" href="resources/main/css/style.css">
 <script>
 $(document).ready(function(){
 	outForm.checkButton.disabled=true;
@@ -118,20 +113,7 @@ $(document).ready(function(){
                                    </div>
                                 </div>
                            </div>
-                        <!-- [ static-layout ] end -->
                     </div>
                </div>
            </div>
 </section>         
-<script>
-/*     //체크박스 버튼 활성화
-    function agreeCheck(frm){
-		  if (frm.checkButton.disabled==true){
-			  frm.checkButton.disabled=false;
-		  } else{
-			  frm.checkButton.disabled=true;
-		  }
-	} */
-</script>
-</body>
-</html>
