@@ -70,10 +70,10 @@
 		</div>
 		<div>	
 		    <ul class="leftMenu">
-		      <li class="leftMenuBar"><a class="active" href="getFarmInfo"><span class="material-icons">home</span>  농촌속으로 소개</a></li>
-		      <li class="leftMenuBar"><a href="getFarmList"><span class="material-icons">view_headline</span>  체험신청</a></li>
+		      <li class="leftMenuBar"><a class="active" href="getFarmInfo"><i class="material-icons agriculture">&#xea79;</i>  농촌속으로 소개</a></li>
+		      <li class="leftMenuBar"><a href="getFarmList"><i class="material-icons playlist_add_check">&#xe065;</i>  체험신청</a></li>
 		      <c:if test="${user_auth == 'farmer'|| user_auth =='admin' }">
-		      <li class="leftMenuBar"><a href="insertFarm"><span class="material-icons">view_headline</span>  체험등록</a></li>
+		      <li class="leftMenuBar"><a href="insertFarm"><i class="material-icons playlist_add">&#xe03b;</i>  체험등록</a></li>
 
 		      </c:if>
 		    </ul>
