@@ -75,7 +75,7 @@
 							</c:if>
 							<a class="dropdown-item" href="infoShop">판매 소개</a>
 						</div></li>
-					<li class="nav-item"><a href="getComm" class="nav-link">커뮤니티</a></li>
+					<li class="nav-item"><a href="#" class="nav-link" data-login ="${user_id }" onclick="checkLogin()">커뮤니티</a></li>
 					<c:if test="${user_auth ne 'admin' and user_id ne null}">
 						<!-- session 내 아이디 값 있을시 마이페이지 표시 -->
 						<li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
@@ -102,5 +102,16 @@
 		</div>
 	</nav>
 	<!-- 내비게이션 바 END -->
+<script>
+function checkLogin(){
+    var $atag = event.target;
+     if($atag.dataset.login == ""){
+       alert("로그인 후 이용가능한 페이지 입니다.");
+       location.href="login";
+    } else {
+       location.href="getComm";
+    } 
+ }
+</script>	
 </body>
 </html>
