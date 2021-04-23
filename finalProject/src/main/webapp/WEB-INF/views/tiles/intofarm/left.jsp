@@ -20,6 +20,7 @@
 	    background-color: #fff;
 	}
 	.leftMenuBar{
+		width:inherit;
 		height:60px !important;
 	}
 	.leftMenuBar a {

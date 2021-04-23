@@ -55,42 +55,20 @@ public class IntoTheFarmController {
 
 
 	// 전체조회
-	
-	  @RequestMapping("/getFarmList")
-	  public String getFarmList(IntoTheFarmVO vo,
-	  Paging paging, UserVO uservo, Model model, HttpSession session) {
-	  
-	  paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는
-	  //페이지 번호
-	  
-	  // 페이징
-	  
-	 if (vo.getPage() == null) {
-		 vo.setPage(1); 
-		 } vo.setStart(paging.getFirst());
-	  vo.setEnd(paging.getLast());
-	  
-	  paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
-	  
-	  model.addAttribute("paging", paging); 
-	  
-	  // 로그인 아이디 가져오기 
-	  String id = (String)session.getAttribute("user_id"); 
-	  vo.setUser_id(id); 
-	  uservo.setUser_id(id);
-	  model.addAttribute("uservo", userService.loginCheck(uservo));
-	  model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
-	  //model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(vo));
-	  return "intofarmTiles/intoFarm/intoTheFarm"; 
-	  }
-	 
-	  //test
-	 // @RequestMapping("/getSearchFarm")
-	//	public String getSearchFarm() {
-
-	//		return "intoFarm/this";
-	//	}
-	  
+	   @RequestMapping("/getFarmList")
+	   public String getFarmList(IntoTheFarmVO vo, Paging paging, UserVO uservo, Model model) {
+	      paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는 페이지 번호
+	      // 페이징
+	      if (vo.getPage() == null) {
+	         vo.setPage(1); 
+	      } vo.setStart(paging.getFirst());
+	     vo.setEnd(paging.getLast());
+	     paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
+	     model.addAttribute("paging", paging); 
+	     model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
+	     return "intofarmTiles/intoFarm/intoTheFarm"; 
+	   }
+	 	  
 	  
 	// 단건조회
 		@RequestMapping("/getSearchFarm")
@@ -204,12 +182,13 @@ public class IntoTheFarmController {
 		return "notiles/intoFarm/insertFarmInq";
 	}
 	
-	//농촌속으로 문의저장 
+	//농촌속으로 문의저장
+	//return 경로 수정 0423 송예솔
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
-		return "mypageTiles/mypage/getIntoFarmInqOfUser";
+		return "redirect:/getIntoFarmInqOfUser";
 	}
 	
 	

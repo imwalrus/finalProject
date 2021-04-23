@@ -47,19 +47,36 @@
 		
 </script>  
 <script>
-/*페이징 값 넣기*/
-$(document).ready(function(){
-	$("#into_city").val($(this).val());
-	$("#into_product").val($(this).val());
-	$("#into_date").val($(this).val());
-	
-});	
+		
+		/*페이징 값 넣기*/
+		$(document).ready(function(){
+			$("#into_city").val($(this).val());
+			$("#into_product").val($(this).val());
+			$("#into_date").val($(this).val());
 			
-			/*페이징*/
-	         function goPage(p) {
-				getSearchFm.page.value=p;
-				getSearchFm.submit(); 
-			    } 
+		});	
+		
+		/*비로그인시 신청하기 클릭 - 경고창 띄우고 로그인 페이지로 이동*/
+		$(document).ready(function() {
+		        $('[name=apply]').on('click', function() {
+		      		var id = $("#hidUser_id").val();
+		      		var no = this.dataset.no;
+		        	var remain = this.dataset.remain;
+		        	var date= event.target.dataset.date;
+ 		        	if(id == "" || id == null){
+		        		alert("로그인이 필요합니다.");
+		        		location.href="login";
+		        	}  else {
+		        		$("[name=apply]").attr('onclick', "fndoapply("+no+","+remain+","+date+")");
+		        	} 
+		        });	
+		});   
+			  
+		/*페이징*/
+		       function goPage(p) {
+			getSearchFm.page.value=p;
+			getSearchFm.submit(); 
+		} 
 			
 		
 		/*모달-상세보기*/
@@ -79,7 +96,6 @@ $(document).ready(function(){
 		function fndoapply(intoNo,remain,into_date){
 			$("#into_req_remain").val(remain);
 			$("#into_no").val(intoNo);
-			var apply_into_req_date=$("#into_req_date").val(into_date);
 			var apply_into_req_date2=$("#into_req_date1").val(into_date);
 			
 			if(remain == 0){
@@ -347,67 +363,15 @@ $(document).ready(function(){
   min-height: 100%;
   border-radius: 0; 
 }
- 	#info{
- 		display: block; 
- 		margin: 0px auto;
- 	}
- 	#header{
- 		width:200px;
- 	}
- 	.leftMenu {
-	    list-style-type: none;
-	    margin: 0;
-		width: 230px !important;
-	    background-color: #fff;
-	    padding: 0;
-	}
-	.leftMenuBar{
-		height:60px !important;
-		width: 225px !important;
-	}
-	.leftMenuBar a {
-		height:60px;
-	    display: block;
-	    color: #000;
-	    padding: 15px 16px;
-	    text-decoration: none;
-	}
-	.leftMenuBar a.active {
-	    background-color: #78c2ad;
-	    color: white;
-	}
-	.leftMenuBar a:hover:not(.active) {
-	    background-color: #78c2ad59;
-	    color: white;
-	}
-	.leftMenuDiv{
-	    display: block;
-	    z-index: 1028;
-	    position: fixed;
-	    box-shadow: 0 2px 10px -1px rgb(69 90 100 / 30%);
-	    transition: all 0.3s ease-in-out;
-	    width: 230px;
-	    height: calc(100%);
-	    margin-top: 50px;
-	    border-radius: 0 6px 0 0;
-	    top: 50px;
-	    background: #fff;
-	    color: #97a7c1;
-	}
-	.leftMenuDiv .leftMenuHeader{
-		position: relative;
-	    padding-top: 20px;
-	    height: 116px;
-	    text-align: center;
-	}
-	label{
-		font-weight:border;
-	}
-	.searchInfoFarmDiv{
-		border: 3px solid #dee2e6;
-		padding:30px;
-		border-radius:20px;
-		width:900px;
+
+label{
+	font-weight:border;
+}
+.searchInfoFarmDiv{
+	border: 3px solid #dee2e6;
+	padding:30px;
+	border-radius:20px;
+	width:900px;
 }
 /*input */
 input{
@@ -446,6 +410,7 @@ input{
 		 <!--검색바 끝-->	
 		 <br><br>
 	<form id="doExit" name="doExit" action="updateFarmExit">		
+	 <input type="hidden" id="hidUser_id" value="${user_id}">
 	 <div class="container">
 		<div class="row">
 		<c:if test="${empty list}">
@@ -468,7 +433,7 @@ input{
 								<span>남은 인원 수:</span><span class="text" id="into_req_remain"> ${listt.into_req_remain}</span><br><br>
 								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
 								<span></span><span class="text">상세보기</span></a>
-								<a href="#" onclick="fndoapply('${listt.into_no}','${listt.into_req_remain}','${listt.into_date}')" class="btn btn-primary">
+								<a href="javascript:;" name="apply" data-no="${listt.into_no}" data-remain="${listt.into_req_remain}" data-date="${listt.into_date}" class="btn btn-primary">
 								<span></span><span class="text">신청하기</span></a>
 						</div>
 					</div>
@@ -521,35 +486,38 @@ input{
 						<div class="row">
 							<div class="modal-body">
 								<form id="applyPersonFrm" method="post" action="insertReqFarm" >
+								<input type="hidden" id="into_no" name="into_no">
+								<input type="hidden" id="into_req_date" name="into_req_date" >
 									<table class="table table-hover">
-										<thead class="text-center">
+										<thead>
 											<tr class="content">
-												<th class="text-left">회원 아이디 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_id" name="user_id" value="${uservo.user_id}" readonly >
-												<input type="hidden" id="into_no" name="into_no"> 
-												</th>
+												<td width="20%">회원 아이디 </td>
+												<td width="80%"><input type="text" style="width:100%;border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_id" name="user_id" value="${uservo.user_id}" readonly >
+												</td>
 											</tr>
-												<tr class="content">
-													<th class="text-left">이름 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="user_name" name="user_name" value="${uservo.user_name}" readonly></th>
-												</tr>
-												<tr class="content">
-													<th class="text-left">연락처 : <input type="text" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></th>
-												</tr>
-												<!--보상선택  -->
-												<tr class="content">  
-													<th class="text-left">
-													  보상선택:
-														  <input type="radio" id="product" name="into_req_reward" value="작물" checked>
-															  <label for="product">작물</label>
-														  <input type="radio" id="cash" name="into_req_reward" value="현금">
-															  <label for="cash">현금</label>
-														  <input type="radio" id="valtime" name="into_req_reward" value="봉사시간">
-															  <label for="valtime">봉사시간</label>
-													</th>		  
-												</tr>
+											<tr class="content">
+												<td width="20%">이름 </td>
+												<td width="80%"><input type="text" style="width:100%; border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; width:70%" id="user_name" name="user_name" value="${uservo.user_name}" readonly></td>
+											</tr>
+											<tr class="content">
+												<td width="20%">연락처 </td>
+												<td width="80%"><input type="text" style="width:100%; border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;width:70%" id="into_req_phone" name="into_req_phone" value="${uservo.user_phone}" readonly></td>
+											</tr>
+											<!--보상선택  -->
+											<tr class="content">  
+												<td width="20%"> 보상선택 </td>
+												<td width="80%">
+													  <input type="radio" id="product" name="into_req_reward" value="작물" checked>
+													  <label for="product">작물</label>
+													  <input type="radio" id="cash" name="into_req_reward" value="현금">
+													  <label for="cash">현금</label>
+													  <input type="radio" id="valtime" name="into_req_reward" value="봉사시간">
+													  <label for="valtime">봉사시간</label>
+												</td>		  
+											</tr>
 											<tr class="content" id="dateTr" >
-												<th class="text-left" id="dateTh" >날짜 선택: 
-														<input type="hidden" id="into_req_date" name="into_req_date" >
-												</th>
+												<td id="dateTh" width="20%">체험일자 선택</td> 
+												<td width="80%"></td>
 											</tr>
 										</thead>
 										
@@ -571,7 +539,7 @@ input{
 							<div class="modal-body">
 								<form id="applyGroupFrm" method="post" action="insertGroupFarm" >
 									<table class="table table-hover" id="groupForm">
-										<thead class="text-center">
+										<thead>
 											<tr class="content">
 													<td class="text-left">
 														신청인원 수: <input type="number" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" id="into_register" name="into_register">

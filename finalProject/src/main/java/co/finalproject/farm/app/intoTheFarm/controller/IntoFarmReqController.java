@@ -45,6 +45,7 @@ public class IntoFarmReqController {
 		String id = (String)session.getAttribute("user_id");
 		vo.setUser_id(id);
 		uservo.setUser_id(id);
+		System.out.println(userService.loginCheck(uservo));
 		model.addAttribute("uservo",userService.loginCheck(uservo));
 		model.addAttribute("datevo",intoTheFarmMapper.getSearchFarm(intoFarmVO));
 		model.addAttribute("reqSearchList", intoFarmReqMapper.getSearchReqFarm(vo));
