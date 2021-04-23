@@ -61,34 +61,17 @@ $(document).ready(function(){
 					<td align="center" width="70">글번호</td>
 					<td align="center" width="50">${faq.faq_no}</td>
 					<td align="center" width="70">분류</td>
-					<td align="center" width="80">
-					<select name="faq_category" id="faq_category">
-					<option value="농업지식"
-                    <c:if test ="${faq.faq_category == '농업지식'}">
-	                         selected </c:if>>농업지식</option>
-	                <option value="교육/기타"
-	                <c:if test ="${faq.faq_category == '교육/기타'}">
-	                         selected </c:if>>교육/기타</option>
-                    <option value="정책/금융"
-                    <c:if test ="${faq.faq_category == '정책/금융'}">
-	                         selected </c:if>>정책/금융</option>
-                    <option value="주택"
-                    <c:if test ="${faq.faq_category == '주택'}">
-	                         selected </c:if>>주택</option>
-	                <option value="농지"
-                    <c:if test ="${faq.faq_category == '농지'}">
-	                         selected </c:if>>농지</option>      
-					</select></td>
+					<td align="center" width="80">${faq.faq_category}</td>
 					<td align="center" width="80">작성일자</td>
 					<td align="center" width="150">${faq.faq_date}</td>
 				</tr>
 				<tr>
-					<td align="center" width="80">제 목</td>
-					<td colspan="5" ><input class="form-control" type="text" id="faq_title" name="faq_title" value="${faq.faq_title}" size=97 required="required"></td>
+					<td width="80">제 목</td>
+					<td align="left" colspan="5">${faq.faq_title}</td>
 				</tr>
 				<tr>
-					<td align="center" width="70">내용</td>
-					<td colspan="5"><textarea class="form-control" rows="7" cols="100" id="faq_content" name="faq_content" required="required">${faq.faq_content}</textarea></td>
+					<td width="70">내용</td>
+					<td align="left" colspan="5" height="300px">${faq.faq_content}</td>
 				</tr>
 				</thead>
 			</table>

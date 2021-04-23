@@ -13,7 +13,7 @@
     <div class="form-group row">
       <div class="col-sm-10">
       	<input type="hidden" name="user_id" value="${user_id }">
-      	<input type="hidden" name="into_no" value="${intoTheFarmVO.into_no }"> 
+      	<input type="hidden" name="into_no" value="${vo.into_no }"> 
       </div>
     </div>
     <div class="form-group">
@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">농촌속으로 체험명</label>
-      <input type="text" class="form-control" value="${intoTheFarmVO.into_title }" readonly="readonly"> 
+      <input type="text" class="form-control" value="${vo.into_title }" readonly="readonly"> 
     </div>
     <div class="form-group">
       <label for="exampleTextarea">문의내용</label>

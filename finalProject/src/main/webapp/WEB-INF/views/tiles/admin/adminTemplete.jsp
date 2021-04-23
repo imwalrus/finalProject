@@ -13,7 +13,7 @@
 <meta name="author" content="Phoenixcoded" />
 <!-- 관리자 부트스트랩 css -->
 <link rel="stylesheet" href="resources/admin/css/style.css">
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/images/logo/favicon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>

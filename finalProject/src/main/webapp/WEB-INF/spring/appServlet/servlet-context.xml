@@ -95,4 +95,6 @@
 
 	<beans:bean id="chatHandler" class="co.finalproject.farm.common.ChatHandler" />
 	
+	
+	
 	</beans:beans>

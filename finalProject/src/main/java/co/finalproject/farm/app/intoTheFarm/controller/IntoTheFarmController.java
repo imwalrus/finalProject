@@ -54,8 +54,9 @@ public class IntoTheFarmController {
 	}
 
 
-	// 전체조회
-	
+
+	  
+	// 단건조회(상세보기)
 	  @RequestMapping("/getFarmList")
 	  public String getFarmList(IntoTheFarmVO vo,
 	  Paging paging, UserVO uservo, Model model, HttpSession session) {
@@ -144,6 +145,7 @@ public class IntoTheFarmController {
 				String path = req.getSession().getServletContext().getRealPath("/resources/images/intofarm/");
 
 				File rename = FileRenamePolicy.rename(new File(path, orgFile));
+				file.transferTo(new File(path, rename.getName()));
 				file1 += rename.getName()+'@';
 				vo.setInto_filename(file1);
 
@@ -199,17 +201,20 @@ public class IntoTheFarmController {
 	
 	//농촌속으로 문의 뷰페이지(모달)
 	@GetMapping("/insertFarmInq")
-	public String insertFarmInq(IntoTheFarmVO vo) {
+	public String insertFarmInq(IntoTheFarmVO vo, Model model) {
 		logger.debug("insertFarmInq ========================> " +vo.toString());
+		model.addAttribute("vo", intoTheFarmMapper.getSearchFarm(vo));
 		return "notiles/intoFarm/insertFarmInq";
 	}
 	
-	//농촌속으로 문의저장 
+	//농촌속으로 문의저장
+	//return 경로 수정 0423 송예솔
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
-		return "mypageTiles/mypage/getIntoFarmInqOfUser";
+
+		return "redirect:/getIntoFarmInqOfUser";
 	}
 	
 	

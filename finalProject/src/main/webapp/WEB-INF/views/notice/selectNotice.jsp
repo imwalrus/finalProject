@@ -63,31 +63,17 @@ $(document).ready(function(){
 					<td align="center" width="70">글번호</td>
 					<td align="center" width="50">${NoticeVO.notice_no}</td>
 					<td align="center" width="70">분류</td>
-					<td align="center" width="80">
-					<select name="notice_category" id="notice_category">
-					<option value="관련기사"
-                    <c:if test ="${NoticeVO.notice_category eq '관련기사'}">
-	                selected </c:if>>관련기사</option>
-	                <option value="관련공문"
-	                <c:if test ="${NoticeVO.notice_category eq '관련공문'}">
-	                selected </c:if>>관련공문</option>
-                    <option value="농산물가격"
-                    <c:if test ="${NoticeVO.notice_category eq '농산물가격'}">
-	                selected </c:if>>농산물가격</option>
-                    <option value="축제,박람회"
-                    <c:if test ="${NoticeVO.notice_category eq '축제,박람회'}">
-	                selected </c:if>>축제,박람회</option>
-					</select></td>
+					<td align="center" width="80">${NoticeVO.notice_category}</td>
 					<td align="center" width="80">작성일자</td>
 					<td align="center" width="150">${NoticeVO.notice_date}</td>
 				</tr>
 				<tr>
-					<td align="center" width="80">제 목</td>
-					<td colspan="5" ><input class="form-control" type="text" id="notice_title" name="notice_title" value="${NoticeVO.notice_title}" size=97 required="required"></td>   
+					<td width="80">제 목</td>
+					<td align="left" colspan="5" >${NoticeVO.notice_title}</td>   
 				</tr>
 				<tr>
-					<td align="center" width="70">내용</td>
-					<td colspan="5"><textarea class="form-control" rows="7" cols="100" id="notice_content" name="notice_content" required="required">${NoticeVO.notice_content}</textarea></td>
+					<td width="70">내용</td>
+					<td align="left" colspan="5" height="300px">${NoticeVO.notice_content}</td>
 				</tr>
 				</thead>
 			</table>

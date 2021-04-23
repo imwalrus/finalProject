@@ -43,6 +43,7 @@
 				console.log(id);
 		        if (id == '') {
 		            alert("로그인이 필요합니다.");
+				    location.href="login";
 		            return false;
 		        } else if (cnt == 0) {
 		            alert("수량을 입력해주세요.");
@@ -57,6 +58,7 @@
 			if (id == '') {
 				$('#req').on('click', function() {
 		            alert("로그인이 필요합니다.")
+				    location.href="login";
 				});
 			} else {
 				$("#req").attr('onclick', "modalInsertInq('${prod.pro_no}');")
