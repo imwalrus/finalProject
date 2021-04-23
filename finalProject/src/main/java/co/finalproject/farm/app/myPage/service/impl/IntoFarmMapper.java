@@ -25,4 +25,5 @@ public interface IntoFarmMapper {
 	//나의 신청 내역 총 건수
 	public int myIntoListCount();
 	public int myIntoListCount(IntoTheFarmVO vo);
+
 }

@@ -69,8 +69,8 @@ font-weight: bold;
 </div>
 </section>
 <script type="text/javascript">
-function invoiceUp(str,dcom) {
-	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&pro_dcompany=" + dcom );
+function invoiceUp(str,con) {
+	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&orderlist_condition=" + con );
 	$('#invoiceUp').modal('show');
 }
 $.ajax({
@@ -84,14 +84,14 @@ $.ajax({
 					"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 					+ data[i].pro_name + "</td><td>" 
 					+ data[i].cart_count + "</td><td>"
-					+ data[i].account + "</td><td>"
+					+ data[i].account + "원</td><td>"
 					+ data[i].order_payment + "</td><td>"
 					+ data[i].buyer + "</td><td>"
 					+ data[i].orderlist_condition +"<br>"
 					+ "(" + data[i].pro_dcompany + ")" +"<br>"
 					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
 					+ data[i].orderlist_invoice  + "</a></td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 					+"</td></tr>"
 					);
 
@@ -100,13 +100,13 @@ $.ajax({
 						"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 						+ data[i].pro_name + "</td><td>" 
 						+ data[i].cart_count + "</td><td>"
-						+ data[i].account + "</td><td>"
+						+ data[i].account + "원</td><td>"
 						+ data[i].order_payment + "</td><td>"
 						+ data[i].buyer + "</td><td>"
 						+ data[i].orderlist_condition +"<br>"
 						+ "(" + data[i].pro_dcompany + ")" +"<br>"
 						+ data[i].orderlist_invoice  + "</td><td>"
-						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 						+"</td></tr>"
 						);
 				

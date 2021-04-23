@@ -101,7 +101,7 @@ function deleteAlert(str) {
 		if (  $("#replyDate").val() != null ) {
 				confirm("댓글이 있는글은 삭제 할 수 없습니다.")			
 	} else {
-		location.href = "deletepuchasInq?pur_inq_no=" + str;
+		location.href = "deleteIntoFarmInq?into_inq_no=" + str;
 	}
 }
 //댓글삭제

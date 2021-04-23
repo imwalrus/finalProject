@@ -8,6 +8,7 @@ public class OrderVO {
 	Integer page = 1;
 	int start = 1;
 	int end = 10;
+	int ends = 5;
 	int pro_count;
 	private String order_no;
 	private String order_date;

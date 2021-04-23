@@ -9,9 +9,10 @@
 	<select id="farmerIntoList" parameterType="IntoTheFarmVO" 
 								resultType="IntoTheFarmVO">
 	
-      SELECT *
-      FROM INTOFARM
-      WHERE USER_ID=#{user_id}
+       SELECT *
+       FROM INTOFARM
+       WHERE USER_ID= #{user_id} 
+       ORDER BY INTO_NO 
 			
 	</select>
 	
@@ -62,6 +63,7 @@ SELECT B.*
         ORDER BY Q.INTO_REQ_DATE DESC ) A ) B
   WHERE RN BETWEEN #{start} and #{end}
 	</select>
+	
 	
 <!-- 나의 신청 내역 조회 총 건수 -->	
 		<select id="myIntoListCount" resultType="int">

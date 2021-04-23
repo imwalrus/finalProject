@@ -17,7 +17,7 @@ font-weight: bold;
 		<table class="table">
 		<tr>
 				<th>주문상태 선택</th>
-				<td><label> <input type="text" list="orderlist_condition" name="orderlist_condition" required> 
+				<td><label> <input type="text" list="orderlist_condition" name="orderlist_condition"  value="${orderVO.orderlist_condition }" required> 
 						<datalist id="orderlist_condition" required="required">
 							<option value="결제완료"></option>
 							<option value="배송중"></option>

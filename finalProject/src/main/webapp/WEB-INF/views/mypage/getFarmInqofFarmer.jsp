@@ -34,9 +34,9 @@ h2 {
 										<div class="table-responsive">
 											<table class="table">
 												<tr class="table-success">
-													<th>No</th>
-													<th>Title</th>
-													<th>Secrete</th>
+													<th>NO</th>
+													<th>제목</th>
+													<th>작성자</th>
 												</tr>
 
 												<tbody>
@@ -45,7 +45,7 @@ h2 {
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
 															<td>${list.into_inq_title }</td>
-															<td>${list.into_inq_check }</td>
+															<td>${list.user_id }</td>
 														</tr>
 													</c:forEach>
 													</c:if>
@@ -60,9 +60,6 @@ h2 {
 									</div>
 								</div>
 							</div>
-						</div>
-						<div align="center">
-							<button type="button" class="btn  btn-outline-success" onclick="location.href='insertintoFarmInq'">등록</button>
 						</div>
 					</div>
 				</div>

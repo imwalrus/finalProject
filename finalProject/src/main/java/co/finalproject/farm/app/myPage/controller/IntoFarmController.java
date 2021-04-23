@@ -1,5 +1,6 @@
 package co.finalproject.farm.app.myPage.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,9 @@ import co.finalproject.farm.common.Paging;
 
 @Controller
 public class IntoFarmController {
-	
+
 	@Autowired IntoFarmMapper intoMapper;
+	
 ///////농업인 권한 //////////////	
 //농업인 농촌속으로 관리 리스트 이동
 	@RequestMapping("/farmerIntoList")
@@ -56,7 +58,6 @@ public class IntoFarmController {
 	@GetMapping("/deleteUserList")
 	public String delteUserList(IntoTheFarmVO vo) {
 		intoMapper.deleteUserList(vo);
-		
 		return "redirect:farmerIntoList";
 	}
 	
@@ -80,6 +81,7 @@ public class IntoFarmController {
 
 		return "mypageTiles/mypage/myIntoList";
 	}
+
 
 //나의 신청내역 조회
 		@RequestMapping("/ajaxmyIntoList")

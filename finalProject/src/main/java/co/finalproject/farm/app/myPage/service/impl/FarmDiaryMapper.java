@@ -14,7 +14,7 @@ public interface FarmDiaryMapper {
 	
 	//작물, 아이디로 일기조회
 	public List<FarmDiaryVO> getfDiary(FarmDiaryVO vo);
-
+	
 	//다이어리 입력
 	public int insertFdiary(FarmDiaryVO vo);
 	

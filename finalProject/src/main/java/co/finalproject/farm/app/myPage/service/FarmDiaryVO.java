@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class FarmDiaryVO {
-	
 	//farmdiary
 	private String fdiary_no;
 	private String fdiary_day;
