@@ -28,6 +28,7 @@
 		width: 500px;
 		margin: 0 auto;
 		padding: 30px 0;
+		margin-left:380px;
 	}
     .signup-form h2 {
 		color: #333;

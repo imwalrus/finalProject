@@ -171,7 +171,8 @@ $(document).ready(function(){
 	 		    /* new_into_req_phone.find("td:eq(0)").attr("rowspan","1");
 	 		    new_into_req_phone.addClass("div"); */
 	 		    $("#groupForm").append(new_into_req_phone);
-	 		    
+	 		    $("#groupForm").append('<hr style="margin-top:3px;">');
+	 		                   
 	 		    
 	 	   });	
 	    });
@@ -408,6 +409,9 @@ $(document).ready(function(){
 		padding:30px;
 		border-radius:20px;
 		width:900px;
+	}
+	#btn{
+	padding:10px;
 }
 /*input */
 input{
@@ -422,14 +426,14 @@ input{
 	
 	<div style="width: 60%; margin: auto;">
 		<!--검색바  -->
-		<div class="searchInfoFarmDiv" style="margin-left:2%">
+		<div class="searchInfoFarmDiv" style="margin-left:11%">
 		  <form id="getSearchFm" name="getSearchFm" action="getFarmList">
 			<input type="hidden" name="page" value="1">
 			  <legend style="font-weight: bold;">Search</legend>
 			  <div class="form-group" style="display: inline-block;">
 			      <label for="into_city">지역</label>
 			      <input type="text" class="form-control" name="into_city" id="into_city" value="${intoTheFarmVO.into_city}" style="width:400px; !important;">
-			  </div>
+			  </div>&nbsp;&nbsp;
 			  <div class="form-group" style="display: inline-block;">
 			      <label for="into_city">농작물 종류</label>
 			      <input type="text" class="form-control" name="into_product"  id="into_product" value="${intoTheFarmVO.into_product}" style="width:400px !important;">
@@ -467,11 +471,11 @@ input{
 								<span>모집 인원 수:</span><span class="text" id="into_entry"> ${listt.into_entry}</span><br>
 								<span>남은 인원 수:</span><span class="text" id="into_req_remain"> ${listt.into_req_remain}</span><br><br>
 								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
-								<span></span><span class="text">상세보기</span></a>
+								<span></span><span class="text">상세보기</span></a>&nbsp;
 								<a href="#" onclick="fndoapply('${listt.into_no}','${listt.into_req_remain}','${listt.into_date}')" class="btn btn-primary">
 								<span></span><span class="text">신청하기</span></a>
 						</div>
-					</div>
+					</div><br/>
 				</div>
 			</c:forEach>
 		</div>
@@ -509,9 +513,9 @@ input{
 							<span aria-hidden="true">x</span>
 						</button>
 					</div>
-					<div class="nav nav-tabs" role="tablist">
-						<a class="nav-item nav-link btn btn-danger active" id="userApply" data-toggle="tab" href="#nav-userApply" role="tab" aria-controls="nav-userApply" aria-selected="true">개인</a> 
-						<a class="nav-item nav-link btn btn-danger" id="groupApply" data-toggle="tab" href="#nav-groupApply" role="tab" aria-controls="nav-groupApply" aria-selected="false">단체</a>
+					<div class="nav nav-tabs" role="tablist" id="btn">
+						<a class="nav-item nav-link btn btn-info active" id="userApply" data-toggle="tab" href="#nav-userApply" role="tab" aria-controls="nav-userApply" aria-selected="true">개인</a>&nbsp;&nbsp;
+						<a class="nav-item nav-link btn btn-warning" id="groupApply" data-toggle="tab" href="#nav-groupApply" role="tab" aria-controls="nav-groupApply" aria-selected="false">단체</a>
 						
 					</div>
 				</nav>

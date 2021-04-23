@@ -59,8 +59,8 @@ public class IntoTheFarmController {
 	  @RequestMapping("/getFarmList")
 	  public String getFarmList(IntoTheFarmVO vo,
 	  Paging paging, UserVO uservo, Model model, HttpSession session) {
-	  
 	  paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는
+	  paging.setPageSize(5); //페이지 번호수
 	  //페이지 번호
 	  
 	  // 페이징

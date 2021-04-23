@@ -17,13 +17,16 @@ font-weight: bold;
 .modal-body {
     padding: 0px !important;
 }
+.col-md-12 {
+   padding-bottom:13px;
+}
 </style>
 <div class="modal-body">
                         
                             <div class="card-body table-border-style">
                             <form action="insertFarms" enctype="multipart/form-data" method="post">
                            
-                                <div class="table-responsive">
+                                <div class="table table-bordered">
                                     <table class="table">
                                     <tr>
                                    			 <th>
@@ -38,7 +41,7 @@ font-weight: bold;
                                                 면적(㎡)
                                             </th>
                                             <td colspan="1">
-                                                <input type="text" class="form-control" id="farm_area"
+                                                <input type="number" class="form-control" id="farm_area"
                                                     name="farm_area" placeholder="면적입력">
                                                <input type="hidden" class="form-control" id="farm_no"
                                                     name="farm_no" placeholder="번호"><!-- 농장번호 hidden-->
@@ -49,7 +52,7 @@ font-weight: bold;
 											<td colspan="3">
 													<input multiple="multiple" type="file" name="uploadFile"> 
 													<input type="hidden" name="farm_filename">
-						</td>
+					                     	</td>
                                         </tr>
                                         <tr>
                                         	 <th colspan="1">
@@ -70,7 +73,7 @@ font-weight: bold;
                                         </tr>
                                     </table>
                                     <div class="col-md-12" align="center">
-                                        <button type="submit" class="btn  btn-outline-success">저장</button>
+                                        <button type="submit" class="btn  btn-outline-success">저장</button>&nbsp;&nbsp;&nbsp;
                                         <button type="reset" class="btn  btn-outline-danger">입력취소</button>
                                     </div>
                                     </div>
