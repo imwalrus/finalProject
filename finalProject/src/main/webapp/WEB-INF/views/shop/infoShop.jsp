@@ -19,6 +19,7 @@
 		for(var i = 0; i < pagSize; i++){ 
 			pag[i] = $("input[name='cnt']").eq(i).val();
 			if(url == pag[i]) {
+				$("input[value=1]").removeClass('active');
 				$("input[value=" + pag[i] + "]").addClass('active');
 			}
 	 	}
@@ -69,7 +70,7 @@
 					<div class="row mt-5">
 						<div class="col text-center">
 							<form action="infoShop" id="infoShop">
-								<input type="submit" class="btn btn-primary" name="cnt" value="1">
+								<input type="submit" class="btn btn-primary active" name="cnt" value="1">
 								<input type="submit" class="btn btn-primary" name="cnt" value="2">
 								<input type="submit" class="btn btn-primary" name="cnt" value="3">
 								<input type="submit" class="btn btn-primary" name="cnt" value="4">
