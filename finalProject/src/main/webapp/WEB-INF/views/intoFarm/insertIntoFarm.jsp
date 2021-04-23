@@ -18,6 +18,7 @@
 /*체험등록 */
 function insertFarm() {
 	var into_city = frm.into_city.value;
+	var into_detailadr = frm.into_detailadr.value;
 	var into_title = frm.into_title.value;
 	var into_product = frm.into_product.value;
 	var into_phone = frm.into_phone.value;
@@ -35,6 +36,10 @@ function insertFarm() {
 	
 	if (into_city.trim() == ''){
 		alert("지역을 선택해주세요");
+		return false;
+	}
+	if (into_detailadr.trim() == ''){
+		alert("상세주소를 입력해주세요");
 		return false;
 	}
 	if (into_title.trim() == ''){
@@ -215,7 +220,7 @@ label{
 			enctype="multipart/form-data">
 			<input type="hidden" name="into_date" id="into_date"> 
 			<input type="hidden" name="user_id" id="user_id" value="hw"> 
-			<input type="hidden" name="uploadFile"><!-- <div class="select_img"><img src=""></div> -->
+			<input type="hidden" name="uploadFile">
 			<div class="form-group">
     		  <label for="exampleInputPassword1">⊚ 체험 지역</label>
 				<select class="custom-select" name="into_city" id="city-select" style="width:93%;" required="required">
@@ -239,11 +244,11 @@ label{
 				</select> 
 			</div>
 			<div class="form-group">
-    		  	<label for="into_title" style="">⊚ 체험 상세주소</label>	
+    		  	<label for="into_title" >⊚ 체험 상세주소</label>	
 				<input type="text" class="form-control" name="into_detailadr" style="width:95%;" placeholder="상세 주소를 입력해주세요. (상세한 지역명을 입력하셔야 합니다.)" required="required"/>
 			</div>
 			<div class="form-group">
-    		  	<label for="into_title" style="">⊚ 체험명</label>	
+    		  	<label for="into_title" >⊚ 체험명</label>	
 				<input type="text" class="form-control" name="into_title" style="width:95%;" placeholder="체험명을 입력하세요." required="required"/>
 			</div>
 			<div class="form-group">
@@ -344,22 +349,6 @@ label{
 			});
 	</script>
 	
-	<!--모달-달력띄우기  -->
-	<!-- <div class="modal fade" id="showDate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="max-width: 50%; width: auto; display: table;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">x</span>
-					</button>
-				</div>
-				<div class="modal-body"> -->
-					
-				
-			<!-- 	</div>
-			</div>
-		</div>
-</div>	 -->
 <script>
 	var plusdate=0;
 	/////////////////////////////////////////날짜 
