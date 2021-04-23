@@ -46,6 +46,7 @@
              , INTO_INFO
              , USER_ID
              , INTO_CITY
+             , INTO_PROGRESS
 		FROM INTOFARM
 		<where>
 		 <if test="into_title != null and into_title != ''">
