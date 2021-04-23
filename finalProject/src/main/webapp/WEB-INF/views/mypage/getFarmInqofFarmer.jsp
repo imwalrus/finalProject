@@ -49,12 +49,13 @@ h2 {
 														</tr>
 													</c:forEach>
 													</c:if>
-													<c:if test="${fn:length(list) >=0}">
+													<c:if test="${fn:length(list) == 0}">
 														<tr>
 															<td colspan="3"> 문의하신 내용이 없습니다. </td>
 														</tr>
 													</c:if>
 												</tbody>
+												
 											</table>
 										</div>
 									</div>

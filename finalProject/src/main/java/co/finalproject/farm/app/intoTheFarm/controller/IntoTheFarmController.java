@@ -196,7 +196,7 @@ public class IntoTheFarmController {
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		intoFarmInqMapper.insertIntoFarmInq(vo);
-		return "mypageTiles/mypage/getIntoFarmInqOfUser";
+		return "redirect:/getIntoFarmInqOfUser";
 	}
 	
 	

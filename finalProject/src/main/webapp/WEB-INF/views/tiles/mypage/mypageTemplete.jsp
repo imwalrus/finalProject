@@ -59,7 +59,7 @@
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
-                            <li><a href="insertFarmer">농업인 권한 신청</a></li>
+                            <li><a href="getFarmerlist">농업인 권한 신청</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">

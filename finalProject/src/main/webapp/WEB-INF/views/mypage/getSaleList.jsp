@@ -23,6 +23,8 @@ font-weight: bold;
                             <div class="col-md-12">
                                 <div class="card-header">
                                     <h2>판매 내역</h2>
+                                    <p></p>
+                                    <p style="float: right">최신순으로 정렬됩니다.</p>
                                 </div>
                                 <div class="table-responsive">
                                <form action="updateOrder" method="post">

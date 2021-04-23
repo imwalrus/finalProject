@@ -56,7 +56,6 @@
 												</label>
 												<div class="col-sm-5" id="userId">
 													<input type="text" class="form-control" id="user_id" name="user_id" value="${user_id }" readonly="readonly">
-													<input type="text" id="check" name="check" >
 												</div>
 											</div>
 											<div class="form-group row">
