@@ -40,14 +40,12 @@
 								extraAddr = ' (' + extraAddr + ')';
 							}
 							document.getElementById("sample6_detailAddress").value = extraAddr;
-
 						} else {
 							document.getElementById("sample6_detailAddress").value = '';
 						}
 						document.getElementById('sample6_postcode').value = data.zonecode;
 						document.getElementById("sample6_address").value = addr;
-						document.getElementById("sample6_detailAddress")
-								.focus();
+						document.getElementById("sample6_detailAddress").focus();
 					}
 				}).open();
 	}
@@ -97,7 +95,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="zipcodeSearch">
-										<button class="btn btn-primary" onclick="execPostcode()">우편번호 찾기</button>
+										<button type="button" class="btn btn-primary" onclick="execPostcode()">우편번호 찾기</button>
 									</label>
 								</div>
 							</div>
