@@ -3,14 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/main/css/style.css">
 <div class="card-body">
-<div class="row" id="diaryList"  align="center">
+<div class="row" id="diaryList" align="center">
 		
 	</div>
 </div>
 <style>
 .table th {
     font-weight: bolder;
-    background-color: #78c2ad !important;
+    background-color: #E3F1D4 !important;
     text-align: center !important;
 }
 .card-image{
@@ -23,9 +23,18 @@
     vertical-align: middle;
     border-style: none;
     }
+.btn-sm { 
+    margin-bottom:15px; 
+    margin-left:10px;
+    }
+.badge-warning { 
+    margin-bottom:15px; 
+    }
+.table td{ 
+    border:1px !impotant;
+    }
 h6{
 font-weight: bolder;
-
 }
 </style>
 <script type="text/javascript">
@@ -47,8 +56,8 @@ $.ajax({
 			var nbsp = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 		$("#diaryList").append(
 						"<span class='badge badge-warning'><h6>"+ data[i].crop_name +"</h6></span>"+nbsp+nbsp+nbsp+nbsp+nbsp+nbsp
-						+"<span><button type='button' class='btn  btn-outline-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
-						+ "<table class='table' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
+						+"<span><button type='button' class='btn btn-outline-info btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
+						+ "<table class='table table-bordered' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
 						+ data[i].fdiary_day.substring(0,10) + "</td><th>"
 						+ "시작시간" + "</th><td>"
 						+ data[i].fdiary_stime + "</td><th>"
@@ -66,7 +75,7 @@ $.ajax({
 				);
 			}
 		}
-}
+	}
 	
 });
 

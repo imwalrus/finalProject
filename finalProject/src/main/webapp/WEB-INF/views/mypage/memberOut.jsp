@@ -39,6 +39,16 @@ $(document).ready(function(){
 
 
 </script>
+<style>
+h2 { padding-top:5px; }
+.form-control { 
+     height:35px; 
+     border-radius:4px;
+     }
+.custom-control-label { display:inline; }
+.mb-4 { padding-bottom:10px;}
+#pwCheckNotice { padding-right:51px; }
+</style>
 <body>
 <section class="pcoded-main-container">
         <!-- [ Main Content ] start -->
@@ -62,19 +72,19 @@ $(document).ready(function(){
                             <div class="card-body" align="center">
                                 <!-- [ Contextual-table ] start -->
                                 <div class="col-md-9">
-                                    <div class="card-header">
+                                    <div class="card-header" id="border">
                                         <h2>회원탈퇴</h2>
                                     </div>
-                                            <div class="alert alert-warning mb-0" role="alert" align="center">
+                                            <div class="alert alert-warning mb-0" role="alert" align="center" id="border">
                                                 <p class="mb-0">
-                                                    <h5>탈퇴 전 아래 내용을 확인하시기 바랍니다.</h5><br>
                                                     <br>
+                                                    <h5>탈퇴 전 아래 내용을 확인하시기 바랍니다.</h5><br>
                                                     <h4>회원 탈퇴는 즉시 개인정보가 모두 삭제 됩니다.
-                                                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp단, 게시판 등에 공유하신 게시물은 탈퇴 후에도 삭제되지 않습니다.
+                                                    <br>&nbsp&nbsp&nbsp&nbsp단, 게시판 등에 공유하신 게시물은 탈퇴 후에도 삭제되지 않습니다.
                                                     </h4>
                                                     <br>
                                                     <form action="memberOut" method="post" class="was-validated" name="outForm">
-                                                        <div class="custom-control custom-checkbox mb-3">
+                                                        <div class="custom-control custom-checkbox mb-4">
                                                             <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
                                                             <label class="custom-control-label" for="customControlValidation1">위 내용에 동의시 체크해주세요.</label>
                                                             <div class="invalid-feedback">체크되지 않을 경우 탈퇴가 불가능 합니다.</div>
@@ -89,19 +99,19 @@ $(document).ready(function(){
 	                                                    <div class="form-group row">
 	                                                        <label class="col-sm-4 col-form-label"><h6>이름</h6></label>
 	                                                        <div class="col-sm-5">
-	                                                            <input type="email" class="form-control" name="user_name" value="${out.user_name }" readonly="readonly">
+	                                                            <input type="email" class="form-control" name="user_name" value="${out.user_name}" readonly="readonly">
 	                                                        </div>
 	                                                    </div>
 	                                                    <div class="form-group row">
-	                                                        <label class="col-sm-4 col-form-label"><h6>Password</h6></label>
+	                                                        <label class="col-sm-4 col-form-label"><h6>Pw</h6></label>
 	                                                        <div class="col-sm-7">
 	                                                            <input type="password" class="form-control" name="user_pwd" placeholder="Password">
 																<font id="pwCheckNotice" size=2>비밀번호를 입력해주세요.</font>
 	                                                        </div>
 	                                                    </div>
 	                                                    <div class="form-group row">
-	                                                        <div class="col-sm-10">
-	                                                            <button type="button" class="btn  btn-outline-danger" name="checkButton" onclick="" disabled>탈퇴</button>
+	                                                        <div class="col-sm-12">
+	                                                            <button type="button" class="btn btn-danger disabled" name="checkButton" onclick="" disabled>탈퇴</button>
 	                                                        </div>
 	                                                    </div>
                                            		 	</div>

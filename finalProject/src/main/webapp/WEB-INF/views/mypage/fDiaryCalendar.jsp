@@ -62,12 +62,12 @@ p {
 				<div class="row">
 					<div class="col-md-8">
 						<div class="card">
-							<div class="card-body" align="center">
+							<div class="card-body" align="center" style="padding:50px;">
 								<div class="col-md-12">
 									<div id="calendarForm"></div>
 									<br> <br>
 								</div>
-								<div class="col-md-12" align="center">
+								<div class="col-md-12" align="center" style="padding-bottom:40px;">
 
 									<button type='submit' class='btn  btn-outline-success'
 										onclick="location.href='insertFdiary'">일기작성</button>

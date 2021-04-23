@@ -25,6 +25,7 @@ right:70px;
 .my-calendar {
   width: 698px;
   padding: 20px 20px 10px;
+  padding-left:60px;
   text-align: center;
   font-weight: 800;
   cursor: default;
@@ -120,6 +121,10 @@ right:70px;
   height: 4px;
   background: #FFC107;
 }
+#city-select { 
+  width:100px !important;
+  height:27px;
+}
 </style>
 <form id="updatefrm" method="post" action="updateFarm" >
 <table class="table table-hover" id="updatetbl">
@@ -134,7 +139,7 @@ right:70px;
 		</tr>
 		<tr class="content">
 			<th class="text-left">
-				지역 :
+				지역 :　
 				<select class="custom-select" name="into_city" id="city-select" style="width:93%;" required="required">
 					<option value="">${upFarm.into_city}</option>
 					<option value="서울">서울</option>

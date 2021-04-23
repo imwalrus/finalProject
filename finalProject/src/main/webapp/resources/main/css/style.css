@@ -191,10 +191,6 @@ caption {
 th {
   text-align: inherit; }
 
-label {
-  display: inline-block;
-  margin-bottom: 0.5rem; }
-
 button {
   border-radius: 0; }
 
@@ -8941,7 +8937,6 @@ h1, h2, h3, h4, h5,
     text-align: center;
     vertical-align: middle;
     padding: 40px 10px;
-    border: 1px solid transparent !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; }
     .table tbody tr td.product-remove a {
       bordeR: 1px solid rgba(0, 0, 0, 0.1);

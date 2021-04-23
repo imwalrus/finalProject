@@ -188,7 +188,7 @@ function btnChg1() {
 		</c:if>
 		</div>
 	    <c:if test="${user_id == communityVO.user_id}">
-		<div style="margin-left:850px;">
+		<div style="margin-left:863px;">
 		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${pageNum}'">글 수정</button>
 		&nbsp;&nbsp;
 		<button type="button" class="btn btn-outline-primary btn-sm" onclick="deleteAlert()">글 삭제</button>

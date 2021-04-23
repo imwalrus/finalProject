@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+#btn { margin-left:3px; }
+</style>
 
 <div class="card-header" align="center">
 	<h2>농촌속으로 문의 작성</h2>
@@ -38,9 +41,9 @@
         </label>
       </div>
     </fieldset>
-		<div class="form-group row">
-			<button type="submit" class="btn  btn-outline-success">등록</button>
-			<button type="reset" class="btn  btn-outline-danger">취소</button>
+		<div class="form-group row" id="btn">
+			<button type="submit" class="btn btn btn-outline-info btn-sm">등록</button>&nbsp;&nbsp;
+			<button type="reset" class="btn btn-outline-danger btn-sm">취소</button>
 		</div>
   </fieldset>
 </form>
