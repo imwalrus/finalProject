@@ -56,7 +56,7 @@ public class IntoTheFarmController {
 
 	// 전체조회(list)
 	   @RequestMapping("/getFarmList")
-	   public String getFarmList(IntoTheFarmVO vo, Paging paging, UserVO uservo, Model model) {
+	   public String getFarmList(IntoTheFarmVO vo, Paging paging, UserVO uservo, Model model,HttpSession session) {
 	      paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는 페이지 번호
 	      // 페이징
 	      if (vo.getPage() == null) {
@@ -65,6 +65,12 @@ public class IntoTheFarmController {
 	     vo.setEnd(paging.getLast());
 	     paging.setTotalRecord(intoTheFarmMapper.getCount(vo));
 	     
+	   //로그인 아이디 가져오기
+			String id = (String)session.getAttribute("user_id");
+			vo.setUser_id(id);
+			uservo.setUser_id(id);
+			
+		 model.addAttribute("uservo",userService.loginCheck(uservo));
 	     model.addAttribute("paging", paging); 
 	     model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
 	     return "intofarmTiles/intoFarm/intoTheFarm"; 

@@ -46,8 +46,6 @@ public class IntoFarmReqController {
 		vo.setUser_id(id);
 		uservo.setUser_id(id);
 		model.addAttribute("uservo",userService.loginCheck(uservo));
-		model.addAttribute("datevo",intoTheFarmMapper.getSearchFarm(intoFarmVO));
-		model.addAttribute("reqSearchList", intoFarmReqMapper.getSearchReqFarm(vo));
 		model.addAttribute("list", intoTheFarmMapper.getFarmList(intoFarmVO));
 		return "intofarmTiles/intoFarm/intoTheFarm";
 		
