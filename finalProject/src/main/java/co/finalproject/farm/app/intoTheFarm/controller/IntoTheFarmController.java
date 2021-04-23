@@ -191,14 +191,14 @@ public class IntoTheFarmController {
 		return "notiles/intoFarm/insertFarmInq";
 	}
 	
-	//농촌속으로 문의저장 
+	//농촌속으로 문의저장
+	//return 경로 수정 0423 송예솔
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
 
 		return "redirect:/getIntoFarmInqOfUser";
-
 	}
 	
 	

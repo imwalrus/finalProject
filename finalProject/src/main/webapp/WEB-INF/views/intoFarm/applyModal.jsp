@@ -63,7 +63,6 @@
 
 <body>
 	<input type="hidden" value="${getlist.into_no}" name="into_no">
-	<input type="hidden" value="${getlist.into_title}" name="into_title">
 <table class="table table-hover">
 	<thead class="text-center">
 		<tr class="content">
@@ -106,10 +105,15 @@
 	</div>
 </div>	
 <div class="modal-footer">
-	<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
-	<button class="btn btn-primary" type="button" data-bs-target="#myInquiry" data-bs-toggle="modal" onclick="fnInquiry()">문의하기</button>
-	<button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal"  onclick="fnUpdate('${getlist.into_no}')">수정</button>
-	<button class="btn btn-primary" type="button" onclick="fnDelete('${getlist.into_no}')">삭제</button>
+	<!-- 버튼 => 작성자가 본인일시 수정, 삭제 버튼 / 아니면 취소 문의하기 버튼 -->
+	<c:if test="${getlist.user_id != user_id}">
+		<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+		<button class="btn btn-primary" type="button" data-bs-target="#myInquiry" data-dismiss="modal" onclick="fnInquiry('${getlist.into_no}','${getlist.into_title}')">문의하기</button>
+	</c:if>
+	<c:if test="${getlist.user_id == user_id}">
+		<button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal" data-bs-dismiss="modal"  onclick="fnUpdate('${getlist.into_no}')">수정</button>
+		<button class="btn btn-primary" type="button" onclick="fnDelete('${getlist.into_no}')">삭제</button>
+	</c:if>
 </div>	
 
 

@@ -65,7 +65,6 @@
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
@@ -105,7 +104,6 @@
                     <li class="nav-item pcoded-hasmenu">
 					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
