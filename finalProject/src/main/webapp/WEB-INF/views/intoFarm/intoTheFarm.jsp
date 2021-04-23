@@ -1,6 +1,9 @@
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -157,8 +160,6 @@ $(document).ready(function(){
 	 		    new_user_name.find("input#user_name").attr("id","new_user_name");
 	 		    new_user_name.find("input#user_name").attr("name","new_user_name");
 	 		    new_user_name.find("input#user_name").attr("required",true);
-	 		    /* new_user_name.find("td:eq(0)").attr("rowspan","1");
-	 		    new_user_name.addClass("div"); */
 	 		    $("#groupForm").append(new_user_name);
 	 		    
 	 		    var add1 = $("#groupForm tr:last").attr("class");
@@ -168,8 +169,6 @@ $(document).ready(function(){
 	 		    new_into_req_phone.find("input#into_req_phone").attr("id","new_into_req_phone");
 	 		    new_into_req_phone.find("input#into_req_phone").attr("name","new_into_req_phone");
 	 		    new_into_req_phone.find("input#into_req_phone").attr("required",true);
-	 		    /* new_into_req_phone.find("td:eq(0)").attr("rowspan","1");
-	 		    new_into_req_phone.addClass("div"); */
 	 		    $("#groupForm").append(new_into_req_phone);
 	 		    
 	 		    
@@ -321,13 +320,13 @@ $(document).ready(function(){
 		})
 	} 
 			
-		/* 모달 - 문의하기 */
-		function fnInquiry(no,title){
-			console.log(title);
-			$('#myInquiry .modal-body').load("insertFarmInq?into_no="+no+"&into_title="+title);
-			$('#myLargeModal').modal('hide');
-			$('#myInquiry').modal('show');
-		}		 
+		 /* 모달 - 문의하기 */
+			function fnInquiry(){
+				var into_no = $("input[name=into_no]").val();
+				$('#myInquiry .modal-body').load("insertFarmInq?into_no="+into_no);
+				$('#myInquiry').modal('show');
+				$('#myLargeModal').modal('hide');
+			} 
 </script>
 
 
@@ -464,7 +463,6 @@ input{
 								<span>지역 :</span><span class="text" id="into_city"> ${listt.into_city}</span><br>
 								<span>상세주소 :</span><span class="text" id="into_city"> ${listt.into_detailadr}</span><br>
 								<span>농작물 :</span><span class="text" id="into_product"> ${listt.into_product}</span><br>
-								<span>체험 기간 :</span><span class="text" id="into_date"> ${listt.into_date}</span><br>
 								<span>모집 인원 수:</span><span class="text" id="into_entry"> ${listt.into_entry}</span><br>
 								<span>남은 인원 수:</span><span class="text" id="into_req_remain"> ${listt.into_req_remain}</span><br><br>
 								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
@@ -646,6 +644,10 @@ input{
 	<div style="overflow: scroll; " class="modal fade" id="myInquiry" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="max-width: 100%; width: 1000px;">
 			<div class="modal-content">
+			
+			
+			
+			
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">농촌속으로 문의하기</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">

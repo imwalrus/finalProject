@@ -54,7 +54,7 @@ public class IntoTheFarmController {
 	}
 
 
-	// 전체조회
+	// 전체조회(list)
 	   @RequestMapping("/getFarmList")
 	   public String getFarmList(IntoTheFarmVO vo, Paging paging, UserVO uservo, Model model) {
 	      paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는 페이지 번호
@@ -69,9 +69,9 @@ public class IntoTheFarmController {
 	     model.addAttribute("list", intoTheFarmMapper.getFarmList(vo));
 	     return "intofarmTiles/intoFarm/intoTheFarm"; 
 	   }
-	 
+	
 	  
-	// 단건조회
+	// 단건조회(상세보기)
 		@RequestMapping("/getSearchFarm")
 		public String getSearchFarm(IntoTheFarmVO vo, Model model) {	  
 		  model.addAttribute("getlist", intoTheFarmMapper.getSearchFarm(vo));
@@ -123,6 +123,7 @@ public class IntoTheFarmController {
 				String path = req.getSession().getServletContext().getRealPath("/resources/images/intofarm/");
 
 				File rename = FileRenamePolicy.rename(new File(path, orgFile));
+				file.transferTo(new File(path, rename.getName()));
 				file1 += rename.getName()+'@';
 				vo.setInto_filename(file1);
 
@@ -178,8 +179,9 @@ public class IntoTheFarmController {
 	
 	//농촌속으로 문의 뷰페이지(모달)
 	@GetMapping("/insertFarmInq")
-	public String insertFarmInq(IntoTheFarmVO vo) {
+	public String insertFarmInq(IntoTheFarmVO vo, Model model) {
 		logger.debug("insertFarmInq ========================> " +vo.toString());
+		model.addAttribute("vo", intoTheFarmMapper.getSearchFarm(vo));
 		return "notiles/intoFarm/insertFarmInq";
 	}
 	
@@ -188,7 +190,7 @@ public class IntoTheFarmController {
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
-		return "redirect:/getintoFarmInqList";
+		return "redirect:/getIntoFarmInqOfUser";
 	}
 	
 	

@@ -244,11 +244,11 @@ label{
 				</select> 
 			</div>
 			<div class="form-group">
-    		  	<label for="into_title" style="">⊚ 체험 상세주소</label>	
+    		  	<label for="into_title" >⊚ 체험 상세주소</label>	
 				<input type="text" class="form-control" name="into_detailadr" style="width:95%;" placeholder="상세 주소를 입력해주세요. (상세한 지역명을 입력하셔야 합니다.)" required="required"/>
 			</div>
 			<div class="form-group">
-    		  	<label for="into_title" style="">⊚ 체험명</label>	
+    		  	<label for="into_title" >⊚ 체험명</label>	
 				<input type="text" class="form-control" name="into_title" style="width:95%;" placeholder="체험명을 입력하세요." required="required"/>
 			</div>
 			<div class="form-group">

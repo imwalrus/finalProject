@@ -24,8 +24,8 @@
 		 </if>
 		 <if test="into_date != null and into_date != ''">					
 		        AND  <![CDATA[
-						    INTO_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
-						    and INTO_DATE < to_date(#{finish_date}, 'YYYY-MM-DD')
+						    INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
+						    and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
 						]]>
 				)
 		 </if>
@@ -58,12 +58,11 @@
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
 		 </if>
-		 <if test="into_date != null and into_date != ''">					
+		 <if test="s_date != null and s_date != '' and e_date != null and e_date != ''" >					
 		        AND  <![CDATA[
-						    INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
-						    and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
+						    INTO_DATE >=#{s_date}
+						    and INTO_DATE < #{e_date}
 						]]>
-				)
 		 </if>
         </where>
 		ORDER BY INTO_NO DESC
