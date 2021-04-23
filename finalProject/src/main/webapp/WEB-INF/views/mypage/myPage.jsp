@@ -57,7 +57,7 @@
             <!-- prject ,team member start -->
             <div class="col-xl-6 col-md-12">
                 <div class="card table-card">
-                        	<jsp:include page="getpuchasInqList.jsp"></jsp:include>
+
                 </div>
             </div>
             <div class="col-xl-6 col-md-12">

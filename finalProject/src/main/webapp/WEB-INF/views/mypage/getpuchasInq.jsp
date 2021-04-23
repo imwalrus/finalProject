@@ -25,7 +25,7 @@ h2 {
 		<table class="table">
 			<tr>
 				<th colspan="1">제목</th>
-				<td colspan="7">${plist.pur_inq_title }</td>
+				<td colspan="7" style="border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${plist.pur_inq_title }</td>
 				<c:if test="${plist.pur_inq_check eq '1'}">				<!-- 비밀글일경우 -->
 					<td>
 						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
@@ -57,7 +57,7 @@ h2 {
 			</tr>
 			<tr>
 			<c:if test="${plist.pur_inq_filename eq null }">
-				<td colspan="10" text-align="center" >
+				<td colspan="10" text-align="center" style="width: 795px; height: 280px;" >
 					등록된 사진이 없습니다.
 				</td>
 			</c:if>
@@ -100,8 +100,8 @@ h2 {
 			placeholder="댓글을 입력하세요" aria-describedby="basic-addon2"> <input
 			type="hidden" name="user_id" value="${user_id }">
 		<div class="input-group-append">
-			<button type="button" id="btnAdd"
-				class="btn  btn-outline-success btn-sm">등록</button>
+			<button type="button" id="btnAdd" class="btn  btn-outline-success btn-sm">등록</button>
+			<button type="reset" class="btn  btn-outline-danger btn-sm">지우기</button>
 		</div>
 	</div>
 
@@ -161,7 +161,7 @@ $.ajax({
 			for(i=0; i<response.length; i++){
 				if(response[i].user_id != '${user_id}' ){
 					$("#reply").append(						
-							"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							"<tr id='replyItem'><td width='70%' style='border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
 							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
 							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
 							+ " "
@@ -170,7 +170,7 @@ $.ajax({
 				}	
 				else{
 					$("#reply").append(						
-							"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							"<tr id='replyItem'><td width='70%' style='border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
 							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
 							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
 							+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"

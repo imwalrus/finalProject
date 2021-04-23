@@ -16,5 +16,6 @@ public class FarmerVO {
 	private String user_id;
 	private MultipartFile uploadFile;
 	private String farmer_date;
+	private String user_auth;
 	
 }

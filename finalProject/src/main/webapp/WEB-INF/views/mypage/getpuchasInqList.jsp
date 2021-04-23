@@ -15,6 +15,10 @@ font-weight: bold;
 h2{
 font-weight: bold;
 }
+.title{
+	width: 80%; 
+	align: left !important; 
+}
 </style>
 
 	<section class="pcoded-main-container">
@@ -23,29 +27,35 @@ font-weight: bold;
 				<div class="row">
 					<div class="col-md-10">
 						<div class="card">
-							<div class="card-body" align="center">
+							<div class="card-body">
 								<div class="col-md-12">
-									<div class="card-header">
+									<div class="card-header"  align="center">
 										<h2>나의 구매 문의</h2>
 									</div>
 											<table class="table table-hover">
+											<colgroup>
+													<col width="80%">
+													<col width="5%">
+													<col width="10%">
+													<col width="5%">
+												</colgroup>
 											<thead>
 												<tr>
-													<th>제목</th>
-													<th>작성자</th>
-													<th>작성일자</th>
-													<th>비밀여부</th>
+													<th align="center">제목</th>
+													<th align="center">작성자</th>
+													<th align="center">작성일자</th>
+													<th align="center">비밀여부</th>
 												</tr>
 											</thead>
 												<tbody>
 													<c:if test="${fn:length(list) >=1 }">
 													<c:forEach items="${list }" var="list">
 														<tr onclick="pQNAview('${list.pur_inq_no}')">
-															<td style="width: 50%; align=left;" >${list.pur_inq_title }</td>
-															<td style="width: 10%">${list.user_id }</td>
-															<td style="width: 20%">${list.pur_inq_date }</td>
+															<td style="border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.pur_inq_title }</td>
+															<td style="width: 5%">${list.user_id }</td>
+															<td style="width: 10%">${list.pur_inq_date }</td>
 														<c:if test="${list.pur_inq_check eq '1'}">
-       														<td  style="width: 20%">
+       														<td  style="width: 5%">
        																<img src="resources/images/mypage/secrete.JPG" width="20" height="30">
        														</td>
        													</c:if>		
@@ -122,7 +132,6 @@ font-weight: bold;
 			$('#pQNAview').remove();
 			$('#pQNAupdate .modal-body').load("updatepuchasInq?pur_inq_no=" + strr);
 			$('#pQNAupdate').modal('show');
-			/* $('#pQNAview').remove(); */
 		}
 </script>
 </body>

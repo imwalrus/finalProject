@@ -47,25 +47,47 @@ $.ajax({
 		}else{
 		for(i=0; i<data.length; i++){ //data값 있을 경우
 			var nbsp = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-		$("#diaryList").append(
-						"<span class='badge badge-warning'><h6>"+ data[i].crop_name +"</h6></span>"+nbsp+nbsp+nbsp+nbsp+nbsp+nbsp
-						+"<span><button type='button' class='btn  btn-outline-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
-						+ "<table class='table' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
-						+ data[i].fdiary_day.substring(0,10) + "</td><th>"
-						+ "시작시간" + "</th><td>"
-						+ data[i].fdiary_stime + "</td><th>"
-						+ "종료시간" + "</th><td>"
-						+ data[i].fdiary_etime + "</td></tr>"
-					+"<tr><th>" + "날씨" + "</th><td colspan='3'>"
-						+ data[i].fdiary_weather + "</td><th>"
-						+ "작업인력" + "</th><td>"
-						+ data[i].fdiary_worker	+ "명</td></tr>"
-					+"<tr><td colspan='6'><img align='center' class='card-image' width='500px' height='320px' src='./resources/images/mypage/" + data[i].fdiary_filename  + "'\></td></tr>"
-					+"<tr><th>" + "내용" + "</th><td colspan='5'>"
-					+"<textarea class='form-control' rows='5' readonly='readonly'>" + data[i].fdiary_content
-					+ "</textarea><input type='hidden' value='"+ data[i].fdiary_no +"'></td></tr>"						
-					+"</table><br><hr>"
+		if( typeof data[i].fdiary_filename == "undefined" || data[i].fdiary_filename == "" || data[i].fdiary_filename == null){ //등록된 사진 없을 경우 
+			$("#diaryList").append(
+					"<span class='badge badge-warning'><h6>"+ data[i].crop_name +"</h6></span>"+nbsp+nbsp+nbsp+nbsp+nbsp+nbsp
+					+"<span><button type='button' class='btn  btn-outline-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
+					+ "<table class='table' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
+					+ data[i].fdiary_day.substring(0,10) + "</td><th>"
+					+ "시작시간" + "</th><td>"
+					+ data[i].fdiary_stime + "</td><th>"
+					+ "종료시간" + "</th><td>"
+					+ data[i].fdiary_etime + "</td></tr>"
+				+"<tr><th>" + "날씨" + "</th><td colspan='3'>"
+					+ data[i].fdiary_weather + "</td><th>"
+					+ "작업인력" + "</th><td>"
+					+ data[i].fdiary_worker	+ "명</td></tr>"
+				+"<tr><td colspan='6' width='500px' height='320px'>등록된 사진이 없습니다.</td></tr>"
+				+"<tr><th>" + "내용" + "</th><td colspan='5'>"
+				+"<textarea class='form-control' rows='5' readonly='readonly'>" + data[i].fdiary_content
+				+ "</textarea><input type='hidden' value='"+ data[i].fdiary_no +"'></td></tr>"						
+				+"</table><br><hr>"
 				);
+		}else{
+			$("#diaryList").append(
+					"<span class='badge badge-warning'><h6>"+ data[i].crop_name +"</h6></span>"+nbsp+nbsp+nbsp+nbsp+nbsp+nbsp
+					+"<span><button type='button' class='btn  btn-outline-warning btn-sm' onclick='fdiaryUpdate(" + data[i].fdiary_no + ")'>수정</button></button>&nbsp&nbsp<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteAlert(" + data[i].fdiary_no + ")'>삭제</button></span>"
+					+ "<table class='table' id='table'><tr><th>" + "작업날짜" + "</th><td id='day'>"
+					+ data[i].fdiary_day.substring(0,10) + "</td><th>"
+					+ "시작시간" + "</th><td>"
+					+ data[i].fdiary_stime + "</td><th>"
+					+ "종료시간" + "</th><td>"
+					+ data[i].fdiary_etime + "</td></tr>"
+				+"<tr><th>" + "날씨" + "</th><td colspan='3'>"
+					+ data[i].fdiary_weather + "</td><th>"
+					+ "작업인력" + "</th><td>"
+					+ data[i].fdiary_worker	+ "명</td></tr>"
+				+"<tr><td colspan='6'><img align='center' class='card-image' width='500px' height='320px' src='./resources/images/mypage/" + data[i].fdiary_filename  + "'\></td></tr>"
+				+"<tr><th>" + "내용" + "</th><td colspan='5'>"
+				+"<textarea class='form-control' rows='5' readonly='readonly'>" + data[i].fdiary_content
+				+ "</textarea><input type='hidden' value='"+ data[i].fdiary_no +"'></td></tr>"						
+				+"</table><br><hr>"
+			);
+		}
 			}
 		}
 }

@@ -15,7 +15,6 @@ public class IntoTheFarmVO {
 		Integer page = 1;
 		int start = 1;
 		int end = 10;
-		int ends = 5;
 		private String into_no;
 		private String into_title;
 		private String into_phone;

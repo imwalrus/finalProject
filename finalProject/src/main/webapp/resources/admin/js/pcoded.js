@@ -738,7 +738,7 @@ $('.pcoded-navbar .close').on('click', function() {
 
 // active menu item list start
 $(".pcoded-navbar .pcoded-inner-navbar a").each(function() {
-    var pageUrl = window.location.href.split(/[?#]/)[0];
+    var pageUrl = window.location.href;
     if (!$('body').hasClass('layout-14')) {
         if (this.href == pageUrl && $(this).attr('href') != "") {
             $(this).parent('li').addClass("active");

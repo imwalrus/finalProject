@@ -64,21 +64,7 @@ public class IntoFarmController {
 ///////유저 권한/////////////
 //나의 신청내역 폼
 	@RequestMapping("/myIntoList")
-	public String myIntoList(Model model, IntoTheFarmVO vo, Paging paging) {
-		paging.setPageUnit(5);// 한 페이지에 표시되는 레코드 건수
-		paging.setPageSize(10);// 페이지 번호수
-
-		// 페이징
-		if (vo.getPage() == null) {
-			vo.setPage(1);
-		}
-		vo.setStart(paging.getFirst());
-		vo.setEnd(paging.getLast());
-
-		paging.setTotalRecord(intoMapper.myIntoListCount(vo));
-
-		model.addAttribute("paging", paging);
-
+	public String myIntoList(IntoTheFarmVO vo) {	
 		return "mypageTiles/mypage/myIntoList";
 	}
 
@@ -86,7 +72,7 @@ public class IntoFarmController {
 //나의 신청내역 조회
 		@RequestMapping("/ajaxmyIntoList")
 		@ResponseBody
-		public List<IntoTheFarmVO> myIntoList(IntoTheFarmVO vo){
+		public List<IntoTheFarmVO> ajaxmyIntoList(IntoTheFarmVO vo){	
 			return intoMapper.myIntoList(vo);
 		}
 

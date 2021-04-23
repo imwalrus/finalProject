@@ -44,7 +44,7 @@
 							<c:if test="${user_auth == 'farmer'}">
 								<p><strong>농업인</strong> 권한 입니다.</p>
 							</c:if>
- 							<a href="#" class="btn chatBtn" onclick="showChat()" >CHAT
+ 							<a href="javascript:;" class="btn chatBtn" onclick="showChat()" >CHAT
  								<c:if test="${unreadNum >= 1 }">
 								&nbsp;&nbsp;&nbsp;<span class="badge badge-danger">new</span>
 								</c:if> 
@@ -52,10 +52,10 @@
 						</div>
 					</div>
 				</div>
-				<c:if test="${user_auth =='user' }">
+ 				<c:if test="${user_auth =='user' }"> 
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons account_box">&#xe851;</i></span><span class="pcoded-mtext">내정보 관리</span></a>
+					    <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons account_box">&#xe851;</i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
@@ -63,28 +63,28 @@
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
-					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="#">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
+					</li>
                         <li class="nav-item pcoded-hasmenu">
-                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                            <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
                                 <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
                                 <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
                             </ul>
                         </li>
 				</ul>
-				</c:if>
+ 				</c:if> 
 				<c:if test="${user_auth =='farmer' }">
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item">
 					    <a href="fDiaryCalendar" class="nav-link "><span class="pcoded-micon"><i class="material-icons calendar_today">&#xe935;</i></span><span class="pcoded-mtext">영농일지</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons account_box">&#xe851;</i></span><span class="pcoded-mtext">내정보 관리</span></a>
+					    <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons account_box">&#xe851;</i></span><span class="pcoded-mtext">내정보 관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="updateUser?user_id=${user_id }">회원정보수정</a></li>
 					        <li><a href="memberOut?user_id=${user_id }">회원탈퇴</a></li>
@@ -96,20 +96,20 @@
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
-					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons store">&#xe8d1;</i></span><span class="pcoded-mtext">판매관리</span></a>
+					    <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons store">&#xe8d1;</i></span><span class="pcoded-mtext">판매관리</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="getSaleList?user_id=${user_id }">판매내역</a></li>
 					    </ul>
 					</li>
                     <li class="nav-item pcoded-hasmenu">
-					    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
+					    <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons shopping_cart">&#xe8cc;</i></span><span class="pcoded-mtext">구매관리</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="#">장바구니</a></li>
+					        <li><a href="javascript:;">장바구니</a></li>
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
                         <li class="nav-item pcoded-hasmenu">
-                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                            <a href="javascript:;" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
                             <ul class="pcoded-submenu">
                                 <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
                                 <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>

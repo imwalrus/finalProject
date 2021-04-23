@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <link rel="stylesheet" href="resources/main/css/style.css">
+
 <style>
 .table th{
 background-color: #c3e6cb;
@@ -42,13 +42,13 @@ font-weight: bold;
                             </form>
                         </div>
                     </div>
-                    <my:paging paging="${paging}" jsFunc="goPage" />  
                 </div>
             </div>
         </div>
 </div>
 </section>
 	<script type="text/javascript">
+
 		$.ajax ({
 			url:"ajaxmyIntoList",
 			data: "user_id=" + '${user_id}',
@@ -68,11 +68,6 @@ font-weight: bold;
 			}
 		});
 		
-		
-	/* 페이징 값 넣기*/
-	function goPage(p) {
-		location.href="myIntoList?page=" + p + "&user_id=${user_id}";
-    }
 	
 	/* 농촌속으로 이동 */
 	function movePage(){

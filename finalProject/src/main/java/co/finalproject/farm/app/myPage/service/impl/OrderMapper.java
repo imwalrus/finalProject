@@ -19,8 +19,5 @@ public interface OrderMapper {
 
 	//판매내역
 	public List<OrderVO> getSaleList(OrderVO vo);
-	
-	//구매내역 총 건수
-	public int getOrderListCount();
-	public int getOrderListCount(OrderVO vo);
+
 }

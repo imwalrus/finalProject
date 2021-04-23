@@ -48,7 +48,7 @@
 							resultType="IntoTheFarmVO" >
 							
 SELECT B.* 
- FROM (SELECT ROWNUM RN, A.* FROM( SELECT	Q.INTO_REQ_NUM
+ FSELECT	Q.INTO_REQ_NUM
                     ,Q.USER_ID
                     ,Q.INTO_REQ_PHONE
                     ,Q.INTO_REQ_REWARD
@@ -60,18 +60,8 @@ SELECT B.*
 		FROM INTOFARM I JOIN INTOFARM_REQ Q
 		ON (I.INTO_NO = Q.INTO_NO)
 		WHERE Q.USER_ID = #{user_id}
-        ORDER BY Q.INTO_REQ_DATE DESC ) A ) B
-  WHERE RN BETWEEN #{start} and #{end}
+        ORDER BY Q.INTO_REQ_DATE DESC 
 	</select>
 	
 	
-<!-- 나의 신청 내역 조회 총 건수 -->	
-		<select id="myIntoListCount" resultType="int">
-	        	SELECT COUNT(*)
-				FROM INTOFARM I JOIN INTOFARM_REQ Q
-					ON (I.INTO_NO = Q.INTO_NO)
-				WHERE Q.USER_ID = #{user_id}
-        				ORDER BY Q.INTO_REQ_DATE DESC
-
-		</select>
 </mapper>

@@ -59,7 +59,7 @@ h2 {
 											</c:if>
 											<c:if test="${fn:length(list) == 0}">
 												<tr>
-													<td colspan="3">문의하신 내용이 없습니다.</td>
+													<td colspan="4">문의하신 내용이 없습니다.</td>
 												</tr>
 											</c:if>
 										</tbody>
