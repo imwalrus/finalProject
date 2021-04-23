@@ -17,7 +17,7 @@
 	
 	 <!-- 관리자 부트스트랩 css -->
  	<link rel="stylesheet" href="resources/admin/css/style.css">
-    <link rel="icon" href="resources/admin/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="resources/images/logo/favicon.png">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="resources/main/js/jquery.min.js"></script>
 </head>
@@ -69,13 +69,14 @@
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
-                        <li class="nav-item pcoded-hasmenu">
-                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
-                            <ul class="pcoded-submenu">
-                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
-                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
-                            </ul>
-                        </li>
+					</li>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                            <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
+                        </ul>
+                    </li>
 				</ul>
 				</c:if>
 				<c:if test="${user_auth =='farmer' }">
@@ -108,14 +109,15 @@
 					        <li><a href="getOrderList?user_id=${user_id}">구매내역</a></li>
 					        <li><a href="getpuchasInqofUser">구매 관련 문의</a></li>
 					    </ul>
-                        <li class="nav-item pcoded-hasmenu">
-                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
-                            <ul class="pcoded-submenu">
-                                <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
-                                <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
-                                <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
-                            </ul>
-                        </li>
+					</li> 
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="material-icons agriculture">&#xea79;</i></span><span class="pcoded-mtext">농촌속으로</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="farmerIntoList?user_id=${user_id }">신청 내역 관리</a></li>
+                            <li><a href="myIntoList?user_id=${user_id }">나의 신청 내역</a></li>
+                            <li><a href="getIntoFarmInqOfUser">체험 관련 문의</a></li>
+                        </ul>
+                    </li>
 				</ul>
 				</c:if>
 			</div>

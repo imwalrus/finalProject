@@ -27,6 +27,7 @@
 			console.log(quan);
 			if (id == '') {
 				alert("로그인이 필요합니다.");
+			    location.href="login";
 				return false;
 			} else if (quan == 0) {
 				alert("재고가 없습니다.");
