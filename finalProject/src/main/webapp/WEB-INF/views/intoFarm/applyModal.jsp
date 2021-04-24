@@ -20,6 +20,7 @@
 .slider-for{
 	width:800px !important; 
 	height:550px;
+	
 }
 .slider-nav{
 	width: 800px; 
@@ -61,27 +62,30 @@
 </style>
 
 <body>
-<%-- <form id="applyfrm" method="post" action="getSearchFarm" >
 	<input type="hidden" value="${getlist.into_no}" name="into_no">
-</form> --%>
 <table class="table table-hover">
 	<thead class="text-center">
 		<tr class="content">
-			<th class="text-center" style="">체험명</th>
+			<th class="text-center">체험명</th>
 			<td>${getlist.into_title}</td>
+		</tr>
+		<tr class="content">
+			<th class="text-center">체험기간</th>
+			<td>${getlist.into_date}</td>
 		</tr>
 		<tr class="content">
 			<th class="text-center">모집 인원 수 </th> 
 			<td>${getlist.into_entry}</td>
 		</tr>
 		<tr class="content">
-			<th class="text-center">체험 내용</th>
+			<th class="text-center" style="vertical-align:top">체험 내용</th>
 			<td>${getlist.into_info}</td>
 		</tr>
 		<tr class="content">
 			<th class="text-center">문의 전화번호</th>
 			<td>${getlist.into_phone}</td>
 		</tr>
+		
 	</thead>
 </table>
 <div class="sliderDiv" align="center">
@@ -101,10 +105,15 @@
 	</div>
 </div>	
 <div class="modal-footer">
-	<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
-	<button class="btn btn-primary" type="button" data-bs-target="#myInquiry" data-dismiss="modal" onclick="fnInquiry('${getlist.into_no}','${getlist.into_title}')">문의하기</button>
-	<button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal" data-bs-dismiss="modal"  onclick="fnUpdate('${getlist.into_no}')">수정</button>
-	<button class="btn btn-primary" type="button" onclick="fnDelete('${getlist.into_no}')">삭제</button>
+	<!-- 버튼 => 작성자가 본인일시 수정, 삭제 버튼 / 아니면 취소 문의하기 버튼 -->
+	<c:if test="${getlist.user_id != user_id}">
+		<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+		<button class="btn btn-primary" type="button" data-bs-target="#myInquiry" data-dismiss="modal" onclick="fnInquiry('${getlist.into_no}','${getlist.into_title}')">문의하기</button>
+	</c:if>
+	<c:if test="${getlist.user_id == user_id}">
+		<button class="btn btn-primary" type="button" data-bs-target="#myUpdate" data-bs-toggle="modal" data-bs-dismiss="modal"  onclick="fnUpdate('${getlist.into_no}')">수정</button>
+		<button class="btn btn-primary" type="button" onclick="fnDelete('${getlist.into_no}')">삭제</button>
+	</c:if>
 </div>	
 
 

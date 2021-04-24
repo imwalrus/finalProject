@@ -100,11 +100,11 @@
 $(document).ready(function(){
 	$('.modal').hide();
 	
-	/////////모///달///기///능///////////
 	// 2. 모달창 닫기 버튼
 	$('[name=close]').on('click', function() {
 		$('.modal').hide();
 	});
+	
 	// 3. 모달창 위도우 클릭 시 닫기
 	$(window).on('click', function() {
 		if (event.target == $('.modal').get(0)) {
@@ -120,21 +120,30 @@ $(document).ready(function(){
 		var name = $('[name=user_name]').val();
 		var birth = $('[name=user_birth]').val();
 		var email = $('[name=user_email]').val();
-		$.ajax({
-			url:"idFind",
-			data:{"user_name":name,"user_birth":birth,"user_email":email},
-			method:"POST",
-			success:function(response){
-				console.log(response.user_id);
-				if(response == 0){
-					$('.modal').show();
-					$('.modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
-				} else{
-					$('.modal').show();
-					$('.modal-body').find('p').html("회원님의 아이디는 <h3>"+response.user_id+"</h3> 입니다.");
+		if(name == ""){
+			alert("이름을 입력하세요.");
+		} else if (birth == ""){
+			alert("생년월일을 입력하세요");
+		} else if(email == ""){
+			alert("이메일을 입력하세요");
+		} else if (birth != "" && name != "" && email !="") {
+			$.ajax({
+				url:"idFind",
+				data:{"user_name":name,"user_birth":birth,"user_email":email},
+				method:"POST",
+				success:function(response){
+					console.log(response.user_id);
+					if(response.user_id == 0){
+						$('.modal').show();
+						$('.modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
+					} else{
+						$('.modal').show();
+						$('.modal-body').find('p').html("회원님의 아이디는 <h3>"+response.user_id+"</h3> 입니다.");
+					}
 				}
-			}
-		})
+			});
+		}
+
 	});
 	
 	//비밀번호 찾기(메일로 임시비밀번호 보내기)
@@ -143,32 +152,45 @@ $(document).ready(function(){
 		var id = $('#id').val();
 		var birth = $('#birth').val();
 		var email = $('#email').val();
-		$.ajax({
-			url:"pwFind",
-			data:{"user_id":id,"user_birth":birth,"user_email":email},
-			type:"POST",
-			async:false,
-			dataType:"json",
-			success:function(response){
-				console.log(response);
-				if(response == 1){
-					$.ajax({
-						url:"pwFindEmail",
-						data:{"user_id":id,"user_email":email},
-						success:function(response){
-							if(response==1){
-								alert('입력하신 메일로 임시비밀번호가 발급되었습니다.');
-							}else{
-								alert('메일 전송 오류');
+		if(id == ""){
+			alert("이름을 입력하세요.");
+		} else if (birth == ""){
+			alert("생년월일을 입력하세요");
+		} else if(email == ""){
+			alert("이메일을 입력하세요");
+		} else if (birth != "" && id != "" && email !="") {
+			$.ajax({
+				url:"pwFind",
+				data:{"user_id":id,"user_birth":birth,"user_email":email},
+				type:"POST",
+				async:false,
+				dataType:"json",
+				success:function(response){
+					console.log(response);
+					if(response == 1){
+						$.ajax({
+							url:"pwFindEmail",
+							data:{"user_id":id,"user_email":email},
+							success:function(response){
+								if(response==1){
+									$('#findPwModal').show();
+									$('#findPwModal .modal-body').find('p').html("입력하신 메일로 임시비밀번호가 발급되었습니다.")
+									alert();
+								}else{
+									$('#findPwModal').show();
+									$('#findPwModal .modal-body').find('p').html("메일 전송 오류")
+								}
 							}
-						}
-					});
-				} else {
-					alert('일치하는 정보가 없습니다. 입력하신 정보를 확인해주세요');
+						});
+					} else {
+						$('#findPwModal').show();
+						$('#findPwModal .modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
+					}
 				}
-			}
-		});
+			});
+		}
 	});
+	
 	
 });
 
@@ -262,13 +284,32 @@ $(document).ready(function(){
    </div>
 </div> 
 
-   <!-- 모달화면 -->
-
+<!-- 아이디 찾기 모달화면 -->
 <div class="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"> 회원님의 아이디는? </h5>
+        <h5 class="modal-title"> 아이디 찾기 </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>	
+
+<!-- 비밀번호 찾기 모달화면 -->
+<div class="modal" id='findPwModal'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> 비밀번호 찾기 </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

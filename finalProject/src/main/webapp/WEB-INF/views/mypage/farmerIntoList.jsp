@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <link rel="stylesheet" href="resources/main/css/style.css">
 <style>
@@ -10,6 +11,13 @@ font-weight: bold;
 }
 #progress{
 font-weight: bold;
+}
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
 }
 </style>
 <body>
@@ -32,7 +40,6 @@ font-weight: bold;
 											onclick="bongsaOpen()">봉사활동 양식출력</button>
 							     </div>
 							     <br>
-                                <div class="table-responsive">							       
 									<table class="table" id="list">
 										<tr class="table-success">
 											<th width="5%">NO</th>
@@ -43,7 +50,6 @@ font-weight: bold;
 											<th	width="10%">신청명단</th>										
 										</tr>																	
 									</table>
-                                </div>
                             </div>
                             </form>
                         </div>
@@ -110,8 +116,7 @@ font-weight: bold;
 		dataType: "json",
 		success: function(data){
 			for(i=0; i<data.length; i++){
-				if(data[i].into_progress == 0){
-			
+				if(data[i].into_progress == 0){	
 				$("#list").append(
 					"<tr><td>" + data[i].into_no + "</td><td>" 
 					+ data[i].into_title + "</td><td>"

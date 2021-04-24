@@ -34,13 +34,15 @@ font-weight: bold;
 									</div>
 											<table class="table table-hover">
 											<colgroup>
-													<col width="80%">
+													<col width="5%">
+													<col width="75%">
 													<col width="5%">
 													<col width="10%">
 													<col width="5%">
 												</colgroup>
 											<thead>
 												<tr>
+													<th align="center">NO</th>
 													<th align="center">제목</th>
 													<th align="center">작성자</th>
 													<th align="center">작성일자</th>
@@ -51,16 +53,17 @@ font-weight: bold;
 													<c:if test="${fn:length(list) >=1 }">
 													<c:forEach items="${list }" var="list">
 														<tr onclick="pQNAview('${list.pur_inq_no}')">
-															<td style="border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.pur_inq_title }</td>
-															<td style="width: 5%">${list.user_id }</td>
-															<td style="width: 10%">${list.pur_inq_date }</td>
+															<td>${list.pur_inq_no }</td>
+															<td style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.pur_inq_title }</td>
+															<td>${list.user_id }</td>
+															<td>${list.pur_inq_date }</td>
 														<c:if test="${list.pur_inq_check eq '1'}">
-       														<td  style="width: 5%">
+       														<td>
        																<img src="resources/images/mypage/secrete.JPG" width="20" height="30">
        														</td>
        													</c:if>		
        													<c:if test="${list.pur_inq_check eq '0'}">
-       														<td  style="width: 20%">
+       														<td>
        																<img src="resources/images/mypage/nosecrete.JPG" width="20" height="30">
        														</td>
        													</c:if>	
@@ -69,7 +72,7 @@ font-weight: bold;
 													</c:if>
 													<c:if test="${fn:length(list) == 0 }">
 														<tr>
-															<td colspan="4">문의하신 내용이 없습니다.</td>
+															<td colspan="5">문의하신 내용이 없습니다.</td>
 														</tr>
 													</c:if> 
 												</tbody>
@@ -83,8 +86,7 @@ font-weight: bold;
 			</div>
 
 			<!-- 상세모달시작 -->
-			<div class="modal fade bd-example-modal-lg" id="pQNAview"
-				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			<div class="modal fade bd-example-modal-lg" id="pQNAview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -101,8 +103,7 @@ font-weight: bold;
 			<!-- 모달끝 -->
 			
 			<!-- 수정모달시작 -->
-			<div class="modal fade bd-example-modal-lg" id="pQNAupdate"
-				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			<div class="modal fade bd-example-modal-lg" id="pQNAupdate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">

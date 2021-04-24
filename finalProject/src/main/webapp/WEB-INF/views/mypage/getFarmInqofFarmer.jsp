@@ -33,10 +33,17 @@ h2 {
 									<div class="card-body table-border-style">
 										<div class="table-responsive">
 											<table class="table">
-												<tr class="table-success">
+												<tr class="table table-hover">
+											<colgroup>
+													<col width="5%">
+													<col width="80%">
+													<col width="5%">
+													<col width="10%">
+											</colgroup>
 													<th>NO</th>
 													<th>제목</th>
 													<th>작성자</th>
+													<th>작성일자</th>
 												</tr>
 
 												<tbody>
@@ -44,14 +51,15 @@ h2 {
 													<c:forEach items="${list }" var="list">
 														<tr  onclick="iQNAview('${list.into_inq_no}')">
 															<td>${list.into_inq_no }</td>
-															<td>${list.into_inq_title }</td>
+															<td style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.into_inq_title }</td>
 															<td>${list.user_id }</td>
+															<td>${list.into_inq_date }</td>
 														</tr>
 													</c:forEach>
 													</c:if>
-													<c:if test="${fn:length(list) == 0}">
+													<c:if test="${fn:length(list) ==0}">
 														<tr>
-															<td colspan="3"> 문의하신 내용이 없습니다. </td>
+															<td colspan="5">문의 내용이 없습니다. </td>
 														</tr>
 													</c:if>
 												</tbody>

@@ -32,11 +32,18 @@ font-weight: bold;
 									</div>
 									<div class="card-body table-border-style">
 										<div class="table-responsive">
-											<table class="table">
+											<table class="table table-hover">
+											<colgroup>
+													<col width="5%">
+													<col width="80%">
+													<col width="5%">
+													<col width="10%">
+											</colgroup>
 												<tr class="table-success">
-													<th>NO</th>
-													<th>제목</th>
-													<th>작성자</th>
+													<th align="center">NO</th>
+													<th align="center">제목</th>
+													<th align="center">작성자</th>
+													<th align="center">작성일자</th>
 												</tr>
 												
 												<tbody>
@@ -44,14 +51,15 @@ font-weight: bold;
 													<c:forEach items="${list }" var="list">
 														<tr  onclick="pQNAview('${list.pur_inq_no}')">
 															<td>${list.pur_inq_no }</td>
-															<td>${list.pur_inq_title }</td>
+															<td style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.pur_inq_title }</td>
 															<td>${list.user_id }</td>
+															<td>${list.pur_inq_date }</td>
 														</tr>
 													</c:forEach>
 													</c:if>
 													<c:if test="${fn:length(list) == 0 }">
 														<tr>
-															<td colspan="4">문의하신 내용이 없습니다.</td>
+															<td colspan="4">문의 내용이 없습니다.</td>
 														</tr>
 													</c:if> 
 												</tbody>

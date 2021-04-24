@@ -22,49 +22,49 @@ h2 {
 <form action="updatepuchasInq" method="post">
 	<div class="row">
 
-		<table class="table">
+		<table class="table" style="overflow: auto;">
 			<tr>
-				<th colspan="1">제목</th>
-				<td colspan="7" style="border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${plist.pur_inq_title }</td>
-				<c:if test="${plist.pur_inq_check eq '1'}">				<!-- 비밀글일경우 -->
-					<td>
-						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
-					</td>
-				</c:if>
-				<c:if test="${plist.pur_inq_check eq '0'}">				<!-- 비밀글 아닐경우 -->
-					<td colspan="1">
-						<img src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
-					</td>
-				</c:if>
-				<c:if test="${plist.user_id eq user_id }">			<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
-					<td colspan="1">
+				<th style="width: 10%;">제목</th>
+				<td colspan="5" style="width: 80%;">${plist.pur_inq_title }</td>
+			<c:if test="${plist.user_id eq user_id }">			<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
+				<td style="width: 10%;">
 						<button class="btn  btn-outline-warning"
 							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
 						<button type="button" class="btn  btn-outline-danger"
 							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
-					</td>
-				</c:if>
-				<c:if test="${plist.user_id ne user_id}">
-							<td colspan="1">											<!-- id값 다르면 수정,삭제 버튼 안보임 -->
-							</td>
-				</c:if>
+				</td>
+			</c:if>
+			<c:if test="${plist.user_id ne user_id}">
+				<td style="width: 10%;">											<!-- id값 다르면 수정,삭제 버튼 안보임 -->
+				</td>
+			</c:if>
+				
 			</tr>
 			<tr>
-				<th colspan="1">작성일</th>
-				<td colspan="7">${plist.pur_inq_date }</td>
-				<th colspan="1">작성자</th>
-				<th colspan="2">${plist.user_id}</th>
+				<th style="width: 10%;">작성일</th>
+				<td style="width: 60%;">${plist.pur_inq_date }</td>
+				<th style="width: 10%;">작성자</th>
+				<td style="width: 15%;">${plist.user_id}</td>
+				<c:if test="${plist.pur_inq_check eq '1'}">				<!-- 비밀글일경우 -->
+					<td style="width: 5%;"> 
+						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
+					</td>
+				</c:if>
+				<c:if test="${plist.pur_inq_check eq '0'}">				<!-- 비밀글 아닐경우 -->
+					<td style="width: 5%;">
+						<img src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
+					</td>
+				</c:if>
 			</tr>
 			<tr>
 			<c:if test="${plist.pur_inq_filename eq null }">
-				<td colspan="10" text-align="center" style="width: 795px; height: 280px;" >
+				<td colspan="6" text-align="center" style="width: 795px; height: 280px;" >
 					등록된 사진이 없습니다.
 				</td>
 			</c:if>
 			<c:if test="${plist.pur_inq_filename ne null }">
-				<td colspan="10"><img class="img-fluid card-img-top"
-					src="resources/images/mypage/${plist.pur_inq_filename}"
-					style="width: 50%; max-width: 100%; height: auto;"
+				<td colspan="10"><img class="img-fluid card-img-top" src="resources/images/mypage/${plist.pur_inq_filename}"
+					style="width: 80%; max-width: 100%; height: auto;"
 					alt="Card image cap">
 				</td>
 			</c:if>
@@ -96,9 +96,8 @@ h2 {
 </div>
 <form>
 	<div class="input-group mb-3">
-		<input type="text" class="form-control" name="pur_inq_rep_content"
-			placeholder="댓글을 입력하세요" aria-describedby="basic-addon2"> <input
-			type="hidden" name="user_id" value="${user_id }">
+		<input type="text" class="form-control" name="pur_inq_rep_content" placeholder="댓글은 34자까지 입력 가능합니다" aria-describedby="basic-addon2" maxlength="34" >  
+			<input type="hidden" name="user_id" value="${user_id }">
 		<div class="input-group-append">
 			<button type="button" id="btnAdd" class="btn  btn-outline-success btn-sm">등록</button>
 			<button type="reset" class="btn  btn-outline-danger btn-sm">지우기</button>
@@ -118,11 +117,6 @@ h2 {
 
 <!-- 모달바디 끝 -->
 
-<!-- Required Js -->
-<script src="resources/admin/js/vendor-all.min.js"></script>
-<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-<script src="resources/admin/js/ripple.js"></script>
-<script src="resources/admin/js/pcoded.min.js"></script>
 <script type="text/javascript">
 
 //문의글삭제 (댓글 있는 경우 삭제 안됨)
@@ -161,7 +155,7 @@ $.ajax({
 			for(i=0; i<response.length; i++){
 				if(response[i].user_id != '${user_id}' ){
 					$("#reply").append(						
-							"<tr id='replyItem'><td width='70%' style='border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							"<tr id='replyItem'><td width='70%' style='text-align : left !important;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
 							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
 							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
 							+ " "
@@ -170,7 +164,7 @@ $.ajax({
 				}	
 				else{
 					$("#reply").append(						
-							"<tr id='replyItem'><td width='70%' style='border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							"<tr id='replyItem'><td width='70%' style='text-align : left !important;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
 							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
 							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
 							+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"

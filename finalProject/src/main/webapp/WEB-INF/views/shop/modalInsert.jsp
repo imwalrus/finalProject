@@ -51,7 +51,7 @@
 							</td>
 							<td></td>
 							<td class="h6">
-								<select class="form-control-sm" name="pro_condition" style="width:278px;">
+								<select class="form-control-sm" name="pro_condition" style="width:260px;">
 									<option value="준비중">준비중</option>
 									<option value="판매중">판매중</option>
 								</select>
@@ -63,7 +63,7 @@
 							</td>
 							<td></td>
 							<td class="h6">
-								<select class="form-control-sm" name="pro_category" style="width:278px;">
+								<select class="form-control-sm" name="pro_category" style="width:260px;">
 									<option value="작물">작물</option>
 									<option value="야채">야채</option>
 									<option value="과일">과일</option>

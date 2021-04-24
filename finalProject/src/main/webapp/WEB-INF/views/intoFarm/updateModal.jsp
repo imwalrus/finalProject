@@ -7,9 +7,6 @@
  }
 </style>
 <style type="text/css">
-*, *:before, *:after {
-  box-sizing: inherit;
-}
 .clearfix:after {
   content: '';
   display: block;
@@ -28,6 +25,7 @@ right:70px;
 .my-calendar {
   width: 698px;
   padding: 20px 20px 10px;
+  padding-left:60px;
   text-align: center;
   font-weight: 800;
   cursor: default;
@@ -123,6 +121,10 @@ right:70px;
   height: 4px;
   background: #FFC107;
 }
+#city-select { 
+  width:100px !important;
+  height:27px;
+}
 </style>
 <form id="updatefrm" method="post" action="updateFarm" >
 <table class="table table-hover" id="updatetbl">
@@ -137,7 +139,7 @@ right:70px;
 		</tr>
 		<tr class="content">
 			<th class="text-left">
-				지역 :
+				지역 :　
 				<select class="custom-select" name="into_city" id="city-select" style="width:93%;" required="required">
 					<option value="">${upFarm.into_city}</option>
 					<option value="서울">서울</option>
@@ -166,7 +168,7 @@ right:70px;
 			<th class="text-left">모집 인원 수 : <input type="text" name="into_entry" value="${upFarm.into_entry}"></th>
 		</tr>
 		 <tr class="content">
-			<th class="text-left" id="upfarmm">체험 일정 : <a href="#" id="upfarmdate" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>
+			<th class="text-left" id="upfarmm">체험 일정 : <a href="javascript:;" id="upfarmdate" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>
 			</th>
 		</tr>
 		<tr class="content">
@@ -184,20 +186,19 @@ right:70px;
 	
 </table>
  
-<div class="modal-footer">
+				<div class="modal-footer">
 					<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
-					<!--농업인& 관리자 수정-->
 					<button class="btn btn-primary" type="button" data-dismiss="modal" onclick="goupdate('${upFarm.into_no}')">저장</button>
 				</div>
 </form>
 
 
 <!--모달-달력띄우기  -->
-	<div class="modal fade" id="showDate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal fade" id="showDate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 		<div class="modal-dialog" style="max-width: 50%; width: auto;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<button class="close" type="button" name="closeBtn">
 						<span aria-hidden="true">x</span>
 					</button>
 				</div>
@@ -384,9 +385,16 @@ right:70px;
 			 		into_date.push(classDates[i].value); 
 			 	}
 			var a=document.getElementById("upfarmm")
-			a.append(into_date)
-			$('#myLargeModal').modal('show');
+			a.append(into_date)/
 			$('#showDate').modal('hide');
 		}
 
 </script>  
+<script>
+$(document).ready(function(){
+	$('[name=closeBtn]').on('click',function(){
+		$('#showDate').modal('hide');
+	})
+})
+
+</script>

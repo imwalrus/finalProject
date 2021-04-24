@@ -105,7 +105,7 @@ function showChatinComu(memberId){
          <input type='checkbox' name='comm_adrs' id="chk2" value='서울/경기/인천' /> 서울/경기/인천&nbsp;
          <input type='checkbox' name='comm_adrs' id="chk3" value='대전/세종/충청' /> 대전/세종/충청&nbsp;
          <input type='checkbox' name='comm_adrs' id="chk4" value='강원' /> 강원&nbsp;
-         <input type='checkbox' name='comm_adrs' id="chk5" value='광주/전라' /> 광주/전라&nbsp;
+         <input type='checkbox' name='comm_adrs' id="chk5" value='광주/전라' /> 광주/전라　　&nbsp;
          <input type='checkbox' name='comm_adrs' id="chk6" value='대구/경북' /> 대구/경북&nbsp;
          <input type='checkbox' name='comm_adrs' id="chk7" value='부산/울산/경남' /> 부산/울산/경남&nbsp;
          <input type='checkbox' name='comm_adrs' id="chk8" value='제주' /> 제주&nbsp;

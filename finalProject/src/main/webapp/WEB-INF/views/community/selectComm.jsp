@@ -188,7 +188,7 @@ function btnChg1() {
 		</c:if>
 		</div>
 	    <c:if test="${user_id == communityVO.user_id}">
-		<div style="margin-left:850px;">
+		<div style="margin-left:863px;">
 		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='updateComm?comm_no=${communityVO.comm_no}&page=${pageNum}'">글 수정</button>
 		&nbsp;&nbsp;
 		<button type="button" class="btn btn-outline-primary btn-sm" onclick="deleteAlert()">글 삭제</button>
@@ -201,46 +201,9 @@ function btnChg1() {
 					<!--  커뮤니티 채팅팝업 - 20210422 송예솔 추가 -->
 					<td align="center" width="100" style="font-size:18px; color: #00cc99;" class="chatId"><strong onclick="showChatinComu('${communityVO.user_id}')">${communityVO.user_id}</strong></td>
 					<td align="center" width="80">지역</td>
-					<td align="center" width="100">
-					<select name="comm_adr" id="comm_adr">
-					<option value="서울/경기/인천"
-                    <c:if test ="${communityVO.comm_adr eq '서울/경기/인천'}">
-	                selected </c:if>>서울/경기/인천</option>
-	                <option value="대전/세종/충청"
-	                <c:if test ="${communityVO.comm_adr eq '대전/세종/충청'}">
-	                selected </c:if>>대전/세종/충청</option>
-                    <option value="강원"
-                    <c:if test ="${communityVO.comm_adr eq '강원'}">
-	                selected </c:if>>강원</option>
-                    <option value="광주/전라"
-                    <c:if test ="${communityVO.comm_adr eq '광주/전라'}">
-	                selected </c:if>>광주/전라</option>
-	                <option value="대구/경북"
-                    <c:if test ="${communityVO.comm_adr eq '대구/경북'}">
-	                selected </c:if>>대구/경북</option>
-	                <option value="부산/울산/경남"
-                    <c:if test ="${communityVO.comm_adr eq '부산/울산/경남'}">
-	                selected </c:if>>부산/울산/경남</option>
-	                <option value="제주 "
-                    <c:if test ="${communityVO.comm_adr eq '제주 '}">
-	                selected </c:if>>제주 </option>
-					</select></td>
+					<td align="center" width="100">${communityVO.comm_adr}</td>
 					<td align="center" width="70">말머리</td>
-					<td align="center" width="80" style="border-right:1px solid #dcdcdc;">
-					<select name="comm_subject" id="comm_subject">
-					<option value="정보공유"
-                    <c:if test ="${communityVO.comm_subject eq '정보공유'}">
-	                selected </c:if>>정보공유</option>
-	                <option value="질문"
-	                <c:if test ="${communityVO.comm_subject eq '질문'}">
-	                selected </c:if>>질문</option>
-                    <option value="일상"
-                    <c:if test ="${communityVO.comm_subject eq '일상'}">
-	                selected </c:if>>일상</option>
-                    <option value="고민"
-                    <c:if test ="${communityVO.comm_subject eq '고민'}">
-	                selected </c:if>>고민</option>
-					</select></td>
+					<td align="center" width="80" style="border-right:1px solid #dcdcdc;">${communityVO.comm_subject}</td>
 				</tr>
 				<tr>
 				   <td align="center" width="70" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc;">작성일자</td>
@@ -250,7 +213,7 @@ function btnChg1() {
 				</tr>
 				<tr>
 					<td align="center" width="80" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc;">제 목</td>
-					<td colspan="5" style="border-right:1px solid #dcdcdc;"><input class="form-control" type="text" id="comm_title" name="comm_title" value="${communityVO.comm_title}" size=97 ></td>   
+					<td align="left" colspan="5" style="border-right:1px solid #dcdcdc;">${communityVO.comm_title}</td>   
 				</tr>
 				<tr>
 					<td align="center" width="70" style="border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc;">내용</td>

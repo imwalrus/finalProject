@@ -9,6 +9,15 @@
 			SELECT *
 			FROM FARM
 	</select>
+
+<!--  id별 전체조회 -->
+	<select id="getFarmsListofUser" resultType="FarmVO">
+	
+	SELECT *
+	FROM FARM
+	WHERE USER_ID = #{user_id}
+	
+	</select>
 	
 <!-- 단건조회 -->
 

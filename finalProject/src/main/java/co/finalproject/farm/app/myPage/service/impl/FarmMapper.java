@@ -3,6 +3,7 @@ package co.finalproject.farm.app.myPage.service.impl;
 import java.util.List;
 
 import co.finalproject.farm.app.myPage.service.FarmVO;
+import co.finalproject.farm.app.myPage.service.puchasInqVO;
 
 public interface FarmMapper {
 
@@ -15,5 +16,7 @@ public interface FarmMapper {
 	public int updateFarm(FarmVO vo);
 	
 	public int deleteFarm(FarmVO vo);
+	
+	public List<puchasInqVO> getFarmsListofUser(String user_id);
 	
 }

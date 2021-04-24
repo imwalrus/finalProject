@@ -7,6 +7,13 @@
 background-color: #c3e6cb;
 font-weight: bold;
 }
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
@@ -23,10 +30,8 @@ font-weight: bold;
                             <div class="col-md-12">
                                 <div class="card-header">
                                     <h2>판매 내역</h2>
-                                    <p></p>
-                                    <p style="float: right">최신순으로 정렬됩니다.</p>
                                 </div>
-                                <div class="table-responsive">
+                                <p style="float: right">최신순으로 정렬됩니다.</p>
                                <form action="updateOrder" method="post">
 									<table class="table" id="sale">
 										<tr class="table-success">

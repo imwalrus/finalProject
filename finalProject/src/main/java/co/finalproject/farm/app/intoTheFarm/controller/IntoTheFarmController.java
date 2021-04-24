@@ -52,13 +52,14 @@ public class IntoTheFarmController {
 	}
 
 
-	// 전체조회
-	
+
+	  
+	// 단건조회(상세보기)
 	  @RequestMapping("/getFarmList")
 	  public String getFarmList(IntoTheFarmVO vo,
 	  Paging paging, UserVO uservo, Model model, HttpSession session) {
-	  
 	  paging.setPageUnit(4); // 한 페이지에 표시되는 레코드 건 수 paging.setPageSize(5); // 표시되는
+	  paging.setPageSize(5); //페이지 번호수
 	  //페이지 번호
 	  
 	  // 페이징
@@ -187,12 +188,14 @@ public class IntoTheFarmController {
 	
 	//농촌속으로 문의 뷰페이지(모달)
 	@GetMapping("/insertFarmInq")
-	public String insertFarmInq(IntoTheFarmVO vo) {
+	public String insertFarmInq(IntoTheFarmVO vo, Model model) {
 		logger.debug("insertFarmInq ========================> " +vo.toString());
+		model.addAttribute("vo", intoTheFarmMapper.getSearchFarm(vo));
 		return "notiles/intoFarm/insertFarmInq";
 	}
 	
-	//농촌속으로 문의저장 
+	//농촌속으로 문의저장
+	//return 경로 수정 0423 송예솔
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
 		intoFarmInqMapper.insertIntoFarmInq(vo);

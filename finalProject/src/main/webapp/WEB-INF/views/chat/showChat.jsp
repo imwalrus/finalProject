@@ -27,8 +27,6 @@ $(document).ready(function(){
 		 var result = confirm("채팅방을 삭제하시겠습니까? 삭제된 메세지는 복구되지 않습니다.");
 		 if(result == true){
 			 deleteMessage();
-		 } else {
-			 
 		 }
 	 });
 	 
@@ -131,7 +129,7 @@ $(document).ready(function(){
 						 $('<div class="row no-gutters"><div class="col-md-3 offset-md-9">'
 								 +'<div class="chat-bubble chat-bubble--right">'
 								 +'<p style="margin-bottom:0px">' + msg.msg_content +'</p>'
-				            	 +'<span class="time text-muted small" style="font-size:10px; margin-right:59%">'
+				            	 +'<span class="time text-muted small" style="font-size:10px; margin-right:57%">'
 				            	 + msg.msg_sendtime+'</span>'
 				            	 +'</div></div></div>')
 				          );
@@ -140,7 +138,7 @@ $(document).ready(function(){
 					$('<div class="row no-gutters"><div class="col-md-3">'
 							+'<div class="chat-bubble chat-bubble--left">'
 							+'<p style="margin-bottom:0px">'+msg.msg_content+'</p>'
-							+'<span class="time text-muted small" style="font-size:10px;margin-left:59%;">'+msg.msg_sendtime+'</span>'
+							+'<span class="time text-muted small" style="font-size:10px;margin-left:57%;">'+msg.msg_sendtime+'</span>'
 							+'</div></div></div>')		 
 				 );
 			 } 
@@ -158,6 +156,7 @@ $(document).ready(function(){
 	//새로고침 버튼 클릭시 리스트 reload 이벤트
 	function listReload(){  
 	     $('#container').load(location.href + '#container');
+	     $('#chatMiddle').scrollTop($('#chatMiddle').prop('scrollHeight'));
 	}
 	//방번호 값 받아서 해당하는 메세지 리스트 불러오기
 	function listClick(roomId,user_id_one,user_id_two){
@@ -190,7 +189,7 @@ $(document).ready(function(){
 									$('<div class="row no-gutters"><div class="col-md-3">'
 									 +'<div class="chat-bubble chat-bubble--left">'
 									 +'<p style="margin-bottom:0px">'+list[i].msg_content+'</p>'
-									 +'<span class="time text-muted small" style="font-size: 10px;  margin-left: 59%;">'+list[i].msg_sendtime+'</span>'
+									 +'<span class="time text-muted small" style="font-size: 10px;  margin-left: 57%;">'+list[i].msg_sendtime+'</span>'
 									 +'</div></div></div>')		 
 						  );
 	 					 $('[name=room_member]').val(list[i].msg_sender);
@@ -201,7 +200,7 @@ $(document).ready(function(){
 								 $('<div class="row no-gutters"><div class="col-md-3 offset-md-9">'
 										 +'<div class="chat-bubble chat-bubble--right">'
 										 + '<p style="margin-bottom:0px">' + list[i].msg_content +'</p>'
-						            	 + '<span class="time text-muted small" style="font-size:10px; margin-right:59%">'
+						            	 + '<span class="time text-muted small" style="font-size:10px; margin-right:57%">'
 						            	 + list[i].msg_sendtime+'</span>'
 						            	 +'</div></div></div>')
 						          );
@@ -255,7 +254,7 @@ $(document).ready(function(){
   <!-- 대화리스트 받는 화면 시작 -->
     <div class="col-md-4 border-right" >
       <div class="settings-tray" onclick="listReload()">
-	      <img src="resources/chat/images/logosample2.png" alt="Profile img" style="width:100px;">
+	      <img src="resources/images/logo/logo2.png" alt="Profile img" style="width:100px;">
 	      <login>${user_id }님 접속중</login>
 	       <span class="settings-tray--right" >
 	         <span class="material-icons" style="margin-top: 15px;">home</span>

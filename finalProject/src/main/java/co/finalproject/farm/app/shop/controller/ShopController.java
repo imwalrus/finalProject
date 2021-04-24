@@ -116,7 +116,7 @@ public class ShopController {
 		String inq_filename = "";
 		if(uploadFile != null && !uploadFile.isEmpty() &&  uploadFile.getSize() > 0) {
 			String filename = uploadFile.getOriginalFilename();
-			String path = req.getSession().getServletContext().getRealPath("/resources/images/shop");
+			String path = req.getSession().getServletContext().getRealPath("/resources/images/mypage");
 			File rename = FileRenamePolicy.rename(new File(path, filename));
 			uploadFile.transferTo(new File(path, rename.getName())); // 임시폴더에서 업로드 폴더로 이동
 			inq_filename += '@' + rename.getName();

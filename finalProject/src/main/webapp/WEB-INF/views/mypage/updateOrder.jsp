@@ -6,6 +6,13 @@
 background-color: #c3e6cb;
 font-weight: bold;
 }
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
 </style>
 
 <form action="updateOrder" method="post">

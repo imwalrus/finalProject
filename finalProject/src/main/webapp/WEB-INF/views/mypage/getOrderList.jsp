@@ -23,12 +23,11 @@ font-weight: bold;
 						<div class="card">
 							<div class="card-body">
 								<div class="col-md-12">
-									<div class="card-header">
+									<div class="card-header" align="center">
 										<h2>구매 내역</h2>
 									</div>
 									<div class="card-body table-border-style">
 										<div class="table-responsive">	
-									<c:if test="${fn:length(list) >=1 }">
 											<table class="table" id="order" align="center">
 												<colgroup>
 													<col width="25%">
@@ -45,28 +44,6 @@ font-weight: bold;
 													</tr>
 												</thead>
 											</table>
-									</c:if>
-									<c:if test="${fn:length(list) == 0 }"><!-- 주문내역없을경우 -->
-										<table class="table" align="center">
-												<colgroup>
-													<col width="25%">
-													<col width="25%">
-													<col width="25%">
-													<col width="25%">
-												</colgroup>
-												<thead>
-													<tr class="table-success">
-														<th>주문번호</th>
-														<th>결제수단</th>
-														<th>총 금액(원)</th>
-														<th>주문일자</th>
-													</tr>
-													<tr>
-														<td colspan="4">구매하신 내역이 없습니다.</td>
-													</tr>
-												</thead>
-											</table>
-									</c:if>
 										</div>
 									</div>
 								</div>
@@ -111,14 +88,20 @@ font-weight: bold;
 			dataType: "json",
 			success: function (data) {
 			 	for(i=0; i<data.length; i++){
-			 		
+			 		if(data[i].order_no  == null){
+			 			$("#order").append(
+								"<tr><td colspan='4'> 구매하신 내역이 없습니다. </td></tr>"		
+						);
+
+			 		}else{
 					$("#order").append(
 						"<tr><td>"  
 						+ "<button type='button' class='btn btn-success btn-sm' onclick='getOrder("+data[i].order_no+")'>" + data[i].order_no + "</button>" + "</td><td>"
 						+ data[i].order_payment + "</td><td style='font-weight: bold'>"
 						+ data[i].order_totalprice + "원</td><td>"
 						+ data[i].order_date + "</td></tr>"
-				); 
+				);
+			 		}
 			} 
 			 	console.log(data + "======")
 		}

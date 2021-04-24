@@ -43,6 +43,14 @@ public class FarmController {
 		return "mypageTiles/mypage/getFarmsList";
 	}
 
+//전체조회(id별)
+	@RequestMapping("/getFarmsListofUser")
+	public String getFarmsListofUser(Model model,HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("farmlist", farmMapper.getFarmsListofUser(user_id));
+		return "mypageTiles/mypage/getFarmsList";
+		
+	}
 	
 //단건조회
 		@RequestMapping("/getFarms")

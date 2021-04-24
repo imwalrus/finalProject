@@ -47,8 +47,7 @@
 	<select id="myIntoList" parameterType="IntoTheFarmVO"
 							resultType="IntoTheFarmVO" >
 							
-SELECT B.* 
- FSELECT	Q.INTO_REQ_NUM
+		SELECT		Q.INTO_REQ_NUM
                     ,Q.USER_ID
                     ,Q.INTO_REQ_PHONE
                     ,Q.INTO_REQ_REWARD

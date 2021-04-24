@@ -12,14 +12,13 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">	
   <link rel="stylesheet" href="resources/chat/style.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>	
   <script  src="resources/chat/script.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 	body{
-		font-family: 'Noto Sans KR', sans-serif;
+		font-family: 'InfinitySans-RegularA1';
 	}
 	.chat-bubble{
 		width: 290px !important;

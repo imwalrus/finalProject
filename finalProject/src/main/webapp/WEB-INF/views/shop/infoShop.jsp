@@ -10,7 +10,21 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	// 페이징 active 적용
+	$(document).ready(function() {
+		var url = window.location.href.substr(window.location.href.lastIndexOf('?') + 5);
+		var pagSize = $("input[name='cnt']").length;
+		var pag = new Array(pagSize);
+		for(var i = 0; i < pagSize; i++){ 
+			pag[i] = $("input[name='cnt']").eq(i).val();
+			if(url == pag[i]) {
+				$("input[value=1]").removeClass('active');
+				$("input[value=" + pag[i] + "]").addClass('active');
+			}
+	 	}
+	});
+</script>
 </head>
 <body class="goto-here">
 	<!-- 소개 페이지 START -->
@@ -55,13 +69,13 @@
 					</div>
 					<div class="row mt-5">
 						<div class="col text-center">
-							<form action="infoShop" method="post">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="1">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="2">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="3">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="4">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="5">
-								<input type="submit" class="btn btn-secondary" name="cnt" value="6">
+							<form action="infoShop" id="infoShop">
+								<input type="submit" class="btn btn-primary active" name="cnt" value="1">
+								<input type="submit" class="btn btn-primary" name="cnt" value="2">
+								<input type="submit" class="btn btn-primary" name="cnt" value="3">
+								<input type="submit" class="btn btn-primary" name="cnt" value="4">
+								<input type="submit" class="btn btn-primary" name="cnt" value="5">
+								<input type="submit" class="btn btn-primary" name="cnt" value="6">
 							</form>
 						</div>
 					</div>
