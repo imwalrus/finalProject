@@ -5,9 +5,12 @@ import java.util.List;
 import co.finalproject.farm.app.myPage.service.FarmDiaryVO;
 
 public interface FarmDiaryMapper {
-		
+	
 	//영농일지 작물선택화면
 	public List<FarmDiaryVO> fDiaryCalendar();
+		
+	//영농일지 작물선택화면
+	public List<FarmDiaryVO> cropList();
 	
 	//영농일지 작물입력
 	public int insertCrop(FarmDiaryVO vo);

@@ -32,7 +32,7 @@ h2 {
 					<form id="doExit" name="doExit" action="updateFarmExit">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h2>농촌속으로 관리 List</h2>
+                                    <h2>농촌속으로 신청 명단 관리</h2>
                                 </div>
                                 <br>
                                  <div style="float: right">

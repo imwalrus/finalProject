@@ -32,6 +32,12 @@ h2 {
 									</div>
 
 									<table class="table table-hover">
+										<colgroup>
+													<col width="75%">
+													<col width="5%">
+													<col width="10%">
+													<col width="10%">
+										</colgroup>
 										<thead>
 											<tr>
 												<th>제목</th>
@@ -45,7 +51,7 @@ h2 {
 											<c:if test="${fn:length(list) >=1}">
 												<c:forEach items="${list }" var="list">
 													<tr onclick="iQNAview('${list.into_inq_no}')">
-														<td>${list.into_inq_title }</td>
+														<td style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.into_inq_title }</td>
 														<td>${list.user_id}</td>
 														<td>${list.into_inq_date}</td>
 														<c:if test="${list.into_inq_check eq '1'}">

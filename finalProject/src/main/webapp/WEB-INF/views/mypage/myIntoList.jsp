@@ -64,7 +64,7 @@ h2 {
 				for(i=0; i<data.length; i++) {
 					if(data[i].into_req_num != null){
 					$("#mylist").append(		
-					"<tr><td>" + data[i].into_req_num + "</td><td>"
+					"<tr><td>" + data[i].into_req_num + "</td><td style='text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>"
 					+ data[i].into_title + "</td><td>"
 					+ data[i].into_req_dates + "</td><td>"
 					+ data[i].into_entry + "</td><td>"

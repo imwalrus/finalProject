@@ -32,7 +32,7 @@
 											<div class="form-group row">
 												<label for="inputTitle" class="col-sm-3 col-form-label"><strong>제목</strong></label>
 												<div class="col-sm-9">
-													<input type="text" class="form-control" name="pur_inq_title" maxlength="50" placeholder="제목을 입력하세요" required>
+													<input type="text" class="form-control" name="pur_inq_title" maxlength="40" placeholder="제목을 입력하세요" required>
 												</div>
 											</div>
 											<br>

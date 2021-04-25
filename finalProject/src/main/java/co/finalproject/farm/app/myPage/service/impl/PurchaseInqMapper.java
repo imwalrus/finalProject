@@ -21,6 +21,7 @@ public interface PurchaseInqMapper {
 	
 	public List<puchasInqVO> getpuchasInqofFarmer(String user_id);
 	
+	
 	//댓글
 	public List<puchasReplyVO> getpuchasReplyList(puchasReplyVO vo);
 	public int insertpuchasReply(puchasReplyVO vo);

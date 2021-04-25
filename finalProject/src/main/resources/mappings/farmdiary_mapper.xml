@@ -5,10 +5,9 @@
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmDiaryMapper">
 
 <!-- 작물조회 -->
-	<select id="fDiaryCalendar" resultType="FarmDiaryVO">
+	<select id="cropList" resultType="FarmDiaryVO">
 			SELECT *
-			FROM CROP
-			ORDER BY CROP_NAME
+			FROM FARMDIARY
 	</select>
 	
 	<!-- 작물추가 -->

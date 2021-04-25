@@ -28,11 +28,17 @@ public class FarmDiaryController {
 	FarmDiaryMapper fdMapper;
 
 	Logger logger = LoggerFactory.getLogger(FarmDiaryController.class);
+	
+//영농일지 첫화면, 캘린더 
+		@RequestMapping("/fDiaryCalendar")
+		public String fDiaryCalendar() {
+			return "mypageTiles/mypage/fDiaryCalendar";
+		}	
 
 //영농일지 첫화면, 캘린더 
-	@RequestMapping("/fDiaryCalendar")
-	public String fDiaryCalendar() {
-		return "mypageTiles/mypage/fDiaryCalendar";
+	@RequestMapping("/cropList")
+	public String cropList() {
+		return "mypageTiles/mypage/insertFdiary";
 	}
 	
 //일자별 다이어리 입력갯수
@@ -60,7 +66,7 @@ public class FarmDiaryController {
 //다이어리 입력폼
 	@RequestMapping("/insertFdiary")
 	public String insertFdiary(Model model, FarmDiaryVO vo) {
-		model.addAttribute("croplist", fdMapper.fDiaryCalendar());
+		model.addAttribute("croplist", fdMapper.cropList());
 		return "mypageTiles/mypage/insertFdiary";
 	}
 	//등록처리
