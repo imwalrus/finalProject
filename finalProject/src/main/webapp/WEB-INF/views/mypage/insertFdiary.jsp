@@ -103,7 +103,7 @@
 	<script type="text/javascript">
 	//작물 추가 모달	
 	function openCrop() {
-		$('#insertCrop .modal-body').load( "insertCrop");
+		$('#insertCrop .modal-body').load("insertCrop");
 		$('#insertCrop').modal('show');
 
 	}

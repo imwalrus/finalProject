@@ -5,9 +5,9 @@
 <mapper namespace="co.finalproject.farm.app.myPage.service.impl.FarmDiaryMapper">
 
 <!-- 작물조회 -->
-	<select id="cropList" resultType="FarmDiaryVO">
+	<select id="cropList" resultType="FarmDiaryVO" parameterType="String">
 			SELECT *
-			FROM FARMDIARY
+			FROM crop where user_id=#{user_id}
 	</select>
 	
 	<!-- 작물추가 -->

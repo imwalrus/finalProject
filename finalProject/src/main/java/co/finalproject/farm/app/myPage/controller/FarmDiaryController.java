@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +67,9 @@ public class FarmDiaryController {
 
 //다이어리 입력폼
 	@RequestMapping("/insertFdiary")
-	public String insertFdiary(Model model, FarmDiaryVO vo) {
-		model.addAttribute("croplist", fdMapper.cropList());
+	public String insertFdiary(Model model, FarmDiaryVO vo,HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("croplist", fdMapper.cropList(user_id));
 		return "mypageTiles/mypage/insertFdiary";
 	}
 	//등록처리

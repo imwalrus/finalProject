@@ -10,7 +10,7 @@ public interface FarmDiaryMapper {
 	public List<FarmDiaryVO> fDiaryCalendar();
 		
 	//영농일지 작물선택화면
-	public List<FarmDiaryVO> cropList();
+	public List<FarmDiaryVO> cropList(String user_id);
 	
 	//영농일지 작물입력
 	public int insertCrop(FarmDiaryVO vo);
