@@ -323,9 +323,9 @@ $(document).ready(function(){
 	} 
 			
 		/* 모달 - 문의하기 */
-		function fnInquiry(no,title){
-			console.log(title);
-			$('#myInquiry .modal-body').load("insertFarmInq?into_no="+no+"&into_title="+title);
+		function fnInquiry(){
+			var into_no = $("input[name=into_no]").val();
+			$('#myInquiry .modal-body').load("insertFarmInq?into_no="+into_no);
 			$('#myLargeModal').modal('hide');
 			$('#myInquiry').modal('show');
 		}		 

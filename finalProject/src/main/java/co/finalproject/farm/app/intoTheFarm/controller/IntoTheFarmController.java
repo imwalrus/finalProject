@@ -198,6 +198,7 @@ public class IntoTheFarmController {
 	//return 경로 수정 0423 송예솔
 	@PostMapping("/insertFarmInq")
 	public String insertFarmInqProc(IntoFarmInqVO vo) {
+		logger.debug(vo.toString());
 		intoFarmInqMapper.insertIntoFarmInq(vo);
 		return "redirect:/getIntoFarmInqOfUser";
 	}
