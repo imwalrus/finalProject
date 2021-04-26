@@ -67,7 +67,7 @@ font-weight: bold;
 						<tr>
 							<td colspan="8">
 								<button type="submit" class="btn  btn-outline-success">등록</button>
-								<button type="close" class="btn  btn-outline-danger">취소</button>
+								<button type="close" class="btn  btn-outline-danger">닫기</button>
 							<td>
 						</tr>
 					</table>			
