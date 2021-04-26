@@ -5,10 +5,8 @@
 
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -95,11 +93,7 @@
 			<!-- 모달끝 -->
 		</div>
 	</section>
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
+
 	<script type="text/javascript">
 	//작물 추가 모달	
 	function openCrop() {

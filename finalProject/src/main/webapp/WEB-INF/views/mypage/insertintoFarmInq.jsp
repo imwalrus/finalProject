@@ -25,10 +25,8 @@
 </head>
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -36,10 +34,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- [ breadcrumb ] end -->
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-body">
@@ -98,7 +93,6 @@
 
 						</div>
 					</div>
-					<!-- [ vertically-modal ] end -->
 				</div>
 
 
@@ -108,11 +102,5 @@
 
 		</div>
 	</section>
-
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
 </body>
 </html>
