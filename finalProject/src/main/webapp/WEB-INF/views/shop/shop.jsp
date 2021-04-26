@@ -10,6 +10,7 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
@@ -114,7 +115,7 @@
 																	<input type="hidden" id="pro_quantity" name="pro_quantity" value="${shop.pro_quantity}">
 																	<!-- 상세 페이지 이동 -->
 																	<a href="product?pro_no=${shop.pro_no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-																		<span><i class="ion-ios-menu"></i></span>
+																		<i class="material-icons zoom_in">&#xe8ff;</i>
 																	</a>
 																	<!-- 장바구니 이동(본인 상품일시 표시 X) -->
 																	<c:if test="${shop.user_id ne user_id and shop.pro_condition eq '판매중'}">

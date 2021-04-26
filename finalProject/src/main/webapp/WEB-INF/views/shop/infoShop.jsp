@@ -10,6 +10,7 @@
 <title>청년농장</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script>
 	// 페이징 active 적용
 	$(document).ready(function() {
@@ -58,7 +59,7 @@
 											<div class="m-auto d-flex">
 												<!-- 상세 페이지 이동 -->
 												<a href="http://www.nongsaro.go.kr${list.farmBaro}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-													<span><i class="ion-ios-menu"></i></span>
+													<i class="material-icons zoom_in">&#xe8ff;</i>
 												</a>
 											</div>
 										</div>
