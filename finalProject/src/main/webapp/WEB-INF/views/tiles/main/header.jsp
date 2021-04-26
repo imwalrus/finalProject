@@ -67,7 +67,7 @@
 							<a class="dropdown-item" href="shop">상품 리스트</a>
 							<c:if test="${user_auth eq 'farmer'}">
 								<!-- session 내 아이디 값 없을시 -->
-								<a class="dropdown-item" href="prodManage?user_id=${user_id}">판매 관리</a>
+								<a class="dropdown-item" href="prodManage?user_id=${user_id}">상품 관리</a>
 							</c:if>
 							<c:if test="${user_id ne null}">
 								<!-- session 내 아이디 값 존재 할 경우 -->
