@@ -137,7 +137,7 @@ $(document).ready(function(){
 					},
 					success:function(response){
 						console.log("result:"+response);
-						/* location.href="ajaxmyIntoList"; */
+						location.href="myIntoList";
 						
 						}  
 					})

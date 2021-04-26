@@ -13,6 +13,7 @@ public class puchasInqVO {
 	private String pur_inq_content;
 	private String pur_inq_check;
 	private String pro_no;
+	private String pro_name;
 	private String pur_inq_filename;
 	private String user_id;
 	private MultipartFile inqfile;

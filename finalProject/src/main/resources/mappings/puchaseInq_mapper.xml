@@ -8,6 +8,7 @@
 	<select id="getpuchasInqList" resultType="puchasInqVO">
 		SELECT *
 		FROM PURCHASE_INQURIY
+		ORDRE BY PUR_INQ_DATE DESC
 	</select>
 
 <!-- 전제조회(id별) -->
@@ -22,28 +23,39 @@
 				USER_ID
 		FROM PURCHASE_INQURIY
 		WHERE USER_ID = #{user_id}
+		ORDER BY PUR_INQ_DATE DESC
 	</select>
 	
 <!-- 판매자에게 들어온 문의리스트 -->
 	<select id="getpuchasInqofFarmer" resultType="puchasInqVO">
-		select  	i.PUR_INQ_NO,
-		            i.PUR_INQ_DATE,
-		           	i.PUR_INQ_TITLE,
-		            i.PUR_INQ_CONTENT,
-		            i.PUR_INQ_CHECK,
-		            p.PRO_NO,
-		            i.PUR_INQ_FILENAME,
-		            i.USER_ID
+		SELECT  	I.PUR_INQ_NO,
+		            I.PUR_INQ_DATE,
+		           	I.PUR_INQ_TITLE,
+		            I.PUR_INQ_CONTENT,
+		            I.PUR_INQ_CHECK,
+		            P.PRO_NO,
+		            I.PUR_INQ_FILENAME,
+		            I.USER_ID
 		FROM PRODUCT P INNER JOIN PURCHASE_INQURIY I
 		ON(P.PRO_NO = I.PRO_NO)
 		WHERE P.USER_ID = #{user_id}
+		ORDER BY I.PUR_INQ_DATE DESC
 	
 	</select>	
 <!-- 단건조회 -->	
 	<select id="getpuchasInq"   parameterType="puchasInqVO"
 								resultType="puchasInqVO">	
-		SELECT *
-		FROM PURCHASE_INQURIY
+		SELECT 		I.PUR_INQ_NO,
+		            I.PUR_INQ_DATE,
+		           	I.PUR_INQ_TITLE,
+		            I.PUR_INQ_CONTENT,
+		            I.PUR_INQ_CHECK,
+		            P.PRO_NO,
+		            P.PRO_NAME,
+		            I.PUR_INQ_FILENAME,
+		            I.USER_ID
+		FROM PRODUCT P INNER JOIN PURCHASE_INQURIY I
+		ON(P.PRO_NO = I.PRO_NO)
 		WHERE PUR_INQ_NO=#{pur_inq_no}		
 	</select>
 
@@ -97,7 +109,8 @@
 	<select id="getpuchasReplyList" resultType="puchasReplyVO">
 			SELECT * 
 			FROM PURCHASE_INQURIY_REPLY
-			WHERE PUR_INQ_NO = #{pur_inq_no}	
+			WHERE PUR_INQ_NO = #{pur_inq_no}
+			ORDER BY PUR_INQ_REP_DATE 	
 	</select>
 
 
