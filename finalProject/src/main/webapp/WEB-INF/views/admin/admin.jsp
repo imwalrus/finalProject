@@ -116,8 +116,7 @@
 						</c:set>
 						<div class="card-header card-chart">
 							<h4 class="title" align="center">
-								<c:out value="${month}" />
-								월 판매량
+								<c:out value="${month}" />월 판매량
 							</h4>
 							<c:set var="year">
 								<fmt:formatDate value="${today}" pattern="yyyy" />
