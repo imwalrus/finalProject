@@ -163,7 +163,7 @@ function showChatinComu(memberId){
     
     <div class="row justify-content-around" style="margin-left:385px; margin-right:385px;">
     <div class="col-auto mr-auto">
-    <c:if test="${user_auth == 'user' || user_auth == 'admin' }">  
+    <c:if test="${user_auth == 'user' || user_auth == 'farmer' }">  
     <button type="button" class="btn btn-primary disabled" onclick="location.href='insertComm'">글쓰기</button>
     </c:if>
     </div>
