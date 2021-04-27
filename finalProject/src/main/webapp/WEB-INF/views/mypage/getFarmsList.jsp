@@ -57,7 +57,7 @@ h3{
 										</table>
 									<div class="col-md-10" align="center">
 										<button type="submit" class="btn  btn-outline-success"
-											onclick='fnfarmInsert()'>농장등록</button>
+											onclick='fnfarmInsert()'>농지등록</button>
 									</div>
 								</div>
 							</div>

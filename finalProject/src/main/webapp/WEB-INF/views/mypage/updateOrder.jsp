@@ -34,7 +34,7 @@ h2 {
 			</tr>
 			<tr>
 				<th>송장번호 입력</th>
-				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice" ></td>
+				<td><input type="text" id="orderlist_invoice" name="orderlist_invoice" value="${orderVO.orderlist_invoice }"></td>
 			</tr>
 			
 		</table>

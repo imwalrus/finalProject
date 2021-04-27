@@ -67,7 +67,7 @@
 							<td class="h6">
 								<select class="form-control-sm" name="pro_category" style="width:170px;">
 									<option value="작물" <c:if test='${modal.pro_category eq "작물"}'>selected</c:if>>작물</option>
-									<option value="채소" <c:if test='${modal.pro_category eq "채소"}'>selected</c:if>>채소</option>
+									<option value="야채" <c:if test='${modal.pro_category eq "야채"}'>selected</c:if>>야채</option>
 									<option value="과일" <c:if test='${modal.pro_category eq "과일"}'>selected</c:if>>과일</option>
 								</select>
 							</td>

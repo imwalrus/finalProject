@@ -1,9 +1,21 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>청년농장</title>
+<script>
+$(document).ready(function(){
+	$('input[type="text"]').keypress(function() {
+		  if (event.keyCode == 13) {
+		    event.preventDefault();
+		  };
+	});
+})
+</script>
+
 <style type="text/css">
 #faq_title {  padding:5px;
               height:32px !important; }
@@ -52,14 +64,12 @@
 					<td colspan="3" align="left"><textarea class="form-control" rows="7" cols="115" id="faq_content" name="faq_content" required="required"></textarea></td>
 				</tr>
 				<thead>
-			</table><br/>
-				
+			</table><br/>	    
 			<div style="margin-left:100px;">
 			<button class="btn btn-outline-primary" type="submit">저장하기</button> &nbsp;&nbsp;
 			<button class="btn btn-outline-primary" type="reset">취소</button> &nbsp;&nbsp;
 		    </div>
-		    
-	</form>
+			</form>
 	</div><br/>
 	</div>
     </section>

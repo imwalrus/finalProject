@@ -39,7 +39,7 @@
 												</tr>
 												<tr>
 													<th>인력</th>
-														<td><input type="text" class="form-control" name="fdiary_worker" value="${list.fdiary_worker }" required="required"></td>
+														<td><input type="number" class="form-control" name="fdiary_worker" value="${list.fdiary_worker }" required="required"></td>
 													<th>날씨</th>
 														<td><input type="text" class="form-control" name="fdiary_weather" value="${list.fdiary_weather }" required="required"></td>
 													<th>사진첨부</th>

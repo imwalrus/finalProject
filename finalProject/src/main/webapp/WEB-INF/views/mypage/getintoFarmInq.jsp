@@ -22,7 +22,7 @@ h2 {
 	<div class="row">
 		<table class="table">
 			<tr>
-				<th>제목</th>
+				<th style="width: 120px">제목</th>
 				<td colspan="4">${ilist.into_inq_title }</td>
 				<td>
 					<c:if test="${ilist.user_id eq user_id }">
