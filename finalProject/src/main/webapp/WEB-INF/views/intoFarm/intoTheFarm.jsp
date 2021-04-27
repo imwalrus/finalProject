@@ -94,24 +94,24 @@ $(document).ready(function(){
 				
 				//개인신청 시 날짜 input:radio생성
 				var a=$("#into_req_date").val()
-				var b=a.split(",")
-				for(i=0; i<b.length; i++){ 
-				var c= $("th#dateTh").append(
-						"<input type='radio' name='selectdate' value='"+b[i]+"'></input>"+b[i]+"&nbsp;&nbsp;&nbsp;")
-						$("#dateTr").append(c)
-
-				}
+				var b=a.split(",");
+				   for(i=0; i<b.length; i++){ 
+					var c= $("th#dateTh").append(
+							"<input type='radio' name='selectdate' checked value='"+b[i]+"'></input>"+b[i]+"&nbsp;&nbsp;&nbsp;")
+				 	 }
+						   $("#dateTr").append(c);
+						   $("input[name='selectdate']").empty();  
+				    
 				
 				//그룹신청 시 날짜 input:radio생성
 				var d=$("#into_req_date1").val()
 				var e=d.split(",")
 				for(i=0; i<e.length; i++){ 
 				var f= $("th#dateTh1").append(
-						"<input type='radio' name='selectdate1' value='"+e[i]+"'></input>"+e[i]+"&nbsp;&nbsp;&nbsp;")
+						"<input type='radio' name='selectdate1' checked value='"+e[i]+"'></input>"+e[i]+"&nbsp;&nbsp;&nbsp;")
 						$("#dateTr1").append(f)
-
 				}
-				
+					
 			}
 		}
 	   /*모달-개인신청*/
@@ -119,10 +119,6 @@ $(document).ready(function(){
 	    	var frm=document.getElementById("applyPersonFrm");
 	    	var into_req_date=frm.into_req_date.value;
 	    		
-	    	if (into_req_date.trim() == ''){
-	    		alert("날짜를 선택해주세요");
-	    		return false;
-	    	}
 	    	var yn = confirm("신청하시겠습니까?");
 	    	if(yn) {
 	    		$.ajax({
@@ -137,7 +133,7 @@ $(document).ready(function(){
 					},
 					success:function(response){
 						console.log("result:"+response);
-						/* location.href="ajaxmyIntoList"; */
+						location.href="myIntoList";
 						
 						}  
 					})
@@ -157,8 +153,6 @@ $(document).ready(function(){
 	 		    new_user_name.find("input#user_name").attr("id","new_user_name");
 	 		    new_user_name.find("input#user_name").attr("name","new_user_name");
 	 		    new_user_name.find("input#user_name").attr("required",true);
-	 		    /* new_user_name.find("td:eq(0)").attr("rowspan","1");
-	 		    new_user_name.addClass("div"); */
 	 		    $("#groupForm").append(new_user_name);
 	 		    
 	 		    var add1 = $("#groupForm tr:last").attr("class");
@@ -168,8 +162,6 @@ $(document).ready(function(){
 	 		    new_into_req_phone.find("input#into_req_phone").attr("id","new_into_req_phone");
 	 		    new_into_req_phone.find("input#into_req_phone").attr("name","new_into_req_phone");
 	 		    new_into_req_phone.find("input#into_req_phone").attr("required",true);
-	 		    /* new_into_req_phone.find("td:eq(0)").attr("rowspan","1");
-	 		    new_into_req_phone.addClass("div"); */
 	 		    $("#groupForm").append(new_into_req_phone);
 	 		    $("#groupForm").append('<hr style="margin-top:3px;">');
 	 		                   
@@ -240,7 +232,7 @@ $(document).ready(function(){
 					},
 					success:function(response){
 						console.log("result:"+response);
-						/* location.href="ajaxmyIntoList"; */
+						location.href="myIntoList";
 						
 						}  
 					})
@@ -329,6 +321,13 @@ $(document).ready(function(){
 			$('#myLargeModal').modal('hide');
 			$('#myInquiry').modal('show');
 		}		 
+		
+		$(document).ready(function(){
+			$("#myReqModal").on('hidden.bs.modal', function (e) {
+				var event = e.target;
+				window.location.reload();
+		});  
+		})
 </script>
 
 
@@ -389,8 +388,8 @@ input{
 			  <div class="form-group">
 				    <label for="into_city">검색 기간</label>
 				    <br>
-				    <input type="date" class="form-control" name="s_date" id="s_date" value="${intoTheFarmVO.into_date}" style="width:400px !important; display: inline-block;"> - 
-					<input type="date" class="form-control" name="e_date" id="e_date" value="${intoTheFarmVO.into_date}" style="width:400px !important; display: inline-block;">
+				    <input type="date" class="form-control" name="s_date" id="s_date" value="${intoTheFarmVO.s_date}" style="width:400px !important; display: inline-block;"> - 
+					<input type="date" class="form-control" name="e_date" id="e_date" value="${intoTheFarmVO.e_date}" style="width:400px !important; display: inline-block;">
 			  </div>
 			<button class="btn btn-warning" style="margin-left: 45%">검색</button>
 		   </form>
@@ -414,13 +413,14 @@ input{
 						<div class="card-body" id="allList">
 								<input type="hidden" name="into_progress" value="${intoTheFarmVO.into_progress}">
 								<span>지역 :</span><span class="text" id="into_city"> ${listt.into_city}</span><br>
+								<span>상세 주소 :</span><span class="text" id="into_detailadr"> ${listt.into_detailadr}</span><br>
 								<span>농작물 :</span><span class="text" id="into_product"> ${listt.into_product}</span><br>
 								<span>체험 기간 :</span><span class="text" id="into_date"> ${listt.into_date}</span><br>
 								<span>모집 인원 수:</span><span class="text" id="into_entry"> ${listt.into_entry}</span><br>
 								<span>남은 인원 수:</span><span class="text" id="into_req_remain"> ${listt.into_req_remain}</span><br><br>
 								<a href="#" onclick="fngetSearchInfo('${listt.into_no}')" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
 								<span></span><span class="text">상세보기</span></a>&nbsp;
-								<a href="#" onclick="fndoapply('${listt.into_no}','${listt.into_req_remain}','${listt.into_date}')" class="btn btn-primary">
+								<a href="#" onclick="fndoapply('${listt.into_no}','${listt.into_req_remain}','${listt.into_date}')" class="btn btn-primary" >
 								<span></span><span class="text">신청하기</span></a>
 						</div>
 					</div><br/>
@@ -507,7 +507,7 @@ input{
 										
 									</table>
 									<div class="modal-footer">
-										<button class="btn btn-primary" type="reset" data-dismiss="modal">취소</button>
+										<button class="btn btn-primary" id="resetbtn" type="reset" data-dismiss="modal">취소</button>
 										<button class="btn btn-primary" type="button" onclick="fnpersonalapply()">신청</button>
 									</div>	
 									</form>

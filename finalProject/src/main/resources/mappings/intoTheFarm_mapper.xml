@@ -10,24 +10,30 @@
 		<where>
 		 <!-- 관리자에서 사용 START(부팀장이 추가) -->
 		 <if test="into_title != null and into_title !=''">
-				UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+				AND UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>
 		 <if test="into_progress != null and into_progress !=''">
 				AND  INTO_PROGRESS = #{into_progress}
 		 </if>
 		 <!-- 관리자에서 사용 END -->
          <if test="into_detailadr != null and into_detailadr != ''">
-			    UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
+			    AND UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
 		 </if>
-		 <if test="into_date != null and into_date != ''">					
-		        AND  <![CDATA[
-						    INTO_DATE >=to_date(#{s_date}, 'YYYY-MM-DD' )
-						    and INTO_DATE < to_date(#{e_date}, 'YYYY-MM-DD')
+		<if test="s_date != null and s_date != ''">
+			OR INTO_DATE LIKE '%' || #{s_date} || '%'
+		</if>
+		<if test="e_date != null and e_date != ''">
+			OR INTO_DATE LIKE '%' || #{e_date} || '%'
+		</if>      
+		  <if test="s_date != null and s_date != '' and e_date != null and e_date != ''" >						
+		       AND  <![CDATA[
+						    INTO_DATE >=#{s_date}
+						    and INTO_DATE < #{e_date}
 						]]>
-				)
+				
 		 </if>
         </where>
 	</select>
@@ -51,14 +57,20 @@
 		FROM INTOFARM
 		<where>
 		 <if test="into_title != null and into_title != ''">
-			    UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
+			    AND UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>
          <if test="into_detailadr != null and into_detailadr != ''">
-			    UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
+			    AND UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
 		 </if>
+		 <if test="s_date != null and s_date != ''">
+			OR INTO_DATE LIKE '%' || #{s_date} || '%'
+		</if>
+		<if test="e_date != null and e_date != ''">
+			OR INTO_DATE LIKE '%' || #{e_date} || '%'
+		</if>   
 		 <if test="s_date != null and s_date != '' and e_date != null and e_date != ''" >					
 		        AND  <![CDATA[
 						    INTO_DATE >=#{s_date}

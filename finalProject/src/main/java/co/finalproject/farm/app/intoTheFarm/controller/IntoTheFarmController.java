@@ -54,7 +54,7 @@ public class IntoTheFarmController {
 
 
 	  
-	// 단건조회(상세보기)
+	// 전체조회
 	  @RequestMapping("/getFarmList")
 	  public String getFarmList(IntoTheFarmVO vo,
 	  Paging paging, UserVO uservo, Model model, HttpSession session) {
@@ -108,14 +108,6 @@ public class IntoTheFarmController {
 		return "intofarmTiles/intoFarm/insertIntoFarm";
 	}
 
-	/*
-	 * //date null값 허용
-	 * 
-	 * @InitBinder public void initBinder(WebDataBinder binder) { SimpleDateFormat
-	 * dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	 * binder.registerCustomEditor(java.util.Date.class, new
-	 * CustomDateEditor(dateFormat, false)); }
-	 */
 
 		
 	@PostMapping("/insertFarm") // 등록

@@ -55,8 +55,10 @@
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="intoTheFarm" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농촌속으로</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown02">
 							<a class="dropdown-item" href="getFarmInfo">농촌속으로 소개</a>
+							<c:if test="${ user_id != null }">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
-							<c:if test="${user_auth == 'farmer' }">
+							</c:if>
+							<c:if test="${user_id == 'farmer' }">
 							<a class="dropdown-item" href="insertFarm">체험등록</a>
 							</c:if>
 						</div>

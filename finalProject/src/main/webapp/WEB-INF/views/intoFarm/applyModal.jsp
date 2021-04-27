@@ -75,6 +75,10 @@
 			<td>${getlist.into_date}</td>
 		</tr>
 		<tr class="content">
+			<th class="text-center">상세주소</th>
+			<td>${getlist.into_detailadr}</td>
+		</tr>
+		<tr class="content">
 			<th class="text-center">모집 인원 수 </th> 
 			<td>${getlist.into_entry}</td>
 		</tr>

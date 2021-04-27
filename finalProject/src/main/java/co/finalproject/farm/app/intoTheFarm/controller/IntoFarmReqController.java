@@ -16,6 +16,7 @@ import co.finalproject.farm.app.intoTheFarm.service.IntoFarmReqVO;
 import co.finalproject.farm.app.intoTheFarm.service.IntoTheFarmVO;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoFarmReqMapper;
 import co.finalproject.farm.app.intoTheFarm.service.impl.IntoTheFarmMapper;
+import co.finalproject.farm.app.myPage.service.impl.IntoFarmMapper;
 import co.finalproject.farm.app.user.service.UserService;
 import co.finalproject.farm.app.user.service.UserVO;
 
@@ -24,6 +25,7 @@ public class IntoFarmReqController {
 	@Autowired IntoFarmReqMapper intoFarmReqMapper;
 	@Autowired UserService userService;
 	@Autowired IntoTheFarmMapper intoTheFarmMapper;
+	@Autowired IntoFarmMapper intoFarmMapper;
 	
 	Logger logger = LoggerFactory.getLogger(IntoTheFarmController.class);
 	
@@ -54,28 +56,23 @@ public class IntoFarmReqController {
 	
 	//체험 신청(개인)
 	@PostMapping("/insertReqFarm") 
-	public @ResponseBody String insertReqFarm(IntoFarmReqVO vo,IntoTheFarmVO intoFarmVO, Model model) {
+	public @ResponseBody String insertReqFarmProc(IntoFarmReqVO vo,IntoTheFarmVO intoFarmVO, Model model) {
 		intoFarmReqMapper.insertReqFarm(vo);
 		//insert한 into_req_num을 intofarmVO에 담기
 		String no = vo.getInto_req_num();
 		intoFarmVO.setInto_req_num(no);
 		
-		//String date = intoFarmVO.getInto_date();
-		//System.out.println(date);
-		
 		model.addAttribute("intoFarmVO",intoTheFarmMapper.getSearchFarm(intoFarmVO));
 		System.out.println(intoFarmVO);
 		model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(intoFarmVO));
 		
-		//return "intoFarm/intoTheFarm";
-		return "mypage/myIntoList";
-		//마이페이지로 이동??
+		return "redirect:myIntoList";
 		
 	}
 	
 	//체험신청(그룹)
 	@PostMapping("/insertGroupFarm") 
-	public @ResponseBody String insertGroupFarm(IntoFarmReqVO vo,IntoTheFarmVO intoFarmVO, Model model) {
+	public @ResponseBody String insertReqFarmProc1(IntoFarmReqVO vo,IntoTheFarmVO intoFarmVO, Model model) {
 		intoFarmReqMapper.insertGroupFarm(vo);
 		//insert한 into_req_num을 intofarmVO에 담기
 		String no = vo.getInto_req_num();
@@ -83,9 +80,7 @@ public class IntoFarmReqController {
 		
 		model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(intoFarmVO));
 		
-		return "intoFarm/intoTheFarm";
-		//return "redirect:/ajaxmyIntoList";
-		//마이페이지로 이동??
+		return "redirect:myIntoList";
 		
 	}
 	
