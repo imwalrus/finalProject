@@ -19,6 +19,9 @@ h4 {
 h2 {
 	font-weight: bold;
 }
+.btn-sm {
+    margin-bottom:20px;
+}
 </style>
 <body>
 	<section class="pcoded-main-container">
@@ -127,8 +130,8 @@ h2 {
 					+ data[i].into_city + "</td><td>"
 					+ data[i].into_product + "</td><td id='progress" + i + "'>"
 					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>완료</button>" + "</td><td>"					
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button></td><td>"
-					+"</td></tr>" 	
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button></td>"
+					+"</tr>" 	
 					);
 				}else{
 					$("#list").append(
