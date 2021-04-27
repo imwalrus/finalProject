@@ -24,7 +24,7 @@ h3{
 
 	<!-- 모달바디 시작 -->
 	<div class="modal-body">
-	<img class="img-fluid card-img-top" src="./resources/images/mypage/${farm.farm_filename}" alt="Card image cap">
+	<img class="img-fluid card-img-top" src="./resources/images/mypage/${farm.farm_filename}" style="width:500px; height: 350px;" alt="Card image cap">
 
 			<div class="card-body">
 					<table class="table">
