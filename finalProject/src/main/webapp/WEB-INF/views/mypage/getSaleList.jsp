@@ -10,7 +10,6 @@ font-weight: bold;
 h4 {
 	font-weight: bold;
 }
-
 h2 {
 	font-weight: bold;
 }
@@ -106,7 +105,6 @@ $.ajax({
 					+"</td></tr>"
 					);
 				}
-
 			}else{ //송장번호 값 - 일 경우 클릭 X 
 				for(i=0; i<data.length; i++){
 				$("#sale").append(
@@ -126,12 +124,9 @@ $.ajax({
 				}
 			}
 				
-
 		}
-
 	});
 	
 	
 	
-
 </script>
