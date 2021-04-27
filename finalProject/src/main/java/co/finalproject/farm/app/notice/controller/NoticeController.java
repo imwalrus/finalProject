@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.finalproject.farm.app.notice.service.FaqPagingVO;
+import co.finalproject.farm.app.notice.service.FaqVO;
 import co.finalproject.farm.app.notice.service.NoticePagingVO;
 import co.finalproject.farm.app.notice.service.NoticeService;
 import co.finalproject.farm.app.notice.service.NoticeVO;
@@ -66,6 +68,13 @@ public class NoticeController {
     	logger.debug(vo.toString());
     	noticeService.insertNotices(vo);
     	return "redirect:getNotices";
+    }
+    
+   //수정폼
+    @RequestMapping("/updateNotices")
+    public String updateNotices(NoticeVO vo, NoticePagingVO pagingvo, Model model) {
+    	model.addAttribute("Notice", noticeService.getSearchNotices(vo));
+    	return "notice/updateNotice";
     }
     	
 	//수정처리

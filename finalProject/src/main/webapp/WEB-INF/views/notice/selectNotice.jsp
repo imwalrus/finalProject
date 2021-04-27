@@ -15,14 +15,13 @@
 		}
 	}
 </script>
+
 <script>
 $(document).ready(function(){
-	$('input[type="text"]').keypress(function() {
-		  if (event.keyCode == 13) {
-		    event.preventDefault();
-		  };
+var str = $("#notice_content").html();
+str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+$("#notice_content").html(str);
 	});
-})
 </script>
 
 <style type="text/css">
@@ -52,7 +51,7 @@ $(document).ready(function(){
 		<div id="title" style="margin-left:100px;">
 			<h1>공지사항 상세보기</h1>
 		</div><br/>
-		<form id="frm" name="frm" action="updateNotices" method="post">
+		<form id="frm" name="frm" action="getSearchNotices">
 		<input type="hidden" name="notice_no" value="${NoticeVO.notice_no}">
 		<input type="hidden" name="page" value="${noticePagingVO.page}">
 		<div>
@@ -73,7 +72,7 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td width="70">내용</td>
-					<td align="left" colspan="5" height="300px">${NoticeVO.notice_content}</td>
+					<td align="left" colspan="5" height="300px" id="notice_content">${NoticeVO.notice_content}</td>
 				</tr>
 				</thead>
 			</table>
@@ -85,7 +84,7 @@ $(document).ready(function(){
 		<div style="margin-left:228px; float:left;">
 		<button type="button" class="btn btn-outline-primary" onclick="deleteAlert()">글 삭제</button>
 		&nbsp;&nbsp;
-		<input type="submit"  class="btn btn-outline-primary" value="글 수정">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='updateNotices?notice_no=${NoticeVO.notice_no}&page=${noticePagingVO.page}'">글 수정</button>
 		</div>
 		</c:if>
 		</form>

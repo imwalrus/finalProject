@@ -59,6 +59,13 @@ public class FaqController {
     	faqService.insertFaq(vo);
     	return "redirect:getFaq";
     }
+    
+    //수정폼
+    @RequestMapping("/updateFaq")
+    public String updateFaq(FaqVO vo, FaqPagingVO pagingvo, Model model) {
+    	model.addAttribute("faq", faqService.getSearchFaq(vo));
+    	return "faq/updateFaq";
+    }
     	
 	//수정처리
     @PostMapping("/updateFaq")

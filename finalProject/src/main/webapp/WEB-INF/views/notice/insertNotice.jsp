@@ -1,9 +1,20 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>청년농장</title>
+<script>
+$(document).ready(function(){
+	$('input[type="text"]').keypress(function() {
+		  if (event.keyCode == 13) {
+		    event.preventDefault();
+		  };
+	});
+})
+</script>
 <style type="text/css">
 #notice_title {  padding:5px;
                  height:32px !important; }
