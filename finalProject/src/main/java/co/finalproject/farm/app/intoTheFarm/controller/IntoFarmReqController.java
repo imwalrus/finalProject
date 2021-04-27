@@ -66,7 +66,7 @@ public class IntoFarmReqController {
 		System.out.println(intoFarmVO);
 		model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(intoFarmVO));
 		
-		return "redirect:myIntoList";
+		return "redirect:/myIntoList";
 		
 	}
 	
@@ -80,7 +80,7 @@ public class IntoFarmReqController {
 		
 		model.addAttribute("togetEntry",intoTheFarmMapper.togetEntry(intoFarmVO));
 		
-		return "redirect:myIntoList";
+		return "redirect:/myIntoList";
 		
 	}
 	
