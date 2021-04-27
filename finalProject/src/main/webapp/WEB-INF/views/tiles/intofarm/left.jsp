@@ -77,7 +77,6 @@
 		      </c:if>
 		      <c:if test="${user_auth == 'farmer'|| user_auth =='admin' }">
 		      <li class="leftMenuBar"><a href="insertFarm"><i class="material-icons playlist_add">&#xe03b;</i>  체험등록</a></li>
-
 		      </c:if>
 		    </ul>
 	    </div>
