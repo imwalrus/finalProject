@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="resources/main/css/style.css">
 
 <div class="card-body">
-<div class="row" id="diaryList"  align="center">
+<div class="row" id="diaryList" align="center">
 		
 	</div>
 </div>
@@ -24,6 +24,16 @@
     height: auto;
     vertical-align: middle;
     border-style: none;
+    }
+.btn-sm { 
+    margin-bottom:15px; 
+    margin-left:10px;
+    }
+.badge-warning { 
+    margin-bottom:15px; 
+    }
+.table td{ 
+    border:1px !impotant;
     }
 h6{
 font-weight: bolder;
