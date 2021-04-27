@@ -101,7 +101,7 @@ public class FarmController {
 	public String updateFarmProc(FarmVO vo){
 		logger.debug(vo.toString());
 		farmMapper.updateFarm(vo);
-		return "mypageTiles/mypage/myIntoList";
+		return "redirect:/getFarmsList";
 	}
 
 //삭제

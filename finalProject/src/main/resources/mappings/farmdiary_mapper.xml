@@ -64,7 +64,7 @@ SELECT F.FDIARY_NO
 							)						  
 			VALUES (
 					#{fdiary_no}
-					,#{fdiary_day} 
+					,TO_DATE(#{fdiary_day},'yyyy-mm-dd')
 					,#{fdiary_stime}
 					,#{fdiary_etime}
 					,#{fdiary_worker}
