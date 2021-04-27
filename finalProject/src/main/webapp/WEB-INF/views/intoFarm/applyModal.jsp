@@ -93,6 +93,7 @@
 		
 	</thead>
 </table>
+
 <div class="sliderDiv" align="center">
 	<div class="slider slider-for">
 		<c:forEach items="${images}" var="image" >
