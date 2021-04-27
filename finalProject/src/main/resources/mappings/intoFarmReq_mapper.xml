@@ -47,7 +47,7 @@
    <insert id="insertReqFarm" parameterType="IntoFarmReqVO"  useGeneratedKeys="true" keyProperty="into_req_num" >
    
    <selectKey keyProperty="into_req_num" resultType="string" order="BEFORE">
-      SELECT NVL(MAX(INTO_REQ_NUM),1)+1 FROM INTOFARM_REQ
+      SELECT NVL(MAX(INTO_REQ_NUM),0)+1 FROM INTOFARM_REQ
    </selectKey>
    INSERT INTO INTOFARM_REQ 
             ( INTO_REQ_NUM
@@ -64,9 +64,7 @@
    VALUES ( #{into_req_num}
          	,#{user_id}
          	,#{into_req_phone}
-         	<!-- <if test="into_entry > into_req_register"> -->
             ,'1'
-            <!-- </if> -->
             ,(select into_entry from intofarm where into_no=#{into_no})
             <if test="into_req_reward != null and into_req_reward != ''">
             ,#{into_req_reward}

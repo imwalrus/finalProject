@@ -58,7 +58,7 @@
 							<c:if test="${ user_id != null }">
 							<a class="dropdown-item" href="getFarmList">체험신청</a>
 							</c:if>
-							<c:if test="${user_id == 'farmer' }">
+							<c:if test="${user_auth == 'farmer'|| user_auth =='admin' }">
 							<a class="dropdown-item" href="insertFarm">체험등록</a>
 							</c:if>
 						</div>
