@@ -7,11 +7,14 @@
 background-color: #c3e6cb;
 font-weight: bold;
 }
+@media print {
+			  #noprint { display:none; }
+			}
 </style>
-<div class="row" id="printme" align="center">
+<div class="row" align="center" id="printme">
 	<h4>신청명단</h4>
 
-	<table class="table">
+	<table class="table" >
 	<thead>	
 		<tr class="table-success">
 			<th class="table-success">이름</th>
@@ -59,7 +62,7 @@ font-weight: bold;
 						+ data[i].into_req_dates + "</td><td>"	
 						+ data[i].into_req_reward + "</td><td>"	
 						+ data[i].into_entry+ "</td><td>"	
-						+ "<button type='button' class='btn  btn-danger btn-sm' onclick=\"deleteUser('" + data[i].into_req_num + "\')\">" + "신청취소"+ "</button>"
+						+ "<button type='button' class='btn  btn-danger btn-sm' id='noprint' onclick=\"deleteUser('" + data[i].into_req_num + "\')\">" + "신청취소"+ "</button>"
 						+"</td></tr>"
 					
 					);
@@ -81,5 +84,7 @@ font-weight: bold;
    				 win.print();
     			win.close();
 		}
+	
+
 </script>
 
