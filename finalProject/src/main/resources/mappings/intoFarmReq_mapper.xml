@@ -58,7 +58,7 @@
 			   <if test="into_req_reward != null and into_req_reward != ''"> 	
 			  ,INTO_REQ_REWARD
 			   </if> 
-			  ,INTO_REQ_DATE
+			  ,INTO_REQ_DATE,'yyyy-mm-dd'
 			  ,INTO_NO
              )
    VALUES ( #{into_req_num}
@@ -69,7 +69,7 @@
             <if test="into_req_reward != null and into_req_reward != ''">
             ,#{into_req_reward}
             </if>
-            ,#{into_req_date}
+            ,TO_DATE(#{into_req_date},'yyyy-mm-dd')
             ,#{into_no}
             )
    </insert>
@@ -102,7 +102,7 @@
             <if test="into_req_reward != null and into_req_reward != ''">
             ,#{into_req_reward}
             </if>
-            ,#{into_req_date}
+            ,TO_DATE(#{into_req_date},'yyyy-mm-dd')
             ,#{into_no}
             )
    </insert>

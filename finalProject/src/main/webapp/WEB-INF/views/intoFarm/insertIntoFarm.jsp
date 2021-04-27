@@ -219,7 +219,6 @@ label{
 		<form id="frm" name="frm" method="post" action="insertFarm"
 			enctype="multipart/form-data">
 			<input type="hidden" name="into_date" id="into_date"> 
-			<input type="hidden" name="user_id" id="user_id" value="hw"> 
 			<input type="hidden" name="uploadFile">
 			<div class="form-group">
     		  <label for="exampleInputPassword1">⊚ 체험 지역</label>

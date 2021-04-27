@@ -126,11 +126,11 @@
              )
            
    VALUES ( #{into_no}
-         ,#{into_title}
-          ,#{into_phone}
+           ,#{into_title}
+           ,#{into_phone}
             ,#{into_product}
              ,#{into_date}
-            ,#{into_entry}
+            ,#{into_entry} 
             ,#{into_entry}
             ,#{into_info}
             <if test="uploadFileName != null and uploadFileName != ''">
@@ -174,7 +174,7 @@
          <if test="into_entry != null and into_entry != ''">
          ,INTO_ENTRY=#{into_entry}
           </if>
-         <if test="into_filename != null and into_filename != ''">
+         <if test="uploadFileName != null and uploadFileName != ''">
          ,INTO_FILENAME=#{into_filename}
           </if>
          <if test="into_info != null and into_info != ''">

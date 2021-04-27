@@ -178,10 +178,10 @@ right:70px;
 		<tr class="content">
 			<th class="text-left">문의 전화번호 :  <input type="text" name="into_phone" value="${upFarm.into_phone}"></th>
 		</tr>
-		<!--파일 가져오기 > 다시 지우고 올리는것! -->
-		<tr class="content">
+ 		<!--파일 가져오기 > 다시 지우고 올리는것! -->
+		<!--<tr class="content">
 			<th class="text-left">파일 :  <input multiple="multiple" name="into_filename" type="file" accept="image/png, image/jpeg, image/jpg"></th>
-		</tr>
+		</tr> -->
 	</thead>
 	
 </table>

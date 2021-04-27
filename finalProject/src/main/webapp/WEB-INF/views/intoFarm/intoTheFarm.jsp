@@ -283,8 +283,8 @@ $(document).ready(function(){
 						  into_date:into_date,
 						  into_entry:$("input[name=into_entry]").val(),
 						  into_info:$("textarea[name=into_info]").val(),
-						  into_phone:$("input[name=into_phone]").val(),
-						  into_filename:$("input[name=into_filename]").val()
+						  into_phone:$("input[name=into_phone]").val()
+						 /*  into_filename:$("input[name=into_filename]").val() */
 						 },
 				success:function(response){
 					console.log("result:"+response);
@@ -299,19 +299,25 @@ $(document).ready(function(){
 		
 		/*모달-삭제*/
 		 function fnDelete(str3){
+			var into_req_remain=parseInt($("#into_req_remain").text());
+			var into_entry=parseInt($("#into_entry").text());
 			var into_no = $("input[name=into_no]").val();
-			
-			$.ajax({
-				url:"deleteFarm?into_no="+into_no,
-				type:"post",
-				success:function(response){
-					console.log("result:"+response);
-					if(response != null){
-						alert("삭제 완료");
-						location.reload();
+		if(into_req_remain == into_entry ){
+				$.ajax({
+					url:"deleteFarm?into_no="+into_no,
+					type:"post",
+					success:function(response){
+						console.log("result:"+response);
+						if(response != null){
+							alert("삭제 완료");
+							location.reload();
+						}
 					}
-				}
-		})
+			})
+		} else {
+			alert("삭제가 불가능합니다.");
+		}		
+		 
 	} 
 			
 		/* 모달 - 문의하기 */
