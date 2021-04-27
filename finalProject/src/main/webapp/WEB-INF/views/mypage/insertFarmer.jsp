@@ -11,9 +11,6 @@
 					<div class="col-md-10">
 					
 						<div class="card">
-						<!-- 농업인 권한 확인 hidden  -->
-						<input type="hidden" id="farmer_check" name="farmer_check" value="">
-						
 							<!-- 농업인 권한 신청 안한 user가 보이는 화면 -->
 							<div class="card-body" align="center" id="userView">
 								<div class="col-md-9">
@@ -107,33 +104,24 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-
 	
 		$.ajax({
 			url : 'ajaxgetFarmerlist',
 			data : "user_id=" + '${user_id}',
 			dataType : "json",
-			success : function(data) {
-				for(i=0; i<data.length; i++){
-					$('input[name=farmer_check]').attr('value',data[i].farmer_check);
-				}
-
+			success : function(data){
+					//console.log(data)
+					//$('input[name=farmer_check]').attr('value',data[i].farmer_check);
+					if(data.length == 0){
+						$('#userView').show();
+						$('#farmerWait').hide();
+					}else{
+						$('#userView').hide();
+						$('#farmerWait').show();						
+					}
 				}
 
 		});
-	
-$(function(){
- 		var fCheck = $('#farmer_check').val();
-			console.log(fCheck)
-			
-		if( fCheck== "undefined"  || fCheck== ""  || fCheck == null ){	//farmer에 데이터가 없을 경우
-				$('#userView').show();
-				$('#farmerWait').hide();				
-			}else if(fCheck != "undefined" || fCheck != "" || fCheck != null){
-				$('#userView').hide();
-				$('#farmerWait').show();
-			} 
-});
 
 	</script>
 </body>

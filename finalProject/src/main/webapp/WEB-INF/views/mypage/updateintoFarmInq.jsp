@@ -55,13 +55,14 @@ h2 {
 						<tr>
 							<th class="table-success">내용</th>
 							<td colspan="7">
-								<textarea class="form-control" id="into_inq_content" name="into_inq_content" rows="10" required="required">${ulist.into_inq_ }</textarea>
+								<textarea class="form-control" id="into_inq_content" name="into_inq_content" rows="10" required="required">${ulist.into_inq_content }</textarea>
 								
 							</td>
 						</tr>
 						<tr>
 							<td colspan="8">
 								<button type="submit" class="btn  btn-outline-success">등록</button>
+								<button type="close" class="btn  btn-outline-danger">닫기</button>
 							<td>
 						</tr>
 					</table>

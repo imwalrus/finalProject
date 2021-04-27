@@ -63,7 +63,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="ID">ID</label>
-									<input type="text" class="form-control" name="user_id" value="${user.user_id}">
+									<input type="text" class="form-control" name="user_id" value="${user.user_id}" readonly="readonly">
 								</div>
 							</div>
 							<div class="col-md-6">

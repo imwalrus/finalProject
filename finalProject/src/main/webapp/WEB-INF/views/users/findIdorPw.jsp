@@ -134,11 +134,11 @@ $(document).ready(function(){
 				success:function(response){
 					console.log(response.user_id);
 					if(response.user_id == 0){
-						$('.modal').show();
-						$('.modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
+						$('#findIdModal').show();
+						$('#findIdModal .modal-body').find('p').html("일치하는 정보가 없습니다. <br> 입력하신 정보를 다시 확인해주세요.")
 					} else{
-						$('.modal').show();
-						$('.modal-body').find('p').html("회원님의 아이디는 <h3>"+response.user_id+"</h3> 입니다.");
+						$('#findIdModal').show();
+						$('#findIdModal .modal-body').find('p').html("회원님의 아이디는 <h3>"+response.user_id+"</h3> 입니다.");
 					}
 				}
 			});

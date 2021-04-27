@@ -35,10 +35,8 @@
 </head>
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -57,7 +55,7 @@
 									<div class="col-md-10">
 															
 										<div class="row" id="addTable">${list.fdiary_no}
-												dfsdfsdfsdfsdfsfsdfsfs
+												
 										</div>
 										<div class="col-md-12" align="center">
 											<button type="submit" class="btn  btn-outline-success">등록</button>

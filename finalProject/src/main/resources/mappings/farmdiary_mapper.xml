@@ -8,6 +8,7 @@
 	<select id="cropList" resultType="FarmDiaryVO" parameterType="String">
 			SELECT *
 			FROM crop where user_id=#{user_id}
+			ORDER BY CROP_NAME
 	</select>
 	
 	<!-- 작물추가 -->
@@ -38,7 +39,8 @@ SELECT F.FDIARY_NO
 		FROM FARMDIARY F JOIN CROP C
 		ON (F.CROP_NO = C.CROP_NO)
 		WHERE F.USER_ID = #{user_id}		
-		AND F.FDIARY_DAY = TO_DATE( #{fdiary_day} ,'YYYYMMDD') 
+		AND F.FDIARY_DAY = TO_DATE( #{fdiary_day} ,'YYYYMMDD')
+		ORDER BY C.CROP_NAME
 
 </select> 
 			

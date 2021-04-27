@@ -129,7 +129,7 @@ public class CommunityController {
     	replyvo.setComm_no(vo.getComm_no());
     	communityService.deleteReplyAll(replyvo);
     	communityService.deleteComm(vo);
-		return "redirect:getComm?page="+pagingvo.getPage();	
+		return "redirect:getComm";
     }
     
    	

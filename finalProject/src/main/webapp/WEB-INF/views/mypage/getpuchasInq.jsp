@@ -22,56 +22,54 @@ h2 {
 <form action="updatepuchasInq" method="post">
 	<div class="row">
 
-		<table class="table" style="overflow: auto;">
+		<table class="table">
 			<tr>
-				<th style="width: 10%;">제목</th>
-				<td colspan="5" style="width: 80%;">${plist.pur_inq_title }</td>
-			<c:if test="${plist.user_id eq user_id }">			<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
-				<td style="width: 10%;">
-						<button class="btn  btn-outline-warning"
-							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-						<button type="button" class="btn  btn-outline-danger"
-							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+				<th>제목</th>
+				<td colspan="4">${plist.pur_inq_title }</td>
+				<td>
+					<c:if test="${plist.user_id eq user_id }">
+									<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
+						<button class="btn  btn-outline-warning" onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
+						<button type="button" class="btn  btn-outline-danger" onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+					</c:if>
+					<c:if test="${plist.user_id ne user_id}">
+						<!-- id값 다르면 수정,삭제 버튼 안보임 -->
+					</c:if>
 				</td>
-			</c:if>
-			<c:if test="${plist.user_id ne user_id}">
-				<td style="width: 10%;">											<!-- id값 다르면 수정,삭제 버튼 안보임 -->
-				</td>
-			</c:if>
-				
 			</tr>
 			<tr>
-				<th style="width: 10%;">작성일</th>
-				<td style="width: 60%;">${plist.pur_inq_date }</td>
-				<th style="width: 10%;">작성자</th>
-				<td style="width: 15%;">${plist.user_id}</td>
-				<c:if test="${plist.pur_inq_check eq '1'}">				<!-- 비밀글일경우 -->
-					<td style="width: 5%;"> 
+				<th>작성일</th>
+				<td colspan="2">${plist.pur_inq_date }</td>
+				<th>작성자</th>
+				<td>${plist.user_id}</td>
+				<td>
+					<c:if test="${plist.pur_inq_check eq '1'}">
 						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
-					</td>
-				</c:if>
-				<c:if test="${plist.pur_inq_check eq '0'}">				<!-- 비밀글 아닐경우 -->
-					<td style="width: 5%;">
+					</c:if>
+					<c:if test="${plist.pur_inq_check eq '0'}">
 						<img src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
-					</td>
-				</c:if>
+					</c:if>
+				</td>
 			</tr>
 			<tr>
-			<c:if test="${plist.pur_inq_filename eq null }">
-				<td colspan="6" text-align="center" style="width: 795px; height: 280px;" >
-					등록된 사진이 없습니다.
-				</td>
-			</c:if>
-			<c:if test="${plist.pur_inq_filename ne null }">
-				<td colspan="10"><img class="img-fluid card-img-top" src="resources/images/mypage/${plist.pur_inq_filename}"
-					style="width: 80%; max-width: 100%; height: auto;"
-					alt="Card image cap">
-				</td>
-			</c:if>
+				<th>문의 할 제품(번호_이름)</th>
+				<td colspan="5">${plist.pro_no}_ ${plist.pro_name}
 			</tr>
 			<tr>
-				<th colspan="1">내용</th>
-				<td colspan="9"><textarea class="form-control"
+				<td colspan="6" text-align="center" style="width: 795px; height: 280px;">
+					<c:if test="${plist.pur_inq_filename eq null }">
+							등록된 사진이 없습니다.
+					</c:if>
+					<c:if test="${plist.pur_inq_filename ne null }">
+						<img class="img-fluid card-img-top" src="resources/images/mypage/${plist.pur_inq_filename}"
+						style="width: 80%; max-width: 100%; height: auto;"
+						alt="Card image cap">
+					</c:if>
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td colspan="5"><textarea class="form-control"
 						name="pur_inq_content" rows="6" readonly="readonly">${plist.pur_inq_content}</textarea>
 				</td>
 			</tr>
@@ -96,10 +94,13 @@ h2 {
 </div>
 <form>
 	<div class="input-group mb-3">
-		<input type="text" class="form-control" name="pur_inq_rep_content" placeholder="댓글은 34자까지 입력 가능합니다" aria-describedby="basic-addon2" maxlength="34" >  
-			<input type="hidden" name="user_id" value="${user_id }">
+		<input type="text" class="form-control" name="pur_inq_rep_content"
+			placeholder="댓글은 34자까지 입력 가능합니다" aria-describedby="basic-addon2"
+			maxlength="34"> <input type="hidden" name="user_id"
+			value="${user_id }">
 		<div class="input-group-append">
-			<button type="button" id="btnAdd" class="btn  btn-outline-success btn-sm">등록</button>
+			<button type="button" id="btnAdd"
+				class="btn  btn-outline-success btn-sm">등록</button>
 			<button type="reset" class="btn  btn-outline-danger btn-sm">지우기</button>
 		</div>
 	</div>
@@ -188,6 +189,7 @@ $("#btnAdd").on("click", function(){
 		dataType:"json",
 		success:function(response){
 			/* $("#reply").append(response.content + "<br>"); */
+			$('[name=pur_inq_rep_content]').val(''); //댓글 작성 후 초기화
 			$("#reply").append(
 					"<tr><td>" +response.pur_inq_rep_content + "</td><td>"
 					+ response.user_id + "</td><td>"

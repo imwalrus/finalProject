@@ -32,7 +32,8 @@ h2 {
                                 </div>
                                  <div style="float: right">
 									<button type=button class="btn  btn-success btn-sm"
-											onclick="movePage()">농촌속으로 이동 > </button>
+											onclick="movePage()">농촌속으로 이동 > </button><br>
+									<p style="float: right">신청취소는 담당자에게 별도 연락하셔야 합니다.</p>
 							     </div>
 							     <form id="myListFrm" name="myListFrm" action="myIntoList">					       
 										<table class="table" id="mylist">
@@ -61,24 +62,28 @@ h2 {
 			data: "user_id=" + '${user_id}',
 			dataType:"json",
 			success: function(data){				
-				for(i=0; i<data.length; i++) {
-					if(data[i].into_req_num != null){
-					$("#mylist").append(		
-					"<tr><td>" + data[i].into_req_num + "</td><td style='text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>"
-					+ data[i].into_title + "</td><td>"
-					+ data[i].into_req_dates + "</td><td>"
-					+ data[i].into_entry + "</td><td>"
-					+ data[i].into_req_reward + "</td><td>"
-					+ data[i].into_req_phone + "</td></tr>"
-					
-					);
-					}
-					else{
+			
+					if(data.length == 0 ){
 						$("#mylist").append(		
 								"<tr><td colspan='6'> 신청하신 농촌속으로 내역이 없습니다. </td><td>"
-						);							
+						);	
+
 					}
-				}
+					else{
+						for(i=0; i<data.length; i++) {
+							$("#mylist").append(		
+							"<tr><td>" + data[i].into_req_num + "</td><td style='text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'>"
+							+ data[i].into_title + "</td><td>"
+							+ data[i].into_req_dates + "</td><td>"
+							+ data[i].into_entry + "</td><td>"
+							+ data[i].into_req_reward + "</td><td>"
+							+ data[i].into_req_phone + "</td></tr>"
+							
+							);
+								}
+												
+					}
+				
 			}
 		});
 		

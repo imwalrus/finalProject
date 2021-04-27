@@ -84,9 +84,13 @@ $.ajax({
 	url: "ajaxgetSaleList",
 	data: "user_id=" + '${user_id}',
 	dataType: "json",
-	success: function(data){
-		for(i=0; i<data.length; i++){
-			if( data[i].orderlist_invoice != '-'){	//송장번호값 - 아닐 경우 클릭시 송장 조회 가능
+	success: function(data){		
+			if(data.length == 0){
+				$("#sale").append(
+						"<tr><td colspan='9'> 판매내역이 없습니다. </tr></td>"
+						);
+		}else if( data.length != 0 || data[i].orderlist_invoice != '-'){	//송장번호값 - 아닐 경우 클릭시 송장 조회 가능
+			for(i=0; i<data.length; i++){
 				$("#sale").append(
 					"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 					+ data[i].pro_name + "</td><td>" 
@@ -101,8 +105,10 @@ $.ajax({
 					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 					+"</td></tr>"
 					);
+				}
 
 			}else{ //송장번호 값 - 일 경우 클릭 X 
+				for(i=0; i<data.length; i++){
 				$("#sale").append(
 						"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 						+ data[i].pro_name + "</td><td>" 
@@ -117,9 +123,9 @@ $.ajax({
 						+"</td></tr>"
 						);
 				
-				
-			}
 				}
+			}
+				
 
 		}
 

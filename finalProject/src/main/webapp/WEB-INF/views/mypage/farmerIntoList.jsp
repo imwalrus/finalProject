@@ -44,12 +44,14 @@ h2 {
 										<tr class="table-success">
 											<th width="5%">NO</th>
 											<th width="60%">체험명</th>
+											<th width="10%">현재인원/정원</th>
 											<th width="5%">지역</th>
 											<th width="5%">농작물</th>
-											<th width="5">완료여부</th>
-											<th	width="10%">신청명단</th>										
+											<th width="5">종료여부</th>
+											<th	width="10%">신청명단</th>
 										</tr>																	
 									</table>
+									체험 취소로 인한 종료 일 경우 신청인원에게 별도 연락 하셔야합니다.
                             </div>
                             </form>
                         </div>
@@ -115,21 +117,24 @@ h2 {
 		data: "user_id=" + '${user_id}',
 		dataType: "json",
 		success: function(data){
+		if(data.length != 0){
 			for(i=0; i<data.length; i++){
 				if(data[i].into_progress == 0){	
 				$("#list").append(
 					"<tr><td>" + data[i].into_no + "</td><td>" 
 					+ data[i].into_title + "</td><td>"
+					+ data[i].into_req_remain + "/" + data[i].into_entry + "</td><td>"
 					+ data[i].into_city + "</td><td>"
 					+ data[i].into_product + "</td><td id='progress" + i + "'>"
 					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>완료</button>" + "</td><td>"					
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button>"			
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button></td><td>"
 					+"</td></tr>" 	
 					);
 				}else{
 					$("#list").append(
 							"<tr><td>" + data[i].into_no + "</td><td>" 
 							+ data[i].into_title + "</td><td>"
+							+ data[i].into_req_remain + "/" + data[i].into_entry + "</td><td>"
 							+ data[i].into_city + "</td><td>"
 							+ data[i].into_product + "</td><td id='progress" + i + "'>"
 							+ "체험종료</td><td>"					
@@ -138,6 +143,10 @@ h2 {
 							);
 				}
 				}
+		}else{
+			$("#list").append( "<tr><td colspan='7'> 등록하신 농촌속으로 체험이 없습니다. </td></tr>");
+			
+		}
 			}
 
 				});
@@ -170,5 +179,6 @@ h2 {
 			alert("취소 되었습니다.");
 		} 
 	}
+	
 	</script>
 </body>
