@@ -45,7 +45,7 @@ h3{
 								<th>면적</th>
 								<td>
 									<div class="form-group">     
-                                        <input type="text" class="form-control" id="farm_area" name="farm_area" value="${ufarm.farm_area }" placeholder="${ufarm.farm_area }" maxlength="5">
+                                        <input type="number" class="form-control" id="farm_area" name="farm_area" value="${ufarm.farm_area }" placeholder="${ufarm.farm_area }" maxlength="5">
                                     </div>
 								</td>								
 							</tr>

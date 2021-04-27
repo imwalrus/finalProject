@@ -24,7 +24,7 @@ h2 {
 
 		<table class="table">
 			<tr>
-				<th>제목</th>
+				<th style="width: 120px">제목</th>
 				<td colspan="4">${plist.pur_inq_title }</td>
 				<td>
 					<c:if test="${plist.user_id eq user_id }">

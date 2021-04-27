@@ -121,6 +121,14 @@ function fnNextQuestion() {
 	$(".base_boardlist:eq(" + (nowSeq + 1) + ")").show();
 	
 }
+
+// 시연시 빠르게 결과 표시 하기 위한 JS (시연 후 삭제바람)
+$(document).ready(function(){
+	$('.input_radios').on("click", function (){
+		$('.input_radios').attr('checked', true);
+	});
+});
+
  
 </script>
 <style>

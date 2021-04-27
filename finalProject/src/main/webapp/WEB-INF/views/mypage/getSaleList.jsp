@@ -10,7 +10,6 @@ font-weight: bold;
 h4 {
 	font-weight: bold;
 }
-
 h2 {
 	font-weight: bold;
 }
@@ -42,7 +41,7 @@ h2 {
 											<th>결제수단</th>
 											<th>구매자</th>
 											<th>주문상태</th>
-											<th>택배사/송장번호등록</th>											
+											<th>송장번호</th>											
 										</tr>																	
 									</table>
 								</form>
@@ -76,8 +75,8 @@ h2 {
 </div>
 </section>
 <script type="text/javascript">
-function invoiceUp(str,con) {
-	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&orderlist_condition=" + con );
+function invoiceUp(str,con,inv) {
+	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&orderlist_condition=" + con + "&orderlist_invoice=" + inv);
 	$('#invoiceUp').modal('show');
 }
 $.ajax({
@@ -102,11 +101,10 @@ $.ajax({
 					+ "(" + data[i].pro_dcompany + ")" +"<br>"
 					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
 					+ data[i].orderlist_invoice  + "</a></td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition + "',\'"+  data[i].orderlist_invoice +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 					+"</td></tr>"
 					);
 				}
-
 			}else{ //송장번호 값 - 일 경우 클릭 X 
 				for(i=0; i<data.length; i++){
 				$("#sale").append(
@@ -119,19 +117,16 @@ $.ajax({
 						+ data[i].orderlist_condition +"<br>"
 						+ "(" + data[i].pro_dcompany + ")" +"<br>"
 						+ data[i].orderlist_invoice  + "</td><td>"
-						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+						+  "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition + "',\'"+  data[i].orderlist_invoice +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 						+"</td></tr>"
 						);
 				
 				}
 			}
 				
-
 		}
-
 	});
 	
 	
 	
-
 </script>

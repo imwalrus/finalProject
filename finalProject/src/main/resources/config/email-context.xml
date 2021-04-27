@@ -6,7 +6,7 @@
 	<property name="host" value="smtp.gmail.com" />
 	<property name="port" value="587" />
 	<property name="username" value="yellowsys92@gmail.com" />
-	<property name="password" value="Farmproject0429@!" />
+	<property name="password" value="ygcmegvvdtpmuzpg" />
 	<!-- 보안연결 TLS와 관련된 설정 -->
 	<property name="javaMailProperties">
 		<props>
