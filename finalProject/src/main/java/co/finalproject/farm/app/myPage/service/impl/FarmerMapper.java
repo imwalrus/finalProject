@@ -12,5 +12,7 @@ public interface FarmerMapper {
 	public int insertFarmer(FarmerVO vo);
 	
 	public int updateFarmer(FarmerVO vo);
+	
+	public int deleteFarmer(FarmerVO vo);
 
 }

@@ -68,5 +68,12 @@ public class FarmerController {
 	}
 	
 	
+	//승인 거절시 기존신청건 삭제
+		@GetMapping("/deleteFarmer")
+		public String deleteFarmer(FarmerVO vo) {
+			farMapper.deleteFarmer(vo);
+
+			return "redirect:/getFarmerlist";
+		}
 
 }

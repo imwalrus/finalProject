@@ -58,7 +58,7 @@
 			   <if test="into_req_reward != null and into_req_reward != ''"> 	
 			  ,INTO_REQ_REWARD
 			   </if> 
-			  ,INTO_REQ_DATE,'yyyy-mm-dd'
+			  ,INTO_REQ_DATE
 			  ,INTO_NO
              )
    VALUES ( #{into_req_num}

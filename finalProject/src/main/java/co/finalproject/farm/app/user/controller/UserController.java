@@ -125,7 +125,7 @@ public class UserController {
 	@PostMapping("/updateUser")
 	public String updateUser(UserVO vo){
 		//비밀번호 암호화해서 다시 vo에 저장
-		if(vo.getUser_pwd() != null) {
+		if(vo.getUser_pwd() != "") {
 			vo.setUser_pwd(pwdEncoder.encode(vo.getUser_pwd()));			
 		}
 		userService.updateUser(vo);

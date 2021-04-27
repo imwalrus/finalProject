@@ -277,7 +277,7 @@ $(document).ready(function(){
 				url:"updateFarm?into_no="+into_no,
 				type:"post",
 				data: {
-						  into_title:$("input[name=into_title]").val(),
+						  into_title:$("#myUpdate input[name=into_title]").val(),
 						  into_city:$("select[name=into_city]").val(),
 						  into_product:$("#myUpdate input[name=into_product]").val(), 
 						  into_date:into_date,

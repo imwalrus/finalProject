@@ -147,7 +147,6 @@ $(document).ready(function(){
 	});
 	
 	//비밀번호 찾기(메일로 임시비밀번호 보내기)
-	//비밀번호 찾기를 해서 정보가 있으면 메일 전송 , 없으면 alert
 	$("[name=pwFindBtn]").on('click',function(){
 		var id = $('#id').val();
 		var birth = $('#birth').val();
@@ -285,7 +284,7 @@ $(document).ready(function(){
 </div> 
 
 <!-- 아이디 찾기 모달화면 -->
-<div class="modal">
+<div class="modal" id='findIdModal'>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -29,7 +29,7 @@
 			OR INTO_DATE LIKE '%' || #{e_date} || '%'
 		</if>      
 		  <if test="s_date != null and s_date != '' and e_date != null and e_date != ''" >						
-		       AND  <![CDATA[
+		       OR  <![CDATA[
 						    INTO_DATE >=#{s_date}
 						    and INTO_DATE < #{e_date}
 						]]>
@@ -72,7 +72,7 @@
 			OR INTO_DATE LIKE '%' || #{e_date} || '%'
 		</if>   
 		 <if test="s_date != null and s_date != '' and e_date != null and e_date != ''" >					
-		        AND  <![CDATA[
+		        OR  <![CDATA[
 						    INTO_DATE >=#{s_date}
 						    and INTO_DATE < #{e_date}
 						]]>
@@ -174,9 +174,9 @@
          <if test="into_entry != null and into_entry != ''">
          ,INTO_ENTRY=#{into_entry}
           </if>
-         <if test="uploadFileName != null and uploadFileName != ''">
+         <!-- <if test="uploadFileName != null and uploadFileName != ''">
          ,INTO_FILENAME=#{into_filename}
-          </if>
+          </if> -->
          <if test="into_info != null and into_info != ''">
          ,INTO_INFO=#{into_info}
           </if>
@@ -186,6 +186,7 @@
           <if test="into_detailadr != null and into_detailadr != ''">
          ,INTO_DETAILADR=#{into_detailadr}
           </if>
+          ,INTO_REQ_REMAIN=#{into_entry}
       </set>
    WHERE INTO_NO=#{into_no}                
    </update>

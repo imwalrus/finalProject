@@ -16,6 +16,7 @@ $(document).ready(function(){
 			success:function(response){
 				console.log(response);
 				if(response != 1){
+					outForm.checkButton.disabled=true;
 					$('#pwCheckNotice').html('비밀번호 일치하지 않음<br>');
 					$('#pwCheckNotice').attr('color', '#ff5252');
 				} else if(response == 1){
@@ -28,13 +29,15 @@ $(document).ready(function(){
 	});
 	
 	$('[name=checkButton]').on('click', function(){
-		var yn = confirm("탈퇴 하시겠습니까?");
-		if(yn){
-			$('[name=outForm]').submit();
-		} else{
-			return;
+		if($('#customControlValidation1').is(":checked")){
+			var yn = confirm("탈퇴 하시겠습니까?");
+			if(yn){
+				$('[name=outForm]').submit();
+			} else{
+				return;
+			}
 		}
-	});	
+	});
 })
 
 

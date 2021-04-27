@@ -72,7 +72,6 @@ h2 {
 				</div>
 			</div>
 		<!-- 모달끝 -->
-</div>
 </section>
 <script type="text/javascript">
 function invoiceUp(str,con,inv) {
@@ -84,30 +83,14 @@ $.ajax({
 	data: "user_id=" + '${user_id}',
 	dataType: "json",
 	success: function(data){		
-			if(data.length == 0){
+		if(data.length == 0){	//판매내역없음
 				$("#sale").append(
 						"<tr><td colspan='9'> 판매내역이 없습니다. </tr></td>"
 						);
-		}else if( data.length != 0 || data[i].orderlist_invoice != '-'){	//송장번호값 - 아닐 경우 클릭시 송장 조회 가능
+		}else{					//판매내역 있는 경우
 			for(i=0; i<data.length; i++){
-				$("#sale").append(
-					"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
-					+ data[i].pro_name + "</td><td>" 
-					+ data[i].cart_count + "</td><td>"
-					+ data[i].account + "원</td><td>"
-					+ data[i].order_payment + "</td><td>"
-					+ data[i].buyer + "</td><td>"
-					+ data[i].orderlist_condition +"<br>"
-					+ "(" + data[i].pro_dcompany + ")" +"<br>"
-					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
-					+ data[i].orderlist_invoice  + "</a></td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition + "',\'"+  data[i].orderlist_invoice +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
-					+"</td></tr>"
-					);
-				}
-			}else{ //송장번호 값 - 일 경우 클릭 X 
-				for(i=0; i<data.length; i++){
-				$("#sale").append(
+				if(data[i].orderlist_invoice == '-'){				
+					$("#sale").append(
 						"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 						+ data[i].pro_name + "</td><td>" 
 						+ data[i].cart_count + "</td><td>"
@@ -120,11 +103,28 @@ $.ajax({
 						+  "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition + "',\'"+  data[i].orderlist_invoice +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 						+"</td></tr>"
 						);
-				
-				}
+				}else{ //송장번호 값 - 일 경우 클릭 X 
+					$("#sale").append(
+						"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
+						+ data[i].pro_name + "</td><td>" 
+						+ data[i].cart_count + "</td><td>"
+						+ data[i].account + "원</td><td>"
+						+ data[i].order_payment + "</td><td>"
+						+ data[i].buyer + "</td><td>"
+						+ data[i].orderlist_condition +"<br>"
+						+ "(" + data[i].pro_dcompany + ")" +"<br>"
+						+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
+						+ data[i].orderlist_invoice  + "</a></td><td>"
+						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition + "',\'"+  data[i].orderlist_invoice +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+						+"</td></tr>"
+						);
+					
 			}
-				
 		}
+			}
+			 
+		}
+
 	});
 	
 	

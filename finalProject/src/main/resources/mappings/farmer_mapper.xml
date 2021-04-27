@@ -39,7 +39,7 @@
 	</insert>
 
 
-<!-- 수정 -->
+ <!-- 수정 -->
 	<update id="updateFarmer" parameterType="FarmerVO">
        
         UPDATE FARMER
@@ -47,6 +47,14 @@
         WHERE FARMER_NO=#{farmer_no}
    	
 	</update>
+	
+<!-- 삭제 -->
+	<delete id="deleteFarmer" parameterType="FarmerVO">
+	
+		DELETE FROM FARMER
+		WHERE USER_ID = #{user_id}
+	
+	</delete>	
 	
 	
 	

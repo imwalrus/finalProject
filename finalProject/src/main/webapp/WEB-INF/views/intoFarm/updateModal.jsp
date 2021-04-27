@@ -165,7 +165,7 @@ right:70px;
 			<th class="text-left">농작물 종류 : <input type="text" name="into_product" value="${upFarm.into_product}"></th>
 		</tr>
 		<tr class="content">
-			<th class="text-left">모집 인원 수 : <input type="text" name="into_entry" value="${upFarm.into_entry}"></th>
+			<th class="text-left">모집 인원 수 : <input type="number" name="into_entry" value="${upFarm.into_entry}"></th>
 		</tr>
 		 <tr class="content">
 			<th class="text-left" id="upfarmm">체험 일정 : <a href="javascript:;" id="upfarmdate" class="btn btn-primary" data-toggle="modal" data-target="#showDate">달력보기</a>

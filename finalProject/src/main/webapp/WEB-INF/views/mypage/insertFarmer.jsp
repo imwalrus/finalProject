@@ -11,6 +11,7 @@
 					<div class="col-md-10">
 					
 						<div class="card">
+					
 							<!-- 농업인 권한 신청 안한 user가 보이는 화면 -->
 							<div class="card-body" align="center" id="userView">
 								<div class="col-md-9">
@@ -53,10 +54,9 @@
 													<div class="col-sm-8">
 
 														<input multiple="multiple" type="file" name="uploadFile"
-															required> <input type="hidden"
-															name="farmer_filename">
-														<div class="invalid-feedback">사업자등록증 (pdf, jpeg,jpg)
-															첨부 필요</div>
+															required> 
+														<input type="hidden" name="farmer_filename">
+														<div class="invalid-feedback">사업자등록증 (pdf, jpeg,jpg) 첨부 필요</div>
 
 													</div>
 													<div></div>
@@ -97,6 +97,28 @@
 								</div>
 							</div>
 							<!-- 끝 -->
+
+							<!-- 농업인 신청 후 대기화면  -->
+							<div class="card-body" align="center" id="farmerCancel">
+								<div class="col-md-9">
+									<div class="card-header">
+										<h2>농업인 권한 신청</h2>
+									</div>
+									<div class="alert alert-success mb-0" role="alert">
+										<div class="col-md-9">
+											<div class="spinner-border text-success"
+												style="width: 3rem; height: 3rem;" role="status"></div>
+											<h2>농업인 권한 신청이 거절되었습니다.</h2>
+											<br> <br>
+											<h3>
+												<button type="button" class="btn  btn-outline-danger" onclick="deleteAlert('${user_id}')">재신청</button>
+											</h3>
+										</div>
+										<br>
+									</div>
+								</div>
+							</div>
+							<!-- 끝 -->
 						</div>
 					</div>
 				</div>
@@ -110,18 +132,31 @@
 			data : "user_id=" + '${user_id}',
 			dataType : "json",
 			success : function(data){
-					//console.log(data)
-					//$('input[name=farmer_check]').attr('value',data[i].farmer_check);
-					if(data.length == 0){
+				console.log(data)
+					if(data.length == 0){					//신청한번도 안한 user 보이는 화면
 						$('#userView').show();
+						$('#farmerCancel').hide();
 						$('#farmerWait').hide();
-					}else{
+					}else if(data[0].farmer_check == '2'){		//신청 후 거절 된 사람
 						$('#userView').hide();
-						$('#farmerWait').show();						
+						$('#farmerCancel').show();
+						$('#farmerWait').hide();
+					}else{	//신청 후 승인까지 대기 화면
+							$('#userView').hide();
+							$('#farmerCancel').hide();
+							$('#farmerWait').show();						
+						}
 					}
-				}
 
 		});
 
+		
+		//재신청 후 기존 신청내역 삭제되고 신청화면 return 
+			//삭제
+		function deleteAlert(str) {
+
+			location.href = "deleteFarmer?user_id=" + str;
+			
+		}
 	</script>
 </body>
