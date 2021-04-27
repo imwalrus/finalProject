@@ -16,6 +16,11 @@ h4 {
 h2 {
 	font-weight: bold;
 }
+.btn-sm {
+	margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left:15px;
+}
 </style>
 <body>
 	<section class="pcoded-main-container">
@@ -65,7 +70,7 @@ h2 {
 			
 					if(data.length == 0 ){
 						$("#mylist").append(		
-								"<tr><td colspan='6'> 신청하신 농촌속으로 내역이 없습니다. </td><td>"
+								"<tr><td colspan='6'> 신청하신 농촌속으로 내역이 없습니다. </td>"
 						);	
 
 					}
