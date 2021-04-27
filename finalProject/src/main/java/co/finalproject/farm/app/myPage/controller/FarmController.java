@@ -84,7 +84,7 @@ public class FarmController {
 			
 		logger.debug(vo.toString());
 		farmMapper.insertFarm(vo);
-		return "redirect:getFarmsList";
+		return "redirect:/getFarmsList";
 
 	}
 
@@ -109,7 +109,7 @@ public class FarmController {
 	public String deleteFarm(FarmVO vo) {
 		farmMapper.deleteFarm(vo);
 
-		return "mypageTiles/mypage/myIntoList";
+		return "redirect:/getFarmsList";
 	}
 
 
