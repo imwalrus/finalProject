@@ -22,7 +22,7 @@ h2 {
 	<div class="row">
 		<table class="table">
 			<tr>
-				<th>제목</th>
+				<th style="width: 120px">제목</th>
 				<td colspan="4">${ilist.into_inq_title }</td>
 				<td>
 					<c:if test="${ilist.user_id eq user_id }">
@@ -36,7 +36,7 @@ h2 {
 			</tr>
 			<tr>
 				<th>작성일</th>
-				<td colspan="2">${ilist.into_inq_date }</td>
+				<td colspan="2" style="width: 70%">${ilist.into_inq_date }</td>
 				<th>작성자</th>
 				<td>${ilist.user_id}</td>
 				<td>

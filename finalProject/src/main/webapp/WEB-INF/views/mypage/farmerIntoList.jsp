@@ -126,7 +126,7 @@ h2 {
 					+ data[i].into_req_remain + "/" + data[i].into_entry + "</td><td>"
 					+ data[i].into_city + "</td><td>"
 					+ data[i].into_product + "</td><td id='progress" + i + "'>"
-					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>완료</button>" + "</td><td>"					
+					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>종료</button>" + "</td><td>"					
 					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button></td><td>"
 					+"</td></tr>" 	
 					);
