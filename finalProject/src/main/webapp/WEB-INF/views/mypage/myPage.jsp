@@ -1,72 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <title>Ablepro v8.0 bootstrap admin template by Phoenixcoded</title>
-    <!-- Meta -->
-	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="">
-	<meta name="author" content="Phoenixcoded" />
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link rel="stylesheet" href="resources/main/css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Paaji">
 <style>
-.table{
-	text-align: center;
+body .pcoded-main-container{
+	background-image: url("resources/images/mypage/myPageImage.png");
+	background-size: cover;
+	margin-left: 0px !important;
+	overflow-x:hidden;
+} 
+@keyframes ani {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
-.table thead th {
-    border-bottom: 1px solid #e2e5e8;
-    font-size: 13px;
-    color: #37474f;
-    background: #e3f1d4 !important;
-    text-transform: uppercase;
+body {
+  background: black;
 }
-.card table-card{
-	width: 100% !important;
-
+.circle {
+  position: relative;
+  top: 200px;
+  right: 1000px;
+  bottom: 50px;
+  left: 400px;
+  z-index: 1;
+  margin: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: #c3e6cb;
+  animation: ani 3s alternate infinite;
+}
+.text {
+  mix-blend-mode: difference;	
+  position: relative;
+  right: 1500px;
+  bottom: 180px;
+  left: 200px;
+  z-index: 2;
+  margin: 0;
+  height: 30px;
+  font-size: 50px;
+  font-weight: bold;
+  color: #ffffff;
 }
 </style>
-</head>
-
-<body>
-	<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
 <div class="pcoded-main-container">
-    <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard Analytics</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        <div class="row">
-            <!-- prject ,team member start -->
-            <div class="col-xl-6 col-md-12">
-                <div class="card table-card">
-                        	<jsp:include page="getpuchasInqList.jsp"></jsp:include>
-                </div>
-            </div>
-            <div class="col-xl-6 col-md-12">
-
-            </div>
-
-        </div>
-        <!-- [ Main Content ] end -->
-    </div>
+<div class="circle"></div>
+<div class="text">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;환영합니다<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user_id }&nbsp;&nbsp;&nbsp;&nbsp;님의<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마이페이지 입니다.
 </div>
-</body>
-</html>
+</div>
+</section>

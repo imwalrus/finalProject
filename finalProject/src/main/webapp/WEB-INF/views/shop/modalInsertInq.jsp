@@ -15,12 +15,9 @@
 		});
 	</script>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ Main Content ] start -->
 				<div class="row">
-					<!-- [ vertically-modal ] start -->
 					<div class="col">
 						<div class="card">
 							<div class="card-body">
@@ -35,7 +32,7 @@
 											<div class="form-group row">
 												<label for="inputTitle" class="col-sm-3 col-form-label"><strong>제목</strong></label>
 												<div class="col-sm-9">
-													<input type="text" class="form-control" name="pur_inq_title" placeholder="제목을 입력하세요" required>
+													<input type="text" class="form-control" name="pur_inq_title" maxlength="40" placeholder="제목을 입력하세요" required>
 												</div>
 											</div>
 											<br>
@@ -87,7 +84,6 @@
 
 						</div>
 					</div>
-					<!-- [ vertically-modal ] end -->
 				</div>
 			</div>
 		</div>

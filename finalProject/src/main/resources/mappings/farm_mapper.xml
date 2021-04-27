@@ -8,6 +8,17 @@
 	<select id="getFarmList" resultType="FarmVO">
 			SELECT *
 			FROM FARM
+			ORDER BY FARM_NO
+	</select>
+
+<!--  id별 전체조회 -->
+	<select id="getFarmsListofUser" resultType="FarmVO">
+	
+	SELECT *
+	FROM FARM
+	WHERE USER_ID = #{user_id}
+	ORDER BY FARM_NO
+	
 	</select>
 	
 <!-- 단건조회 -->

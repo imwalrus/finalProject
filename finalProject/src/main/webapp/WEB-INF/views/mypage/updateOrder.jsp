@@ -6,6 +6,13 @@
 background-color: #c3e6cb;
 font-weight: bold;
 }
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
 </style>
 
 <form action="updateOrder" method="post">
@@ -17,12 +24,11 @@ font-weight: bold;
 		<table class="table">
 		<tr>
 				<th>주문상태 선택</th>
-				<td><label> <input type="text" list="orderlist_condition" name="orderlist_condition" required> 
-						<datalist id="orderlist_condition" required="required">
-							<option value="결제완료"></option>
-							<option value="배송중"></option>
-							<option value="배송완료"></option>
-						</datalist>
+				<td><label> <select name="orderlist_condition" value="${orderVO.orderlist_condition }" style="width:151px; height:32px;"> 
+								<option value="결제완료">결제완료</option>
+								<option value="배송중">배송중</option>
+								<option value="배송완료">배송완료</option>
+							</select>
 				</label>
 				<td>
 			</tr>

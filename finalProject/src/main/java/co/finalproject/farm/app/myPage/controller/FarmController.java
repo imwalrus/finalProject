@@ -43,6 +43,14 @@ public class FarmController {
 		return "mypageTiles/mypage/getFarmsList";
 	}
 
+//전체조회(id별)
+	@RequestMapping("/getFarmsListofUser")
+	public String getFarmsListofUser(Model model,HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("farmlist", farmMapper.getFarmsListofUser(user_id));
+		return "mypageTiles/mypage/getFarmsList";
+		
+	}
 	
 //단건조회
 		@RequestMapping("/getFarms")
@@ -90,20 +98,7 @@ public class FarmController {
 
 	// 수정처리
 	@PostMapping("/updateFarms")
-	public String updateFarmProc(FarmVO vo, MultipartHttpServletRequest request) throws Exception,IOException{
-		//파일 업로드
-		MultipartFile file = vo.getUploadFile();
-		String farm_filename="";
-		String path = request.getSession().getServletContext().getRealPath("/resources/images/mypage/");
-		
-		if(file != null && !file.isEmpty() &&  file.getSize() > 0) {
-			String filename = file.getOriginalFilename();
-			
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			farm_filename += rename.getName();
-			file.transferTo(rename);//임시폴더에서 업로드 폴더로 이동
-		}
-		vo.setFarm_filename(farm_filename);
+	public String updateFarmProc(FarmVO vo){
 		logger.debug(vo.toString());
 		farmMapper.updateFarm(vo);
 		return "redirect:getFarmsList";

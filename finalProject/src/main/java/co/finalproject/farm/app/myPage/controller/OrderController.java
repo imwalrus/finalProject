@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.finalproject.farm.app.shop.service.OrderVO;
+import co.finalproject.farm.common.Paging;
 import oracle.jdbc.proxy.annotation.Post;
 import co.finalproject.farm.app.myPage.service.impl.OrderMapper;
 
@@ -26,7 +27,7 @@ public class OrderController {
 
 //구매내역 뷰페이시 이동
 	@RequestMapping("/getOrderList")
-	public String getOrderList(){
+	public String getOrderList(OrderVO vo){
 		return "mypageTiles/mypage/getOrderList";
 	}
 	

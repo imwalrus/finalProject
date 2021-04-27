@@ -7,6 +7,13 @@
 background-color: #c3e6cb;
 font-weight: bold;
 }
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>    
@@ -24,7 +31,7 @@ font-weight: bold;
                                 <div class="card-header">
                                     <h2>판매 내역</h2>
                                 </div>
-                                <div class="table-responsive">
+                                <p style="float: right">최신순으로 정렬됩니다.</p>
                                <form action="updateOrder" method="post">
 									<table class="table" id="sale">
 										<tr class="table-success">
@@ -69,50 +76,56 @@ font-weight: bold;
 </div>
 </section>
 <script type="text/javascript">
-function invoiceUp(str,dcom) {
-	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&pro_dcompany=" + dcom );
+function invoiceUp(str,con) {
+	$('#invoiceUp .modal-body').load("updateOrder?orderlist_no=" + str + "&orderlist_condition=" + con );
 	$('#invoiceUp').modal('show');
 }
 $.ajax({
 	url: "ajaxgetSaleList",
 	data: "user_id=" + '${user_id}',
 	dataType: "json",
-	success: function(data){
-		for(i=0; i<data.length; i++){
-			if( data[i].orderlist_invoice != '-'){	//송장번호값 - 아닐 경우 클릭시 송장 조회 가능
+	success: function(data){		
+			if(data.length == 0){
+				$("#sale").append(
+						"<tr><td colspan='9'> 판매내역이 없습니다. </tr></td>"
+						);
+		}else if( data.length != 0 || data[i].orderlist_invoice != '-'){	//송장번호값 - 아닐 경우 클릭시 송장 조회 가능
+			for(i=0; i<data.length; i++){
 				$("#sale").append(
 					"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 					+ data[i].pro_name + "</td><td>" 
 					+ data[i].cart_count + "</td><td>"
-					+ data[i].account + "</td><td>"
+					+ data[i].account + "원</td><td>"
 					+ data[i].order_payment + "</td><td>"
 					+ data[i].buyer + "</td><td>"
 					+ data[i].orderlist_condition +"<br>"
 					+ "(" + data[i].pro_dcompany + ")" +"<br>"
 					+"<a href='#' onclick="+"window.open("+"'https://tracker.delivery/#/kr.cjlogistics/"+ data[i].orderlist_invoice + "','_blank','width=800,height=600');" + " return false;>"
 					+ data[i].orderlist_invoice  + "</a></td><td>"
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 					+"</td></tr>"
 					);
+				}
 
 			}else{ //송장번호 값 - 일 경우 클릭 X 
+				for(i=0; i<data.length; i++){
 				$("#sale").append(
 						"<tr><td>" + data[i].order_no + "-" + data[i].orderlist_no + "</td><td>" 
 						+ data[i].pro_name + "</td><td>" 
 						+ data[i].cart_count + "</td><td>"
-						+ data[i].account + "</td><td>"
+						+ data[i].account + "원</td><td>"
 						+ data[i].order_payment + "</td><td>"
 						+ data[i].buyer + "</td><td>"
 						+ data[i].orderlist_condition +"<br>"
 						+ "(" + data[i].pro_dcompany + ")" +"<br>"
 						+ data[i].orderlist_invoice  + "</td><td>"
-						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].pro_dcompany  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
+						+ "<button type='button' class='btn  btn-warning btn-sm' onclick=\"invoiceUp(" + data[i].orderlist_no + ",\'"+  data[i].orderlist_condition  +"\')\">" + "송장번호<br>등록/수정"+ "</button>"
 						+"</td></tr>"
 						);
 				
-				
-			}
 				}
+			}
+				
 
 		}
 

@@ -73,12 +73,12 @@ function showChatinComu(memberId){
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="goto-here">
-    <div class="hero-wrap hero-bread" style="background-image: url('resources/main/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/images/logo/ququ.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About us</span></p>
-            <h1 class="mb-0 bread">About us</h1>
+          	<p class="breadcrumbs"><span class="mr-2"></span> <span>YOUTH FARM</span></p>
+            <h1 class="mb-0 bread">청년농장 커뮤니티</h1>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ function showChatinComu(memberId){
     
     <div class="row justify-content-around" style="margin-left:385px; margin-right:385px;">
     <div class="col-auto mr-auto">
-    <c:if test="${user_auth == 'user' || user_auth == 'admin' }">  
+    <c:if test="${user_auth == 'user' || user_auth == 'farmer' }">  
     <button type="button" class="btn btn-primary disabled" onclick="location.href='insertComm'">글쓰기</button>
     </c:if>
     </div>

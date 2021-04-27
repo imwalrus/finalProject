@@ -7,9 +7,15 @@
 <!-- 단건조회 -->
 	<select id="getFarmerlist" resultType="FarmerVO">
 	
-		SELECT *
-		FROM FARMER
-		WHERE USER_ID=${user_id}
+		SELECT F.FARMER_NO
+				,F.FARMER_FILENAME
+				,F.FARMER_CHECK
+				,F.USER_ID
+				,F.FARMER_DATE
+				,U.USER_AUTH
+		FROM FARMER F JOIN USERS U
+		ON (F.USER_ID = U.USER_ID)
+		WHERE F.USER_ID=#{user_id}
 		
 	</select>
 

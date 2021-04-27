@@ -26,11 +26,7 @@ font-weight: bold;
 	</div>
 	<!-- 모달바디 끝 -->
 	
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
+
 	<script type="text/javascript">
 	function printIt(printThis)
 	{

@@ -29,7 +29,7 @@ h3{
 							<tr>
 								<th>농장명</th>
 								<td colspan="1">   
-                                        <input type="text" class="form-control" id="farm_name" name="farm_name" value="${ufarm.farm_name}"placeholder="${ufarm.farm_name}">							
+                                        <input type="text" class="form-control" id="farm_name" name="farm_name" value="${ufarm.farm_name}"placeholder="${ufarm.farm_name}" maxlength="30">							
 										<input type="hidden" id="farm_no" name="farm_no" value="${ufarm.farm_no }">
 								</td>																
 							</tr>
@@ -37,7 +37,7 @@ h3{
 								<th>주소</th>
 								<td>
 									<div class="form-group">     
-                                        <input type="text" class="form-control" id="farm_adr" name="farm_adr" value="${ufarm.farm_adr }" placeholder="${ufarm.farm_adr }">
+                                        <input type="text" class="form-control" id="farm_adr" name="farm_adr" value="${ufarm.farm_adr }" placeholder="${ufarm.farm_adr }" maxlength="24">
                                     </div>
 								</td>								
 							</tr>
@@ -45,7 +45,7 @@ h3{
 								<th>면적</th>
 								<td>
 									<div class="form-group">     
-                                        <input type="text" class="form-control" id="farm_area" name="farm_area" value="${ufarm.farm_area }" placeholder="${ufarm.farm_area }">
+                                        <input type="text" class="form-control" id="farm_area" name="farm_area" value="${ufarm.farm_area }" placeholder="${ufarm.farm_area }" maxlength="5">
                                     </div>
 								</td>								
 							</tr>

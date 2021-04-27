@@ -24,58 +24,52 @@ h2 {
 
 		<table class="table">
 			<tr>
-				<th colspan="1">제목</th>
-				<td colspan="7">${plist.pur_inq_title }</td>
-				<c:if test="${plist.pur_inq_check eq '1'}">
-					<td colspan="1" align="rigth"><img
-						src="resources/images/mypage/secrete.JPG" width="30" height="40">
-					</td>
-					<td colspan="1">
-						<button class="btn  btn-outline-warning"
-							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-						<button type="button" class="btn  btn-outline-danger"
-							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
-					</td>
-				</c:if>
-				<c:if test="${plist.pur_inq_check eq '0'}">
-					<td colspan="1"><img
-						src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
-					</td>
-					<td colspan="1">
-				<c:if test="${plist.user_id eq user_id }">
-						<button class="btn  btn-outline-warning"
-							onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
-						<button type="button" class="btn  btn-outline-danger"
-							onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
-				</c:if>
-				<c:if test="${plist.user_id ne user_id }">
-				</c:if>
-					</td>
-				</c:if>
-			</tr>
-			<tr>
-				<th colspan="1">작성일</th>
-				<td colspan="7">${plist.pur_inq_date }</td>
-				<th colspan="1">작성자</th>
-				<th colspan="2">${plist.user_id}</th>
-			</tr>
-			<tr>
-			<c:if test="${plist.pur_inq_filename eq null }">
+				<th>제목</th>
+				<td colspan="4">${plist.pur_inq_title }</td>
 				<td>
-					입력한 사진이 없습니다.
+					<c:if test="${plist.user_id eq user_id }">
+									<!-- 작성자와 아이디가 같으면 수정,삭제 버튼 보인  -->
+						<button class="btn  btn-outline-warning" onclick="pQNAupdate('${plist.pur_inq_no}')">수정</button>
+						<button type="button" class="btn  btn-outline-danger" onclick="deleteAlert('${plist.pur_inq_no }')">삭제</button>
+					</c:if>
+					<c:if test="${plist.user_id ne user_id}">
+						<!-- id값 다르면 수정,삭제 버튼 안보임 -->
+					</c:if>
 				</td>
-			</c:if>
-			<c:if test="${plist.pur_inq_filename ne null }">
-				<td colspan="10"><img class="img-fluid card-img-top"
-					src="resources/images/mypage/${plist.pur_inq_filename}"
-					style="width: 50%; max-width: 100%; height: auto;"
-					alt="Card image cap">
-				</td>
-			</c:if>
 			</tr>
 			<tr>
-				<th colspan="1">내용</th>
-				<td colspan="9"><textarea class="form-control"
+				<th>작성일</th>
+				<td colspan="2">${plist.pur_inq_date }</td>
+				<th>작성자</th>
+				<td>${plist.user_id}</td>
+				<td>
+					<c:if test="${plist.pur_inq_check eq '1'}">
+						<img src="resources/images/mypage/secrete.JPG" width="30" height="40">
+					</c:if>
+					<c:if test="${plist.pur_inq_check eq '0'}">
+						<img src="resources/images/mypage/nosecrete.JPG" width="30" height="40">
+					</c:if>
+				</td>
+			</tr>
+			<tr>
+				<th>문의 할 제품(번호_이름)</th>
+				<td colspan="5">${plist.pro_no}_ ${plist.pro_name}
+			</tr>
+			<tr>
+				<td colspan="6" text-align="center" style="width: 795px; height: 280px;">
+					<c:if test="${plist.pur_inq_filename eq null }">
+							등록된 사진이 없습니다.
+					</c:if>
+					<c:if test="${plist.pur_inq_filename ne null }">
+						<img class="img-fluid card-img-top" src="resources/images/mypage/${plist.pur_inq_filename}"
+						style="width: 80%; max-width: 100%; height: auto;"
+						alt="Card image cap">
+					</c:if>
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td colspan="5"><textarea class="form-control"
 						name="pur_inq_content" rows="6" readonly="readonly">${plist.pur_inq_content}</textarea>
 				</td>
 			</tr>
@@ -101,11 +95,13 @@ h2 {
 <form>
 	<div class="input-group mb-3">
 		<input type="text" class="form-control" name="pur_inq_rep_content"
-			placeholder="댓글을 입력하세요" aria-describedby="basic-addon2"> <input
-			type="hidden" name="user_id" value="${user_id }">
+			placeholder="댓글은 34자까지 입력 가능합니다" aria-describedby="basic-addon2"
+			maxlength="34"> <input type="hidden" name="user_id"
+			value="${user_id }">
 		<div class="input-group-append">
 			<button type="button" id="btnAdd"
 				class="btn  btn-outline-success btn-sm">등록</button>
+			<button type="reset" class="btn  btn-outline-danger btn-sm">지우기</button>
 		</div>
 	</div>
 
@@ -122,11 +118,6 @@ h2 {
 
 <!-- 모달바디 끝 -->
 
-<!-- Required Js -->
-<script src="resources/admin/js/vendor-all.min.js"></script>
-<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-<script src="resources/admin/js/ripple.js"></script>
-<script src="resources/admin/js/pcoded.min.js"></script>
 <script type="text/javascript">
 
 //문의글삭제 (댓글 있는 경우 삭제 안됨)
@@ -163,13 +154,25 @@ $.ajax({
 		dataType:"json",
 		success: function(response) {
 			for(i=0; i<response.length; i++){
-				$("#reply").append(						
-						"<tr id='replyItem'><td width='70%'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
-						+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
-						+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
-						+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"
-						+ "</td></tr>"						
-						);
+				if(response[i].user_id != '${user_id}' ){
+					$("#reply").append(						
+							"<tr id='replyItem'><td width='70%' style='text-align : left !important;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
+							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
+							+ " "
+							+ "</td></tr>"						
+							);
+				}	
+				else{
+					$("#reply").append(						
+							"<tr id='replyItem'><td width='70%' style='text-align : left !important;'>" + response[i].pur_inq_rep_content + "</td><td width='5%'>"
+							+ response[i].user_id + "</td><td id='replyDate' width='15%'>"
+							+ response[i].pur_inq_rep_date + "</td><td width='5%'>"
+							+ "<button type='button' class='btn  btn-outline-danger btn-sm' onclick='deleteReply("+response[i].pur_inq_rep_no+")'>" + "삭제" + "</button>"
+							+ "</td></tr>"						
+							);
+
+				}
 			}
 		}
 		
@@ -186,6 +189,7 @@ $("#btnAdd").on("click", function(){
 		dataType:"json",
 		success:function(response){
 			/* $("#reply").append(response.content + "<br>"); */
+			$('[name=pur_inq_rep_content]').val(''); //댓글 작성 후 초기화
 			$("#reply").append(
 					"<tr><td>" +response.pur_inq_rep_content + "</td><td>"
 					+ response.user_id + "</td><td>"

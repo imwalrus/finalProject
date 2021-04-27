@@ -25,7 +25,7 @@ font-weight: bold;
 				<table class="table">
 						<tr>
 							<th class="table-success">제목</th>
-							<td colspan="2">
+							<td colspan="5">
 								<input type="text" class="form-control" name="pur_inq_title" value="${pupdate.pur_inq_title }">
 							</td>
 						</tr>
@@ -67,6 +67,7 @@ font-weight: bold;
 						<tr>
 							<td colspan="8">
 								<button type="submit" class="btn  btn-outline-success">등록</button>
+								<button type="close" class="btn  btn-outline-danger">닫기</button>
 							<td>
 						</tr>
 					</table>			

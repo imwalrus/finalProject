@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <link rel="stylesheet" href="resources/main/css/style.css">
 <style>
 .table th{
@@ -9,6 +11,13 @@ font-weight: bold;
 }
 #progress{
 font-weight: bold;
+}
+h4 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
 }
 </style>
 <body>
@@ -23,7 +32,7 @@ font-weight: bold;
 					<form id="doExit" name="doExit" action="updateFarmExit">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h2>농촌속으로 관리 List</h2>
+                                    <h2>농촌속으로 신청 명단 관리</h2>
                                 </div>
                                 <br>
                                  <div style="float: right">
@@ -31,28 +40,23 @@ font-weight: bold;
 											onclick="bongsaOpen()">봉사활동 양식출력</button>
 							     </div>
 							     <br>
-                                <div class="table-responsive">							       
 									<table class="table" id="list">
 										<tr class="table-success">
-											<th width="5%">No</th>
+											<th width="5%">NO</th>
 											<th width="60%">체험명</th>
+											<th width="10%">현재인원/정원</th>
 											<th width="5%">지역</th>
 											<th width="5%">농작물</th>
-											<th width="5">완료여부</th>
-											<th	width="10%">신청명단</th>										
+											<th width="5">종료여부</th>
+											<th	width="10%">신청명단</th>
 										</tr>																	
 									</table>
-                                </div>
+									체험 취소로 인한 종료 일 경우 신청인원에게 별도 연락 하셔야합니다.
                             </div>
                             </form>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
             </div>
         </div>
         
@@ -65,7 +69,7 @@ font-weight: bold;
 							<button class="close" type="button" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
-{							</button>
+							</button>
 						</div>
 						<div class="modal-body"></div>
 					
@@ -113,22 +117,24 @@ font-weight: bold;
 		data: "user_id=" + '${user_id}',
 		dataType: "json",
 		success: function(data){
+		if(data.length != 0){
 			for(i=0; i<data.length; i++){
-				if(data[i].into_progress == 0){
-			
+				if(data[i].into_progress == 0){	
 				$("#list").append(
 					"<tr><td>" + data[i].into_no + "</td><td>" 
 					+ data[i].into_title + "</td><td>"
+					+ data[i].into_req_remain + "/" + data[i].into_entry + "</td><td>"
 					+ data[i].into_city + "</td><td>"
 					+ data[i].into_product + "</td><td id='progress" + i + "'>"
 					+ "진행중<br><button type='button' id='endBtn"+ i +"' class='btn  btn-success btn-sm' onclick='fndoexit(" + data[i].into_no + ")'>완료</button>" + "</td><td>"					
-					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button>"			
+					+ "<button type='button' class='btn  btn-warning btn-sm' onclick='userListOpen(" + data[i].into_no + ")'>"+ "명단보기"+ "</button></td><td>"
 					+"</td></tr>" 	
 					);
 				}else{
 					$("#list").append(
 							"<tr><td>" + data[i].into_no + "</td><td>" 
 							+ data[i].into_title + "</td><td>"
+							+ data[i].into_req_remain + "/" + data[i].into_entry + "</td><td>"
 							+ data[i].into_city + "</td><td>"
 							+ data[i].into_product + "</td><td id='progress" + i + "'>"
 							+ "체험종료</td><td>"					
@@ -137,6 +143,10 @@ font-weight: bold;
 							);
 				}
 				}
+		}else{
+			$("#list").append( "<tr><td colspan='7'> 등록하신 농촌속으로 체험이 없습니다. </td></tr>");
+			
+		}
 			}
 
 				});

@@ -29,7 +29,7 @@ h3{
 			<div class="card-body">
 					<table class="table">
 							<tr class="table-success">
-								<th colspan="2" id="name"><h4>${farm.farm_name}</h4></th>								
+								<th colspan="2" id="name"><h6>${farm.farm_name}</h6></th>								
 								
 							</tr>
 							<tr>

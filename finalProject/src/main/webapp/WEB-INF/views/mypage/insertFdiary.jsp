@@ -2,12 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/main/css/style.css">
+
 <body>
 	<section class="pcoded-main-container">
-		<!-- [ Main Content ] start -->
 		<div class="pcoded-main-container">
 			<div class="pcoded-content">
-				<!-- [ breadcrumb ] start -->
 				<div class="page-header">
 					<div class="page-block">
 						<div class="row align-items-center">
@@ -36,32 +35,31 @@
 									<!-- 작물추가 --><br>	<button type="button" class="btn btn-warning" onclick="openCrop()">+</button>
 													</th>
 													<td>
-														<select class="form-control" id="crop_no" name="crop_no">
-															<option value="none">===== 선택 =====</option>
+														<select class="form-control required"  id="crop_no" name="crop_no" required="required">
+															<option value="">===== 선택 =====</option>
 															<c:forEach var="i" items="${croplist}" >
 																<option value="${i.crop_no}">${i.crop_name}</options>
 															</c:forEach>
-														</select> 
-														
-														<br>
+														</select>
 													</td>
 													<th>시작시간</th>
-														<td><input type="time" class="form-control" name="fdiary_stime"></td>
+														<td><input type="time" class="form-control" name="fdiary_stime" required="required"></td>
 													<th>종료시간</th>
-														<td><input type="time" class="form-control" name="fdiary_etime"></td>
+														<td><input type="time" class="form-control" name="fdiary_etime" required="required"></td>
 												</tr>
 												<tr>
 													<th>인력(명)</th>
-														<td><input type="number" class="form-control" name="fdiary_worker"></td>
+														<td><input type="number" class="form-control" name="fdiary_worker" required="required"></td>
 													<th>날씨</th>
-														<td><input type="text" class="form-control" name="fdiary_weather"></td>
+														<td><br><input type="text" class="form-control" name="fdiary_weather" maxlength="40" placeholder="40자 이내로 입력 가능합니다" required="required"><br>			
+														</td>
 													<th>사진첨부</th>
 														<td><input multiple="multiple" type="file" name="uploadFile"> 
 														<input type="hidden" name="fdiary_filename"></td>
 												</tr>
 												<tr>
 													<th>내용</th>
-													<td colspan="5"><textarea class="form-control" rows="3" name="fdiary_content"></textarea></td>
+													<td colspan="5"><textarea class="form-control" rows="3" name="fdiary_content" required="required"></textarea></td>
 												</tr>
 											</table>
 										</div>
@@ -95,15 +93,11 @@
 			<!-- 모달끝 -->
 		</div>
 	</section>
-	<!-- Required Js -->
-	<script src="resources/admin/js/vendor-all.min.js"></script>
-	<script src="resources/admin/js/plugins/bootstrap.min.js"></script>
-	<script src="resources/admin/js/ripple.js"></script>
-	<script src="resources/admin/js/pcoded.min.js"></script>
+
 	<script type="text/javascript">
 	//작물 추가 모달	
 	function openCrop() {
-		$('#insertCrop .modal-body').load( "insertCrop");
+		$('#insertCrop .modal-body').load("insertCrop");
 		$('#insertCrop').modal('show');
 
 	}

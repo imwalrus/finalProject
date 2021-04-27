@@ -203,4 +203,5 @@
 	WHERE COMM_NO = #{comm_no}
 	</delete>
 	
+
 </mapper>

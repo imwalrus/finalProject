@@ -64,16 +64,16 @@
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">농산물판매</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="#"></a>
-							<a class="dropdown-item" href="shop">판매리스트</a>
+							<a class="dropdown-item" href="shop">상품 리스트</a>
 							<c:if test="${user_auth eq 'farmer'}">
 								<!-- session 내 아이디 값 없을시 -->
-								<a class="dropdown-item" href="prodManage?user_id=${user_id}">판매 관리</a>
+								<a class="dropdown-item" href="prodManage?user_id=${user_id}">상품 관리</a>
 							</c:if>
 							<c:if test="${user_id ne null}">
 								<!-- session 내 아이디 값 존재 할 경우 -->
 								<a class="dropdown-item" href="cart?user_id=${user_id}">장바구니</a>
 							</c:if>
-							<a class="dropdown-item" href="infoShop">판매 소개</a>
+							<a class="dropdown-item" href="infoShop">타 사이트 상품 소개</a>
 						</div></li>
 					<li class="nav-item"><a href="#" class="nav-link" data-login ="${user_id }" onclick="checkLogin()">커뮤니티</a></li>
 					<c:if test="${user_auth ne 'admin' and user_id ne null}">

@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">제목</label>
-      <input type="text" class="form-control" name="into_inq_title" placeholder="제목을 작성하세요." required="required">
+      <input type="text" class="form-control" name="into_inq_title" placeholder="제목을 작성하세요." required="required" maxlength="40"> 
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">농촌속으로 체험명</label>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/main/css/style.css">
+
 <style type="text/css">
 .custom_calendar_table tr td {
 	text-align: center;
@@ -44,7 +45,7 @@
 	color: #000;
 }
 
-p {
+.cal{
 	font-size: 30px;
 }
 
@@ -62,12 +63,12 @@ p {
 				<div class="row">
 					<div class="col-md-8">
 						<div class="card">
-							<div class="card-body" align="center" style="padding:50px;">
+							<div class="card-body" align="center">
 								<div class="col-md-12">
 									<div id="calendarForm"></div>
 									<br> <br>
 								</div>
-								<div class="col-md-12" align="center" style="padding-bottom:40px;">
+								<div class="col-md-12" align="center">
 
 									<button type='submit' class='btn  btn-outline-success'
 										onclick="location.href='insertFdiary'">일기작성</button>
@@ -100,6 +101,7 @@ p {
 							</button>
 						</div>
 						<div class="modal-body"></div>
+						 <my:paging paging="${paging}" jsFunc="goPage" /> 
 					</div>
 				</div>
 			</div>
@@ -180,7 +182,7 @@ p {
 						+ "</colgroup>"
 						+ "<thead class='cal_date'>"
 						+ "<th><button type='button' class='prev'><</button></th>"
-						+ "<th colspan='5'><p><span id='years'>"
+						+ "<th colspan='5'><p class='cal'><span id='years'>"
 						+ year
 						+ "</span>년 <span id='months'>"
 						+ month
@@ -266,6 +268,6 @@ p {
 			$('#diaryModal').modal('show');
 
 		}
-	</script>
+		
 
-</body>
+	</script>

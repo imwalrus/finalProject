@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="resources/main/css/style.css">
 
 <style>
@@ -34,21 +35,24 @@ h3{
 													<th>농장이름</th>
 													<th>주소</th>
 													<th>면적(㎡)</th>
-													<th></th>
 												</tr>
 											</thead>
 											<tbody>
+											<c:if test="${fn:length(farmlist) >=1 }">
 												<c:forEach items="${farmlist }" var="fa">
 													<tr onclick="fnfarmView('${fa.farm_no}')">
 														<td>${fa.farm_no }</td>
 														<td>${fa.farm_name }</td>
 														<td>${fa.farm_adr }</td>
-														<td>${fa.farm_area }</td>
-														<td>
-
-														</td>
+														<td>${fa.farm_area }</td>	
 													</tr>
 												</c:forEach>
+											</c:if>
+											<c:if test="${fn:length(farmlist) == 0 }">
+														<tr>
+															<td colspan="4">등록된 농지내역이 없습니다.</td>
+														</tr>
+											</c:if> 										
 											</tbody>
 										</table>
 									<div class="col-md-10" align="center">

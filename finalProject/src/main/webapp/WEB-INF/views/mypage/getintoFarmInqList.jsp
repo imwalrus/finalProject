@@ -32,6 +32,12 @@ h2 {
 									</div>
 
 									<table class="table table-hover">
+										<colgroup>
+													<col width="75%">
+													<col width="5%">
+													<col width="10%">
+													<col width="10%">
+										</colgroup>
 										<thead>
 											<tr>
 												<th>제목</th>
@@ -45,7 +51,7 @@ h2 {
 											<c:if test="${fn:length(list) >=1}">
 												<c:forEach items="${list }" var="list">
 													<tr onclick="iQNAview('${list.into_inq_no}')">
-														<td>${list.into_inq_title }</td>
+														<td style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${list.into_inq_title }</td>
 														<td>${list.user_id}</td>
 														<td>${list.into_inq_date}</td>
 														<c:if test="${list.into_inq_check eq '1'}">
@@ -59,7 +65,7 @@ h2 {
 											</c:if>
 											<c:if test="${fn:length(list) == 0}">
 												<tr>
-													<td colspan="3">문의하신 내용이 없습니다.</td>
+													<td colspan="4">문의하신 내용이 없습니다.</td>
 												</tr>
 											</c:if>
 										</tbody>
@@ -99,10 +105,6 @@ h2 {
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header"><h4>문의 내용 수정</h4>
-							<button class="close" type="button" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">x</span>
-							</button>
 						</div>
 						<div class="modal-body"></div>
 					</div>

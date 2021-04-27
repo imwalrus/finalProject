@@ -8,11 +8,11 @@
 	<select id="getOrderList"  parameterType="OrderVO"
 								resultType="OrderVO">
 	
-		SELECT * FROM ORDERS
-		WHERE USER_ID = #{user_id}
+	SELECT * FROM ORDERS
+		WHERE USER_ID = #{user_id} 
 	
 	</select>
-
+	
  <!-- 구매내역 상세리스트-->
 <select id="getOrder" parameterType="OrderVO"
 							resultType="OrderVO">
@@ -57,6 +57,7 @@ INNER JOIN PRODUCT P
 INNER JOIN ORDERS O
             ON O.ORDER_NO = L.ORDER_NO
 WHERE P.USER_ID = #{user_id}
+ORDER BY L.ORDERLIST_NO DESC
         
 </select>
 

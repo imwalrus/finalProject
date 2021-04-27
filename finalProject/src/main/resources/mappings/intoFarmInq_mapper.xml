@@ -12,34 +12,48 @@
 	
 <!-- 전체조회(id별) -->
 	<select id="getIntoFarmInqOfUser" resultType="IntoFarmInqVO">
-			SELECT  INTO_INQ_NO,
-					INTO_NO,
-					INTO_INQ_DATE,
-					INTO_INQ_TITLE,
-					INTO_INQ_CHECK,
-					INTO_INQ_CONTENT,
-					USER_ID
-			FROM INTOFARM_INQUIRY
-			WHERE USER_ID = #{user_id}
+			SELECT  I.INTO_INQ_NO,
+					I.INTO_NO,
+					I.INTO_INQ_DATE,
+					I.INTO_INQ_TITLE,
+					I.INTO_INQ_CHECK,
+					I.INTO_INQ_CONTENT,
+					I.USER_ID
+			FROM INTOFARM_INQUIRY I JOIN INTOFARM F
+			ON (I.INTO_NO = F.INTO_NO)
+			WHERE I.USER_ID = #{user_id}
+			ORDER BY INTO_INQ_DATE DESC
 	</select>	
 
+<!-- 판매자에게 남긴 문의 조회  -->
 	<select id="getFarmInqofFarmer" resultType="IntoFarmInqVO">
-			select  i.INTO_INQ_NO,
-					i.INTO_NO,
-					i.INTO_INQ_DATE,
-					i.INTO_INQ_TITLE,
-					i.INTO_INQ_CHECK,
-					i.INTO_INQ_CONTENT,
-					i.USER_ID 
-					from intofarm_inquiry i inner join intofarm f
-					on(i.into_no = f.into_no)
-					where f.user_id = #{user_id}
+			SELECT  I.INTO_INQ_NO,
+					F.INTO_NO,
+					F.INTO_TITLE,
+					I.INTO_INQ_DATE,
+					I.INTO_INQ_TITLE,
+					I.INTO_INQ_CHECK,
+					I.INTO_INQ_CONTENT,
+					I.USER_ID 
+					FROM INTOFARM_INQUIRY I INNER JOIN INTOFARM F
+					ON(I.INTO_NO = F.INTO_NO)
+					WHERE F.USER_ID = #{user_id}
+					ORDER BY INTO_INQ_DATE DESC
 	</select>
+	
 <!-- 단건조회 -->
 	<select id="getIntoFarmInq" resultType="IntoFarmInqVO">
-			SELECT * 
-			FROM INTOFARM_INQUIRY
-			WHERE into_inq_no=#{into_inq_no}
+			SELECT  I.INTO_INQ_NO,
+					F.INTO_NO,
+					F.INTO_TITLE,
+					I.INTO_INQ_DATE,
+					I.INTO_INQ_TITLE,
+					I.INTO_INQ_CHECK,
+					I.INTO_INQ_CONTENT,
+					I.USER_ID 
+			FROM INTOFARM_INQUIRY I INNER JOIN INTOFARM F
+					ON(I.INTO_NO = F.INTO_NO)
+			WHERE INTO_INQ_NO=#{into_inq_no}
 									
 	</select>	
 	
@@ -88,6 +102,7 @@
 			SELECT * 
 			FROM INTOFARM_INQUIRY_REPLY
 			WHERE INTO_INQ_NO = #{into_inq_no}	
+			ORDER BY INTO_INQ_REP_DATE
 	</select>
 
 <!-- 댓글등록 -->	
