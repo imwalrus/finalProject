@@ -20,7 +20,6 @@
 .slider-for{
 	width:800px !important; 
 	height:550px;
-	
 }
 .slider-nav{
 	width: 800px; 
