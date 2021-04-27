@@ -95,7 +95,17 @@
 														<input type="hidden" name="pro_no" value="${shop.pro_no}">
 														<a href="product?pro_no=${shop.pro_no}" class="img-prod">
 															<!-- 이미지 -->
-															<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" alt="Colorlib Template">
+															<c:if test="${shop.pro_condition eq '준비중'}">
+																<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" style="filter: brightness(50%);" alt="Colorlib Template">
+																<span style="left: 60px; width: 450px; bottom: 100px; font-size: 1.8em; color:#F4FA58; font-weight: bold; position: absolute;">상품 준비중</span>
+															</c:if>
+															<c:if test="${shop.pro_condition eq '판매중'}">
+																<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" alt="Colorlib Template">
+															</c:if>
+															<c:if test="${shop.pro_condition eq '품절'}">
+																<img class="img-fluid" src="resources/images/shop/${shop.pro_filename}" style="filter: brightness(50%);" alt="Colorlib Template">
+																<span style="left: 100px; width: 450px; bottom: 100px; font-size: 1.8em; color:#DF013A; font-weight: bold; position: absolute;">품절</span>
+															</c:if>
 														</a>
 														<div class="text py-3 pb-4 px-3 text-center">
 															<h3>
