@@ -99,6 +99,7 @@
 	<beans:bean class="co.finalproject.farm.common.LoginIntercepter" id="LoginIntercepter"/>
 		<interceptors>
 			<interceptor>
+			
 				<mapping path="/**"/>
 				<exclude-mapping path="/"/>
 				<exclude-mapping path="/login"/>
