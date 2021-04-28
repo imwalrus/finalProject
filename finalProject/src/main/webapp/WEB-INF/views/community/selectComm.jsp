@@ -246,13 +246,13 @@ function btnChg1() {
 			<span class="reply-comm_rep_date" style="float:right;"><fmt:formatDate value="${reply.comm_rep_date}" pattern="yyyy-MM-dd"/>　</span>
 			</div>
 		</c:forEach>
-		</div>  
+		</div>
 		   <c:if test="${user_id != null && user_id != ''}">
             <div style="margin-left:48px; margin-right:70px;">
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width:1000px; border-color:#bebebe;" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요 (166자까지 가능합니다.)"></textarea>
+                            <textarea style="width:1000px; border-color:#bebebe;" rows="3" cols="30" id="comm_rep_content" name="comm_rep_content" placeholder="댓글을 입력하세요 (166자까지 가능합니다.)" required="required"></textarea>
                             <br>
                                <div class="form-group">
 				               <button type="button" id="btnAdd" class="btn btn-outline-primary">등록</button>

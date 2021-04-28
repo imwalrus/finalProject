@@ -79,9 +79,8 @@ $("#faq_content").html(str);
 		</div>
 		<c:if test="${user_auth == 'admin' }">
 		<div style="margin-left:228px; float:left;">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='updateFaq?faq_no=${faq.faq_no}&page=${faqPagingVO.page}'">글 수정</button>&nbsp;&nbsp;
 		<button type="button" class="btn btn-outline-primary" onclick="deleteAlert()">글 삭제</button>
-		&nbsp;&nbsp;
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='updateFaq?faq_no=${faq.faq_no}&page=${faqPagingVO.page}'">글 수정</button>
 		</div>
 		</c:if>
 		</form>

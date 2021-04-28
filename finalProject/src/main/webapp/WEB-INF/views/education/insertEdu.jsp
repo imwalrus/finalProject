@@ -32,6 +32,9 @@ $(function() {
        color: #00cc99;
             } 
 .select_img img { margin: 20px 0 !important;}
+#edu_place {  height:30px !important; 
+  			  border:none !important;
+  			  }
 </style>
 
 </head>
@@ -102,7 +105,7 @@ $(function() {
     <tr>
     <td class="table-active" width="100" align="center">교육 장소</td>
     <td colspan="3" align="left">
-    <input class="form-control" id="form-control1" type="text" id="edu_place" name="edu_place" required="required">
+    <input class="form-control" type="text" id="edu_place" name="edu_place" required="required">
     </td>
     </tr>
     <tr>
