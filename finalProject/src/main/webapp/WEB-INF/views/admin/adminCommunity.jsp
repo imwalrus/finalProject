@@ -140,8 +140,7 @@
 										<div class="col-md-3">
 											<select class="custom-select" id="select-search">
 												<option value="comm_subject" selected>말머리</option>
-												<option value="comm_title">제목</option>
-												<option value="comm_content">내용</option>
+												<option value="comm_title">제목+내용</option>
 											</select>
 										</div>
 										<div class="col-md-7">

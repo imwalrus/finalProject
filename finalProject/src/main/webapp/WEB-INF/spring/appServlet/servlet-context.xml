@@ -104,17 +104,19 @@
 				<exclude-mapping path="/"/>
 				<exclude-mapping path="/login"/>
 				<exclude-mapping path="/idCheck"/>
-				<exclude-mapping path="/idCheck"/>
+				<exclude-mapping path="/signUp"/>
 				<exclude-mapping path="/emailCheck"/>
 				<exclude-mapping path="/sendEmailJoinCode"/>
 				<exclude-mapping path="/pwFindEmail"/>
-				
 				<exclude-mapping path="/idCheck"/>
 				<exclude-mapping path="/memberOutSuccess"/>
 				<exclude-mapping path="/signUpForm"/>
 				<exclude-mapping path="/findIdorPw"/>
 				<exclude-mapping path="/jusoPopup"/>
 				<exclude-mapping path="/logout"/>
+				<exclude-mapping path="/idFind"/>
+				<exclude-mapping path="/pwFind"/>
+				
 				<exclude-mapping path="/getNotices"/>
 				<exclude-mapping path="/getSearchNotices"/>
 				<exclude-mapping path="/getFaq"/>
