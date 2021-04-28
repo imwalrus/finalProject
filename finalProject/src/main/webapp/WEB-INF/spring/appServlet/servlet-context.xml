@@ -105,6 +105,9 @@
 				<exclude-mapping path="/idCheck"/>
 				<exclude-mapping path="/idCheck"/>
 				<exclude-mapping path="/emailCheck"/>
+				<exclude-mapping path="/sendEmailJoinCode"/>
+				<exclude-mapping path="/pwFindEmail"/>
+				
 				<exclude-mapping path="/idCheck"/>
 				<exclude-mapping path="/memberOutSuccess"/>
 				<exclude-mapping path="/signUpForm"/>
