@@ -41,7 +41,7 @@ public class NoticeController {
 		paging.setTotalRecord(noticeService.getCount(vo)); 
 		model.addAttribute("paging", paging);
     	model.addAttribute("list", noticeService.getNotices(vo) );
-    	return "notice";
+    	return "notice/notice";
     }
     
     //단건 조회 ( + 조회수 증가 )

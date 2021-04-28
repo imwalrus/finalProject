@@ -16,8 +16,8 @@
 				AND  INTO_PROGRESS = #{into_progress}
 		 </if>
 		 <!-- 관리자에서 사용 END -->
-         <if test="into_detailadr != null and into_detailadr != ''">
-			    AND UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
+         <if test="into_city != null and into_city != ''">
+			    AND UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'
@@ -59,8 +59,8 @@
 		 <if test="into_title != null and into_title != ''">
 			    AND UPPER(INTO_TITLE) LIKE '%' || UPPER(#{into_title}) || '%'
 		 </if>
-         <if test="into_detailadr != null and into_detailadr != ''">
-			    AND UPPER(INTO_DETAILADR) LIKE '%' || UPPER(#{into_detailadr}) || '%'
+         <if test="into_city != null and into_city != ''">
+			    AND UPPER(INTO_CITY) LIKE '%' || UPPER(#{into_city}) || '%'
 		 </if>
 		 <if test="into_product != null and into_product != ''">	    
 				AND  UPPER(INTO_PRODUCT) LIKE '%' || UPPER(#{into_product}) || '%'

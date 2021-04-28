@@ -192,6 +192,7 @@
      	  <if test="farmer_check != null and farmer_check != ''">
      	   AND F.FARMER_CHECK = #{farmer_check}
        	  </if>
+       	  ORDER BY F.FARMER_NO DESC
 	    ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	

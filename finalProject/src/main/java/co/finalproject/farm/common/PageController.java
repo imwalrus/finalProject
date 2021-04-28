@@ -26,14 +26,10 @@ public class PageController {
 		return "mypageTiles/mypage/myPage";
 	}
 
-	@GetMapping("/notice")
-	public String noticeMove() {
-		return "notice";
-	}
 
 	@GetMapping("/education")
 	public String educationMove() {
-		return "education";
+		return "education/education";
 	}
 
 	@GetMapping("/intoTheFarm")
@@ -43,7 +39,7 @@ public class PageController {
 
 	@GetMapping("/community")
 	public String communityMove() {
-		return "community";
+		return "community/community";
 	}
 
 	

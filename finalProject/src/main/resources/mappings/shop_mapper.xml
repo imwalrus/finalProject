@@ -337,51 +337,51 @@
 	
 	<!-- 요일별 차트 -->
 	<select id="weekChart" resultType="map">
-		SELECT TO_CHAR(B.DT, 'DY') AS ORDER_DATE
-     		 , NVL(SUM(A.ORDER_COUNT), 0) AS ORDER_COUNT
-     		 , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
-  		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
+ 	SELECT TO_CHAR(B.DT, 'DY') AS ORDER_DATE
+            , NVL(SUM(A.ORDER_COUNT), 0) AS ORDER_COUNT
+            , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
+          FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
              , COUNT(*) AS ORDER_COUNT
              , SUM(ORDER_TOTALPRICE) AS ORDER_TOTALPRICE
           FROM ORDERS
-         WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE, 'D') + 1
-                              AND TRUNC(SYSDATE, 'D') + 8
+         WHERE ORDER_DATE BETWEEN TRUNC(TO_DATE(SYSDATE), 'D') + 1
+                              AND TRUNC(TO_DATE(SYSDATE), 'D') + 8
       GROUP BY ORDER_DATE
-        		) A
-      		  , (SELECT TRUNC(SYSDATE, 'D') + 1 + LEVEL - 1 AS DT
-            	   FROM DUAL 
-     		<![CDATA[
-             CONNECT BY LEVEL <= ((TRUNC(SYSDATE, 'D') + 8 )
-                                - (TRUNC(SYSDATE, 'D') + 1))
+              ) A
+              , (SELECT TRUNC(TO_DATE(SYSDATE), 'D') + 1 + LEVEL - 1 AS DT
+                  FROM DUAL 
+           <![CDATA[ 
+             CONNECT BY LEVEL <= ((TRUNC(TO_DATE(SYSDATE), 'D') + 8 )
+                                - (TRUNC(TO_DATE(SYSDATE), 'D') + 1))
                 ) B
-  			      WHERE B.DT = A.ORDER_DATE(+)
-  			   GROUP BY B.DT
-  			   ORDER BY B.DT
-	 		]]>
+                 WHERE B.DT = A.ORDER_DATE(+)
+              GROUP BY B.DT
+              ORDER BY B.DT
+          ]]>
 	</select>
 			
 	<!-- 월별 차트 -->
 	<select id="monthChart" resultType="map">
-		SELECT TO_CHAR(B.DT, 'DD') AS ORDER_DATE
-     		 , NVL(SUM(A.ORDER_COUNT), 0) ORDER_COUNT
-     		 , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
-  		  FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
+		 SELECT TO_CHAR(B.DT, 'DD') AS ORDER_DATE
+            , NVL(SUM(A.ORDER_COUNT), 0) ORDER_COUNT
+            , NVL(SUM(A.ORDER_TOTALPRICE), 0) AS ORDER_TOTALPRICE
+          FROM (SELECT TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE
              , COUNT(*) ORDER_COUNT
              , SUM(ORDER_TOTALPRICE) AS ORDER_TOTALPRICE
           FROM ORDERS
-         WHERE ORDER_DATE BETWEEN TO_DATE(TRUNC(sysdate,'MM'))
-                              AND TO_DATE(LAST_DAY(sysdate))
+         WHERE ORDER_DATE BETWEEN TO_DATE(TRUNC(TO_DATE(TO_DATE(SYSDATE)),'MM'))
+                              AND TO_DATE(LAST_DAY(TO_DATE(SYSDATE)))
       GROUP BY ORDER_DATE
                ) A
-      		 , (SELECT TO_DATE(TRUNC(sysdate,'MM')) + LEVEL - 1 AS DT
+             , (SELECT TO_DATE(TRUNC(TO_DATE(SYSDATE),'MM')) + LEVEL - 1 AS DT
                   FROM DUAL
-     		<![CDATA[ 
-            CONNECT BY LEVEL <= (TO_DATE(LAST_DAY(sysdate))
-                               - TO_DATE(TRUNC(sysdate,'MM')) + 1)
+           <![CDATA[ 
+            CONNECT BY LEVEL <= (TO_DATE(LAST_DAY(TO_DATE(SYSDATE)))
+                               - TO_DATE(TRUNC(TO_DATE(SYSDATE),'MM')) + 1)
                 ) B
-	  		     WHERE B.DT = A.ORDER_DATE(+)
-	  		  GROUP BY TO_CHAR(B.DT, 'DD')
-	  		  ORDER BY TO_CHAR(B.DT, 'DD')
-	 		]]>
+                WHERE B.DT = A.ORDER_DATE(+)
+             GROUP BY TO_CHAR(B.DT, 'DD')
+             ORDER BY TO_CHAR(B.DT, 'DD')
+          ]]>
 	</select>
 </mapper>

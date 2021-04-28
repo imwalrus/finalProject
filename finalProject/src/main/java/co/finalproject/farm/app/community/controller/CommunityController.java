@@ -49,7 +49,7 @@ public class CommunityController {
 		paging.setTotalRecord(communityService.getCount(vo)); 
 		model.addAttribute("paging", paging);
     	model.addAttribute("list", communityService.getComm(vo) );
-    	return "community";
+    	return "community/community";
     }
     
     //단건 조회 ( + 조회수 증가 )

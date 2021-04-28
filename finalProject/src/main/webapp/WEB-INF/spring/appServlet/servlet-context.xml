@@ -95,6 +95,57 @@
 
 	<beans:bean id="chatHandler" class="co.finalproject.farm.common.ChatHandler" />
 	
-	
-	
+	<beans:bean class="co.finalproject.farm.common.AdminIntercepter" id="AdminIntercepter"/>
+	<beans:bean class="co.finalproject.farm.common.LoginIntercepter" id="LoginIntercepter"/>
+		<interceptors>
+			<interceptor>
+				<mapping path="/**"/>
+				<exclude-mapping path="/"/>
+				<exclude-mapping path="/login"/>
+				<exclude-mapping path="/idCheck"/>
+				<exclude-mapping path="/idCheck"/>
+				<exclude-mapping path="/emailCheck"/>
+				<exclude-mapping path="/idCheck"/>
+				<exclude-mapping path="/memberOutSuccess"/>
+				<exclude-mapping path="/signUpForm"/>
+				<exclude-mapping path="/findIdorPw"/>
+				<exclude-mapping path="/jusoPopup"/>
+				<exclude-mapping path="/logout"/>
+				<exclude-mapping path="/getNotices"/>
+				<exclude-mapping path="/getSearchNotices"/>
+				<exclude-mapping path="/getFaq"/>
+				<exclude-mapping path="/getSearchFaq"/>
+				
+				<exclude-mapping path="/getFarmInfo"/>
+				
+				<exclude-mapping path="/education"/>
+				<exclude-mapping path="/onEducation"/>
+				<exclude-mapping path="/ajax_local_callback"/>
+				<exclude-mapping path="/getOffEdu"/>
+				<exclude-mapping path="/getSchOffEdu"/>
+
+				<exclude-mapping path="/shop"/>
+				<exclude-mapping path="/product"/>
+				<exclude-mapping path="/modalView"/>
+				<exclude-mapping path="/infoShop"/>
+				<exclude-mapping path="/resources/**"/>
+				
+				<exclude-mapping path="/admin"/>
+				<beans:ref bean="LoginIntercepter"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/admin"/>
+				<mapping path="/adminUser"/>
+				<mapping path="/adminUserSel"/>
+				<mapping path="/adminFarmer"/>
+				<mapping path="/adminFarmerSel"/>
+				<mapping path="/adminBanner"/>
+				<mapping path="/adminBannerModal"/>
+				<mapping path="/adminIntoFarm"/>
+				<mapping path="/adminIntoFarmSel"/>
+				<mapping path="/adminCommunity"/>
+				<mapping path="/adminCommunitySel"/>
+				<beans:ref bean="AdminIntercepter"/>
+			</interceptor>
+			</interceptors>
 	</beans:beans>
