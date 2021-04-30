@@ -129,6 +129,8 @@ public class ShopController {
 	// 상품 등록
 	@PostMapping("/insertProduct")
 	public String insertProduct(ShopVO vo, HttpServletRequest req) throws Exception, IOException {
+		HttpSession session = req.getSession(); // id를 세션값으로 받아 파라미터값으로
+		String user_id = (String) session.getAttribute("user_id");
 		// 첨부 파일 처리
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
@@ -141,12 +143,14 @@ public class ShopController {
 			vo.setPro_filename(rename.getName());
 		}
 		shopMapper.insertProduct(vo);
-		return "redirect:/prodManage";
+		return "redirect:/prodManage?user_id=" + user_id;
 	}
 
 	// 상품 수정
 	@PostMapping("/updateProduct")
 	public String updateProduct(ShopVO vo, Model model, HttpServletRequest req) throws Exception, IOException {
+		HttpSession session = req.getSession(); // id를 세션값으로 받아 파라미터값으로
+		String user_id = (String) session.getAttribute("user_id");
 		MultipartFile uploadFile = vo.getUploadFile();
 		String pro_filename = "";
 		if (uploadFile != null && !uploadFile.isEmpty() && uploadFile.getSize() > 0) {
@@ -158,14 +162,16 @@ public class ShopController {
 			vo.setPro_filename(rename.getName());
 		}
 		model.addAttribute("modal", shopMapper.updateProduct(vo));
-		return "redirect:/prodManage";
+		return "redirect:/prodManage?user_id=" + user_id;
 	}
 
 	// 상품 삭제
 	@PostMapping("/deleteProduct")
-	public String deleteProduct(ShopVO vo) {
+	public String deleteProduct(ShopVO vo, HttpServletRequest req) {
+		HttpSession session = req.getSession(); // id를 세션값으로 받아 파라미터값으로
+		String user_id = (String) session.getAttribute("user_id");
 		shopMapper.deleteProduct(vo);
-		return "redirect:/prodManage";
+		return "redirect:/prodManage?user_id=" + user_id;
 	}
 
 	// 장바구니 페이지
